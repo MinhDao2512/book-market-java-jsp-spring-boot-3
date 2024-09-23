@@ -62,22 +62,56 @@
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
                 <li class="menu-item active">
-                    <a href="index.html" class="menu-link">
+                    <a href="/admin" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Dashboard</div>
                     </a>
                 </li>
                 <!--Dashboard-->
 
-                <!-- Forms & Tables -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">Quản Lý Thông Tin</span>
+                <!-- Users -->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ NGƯỜI DÙNG</span>
                 </li>
-                <!-- Forms -->
-                <!-- Tables -->
                 <li class="menu-item">
-                    <a href="tables-basic.html" class="menu-link">
+                    <a href="/admin/user" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
-                        <div data-i18n="Tables">Tables</div>
+                        <div data-i18n="Tables">Users</div>
+                    </a>
+                    <a href="/admin/role" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">Roles</div>
+                    </a>
+                </li>
+
+                <!--Books-->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ SÁCH</span>
+                </li>
+                <li class="menu-item">
+                    <a href="/admin/book" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">Books</div>
+                    </a>
+                    <a href="/admin/author" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">Authors</div>
+                    </a>
+                    <a href="/admin/publisher" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">Publishers</div>
+                    </a>
+                    <a href="/admin/category" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">Categories</div>
+                    </a>
+                </li>
+
+                <!--Orders-->
+                <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ ĐƠN HÀNG</span>
+                </li>
+                <li class="menu-item">
+                    <a href="/admin/order" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">Orders</div>
                     </a>
                 </li>
             </ul>

@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     @GetMapping
     public String getHomePage(Model model) {
-        return "client/home/show";
+        return "client/homepage/homepage-home";
     }
 }
