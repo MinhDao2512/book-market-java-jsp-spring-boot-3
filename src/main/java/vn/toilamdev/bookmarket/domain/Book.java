@@ -17,7 +17,7 @@ public class Book extends AbstractDomain {
     private String description;
     private Double price;
     private LocalDate publicationDate;
-    private String condition;
+    private String state;
     private Integer quantity;
 
     @ManyToOne
@@ -79,12 +79,12 @@ public class Book extends AbstractDomain {
         this.publicationDate = publicationDate;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getState() {
+        return state;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public Integer getQuantity() {
@@ -141,15 +141,6 @@ public class Book extends AbstractDomain {
 
     public void setBookCategorizations(List<BookCategorization> bookCategorizations) {
         this.bookCategorizations = bookCategorizations;
-    }
-
-    @Override
-    public String toString() {
-        return "Book [title=" + title + ", ISBN=" + ISBN + ", description=" + description + ", price=" + price
-                + ", publicationDate=" + publicationDate + ", condition=" + condition + ", quantity=" + quantity
-                + ", publisher=" + publisher + ", bookAuthorship=" + bookAuthorship + ", comments=" + comments
-                + ", orderItems=" + orderItems + ", cartItems=" + cartItems + ", bookCategorizations="
-                + bookCategorizations + "]";
     }
 
 }

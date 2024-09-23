@@ -16,8 +16,8 @@ public class BookAuthorship extends AbstractDomain {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    private String role;
-    private Integer order;
+    private String roleAuthor;
+    private Integer orderAuthor;
 
     public Book getBook() {
         return book;
@@ -35,20 +35,20 @@ public class BookAuthorship extends AbstractDomain {
         this.author = author;
     }
 
-    public String getRole() {
-        return role;
+    public String getRoleAuthor() {
+        return roleAuthor;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoleAuthor(String roleAuthor) {
+        this.roleAuthor = roleAuthor;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getOrderAuthor() {
+        return orderAuthor;
     }
 
-    public void setOrder(Integer order) {
-        this.order = order;
+    public void setOrderAuthor(Integer orderAuthor) {
+        this.orderAuthor = orderAuthor;
     }
 
 }

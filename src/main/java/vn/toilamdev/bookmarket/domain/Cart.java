@@ -14,7 +14,7 @@ public class Cart extends AbstractDomain {
     @OneToMany(mappedBy = CartItem_.CART)
     private List<CartItem> cartItems;
 
-    @OneToOne(mappedBy = User_.CART)
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 

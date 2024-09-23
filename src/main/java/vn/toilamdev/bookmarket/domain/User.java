@@ -32,7 +32,7 @@ public class User extends AbstractDomain {
     @OneToMany(mappedBy = Order_.USER)
     private List<Order> orders;
 
-    @OneToOne
+    @OneToOne(mappedBy = Cart_.USER)
     private Cart cart;
 
     public String getUsername() {
