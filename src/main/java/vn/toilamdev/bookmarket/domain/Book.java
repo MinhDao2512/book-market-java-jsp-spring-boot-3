@@ -19,6 +19,7 @@ public class Book extends AbstractDomain {
     private LocalDate publicationDate;
     private String state;
     private Integer quantity;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
@@ -93,6 +94,14 @@ public class Book extends AbstractDomain {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Publisher getPublisher() {

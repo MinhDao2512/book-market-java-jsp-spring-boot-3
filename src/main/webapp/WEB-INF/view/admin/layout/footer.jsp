@@ -9,7 +9,8 @@
                         document.write(new Date().getFullYear());
                     </script>
                     , made with ❤️ by
-                    <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ToiLamDev</a>
+                    <a href="https://www.youtube.com/@ToiLamDev0602" target="_blank"
+                        class="footer-link fw-bolder">ToiLamDev</a>
                 </div>
             </div>
         </footer>
