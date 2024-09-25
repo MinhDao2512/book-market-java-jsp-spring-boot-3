@@ -110,7 +110,7 @@
                                                         24/09/2024
                                                     </td>
                                                     <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Info</button>
+                                                        <button type="button" class="btn btn-info">Detail</button>
                                                         <button type="button" class="btn btn-warning">Edit</button>
                                                         <button type="button" class="btn btn-danger">Delete</button>
                                                     </td>

@@ -15,6 +15,8 @@ public class Order extends AbstractDomain {
     private String status;
     private String shippingAddress;
     private String paymentMethod;
+    private String phoneNumber;
+    private String receiver;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -53,6 +55,22 @@ public class Order extends AbstractDomain {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
     public User getUser() {

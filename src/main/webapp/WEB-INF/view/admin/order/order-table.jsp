@@ -63,7 +63,7 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Authors
+                                        <span class="text-muted fw-light">Dashboard /</span> Orders
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
                                         <button type="button" class="btn btn-primary">Create</button>
@@ -71,32 +71,42 @@
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
-                                    <h5 class="card-header">Authors Table: </h5>
+                                    <h5 class="card-header">Orders Table: </h5>
                                     <div class="table-responsive text-nowrap">
-                                        <table class="table">
+                                        <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th>Date</th>
-                                                    <th>Biography</th>
-                                                    <th>Nationality</th>
-                                                    <th>Actions</th>
+                                                    <th class="text-center">Order</th>
+                                                    <th class="text-center">Receiver</th>
+                                                    <th class="text-center">Shipping Address</th>
+                                                    <th class="text-center">Phone Number</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Created At</th>
+                                                    <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">
                                                 <tr>
-                                                    <td class="col-md-2"><i
-                                                            class="fab fa-vuejs fa-lg text-success me-3"></i>
-                                                        <strong>Faker</strong>
+                                                    <td class="col-md-1 text-center">
+                                                        <strong>1</strong>
                                                     </td>
-                                                    <td class="col-md-2">06/02/2002</td>
-                                                    <td class="col-md-4">
-                                                        Human
+                                                    <td class="text-center">
+                                                        Vn KUnn
                                                     </td>
-                                                    <td class="col-md-2"><span
-                                                            class="badge bg-label-info me-1">VN</span></td>
+                                                    <td>
+                                                        Tp.HCM
+                                                    </td>
+                                                    <td class="col-md-1 text-center">
+                                                        0942236357
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="badge bg-label-info me-1">PENDING</span>
+                                                    </td>
+                                                    <td class="col-md-1">
+                                                        25/09/204
+                                                    </td>
                                                     <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Info</button>
+                                                        <button type="button" class="btn btn-info">Detail</button>
                                                         <button type="button" class="btn btn-warning">Edit</button>
                                                         <button type="button" class="btn btn-danger">Delete</button>
                                                     </td>
