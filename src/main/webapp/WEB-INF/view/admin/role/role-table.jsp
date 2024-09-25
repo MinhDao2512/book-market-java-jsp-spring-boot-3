@@ -65,9 +65,6 @@
                                     <h4 class="fw-bold py-3 mb-4">
                                         <span class="text-muted fw-light">Dashboard /</span> Roles
                                     </h4>
-                                    <h4 class="fw-bold py-3 mb-4">
-                                        <button type="button" class="btn btn-primary">Create</button>
-                                    </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
@@ -84,25 +81,26 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">
-                                                <tr>
-                                                    <td class="col-md-1 text-center">
-                                                        <strong>1</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        ADMIN
-                                                    </td>
-                                                    <td>
-                                                        Admin thì full quyền
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        24/09/2024
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Detail</button>
-                                                        <button type="button" class="btn btn-warning">Edit</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
+                                                <c:forEach var="role" items="${roles}">
+                                                    <tr>
+                                                        <td class="col-md-1 text-center">
+                                                            <strong>${role.id}</strong>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            ${role.name}
+                                                        </td>
+                                                        <td>
+                                                            ${role.description}
+                                                        </td>
+                                                        <td class="col-md-1">
+                                                            ${role.createdAt}
+                                                        </td>
+                                                        <td class="col-md-2 text-center">
+                                                            <a href="/admin/role/detail/${role.id}"
+                                                                class="btn btn-info">Detail</a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

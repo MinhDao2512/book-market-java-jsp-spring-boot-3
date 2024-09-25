@@ -63,63 +63,61 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Users
-                                    </h4>
-                                    <h4 class="fw-bold py-3 mb-4">
-                                        <a href="/admin/user/create" class="btn btn-primary">Create</a>
+                                        <span class="text-muted fw-light">Dashboard /</span>
+                                        <span class="text-muted fw-light">Roles /</span> Detail
                                     </h4>
                                 </div>
-                                <!-- Basic Bootstrap Table -->
-                                <div class="card">
-                                    <h5 class="card-header">Users Table: </h5>
-                                    <div class="table-responsive text-nowrap">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Order</th>
-                                                    <th class="text-center">Avatar</th>
-                                                    <th class="text-center">Full Name</th>
-                                                    <th class="text-center">Username</th>
-                                                    <th class="text-center">Email</th>
-                                                    <th class="text-center">Created At</th>
-                                                    <th class="text-center">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-border-bottom-0">
-                                                <tr>
-                                                    <td class="col-md-1 text-center">
-                                                        <strong>1</strong>
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        <i class="fab fa-vuejs fa-lg text-success me-3"></i>
-                                                        <img src="/admin/img/avatars/5.png" alt="Avatar"
-                                                            class="rounded-circle avatar avatar-xs"
-                                                            data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-bs-placement="top" title="Faker" />
-                                                    </td>
-                                                    <td>
-                                                        Nguyễn Minh Đạo
-                                                    </td>
-                                                    <td>
-                                                        n20dcvt009
-                                                    </td>
-                                                    <td>
-                                                        nguyenminhdao002@gmail.com
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        24/09/2024
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Detail</button>
-                                                        <button type="button" class="btn btn-warning">Edit</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-7">
+                                        <!-- HTML5 Inputs -->
+                                        <div class="card mb-4">
+                                            <h5 class="card-header text-center" style="color: goldenrod;">
+                                                <strong>Role Detail</strong>
+                                            </h5>
+                                            <div class="card-body">
+                                                <div class="mb-3 row">
+                                                    <label for="html5-url-input" class="col-md-2 col-form-label">
+                                                        Name:</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text" id="html5-url-input"
+                                                            value="${role.name}" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="html5-url-input" class="col-md-2 col-form-label">
+                                                        Description:</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text" id="html5-url-input"
+                                                            value="${role.description}" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="html5-url-input" class="col-md-2 col-form-label">
+                                                        Create By:</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="text" id="html5-url-input"
+                                                            value="${role.createdBy}" readonly />
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label for="html5-date-input" class="col-md-2 col-form-label">Create
+                                                        At:</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="datetime"
+                                                            id="html5-date-input" value="${role.createdAt}" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!--/ Basic Bootstrap Table -->
+                                <div class="row justify-content-center mt-4">
+                                    <div class="col-xl-8">
+                                        <div class="d-flex justify-content-between">
+                                            <a href="/admin/role" class="btn btn-outline-secondary">Back</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- / Content -->
 

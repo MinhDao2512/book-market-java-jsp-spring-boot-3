@@ -1,13 +1,25 @@
 package vn.toilamdev.bookmarket.controller.admin;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import vn.toilamdev.bookmarket.domain.Role;
+import vn.toilamdev.bookmarket.service.RoleService;
+
 @Controller
 @RequestMapping("/admin")
 public class DashboardController {
+
+    private final RoleService roleService;
+
+    public DashboardController(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
     @GetMapping
     public String getDashboardPage(Model model) {
         return "admin/dashboard/dashboard-home";
@@ -40,6 +52,8 @@ public class DashboardController {
 
     @GetMapping("/role")
     public String getRolesTablePage(Model model) {
+        List<Role> roles = this.roleService.getAllRoles();
+        model.addAttribute("roles", roles);
         return "admin/role/role-table";
     }
 
