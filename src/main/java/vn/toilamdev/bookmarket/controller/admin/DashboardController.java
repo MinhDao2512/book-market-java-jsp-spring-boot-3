@@ -8,16 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import vn.toilamdev.bookmarket.domain.Role;
+import vn.toilamdev.bookmarket.domain.User;
 import vn.toilamdev.bookmarket.service.RoleService;
+import vn.toilamdev.bookmarket.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
 public class DashboardController {
 
     private final RoleService roleService;
+    private final UserService userService;
 
-    public DashboardController(RoleService roleService) {
+    public DashboardController(RoleService roleService, UserService userService) {
         this.roleService = roleService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -59,6 +63,8 @@ public class DashboardController {
 
     @GetMapping("/user")
     public String getUsersTablePage(Model model) {
+        List<User> users = this.userService.getAllUsers();
+        model.addAttribute("users", users);
         return "admin/user/user-table";
     }
 }

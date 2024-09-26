@@ -44,6 +44,7 @@
             <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
             <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
             <script src="/admin/js/config.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         </head>
 
         <body>
@@ -83,14 +84,14 @@
                                                             class="col-md-2 col-form-label">First Name:</label>
                                                         <div class="col-md-3">
                                                             <form:input class="form-control" type="text"
-                                                                id="html5-url-input" placeholder="David Nguyen"
+                                                                id="html5-url-input" placeholder="Dao"
                                                                 path="firstName" />
                                                         </div>
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Last Name:</label>
                                                         <div class="col-md-5">
                                                             <form:input class="form-control" type="text"
-                                                                id="html5-url-input" placeholder="David Nguyen"
+                                                                id="html5-url-input" placeholder="Nguyen Minh"
                                                                 path="lastName" />
                                                         </div>
                                                     </div>
@@ -119,7 +120,7 @@
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-tel-input"
-                                                            class="col-md-2 col-form-label">Phone</label>
+                                                            class="col-md-2 col-form-label">Phone:</label>
                                                         <div class="col-md-10">
                                                             <form:input class="form-control" type="tel"
                                                                 id="html5-tel-input" placeholder="(+84)120 230 016"
@@ -128,7 +129,7 @@
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Address</label>
+                                                            class="col-md-2 col-form-label">Address:</label>
                                                         <div class="col-md-10">
                                                             <form:input class="form-control" type="text"
                                                                 id="html5-url-input"
@@ -166,26 +167,26 @@
                                                     <div class="mb-3">
                                                         <label for="formFile" class="form-label">Avatar</label>
                                                         <input class="form-control" accept=".png, .jpg, .jpeg"
-                                                            type="file" id="formFile" name="avatarFile" />
+                                                            type="file" id="avatarFile" name="avatarFile" />
                                                     </div>
                                                     <div class="mb-3">
                                                         <img style="max-height: 250px; display: none;"
-                                                            alt="avatar preview" id="avatarPreview" />
+                                                            alt="avatar preview" id="avatarPreview"
+                                                            title="Avatar Preview " />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center mt-4">
-                                        <div class="col-xl-6">
+                                        <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/user" class="btn btn-outline-secondary">Cancel</a>
-                                                <button type="submit" class="btn btn-primary">Create</button>
+                                                <a href="/admin/user" class="btn btn-outline-secondary">Quay lại</a>
+                                                <button type="submit" class="btn btn-primary">Thêm mới</button>
                                             </div>
                                         </div>
                                     </div>
                                 </form:form>
-
                             </div>
                             <!-- / Content -->
 
@@ -221,6 +222,18 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <script>
+                $(document).ready(() => {
+                    const avatarFile = $("#avatarFile");
+                    avatarFile.change(
+                        function (e) {
+                            const imfURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imfURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        }
+                    );
+                });
+            </script>
         </body>
 
         </html>

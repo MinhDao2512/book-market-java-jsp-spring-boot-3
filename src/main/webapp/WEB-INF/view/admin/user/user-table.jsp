@@ -50,28 +50,49 @@
             <!-- Layout wrapper -->
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
+                    <!--Start Alert Dialog-->
+                    <div class="modal" tabindex="-1" id="exampleModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        <strong>Thông báo</strong>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Bạn muốn xóa tài khoản này ?</strong></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <a href="/admin/user" class="btn btn-primary">Đồng ý</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Alert Dialog-->
 
                     <jsp:include page="../layout/menu.jsp" />
 
                     <!-- Layout container -->
                     <div class="layout-page">
                         <jsp:include page="../layout/header.jsp" />
-
                         <!-- Content wrapper -->
                         <div class="content-wrapper">
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Users
+                                        <span class="text-muted fw-light">Dashboard /</span> Tài Khoản
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <a href="/admin/user/create" class="btn btn-primary">Create</a>
+                                        <a href="/admin/user/create" class="btn btn-primary">Thêm mới</a>
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
-                                    <h5 class="card-header">Users Table: </h5>
+                                    <h5 class="card-header">BẢNG TÀI KHOẢN: </h5>
                                     <div class="table-responsive text-nowrap">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -79,42 +100,43 @@
                                                     <th class="text-center">Order</th>
                                                     <th class="text-center">Avatar</th>
                                                     <th class="text-center">Full Name</th>
-                                                    <th class="text-center">Username</th>
                                                     <th class="text-center">Email</th>
                                                     <th class="text-center">Created At</th>
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">
-                                                <tr>
-                                                    <td class="col-md-1 text-center">
-                                                        <strong>1</strong>
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        <i class="fab fa-vuejs fa-lg text-success me-3"></i>
-                                                        <img src="/admin/img/avatars/5.png" alt="Avatar"
-                                                            class="rounded-circle avatar avatar-xs"
-                                                            data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                            data-bs-placement="top" title="Faker" />
-                                                    </td>
-                                                    <td>
-                                                        Nguyễn Minh Đạo
-                                                    </td>
-                                                    <td>
-                                                        n20dcvt009
-                                                    </td>
-                                                    <td>
-                                                        nguyenminhdao002@gmail.com
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        24/09/2024
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Detail</button>
-                                                        <button type="button" class="btn btn-warning">Edit</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
+                                                <c:forEach var="user" items="${users}">
+                                                    <tr>
+                                                        <td class="col-md-1 text-center">
+                                                            <strong>${user.id}</strong>
+                                                        </td>
+                                                        <td class="col-md-1">
+                                                            <i class="fab fa-vuejs fa-lg text-success me-3"></i>
+                                                            <img src="/images/user/${user.avatar}" alt="Avatar"
+                                                                class="rounded-circle avatar avatar-xs"
+                                                                data-bs-toggle="tooltip" data-popup="tooltip-custom"
+                                                                data-bs-placement="top" title="Avatar" />
+                                                        </td>
+                                                        <td>
+                                                            ${user.fullName}
+                                                        </td>
+                                                        <td>
+                                                            ${user.email}
+                                                        </td>
+                                                        <td class="col-md-1">
+                                                            ${user.createdAt}
+                                                        </td>
+                                                        <td class="col-md-2">
+                                                            <button type="button" class="btn btn-info">Chi tiết</button>
+                                                            <button type="button" class="btn btn-warning">Cập
+                                                                nhật</button>
+                                                            <button data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal" type="button"
+                                                                class="btn btn-danger">Xóa</button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

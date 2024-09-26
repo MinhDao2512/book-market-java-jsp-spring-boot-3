@@ -112,9 +112,9 @@
                                     </div>
                                 </div>
                                 <div class="row justify-content-center mt-4">
-                                    <div class="col-xl-8">
+                                    <div class="col-xl-7">
                                         <div class="d-flex justify-content-between">
-                                            <a href="/admin/role" class="btn btn-outline-secondary">Back</a>
+                                            <a href="/admin/role" class="btn btn-outline-secondary">Quay lại</a>
                                         </div>
                                     </div>
                                 </div>

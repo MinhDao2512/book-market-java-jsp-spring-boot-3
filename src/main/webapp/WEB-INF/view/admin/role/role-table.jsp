@@ -63,12 +63,12 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Roles
+                                        <span class="text-muted fw-light">Dashboard /</span> Vai Trò
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
-                                    <h5 class="card-header">Roles Table: </h5>
+                                    <h5 class="card-header">BẢNG VAI TRÒ: </h5>
                                     <div class="table-responsive text-nowrap">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -97,7 +97,7 @@
                                                         </td>
                                                         <td class="col-md-2 text-center">
                                                             <a href="/admin/role/detail/${role.id}"
-                                                                class="btn btn-info">Detail</a>
+                                                                class="btn btn-info">Chi tiết</a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
