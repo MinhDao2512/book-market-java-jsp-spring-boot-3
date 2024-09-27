@@ -62,9 +62,8 @@
                         <div class="content-wrapper">
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
-
-                                <form:form action="/admin/user/create" method="post" modelAttribute="userDTO"
-                                    enctype="multipart/form-data">
+                                <!--Start Form Create User-->
+                                <form id="formCreateUser">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Dashboard /</span>
@@ -83,76 +82,67 @@
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">First Name:</label>
                                                         <div class="col-md-3">
-                                                            <form:input class="form-control" type="text"
-                                                                id="html5-url-input" placeholder="Dao"
-                                                                path="firstName" />
+                                                            <input class="form-control" type="text" id="firstName"
+                                                                placeholder="Dao" />
                                                         </div>
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Last Name:</label>
                                                         <div class="col-md-5">
-                                                            <form:input class="form-control" type="text"
-                                                                id="html5-url-input" placeholder="Nguyen Minh"
-                                                                path="lastName" />
+                                                            <input class="form-control" type="text" id="lastName"
+                                                                placeholder="Nguyen Minh" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-email-input"
                                                             class="col-md-2 col-form-label">Email:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="email"
-                                                                id="html5-email-input" placeholder="vnkun@example.com"
-                                                                path="email" />
+                                                            <input class="form-control" type="email" id="email"
+                                                                placeholder="vnkun@example.com" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-password-input"
                                                             class="col-md-2 col-form-label">Password:</label>
                                                         <div class="col-md-4">
-                                                            <form:input class="form-control" type="password"
-                                                                id="html5-password-input" path="password" />
+                                                            <input class="form-control" type="password" id="password" />
                                                         </div>
                                                         <label for="html5-password-input"
                                                             class="col-md-2 col-form-label">Confirm:</label>
                                                         <div class="col-md-4">
-                                                            <form:input class="form-control" type="password"
-                                                                id="html5-password-input" path="confirmPassword" />
+                                                            <input class="form-control" type="password"
+                                                                id="confirmPassword" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-tel-input"
                                                             class="col-md-2 col-form-label">Phone:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="tel"
-                                                                id="html5-tel-input" placeholder="(+84)120 230 016"
-                                                                path="phoneNumber" />
+                                                            <input class="form-control" type="tel" id="phoneNumber"
+                                                                placeholder="(+84)120 230 016" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Address:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text"
-                                                                id="html5-url-input"
-                                                                placeholder="Số nhà, Phường, Quận, Thành phố "
-                                                                path="address" />
+                                                            <input class="form-control" type="text" id="address"
+                                                                placeholder="Số nhà, Phường, Quận, Thành phố " />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Date:</label>
                                                         <div class="col-md-3">
-                                                            <form:input class="form-control" type="date"
-                                                                id="html5-date-input" path="dateOfBirth" />
+                                                            <input class="form-control" type="date" id="dateOfBirth" />
                                                         </div>
                                                         <label for="defaultSelect"
                                                             class="col-md-2 col-form-label">Role:</label>
                                                         <div class="col-md-5">
-                                                            <form:select id="defaultSelect" class="form-select"
-                                                                path="role.name">
-                                                                <form:option value="USER">User</form:option>
-                                                                <form:option value="CONTENT">Content</form:option>
-                                                                <form:option value="ADMIN">Admin</form:option>
-                                                            </form:select>
+                                                            <select id="selectRole" class="form-select">
+                                                                <option value="USER">User</option>
+                                                                <option value="CONTENT">Content</option>
+                                                                <option value="ADMIN">Admin</option>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -181,12 +171,14 @@
                                     <div class="row justify-content-center mt-4">
                                         <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/user" class="btn btn-outline-secondary">Quay lại</a>
-                                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                                <a href="/admin/users" class="btn btn-outline-secondary">Quay lại</a>
+                                                <button id="btnCreateUser" type="submit" class="btn btn-primary">Thêm
+                                                    mới</button>
                                             </div>
                                         </div>
                                     </div>
-                                </form:form>
+                                </form>
+                                <!--End Form Create User-->
                             </div>
                             <!-- / Content -->
 
@@ -224,6 +216,48 @@
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <script>
                 $(document).ready(() => {
+                    //Form Submit
+                    $('#formCreateUser').on('submit', function (e) {
+                        e.preventDefault();
+
+                        var formData = new FormData();
+
+                        formData.append('firstName', $('#firstName').val());
+                        formData.append('lastName', $('#lastName').val());
+                        formData.append('email', $('#email').val());
+                        formData.append('password', $('#password').val());
+                        formData.append('confirmPassword', $('#confirmPassword').val());
+                        formData.append('phoneNumber', $('#phoneNumber').val());
+                        formData.append('address', $('#address').val());
+                        formData.append('dateOfBirth', $('#dateOfBirth').val());
+                        formData.append('roleName', $('#selectRole').val());
+
+                        var avatarFile = $('#avatarFile')[0].files[0];
+                        formData.append('avatarFile', avatarFile);
+
+                        //Use AJAX send data
+                        sendAjaxRequest(formData);
+                    });
+
+                    // Call API using FormData
+                    function sendAjaxRequest(formData) {
+                        $.ajax({
+                            type: 'POST',
+                            url: 'http://localhost:8082/api/admin/users',
+                            data: formData,
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                alert('Bạn đã thêm mới người dùng thành công!');
+                                window.location.href = '/admin/users';
+                            },
+                            error: function (xhr, status, error) {
+                                alert('Lỗi khi tạo người dùng: ' + xhr.responseText);
+                            }
+                        });
+                    }
+
+                    // Preview Avatar
                     const avatarFile = $("#avatarFile");
                     avatarFile.change(
                         function (e) {
@@ -234,6 +268,7 @@
                     );
                 });
             </script>
+
         </body>
 
         </html>

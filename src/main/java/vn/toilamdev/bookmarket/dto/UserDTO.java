@@ -1,8 +1,8 @@
 package vn.toilamdev.bookmarket.dto;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-import vn.toilamdev.bookmarket.domain.Role;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class UserDTO {
     private String firstName;
@@ -12,8 +12,11 @@ public class UserDTO {
     private String confirmPassword;
     private String phoneNumber;
     private String address;
-    private LocalDate dateOfBirth;
-    private Role role;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
+
+    private String roleName;
 
     public String getFirstName() {
         return firstName;
@@ -71,20 +74,20 @@ public class UserDTO {
         this.address = address;
     }
 
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Role getRole() {
-        return role;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
 }

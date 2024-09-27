@@ -1,6 +1,6 @@
 package vn.toilamdev.bookmarket.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -19,7 +19,7 @@ public class User extends AbstractDomain {
     private String fullName;
     private String address;
     private String phoneNumber;
-    private LocalDate dateOfBirth;
+    private Date dateOfBirth;
     private String avatar;
 
     @ManyToOne
@@ -83,11 +83,11 @@ public class User extends AbstractDomain {
         this.phoneNumber = phoneNumber;
     }
 
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

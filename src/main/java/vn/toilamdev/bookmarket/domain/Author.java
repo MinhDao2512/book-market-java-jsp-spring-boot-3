@@ -1,6 +1,6 @@
 package vn.toilamdev.bookmarket.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Author extends AbstractDomain {
     private String name;
     private String biography;
-    private LocalDate birthDate;
+    private Date birthDate;
     private String nationality;
 
     @OneToMany(mappedBy = BookAuthorship_.AUTHOR)
@@ -34,11 +34,11 @@ public class Author extends AbstractDomain {
         this.biography = biography;
     }
 
-    public LocalDate getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 

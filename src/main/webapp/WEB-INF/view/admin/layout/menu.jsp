@@ -76,13 +76,13 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ TÀI KHOẢN</span>
                 </li>
                 <li class="menu-item">
-                    <a href="/admin/user" class="menu-link">
+                    <a href="/admin/users" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Tài Khoản</strong>
                         </div>
                     </a>
-                    <a href="/admin/role" class="menu-link">
+                    <a href="/admin/roles" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Vai Trò</strong>
@@ -94,25 +94,25 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ SÁCH</span>
                 </li>
                 <li class="menu-item">
-                    <a href="/admin/book" class="menu-link">
+                    <a href="/admin/books" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Sách</strong>
                         </div>
                     </a>
-                    <a href="/admin/author" class="menu-link">
+                    <a href="/admin/authors" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Tác Giả</strong>
                         </div>
                     </a>
-                    <a href="/admin/publisher" class="menu-link">
+                    <a href="/admin/publishers" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Nhà Xuất Bản</strong>
                         </div>
                     </a>
-                    <a href="/admin/category" class="menu-link">
+                    <a href="/admin/categories" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Thể Loại</strong>
@@ -124,7 +124,7 @@
                 <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ ĐƠN HÀNG</span>
                 </li>
                 <li class="menu-item">
-                    <a href="/admin/order" class="menu-link">
+                    <a href="/admin/orders" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables"><strong>Đơn Hàng</strong></div>
                     </a>

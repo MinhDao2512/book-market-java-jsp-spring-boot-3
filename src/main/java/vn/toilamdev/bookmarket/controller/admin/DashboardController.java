@@ -29,39 +29,39 @@ public class DashboardController {
         return "admin/dashboard/dashboard-home";
     }
 
-    @GetMapping("/author")
+    @GetMapping("/authors")
     public String getAuthorsTablePage(Model model) {
         return "admin/author/author-table";
     }
 
-    @GetMapping("/book")
+    @GetMapping("/books")
     public String getBooksTablePage(Model model) {
         return "admin/book/book-table";
     }
 
-    @GetMapping("/category")
+    @GetMapping("/categories")
     public String getCategoriesTablePage(Model model) {
         return "admin/category/category-table";
     }
 
-    @GetMapping("/order")
+    @GetMapping("/orders")
     public String getOrdersTablePage(Model model) {
         return "admin/order/order-table";
     }
 
-    @GetMapping("/publisher")
+    @GetMapping("/publishers")
     public String getPublishersTablePage(Model model) {
         return "admin/publisher/publisher-table";
     }
 
-    @GetMapping("/role")
+    @GetMapping("/roles")
     public String getRolesTablePage(Model model) {
         List<Role> roles = this.roleService.getAllRoles();
         model.addAttribute("roles", roles);
         return "admin/role/role-table";
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public String getUsersTablePage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);

@@ -1,6 +1,6 @@
 package vn.toilamdev.bookmarket.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -16,7 +16,7 @@ public class Book extends AbstractDomain {
     private String ISBN;
     private String description;
     private Double price;
-    private LocalDate publicationDate;
+    private Date publicationDate;
     private String state;
     private Integer quantity;
     private String image;
@@ -72,11 +72,11 @@ public class Book extends AbstractDomain {
         this.price = price;
     }
 
-    public LocalDate getPublicationDate() {
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(LocalDate publicationDate) {
+    public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 
