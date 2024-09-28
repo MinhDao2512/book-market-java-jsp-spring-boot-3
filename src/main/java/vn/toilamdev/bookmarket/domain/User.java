@@ -3,6 +3,8 @@ package vn.toilamdev.bookmarket.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,6 +21,8 @@ public class User extends AbstractDomain {
     private String fullName;
     private String address;
     private String phoneNumber;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
     private String avatar;
 

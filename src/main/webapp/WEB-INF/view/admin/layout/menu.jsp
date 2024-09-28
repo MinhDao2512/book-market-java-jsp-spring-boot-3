@@ -64,16 +64,22 @@
 
             <ul class="menu-inner py-1">
                 <!-- Dashboard -->
-                <li class="menu-item active">
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">TỔNG QUAN</span>
+                </li>
+                <li class="menu-item">
                     <a href="/admin" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Dashboard</div>
+                        <div data-i18n="Analytics">
+                            <strong>Thống Kê</strong>
+                        </div>
                     </a>
                 </li>
                 <!--Dashboard-->
 
                 <!-- Users -->
-                <li class="menu-header small text-uppercase"><span class="menu-header-text">QUẢN LÝ TÀI KHOẢN</span>
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">QUẢN LÝ TÀI KHOẢN</span>
                 </li>
                 <li class="menu-item">
                     <a href="/admin/users" class="menu-link">

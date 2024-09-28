@@ -66,8 +66,8 @@
                                 <form id="formCreateUser">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
-                                            <span class="text-muted fw-light">Dashboard /</span>
-                                            <span class="text-muted fw-light">Users /</span> Create A User
+                                            <span class="text-muted fw-light">Quản Lý Tài Khoản /</span>
+                                            <span class="text-muted fw-light">Tài Khoản /</span> Thêm mới
                                         </h4>
                                     </div>
                                     <div class="row justify-content-center">
@@ -75,7 +75,7 @@
                                             <!-- HTML5 Inputs -->
                                             <div class="card mb-4">
                                                 <h5 class="card-header" style="color: goldenrod;">
-                                                    <strong>Info User</strong>
+                                                    <strong>Thông tin cá nhân</strong>
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3 row">
@@ -83,13 +83,13 @@
                                                             class="col-md-2 col-form-label">First Name:</label>
                                                         <div class="col-md-3">
                                                             <input class="form-control" type="text" id="firstName"
-                                                                placeholder="Dao" />
+                                                                placeholder="Dao" name="firstName" />
                                                         </div>
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Last Name:</label>
                                                         <div class="col-md-5">
                                                             <input class="form-control" type="text" id="lastName"
-                                                                placeholder="Nguyen Minh" />
+                                                                placeholder="Nguyen Minh" name="lastName" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -97,20 +97,21 @@
                                                             class="col-md-2 col-form-label">Email:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="email" id="email"
-                                                                placeholder="vnkun@example.com" />
+                                                                placeholder="vnkun@example.com" name="email" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-password-input"
                                                             class="col-md-2 col-form-label">Password:</label>
                                                         <div class="col-md-4">
-                                                            <input class="form-control" type="password" id="password" />
+                                                            <input class="form-control" type="password" id="password"
+                                                                name="password" />
                                                         </div>
                                                         <label for="html5-password-input"
                                                             class="col-md-2 col-form-label">Confirm:</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="password"
-                                                                id="confirmPassword" />
+                                                                id="confirmPassword" name="confirmPassword" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -118,7 +119,7 @@
                                                             class="col-md-2 col-form-label">Phone:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="tel" id="phoneNumber"
-                                                                placeholder="(+84)120 230 016" />
+                                                                placeholder="(+84)120 230 016" name="phoneNumber" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -126,19 +127,21 @@
                                                             class="col-md-2 col-form-label">Address:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="address"
-                                                                placeholder="Số nhà, Phường, Quận, Thành phố " />
+                                                                placeholder="Số nhà, Phường, Quận, Thành phố "
+                                                                name="address" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Date:</label>
                                                         <div class="col-md-3">
-                                                            <input class="form-control" type="date" id="dateOfBirth" />
+                                                            <input class="form-control" type="date" id="dateOfBirth"
+                                                                name="dateOfBirth" />
                                                         </div>
                                                         <label for="defaultSelect"
                                                             class="col-md-2 col-form-label">Role:</label>
                                                         <div class="col-md-5">
-                                                            <select id="selectRole" class="form-select">
+                                                            <select id="selectRole" class="form-select" name="roleName">
                                                                 <option value="USER">User</option>
                                                                 <option value="CONTENT">Content</option>
                                                                 <option value="ADMIN">Admin</option>
@@ -151,11 +154,10 @@
                                             <!-- File input -->
                                             <div class="card">
                                                 <h5 class="card-header" style="color: goldenrod;">
-                                                    <strong>Chose avatar</strong>
+                                                    <strong>Hình đại diện</strong>
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3">
-                                                        <label for="formFile" class="form-label">Avatar</label>
                                                         <input class="form-control" accept=".png, .jpg, .jpeg"
                                                             type="file" id="avatarFile" name="avatarFile" />
                                                     </div>
@@ -217,25 +219,11 @@
             <script>
                 $(document).ready(() => {
                     //Form Submit
-                    $('#formCreateUser').on('submit', function (e) {
-                        e.preventDefault();
+                    $("#formCreateUser").submit(function (event) {
+                        event.preventDefault();
+                        var form = document.getElementById('formCreateUser');
+                        var formData = new FormData(form);
 
-                        var formData = new FormData();
-
-                        formData.append('firstName', $('#firstName').val());
-                        formData.append('lastName', $('#lastName').val());
-                        formData.append('email', $('#email').val());
-                        formData.append('password', $('#password').val());
-                        formData.append('confirmPassword', $('#confirmPassword').val());
-                        formData.append('phoneNumber', $('#phoneNumber').val());
-                        formData.append('address', $('#address').val());
-                        formData.append('dateOfBirth', $('#dateOfBirth').val());
-                        formData.append('roleName', $('#selectRole').val());
-
-                        var avatarFile = $('#avatarFile')[0].files[0];
-                        formData.append('avatarFile', avatarFile);
-
-                        //Use AJAX send data
                         sendAjaxRequest(formData);
                     });
 
@@ -268,7 +256,6 @@
                     );
                 });
             </script>
-
         </body>
 
         </html>

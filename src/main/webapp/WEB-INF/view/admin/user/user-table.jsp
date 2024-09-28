@@ -22,6 +22,7 @@
             <link
                 href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
                 rel="stylesheet" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
             <!-- Icons. Uncomment required icon fonts -->
             <link rel="stylesheet" href="/admin/vendor/fonts/boxicons.css" />
@@ -84,10 +85,13 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Tài Khoản
+                                        <span class="text-muted fw-light">Quản Lý Tài Khoản /</span> Tài Khoản
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <a href="/admin/user/create" class="btn btn-primary">Thêm mới</a>
+                                        <a href="/admin/user/create" class="btn btn-primary" title="Tạo mới">
+                                            <i class="far fa-plus-square"></i>
+                                            Thêm
+                                        </a>
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
@@ -111,8 +115,7 @@
                                                         <td class="col-md-1 text-center">
                                                             <strong>${user.id}</strong>
                                                         </td>
-                                                        <td class="col-md-1">
-                                                            <i class="fab fa-vuejs fa-lg text-success me-3"></i>
+                                                        <td class="col-md-1 text-center">
                                                             <img src="/images/user/${user.avatar}" alt="Avatar"
                                                                 class="rounded-circle avatar avatar-xs"
                                                                 data-bs-toggle="tooltip" data-popup="tooltip-custom"
@@ -128,12 +131,22 @@
                                                             ${user.createdAt}
                                                         </td>
                                                         <td class="col-md-2">
-                                                            <button type="button" class="btn btn-info">Chi tiết</button>
-                                                            <button type="button" class="btn btn-warning">Cập
-                                                                nhật</button>
+                                                            <button type="button" class="btn btn-info"
+                                                                title="Xem chi tiết">
+                                                                <i class="far fa-sticky-note"></i>
+                                                                Xem
+                                                            </button>
+                                                            <button type="button" class="btn btn-warning"
+                                                                title="Cập nhật">
+                                                                <i class="fas fa-user-edit"></i>
+                                                                Sửa
+                                                            </button>
                                                             <button data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal" type="button"
-                                                                class="btn btn-danger">Xóa</button>
+                                                                class="btn btn-danger" title="Xóa">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                                Xóa
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
