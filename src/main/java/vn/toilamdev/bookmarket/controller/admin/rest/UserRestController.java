@@ -5,8 +5,11 @@ import java.util.Date;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,5 +62,18 @@ public class UserRestController {
 
         this.userService.saveOrUpdateUser(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@ModelAttribute User user, @RequestParam MultipartFile multipartFile) {
+        User currentUser = new User();
+        return ResponseEntity.status(HttpStatus.OK).body(currentUser);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
+        // Do somethings
+        this.userService.deleteUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

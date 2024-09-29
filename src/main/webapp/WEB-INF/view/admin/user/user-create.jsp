@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Dashboard</title>
+            <title>StorySwap.vn | Thêm mới tài khoản </title>
 
             <meta name="description" content="" />
 
@@ -66,8 +66,8 @@
                                 <form id="formCreateUser">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
-                                            <span class="text-muted fw-light">Quản Lý Tài Khoản /</span>
-                                            <span class="text-muted fw-light">Tài Khoản /</span> Thêm mới
+                                            <span class="text-muted fw-light">Quản Lý Người Dùng /</span>
+                                            <span class="text-muted fw-light">Người Dùng /</span> Thêm mới
                                         </h4>
                                     </div>
                                     <div class="row justify-content-center">

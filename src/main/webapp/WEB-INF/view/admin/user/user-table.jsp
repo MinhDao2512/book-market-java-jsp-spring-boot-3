@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Dashboard</title>
+            <title>StorySwap.vn | Tài khoản</title>
 
             <meta name="description" content="" />
 
@@ -64,10 +64,11 @@
                                 </div>
                                 <div class="modal-body">
                                     <p><strong>Bạn muốn xóa tài khoản này ?</strong></p>
+                                    <input id="userIdToDelete" type="hidden" />
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                    <a href="/admin/user" class="btn btn-primary">Đồng ý</a>
+                                    <button id="btnConfirmDelete" class="btn btn-primary">Đồng ý</button>
                                 </div>
                             </div>
                         </div>
@@ -85,10 +86,10 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Quản Lý Tài Khoản /</span> Tài Khoản
+                                        <span class="text-muted fw-light">Quản Lý Người Dùng /</span> Người Dùng
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <a href="/admin/user/create" class="btn btn-primary" title="Tạo mới">
+                                        <a href="/admin/users/create" class="btn btn-primary" title="Tạo mới">
                                             <i class="far fa-plus-square"></i>
                                             Thêm
                                         </a>
@@ -96,7 +97,7 @@
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
-                                    <h5 class="card-header">BẢNG TÀI KHOẢN: </h5>
+                                    <h5 class="card-header">BẢNG NGƯỜI DÙNG: </h5>
                                     <div class="table-responsive text-nowrap">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -111,7 +112,7 @@
                                             </thead>
                                             <tbody class="table-border-bottom-0">
                                                 <c:forEach var="user" items="${users}">
-                                                    <tr>
+                                                    <tr data-user-id="${user.id}">
                                                         <td class="col-md-1 text-center">
                                                             <strong>${user.id}</strong>
                                                         </td>
@@ -131,19 +132,20 @@
                                                             ${user.createdAt}
                                                         </td>
                                                         <td class="col-md-2">
-                                                            <button type="button" class="btn btn-info"
+                                                            <a href="/admin/users/detail" class="btn btn-info"
                                                                 title="Xem chi tiết">
                                                                 <i class="far fa-sticky-note"></i>
                                                                 Xem
-                                                            </button>
-                                                            <button type="button" class="btn btn-warning"
+                                                            </a>
+                                                            <a href="/admin/users/update" class="btn btn-warning"
                                                                 title="Cập nhật">
                                                                 <i class="fas fa-user-edit"></i>
                                                                 Sửa
-                                                            </button>
+                                                            </a>
                                                             <button data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal" type="button"
-                                                                class="btn btn-danger" title="Xóa">
+                                                                class="btn btn-danger btnDelete" title="Xóa"
+                                                                data-user-id="${user.id}">
                                                                 <i class="fas fa-trash-alt"></i>
                                                                 Xóa
                                                             </button>
@@ -190,6 +192,44 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <script>
+                $(document).ready(function (event) {
+
+                    //Check event button delete on click
+                    $('.btnDelete').click(function () {
+                        var userId = $(this).data('user-id');
+                        $('#userIdToDelete').val(userId);
+                    });
+
+                    //Check event button confirm delete on click
+                    $('#btnConfirmDelete').click(function () {
+                        closeModalAndBackdrop();
+                        var userId = $('#userIdToDelete').val();
+                        sendAJAXRequest(userId);
+                    });
+
+                    //Call API  
+                    function sendAJAXRequest(userId) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "http://localhost:8082/api/admin/users/" + userId,
+                            success: function (response) {
+                                $('tr[data-user-id="' + userId + '"]').remove();
+                                alert("Bạn đã xóa thành công Người Dùng có ID = " + userId + "!");
+                            },
+                            error: function (jqXHR, status, error) {
+                                alert("Lỗi khi xóa người dùng: " + jqXHR.responseText);
+                            }
+                        });
+                    }
+
+                    function closeModalAndBackdrop() {
+                        $('#exampleModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                    }
+                });
+            </script>
         </body>
 
         </html>

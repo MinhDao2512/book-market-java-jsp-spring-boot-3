@@ -79,13 +79,13 @@
 
                 <!-- Users -->
                 <li class="menu-header small text-uppercase">
-                    <span class="menu-header-text">QUẢN LÝ TÀI KHOẢN</span>
+                    <span class="menu-header-text">QUẢN LÝ NGƯỜI DÙNG</span>
                 </li>
                 <li class="menu-item">
                     <a href="/admin/users" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
-                            <strong>Tài Khoản</strong>
+                            <strong>Người Dùng</strong>
                         </div>
                     </a>
                     <a href="/admin/roles" class="menu-link">
