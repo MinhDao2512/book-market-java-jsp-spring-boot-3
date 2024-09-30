@@ -63,16 +63,16 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span>
-                                        <span class="text-muted fw-light">Roles /</span> Detail
+                                        <span class="text-muted fw-light">Quản Lý Tài Khoản /</span>
+                                        <span class="text-muted fw-light">Vai Trò /</span> id = ${role.id}
                                     </h4>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-xl-7">
                                         <!-- HTML5 Inputs -->
                                         <div class="card mb-4">
-                                            <h5 class="card-header text-center" style="color: goldenrod;">
-                                                <strong>Role Detail</strong>
+                                            <h5 class="card-header" style="color: goldenrod;">
+                                                <strong>Thông tin chi tiết</strong>
                                             </h5>
                                             <div class="card-body">
                                                 <div class="mb-3 row">
@@ -114,7 +114,7 @@
                                 <div class="row justify-content-center mt-4">
                                     <div class="col-xl-7">
                                         <div class="d-flex justify-content-between">
-                                            <a href="/admin/role" class="btn btn-outline-secondary">Quay lại</a>
+                                            <a href="/admin/roles" class="btn btn-outline-secondary">Quay lại</a>
                                         </div>
                                     </div>
                                 </div>

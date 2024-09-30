@@ -67,7 +67,7 @@
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Người Dùng /</span>
-                                            <span class="text-muted fw-light">Người Dùng /</span> Thêm mới
+                                            <span class="text-muted fw-light">Người Dùng /</span> Tạo mới
                                         </h4>
                                     </div>
                                     <div class="row justify-content-center">
@@ -162,9 +162,9 @@
                                                             type="file" id="avatarFile" name="avatarFile" />
                                                     </div>
                                                     <div class="mb-3">
-                                                        <img style="max-height: 250px; display: none;"
+                                                        <img style="max-height: 200px; display: none;"
                                                             alt="avatar preview" id="avatarPreview"
-                                                            title="Avatar Preview " />
+                                                            class="rounded-circle" title="Avatar Preview " />
                                                     </div>
                                                 </div>
                                             </div>

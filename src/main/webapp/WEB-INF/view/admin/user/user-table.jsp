@@ -67,7 +67,8 @@
                                     <input id="userIdToDelete" type="hidden" />
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                    <button id="btnCancelDelete" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Hủy</button>
                                     <button id="btnConfirmDelete" class="btn btn-primary">Đồng ý</button>
                                 </div>
                             </div>
@@ -89,9 +90,9 @@
                                         <span class="text-muted fw-light">Quản Lý Người Dùng /</span> Người Dùng
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <a href="/admin/users/create" class="btn btn-primary" title="Tạo mới">
+                                        <a href="/admin/users/create" class="btn btn-outline-primary" title="Tạo mới">
                                             <i class="far fa-plus-square"></i>
-                                            Thêm
+                                            Tạo
                                         </a>
                                     </h4>
                                 </div>
@@ -132,19 +133,19 @@
                                                             ${user.createdAt}
                                                         </td>
                                                         <td class="col-md-2">
-                                                            <a href="/admin/users/detail" class="btn btn-info"
-                                                                title="Xem chi tiết">
+                                                            <a href="/admin/users/detail/${user.id}"
+                                                                class="btn btn-outline-info" title="Xem chi tiết">
                                                                 <i class="far fa-sticky-note"></i>
                                                                 Xem
                                                             </a>
-                                                            <a href="/admin/users/update" class="btn btn-warning"
-                                                                title="Cập nhật">
+                                                            <a href="/admin/users/update/${user.id}"
+                                                                class="btn btn-outline-warning" title="Cập nhật">
                                                                 <i class="fas fa-user-edit"></i>
                                                                 Sửa
                                                             </a>
                                                             <button data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal" type="button"
-                                                                class="btn btn-danger btnDelete" title="Xóa"
+                                                                class="btn btn-outline-danger btnDelete" title="Xóa"
                                                                 data-user-id="${user.id}">
                                                                 <i class="fas fa-trash-alt"></i>
                                                                 Xóa
@@ -194,6 +195,22 @@
             <script async defer src="https://buttons.github.io/buttons.js"></script>
             <script>
                 $(document).ready(function (event) {
+
+                    $(this).click(function () {
+                        var btnDeletes = document.querySelectorAll('.btnDelete');
+                        btnDeletes.forEach(function (button) {
+                            button.blur();
+                            button.classList.remove('active');
+                        });
+                    });
+
+                    $(this).keydown(function () {
+                        var btnDeletes = document.querySelectorAll('.btnDelete');
+                        btnDeletes.forEach(function (button) {
+                            button.blur();
+                            button.classList.remove('active');
+                        });
+                    });
 
                     //Check event button delete on click
                     $('.btnDelete').click(function () {

@@ -65,9 +65,23 @@ public class UserRestController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@ModelAttribute User user, @RequestParam MultipartFile multipartFile) {
-        User currentUser = new User();
-        return ResponseEntity.status(HttpStatus.OK).body(currentUser);
+    public ResponseEntity<Void> updateUser(@ModelAttribute User user,
+            @RequestParam("avatarFile") MultipartFile multipartFile, @PathVariable long id) {
+        User currentUser = this.userService.getUserById(id);
+        Role newRole = this.roleService.getRoleByName(user.getRole().getName());
+
+        currentUser.setFullName(user.getFullName());
+        currentUser.setPhoneNumber(user.getPhoneNumber());
+        currentUser.setAddress(user.getAddress());
+        currentUser.setDateOfBirth(user.getDateOfBirth());
+        currentUser.setRole(newRole);
+        if (multipartFile.getOriginalFilename() != "" || multipartFile.getOriginalFilename() != null) {
+            String fileName = this.uploadFileService.handleSaveFile(multipartFile, SystemConstant.DIRECTORY_AVATAR);
+            currentUser.setAvatar(fileName);
+        }
+
+        this.userService.saveOrUpdateUser(currentUser);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @DeleteMapping("/users/{id}")

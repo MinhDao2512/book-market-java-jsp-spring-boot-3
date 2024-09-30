@@ -22,6 +22,7 @@
             <link
                 href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
                 rel="stylesheet" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
             <!-- Icons. Uncomment required icon fonts -->
             <link rel="stylesheet" href="/admin/vendor/fonts/boxicons.css" />
@@ -63,7 +64,7 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Vai Trò
+                                        <span class="text-muted fw-light">Quản Lý Người Dùng /</span> Vai Trò
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
@@ -97,7 +98,10 @@
                                                         </td>
                                                         <td class="col-md-2 text-center">
                                                             <a href="/admin/role/detail/${role.id}"
-                                                                class="btn btn-info">Chi tiết</a>
+                                                                class="btn btn-outline-info" title="Xem chi tiết">
+                                                                <i class="far fa-sticky-note"></i>
+                                                                Xem
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
