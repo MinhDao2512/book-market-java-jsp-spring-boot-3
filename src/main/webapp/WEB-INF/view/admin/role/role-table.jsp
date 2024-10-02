@@ -90,13 +90,13 @@
                                                         <td class="text-center">
                                                             ${role.name}
                                                         </td>
-                                                        <td>
+                                                        <td style="white-space: normal; word-wrap: break-word;">
                                                             ${role.description}
                                                         </td>
                                                         <td class="col-md-1">
-                                                            ${role.createdAt}
+                                                            <fmt:formatDate type="date" value="${role.createdAt}" />
                                                         </td>
-                                                        <td class="col-md-2 text-center">
+                                                        <td class="col-md-1 text-center">
                                                             <a href="/admin/role/detail/${role.id}"
                                                                 class="btn btn-outline-info" title="Xem chi tiết">
                                                                 <i class="far fa-sticky-note"></i>

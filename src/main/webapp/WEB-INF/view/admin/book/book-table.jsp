@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Dashboard</title>
+            <title>StorySwap.vn | Sách</title>
 
             <meta name="description" content="" />
 
@@ -50,7 +50,29 @@
             <!-- Layout wrapper -->
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
-
+                    <!--Start Alert Dialog-->
+                    <div class="modal" tabindex="-1" id="exampleModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        <strong>Thông báo</strong>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Bạn muốn xóa sản phẩm này ?</strong></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="btnCancelDelete" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Hủy</button>
+                                    <button id="btnConfirmDelete" class="btn btn-primary">Đồng ý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Alert Dialog-->
                     <jsp:include page="../layout/menu.jsp" />
 
                     <!-- Layout container -->
@@ -63,15 +85,18 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Books
+                                        <span class="text-muted fw-light">Quản Lý Sách /</span> Sách
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <button type="button" class="btn btn-primary">Create</button>
+                                        <a href="/admin/books/create" class="btn btn-outline-primary" title="Tạo mới">
+                                            <i class="far fa-plus-square"></i>
+                                            Tạo
+                                        </a>
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
-                                    <h5 class="card-header">Books Table: </h5>
+                                    <h5 class="card-header">BẢNG SÁCH: </h5>
                                     <div class="table-responsive text-nowrap">
                                         <table class="table table-bordered table-striped">
                                             <thead>
@@ -82,39 +107,55 @@
                                                     <th class="text-center">State</th>
                                                     <th class="text-center">Price</th>
                                                     <th class="text-center">Publisher</th>
-                                                    <th class="text-center">Created At</th>
+                                                    <th class="text-center">Publication Date</th>
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">
-                                                <tr>
-                                                    <td class="col-md-1 text-center">
-                                                        <strong>1</strong>
-                                                    </td>
-                                                    <td>
-                                                        978-604-2-27297-1
-                                                    </td>
-                                                    <td>
-                                                        THÁM TỬ LỪNG DANH CONAN
-                                                    </td>
-                                                    <td>
-                                                        USED
-                                                    </td>
-                                                    <td>
-                                                        <fmt:formatNumber type="number" value="20000" />
-                                                    </td>
-                                                    <td>
-                                                        NHÀ XUẤT BẢN KIM ĐỒNG
-                                                    </td>
-                                                    <td>
-                                                        24/09/2024
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Detail</button>
-                                                        <button type="button" class="btn btn-warning">Edit</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
+                                                <c:forEach var="book" items="${books}">
+                                                    <tr>
+                                                        <td class="col-md-1 text-center">
+                                                            <strong>${book.id}</strong>
+                                                        </td>
+                                                        <td>
+                                                            ${book.ISBN}
+                                                        </td>
+                                                        <td style="white-space: normal; word-wrap: break-word;">
+                                                            ${book.title}
+                                                        </td>
+                                                        <td>
+                                                            ${book.state}
+                                                        </td>
+                                                        <td>
+                                                            <fmt:formatNumber type="number" value="${book.price}" />
+                                                        </td>
+                                                        <td>
+                                                            ${book.publisher.name}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <fmt:formatDate type="date"
+                                                                value="${book.publicationDate}" />
+                                                        </td>
+                                                        <td class="col-md-2">
+                                                            <a href="#" class="btn btn-outline-info"
+                                                                title="Xem chi tiết">
+                                                                <i class="far fa-sticky-note"></i>
+                                                                Xem
+                                                            </a>
+                                                            <a href="#" class="btn btn-outline-warning"
+                                                                title="Cập nhật">
+                                                                <i class="fas fa-user-edit"></i>
+                                                                Sửa
+                                                            </a>
+                                                            <button data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal" type="button"
+                                                                class="btn btn-outline-danger btnDelete" title="Xóa">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                                Xóa
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

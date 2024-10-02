@@ -3,6 +3,7 @@ package vn.toilamdev.bookmarket.domain;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,12 +15,14 @@ import jakarta.persistence.Table;
 public class Book extends AbstractDomain {
     private String title;
     private String ISBN;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String description;
+
     private Double price;
     private Date publicationDate;
     private String state;
     private Integer quantity;
-    private String image;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
@@ -39,6 +42,9 @@ public class Book extends AbstractDomain {
 
     @OneToMany(mappedBy = BookCategorization_.BOOK)
     private List<BookCategorization> bookCategorizations;
+
+    @OneToMany(mappedBy = BookImage_.BOOK)
+    private List<BookImage> bookImages;
 
     public String getTitle() {
         return title;
@@ -96,14 +102,6 @@ public class Book extends AbstractDomain {
         this.quantity = quantity;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public Publisher getPublisher() {
         return publisher;
     }
@@ -150,6 +148,14 @@ public class Book extends AbstractDomain {
 
     public void setBookCategorizations(List<BookCategorization> bookCategorizations) {
         this.bookCategorizations = bookCategorizations;
+    }
+
+    public List<BookImage> getBookImages() {
+        return bookImages;
+    }
+
+    public void setBookImages(List<BookImage> bookImages) {
+        this.bookImages = bookImages;
     }
 
 }

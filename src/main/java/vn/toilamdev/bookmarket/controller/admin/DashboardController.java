@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.Role;
 import vn.toilamdev.bookmarket.domain.User;
+import vn.toilamdev.bookmarket.service.BookService;
 import vn.toilamdev.bookmarket.service.RoleService;
 import vn.toilamdev.bookmarket.service.UserService;
 
@@ -18,10 +20,12 @@ public class DashboardController {
 
     private final RoleService roleService;
     private final UserService userService;
+    private final BookService bookService;
 
-    public DashboardController(RoleService roleService, UserService userService) {
+    public DashboardController(RoleService roleService, UserService userService, BookService bookService) {
         this.roleService = roleService;
         this.userService = userService;
+        this.bookService = bookService;
     }
 
     @GetMapping
@@ -36,6 +40,8 @@ public class DashboardController {
 
     @GetMapping("/books")
     public String getBooksTablePage(Model model) {
+        List<Book> books = this.bookService.getAllBooks();
+        model.addAttribute("books", books);
         return "admin/book/book-table";
     }
 

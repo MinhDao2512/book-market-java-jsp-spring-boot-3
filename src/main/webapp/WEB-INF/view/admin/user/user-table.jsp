@@ -130,7 +130,7 @@
                                                             ${user.email}
                                                         </td>
                                                         <td class="col-md-1">
-                                                            ${user.createdAt}
+                                                            <fmt:formatDate type="date" value="${user.createdAt}" />
                                                         </td>
                                                         <td class="col-md-2">
                                                             <a href="/admin/users/detail/${user.id}"

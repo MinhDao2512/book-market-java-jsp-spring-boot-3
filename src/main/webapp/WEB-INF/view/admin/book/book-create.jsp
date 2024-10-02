@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Thêm mới tài khoản </title>
+            <title>StorySwap.vn | Thêm mới sách </title>
 
             <meta name="description" content="" />
 
@@ -66,8 +66,8 @@
                                 <form id="formCreateUser">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
-                                            <span class="text-muted fw-light">Quản Lý Người Dùng /</span>
-                                            <span class="text-muted fw-light">Người Dùng /</span> Tạo mới
+                                            <span class="text-muted fw-light">Quản Lý Sách /</span>
+                                            <span class="text-muted fw-light">Sách /</span> Tạo mới
                                         </h4>
                                     </div>
                                     <div class="row justify-content-center">
@@ -75,78 +75,75 @@
                                             <!-- HTML5 Inputs -->
                                             <div class="card mb-4">
                                                 <h5 class="card-header" style="color: goldenrod;">
-                                                    <strong>Thông tin cá nhân</strong>
+                                                    <strong>Thông tin cơ bản</strong>
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3 row">
-                                                        <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">First Name:</label>
-                                                        <div class="col-md-3">
-                                                            <input class="form-control" type="text" id="firstName"
-                                                                placeholder="Dao" name="firstName" />
-                                                        </div>
-                                                        <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Last Name:</label>
-                                                        <div class="col-md-5">
-                                                            <input class="form-control" type="text" id="lastName"
-                                                                placeholder="Nguyen Minh" name="lastName" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
                                                         <label for="html5-email-input"
-                                                            class="col-md-2 col-form-label">Email:</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" type="email" id="email"
-                                                                placeholder="vnkun@example.com" name="email" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-password-input"
-                                                            class="col-md-2 col-form-label">Password:</label>
+                                                            class="col-md-2 col-form-label">ISBN:</label>
                                                         <div class="col-md-4">
-                                                            <input class="form-control" type="password" id="password"
-                                                                name="password" />
+                                                            <input class="form-control" type="text" id="ISBN"
+                                                                placeholder="978-604-2-27297-1" name="ISBN" />
                                                         </div>
-                                                        <label for="html5-password-input"
-                                                            class="col-md-2 col-form-label">Confirm:</label>
-                                                        <div class="col-md-4">
-                                                            <input class="form-control" type="password"
-                                                                id="confirmPassword" name="confirmPassword" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-tel-input"
-                                                            class="col-md-2 col-form-label">Phone:</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" type="tel" id="phoneNumber"
-                                                                placeholder="(+84)120 230 016" name="phoneNumber" />
+                                                        <label for="html5-email-input"
+                                                            class="col-md-3 col-form-label">Publication Date:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control" type="date" id="publicationDate"
+                                                                name="publicationDate" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Address:</label>
+                                                            class="col-md-2 col-form-label">Title:</label>
                                                         <div class="col-md-10">
-                                                            <input class="form-control" type="text" id="address"
-                                                                placeholder="Số nhà, Phường, Quận, Thành phố "
-                                                                name="address" />
+                                                            <input class="form-control" type="text" id="title"
+                                                                placeholder="Clean Code" name="title" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
-                                                            class="col-md-2 col-form-label">Date:</label>
-                                                        <div class="col-md-3">
-                                                            <input class="form-control" type="date" id="dateOfBirth"
-                                                                name="dateOfBirth" />
+                                                            class="col-md-2 col-form-label">Quantity:</label>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" type="text" id="quantity"
+                                                                name="quantity" />
                                                         </div>
-                                                        <label for="defaultSelect"
-                                                            class="col-md-2 col-form-label">Role:</label>
-                                                        <div class="col-md-5">
-                                                            <select id="selectRole" class="form-select" name="roleName">
-                                                                <option selected>Chọn vai trò</option>
-                                                                <c:forEach var="role" items="${roles}">
-                                                                    <option value="${role.name}">${role.name}</option>
+                                                        <label for="html5-date-input"
+                                                            class="col-md-2 col-form-label">Price:</label>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" type="text" id="price"
+                                                                name="price" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="html5-date-input"
+                                                            class="col-md-2 col-form-label">State:</label>
+                                                        <div class="col-md-4">
+                                                            <select id="state" class="form-select" name="state">
+                                                                <option selected>Chọn tình trạng</option>
+                                                                <option value="NEW">NEW</option>
+                                                                <option value="LIKE NEW">LIKE NEW</option>
+                                                                <option value="USED">USED</option>
+                                                            </select>
+                                                        </div>
+                                                        <label for="html5-date-input"
+                                                            class="col-md-2 col-form-label">Category:</label>
+                                                        <div class="col-md-4">
+                                                            <select id="category" class="form-select" name="category">
+                                                                <option selected>Chọn thể loại</option>
+                                                                <c:forEach var="category" items="${categories}">
+                                                                    <option value="${category.name}">
+                                                                        ${category.description}
+                                                                    </option>
                                                                 </c:forEach>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="html5-date-input"
+                                                            class="col-md-2 col-form-label">Description:</label>
+                                                        <div class="col-md-10">
+                                                            <textarea class="form-control" id="description"
+                                                                name="description" rows="10" cols="50"></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -155,7 +152,7 @@
                                             <!-- File input -->
                                             <div class="card">
                                                 <h5 class="card-header" style="color: goldenrod;">
-                                                    <strong>Hình đại diện</strong>
+                                                    <strong>Tác giả</strong>
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3">
@@ -217,46 +214,6 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formCreateUser").submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreateUser');
-                        var formData = new FormData(form);
-
-                        sendAjaxRequest(formData);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'http://localhost:8082/api/admin/users',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                alert('Bạn đã thêm mới người dùng thành công!');
-                                window.location.href = '/admin/users';
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi tạo người dùng: ' + xhr.responseText);
-                            }
-                        });
-                    }
-
-                    // Preview Avatar
-                    const avatarFile = $("#avatarFile");
-                    avatarFile.change(
-                        function (e) {
-                            const imfURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imfURL);
-                            $("#avatarPreview").css({ "display": "block" });
-                        }
-                    );
-                });
-            </script>
         </body>
 
         </html>
