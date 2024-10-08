@@ -3,9 +3,9 @@ package vn.toilamdev.bookmarket.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import vn.toilamdev.bookmarket.domain.Category;
+import vn.toilamdev.bookmarket.domain.Publisher;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-    Category findByName(String name);
+public interface PublisherRepository extends JpaRepository<Publisher, Long> {
+    Publisher findByName(String name);
 }

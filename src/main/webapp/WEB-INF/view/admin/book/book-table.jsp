@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Sách</title>
+            <title>StorySwap.vn | Bảng sách</title>
 
             <meta name="description" content="" />
 
@@ -101,14 +101,14 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Order</th>
+                                                    <th class="text-center">ID</th>
                                                     <th class="text-center">ISBN</th>
-                                                    <th class="text-center">Title</th>
-                                                    <th class="text-center">State</th>
-                                                    <th class="text-center">Price</th>
-                                                    <th class="text-center">Publisher</th>
-                                                    <th class="text-center">Publication Date</th>
-                                                    <th class="text-center">Actions</th>
+                                                    <th class="text-center">Tiêu Đề</th>
+                                                    <th class="text-center">Tình Trạng</th>
+                                                    <th class="text-center">Giá Bán</th>
+                                                    <th class="text-center">Nhà Xuất Bản</th>
+                                                    <th class="text-center">Ngày Xuất Bản</th>
+                                                    <th class="text-center">Tác Vụ</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">
@@ -130,7 +130,7 @@
                                                             <fmt:formatNumber type="number" value="${book.price}" />
                                                         </td>
                                                         <td>
-                                                            ${book.publisher.name}
+                                                            Nhà Xuất Bản ${book.publisher.name}
                                                         </td>
                                                         <td class="text-center">
                                                             <fmt:formatDate type="date"

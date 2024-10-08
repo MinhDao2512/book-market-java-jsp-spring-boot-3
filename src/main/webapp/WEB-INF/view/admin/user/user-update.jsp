@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Cập nhật tài khoản </title>
+            <title>StorySwap.vn | Cập nhật người dùng</title>
 
             <meta name="description" content="" />
 
@@ -71,6 +71,25 @@
                                         </h4>
                                     </div>
                                     <div class="row justify-content-center">
+                                        <div class="col-xl-3">
+                                            <div class="card">
+                                                <h5 class="card-header" style="color: goldenrod;">
+                                                    <strong>Hình đại diện</strong>
+                                                </h5>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <input class="form-control" accept=".png, .jpg, .jpeg"
+                                                            type="file" id="avatarFile" name="avatarFile" />
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <img style="max-height: 200px; display: block;"
+                                                            alt="avatar preview" id="avatarPreview"
+                                                            src="/images/user/${currentUser.avatar}"
+                                                            class="rounded-circle" title="Avatar Preview " />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-xl-7">
                                             <!-- HTML5 Inputs -->
                                             <div class="card mb-4">
@@ -157,28 +176,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <!-- File input -->
-                                            <div class="card">
-                                                <h5 class="card-header" style="color: goldenrod;">
-                                                    <strong>Hình đại diện</strong>
-                                                </h5>
-                                                <div class="card-body">
-                                                    <div class="mb-3">
-                                                        <input class="form-control" accept=".png, .jpg, .jpeg"
-                                                            type="file" id="avatarFile" name="avatarFile" />
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <img style="max-height: 200px; display: block;"
-                                                            alt="avatar preview" id="avatarPreview"
-                                                            src="/images/user/${currentUser.avatar}"
-                                                            class="rounded-circle" title="Avatar Preview " />
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="row justify-content-center mt-4">
+                                        <div class="col-xl-3"></div>
                                         <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
                                                 <a href="/admin/users" class="btn btn-outline-secondary">Quay lại</a>

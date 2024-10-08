@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Dashboard</title>
+            <title>StorySwap.vn | Bảng tác giả</title>
 
             <meta name="description" content="" />
 
@@ -63,50 +63,70 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Authors
+                                        <span class="text-muted fw-light">Quản Lý Sách /</span> Tác Giả
                                     </h4>
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <button type="button" class="btn btn-primary">Create</button>
+                                        <a href="/admin/authors/create" class="btn btn-outline-primary" title="Tạo mới">
+                                            <i class="far fa-plus-square"></i>
+                                            Tạo
+                                        </a>
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
-                                    <h5 class="card-header">Authors Table: </h5>
+                                    <h5 class="card-header">BẢNG TÁC GIẢ:</h5>
                                     <div class="table-responsive text-nowrap">
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Order</th>
-                                                    <th class="text-center">Name</th>
-                                                    <th class="text-center">Date</th>
-                                                    <th class="text-center">Nationality</th>
-                                                    <th class="text-center">Created At</th>
-                                                    <th class="text-center">Actions</th>
+                                                    <th class="text-center">ID</th>
+                                                    <th class="text-center">Tên</th>
+                                                    <th class="text-center">Ngày Sinh</th>
+                                                    <th class="text-center">Quốc Tịch</th>
+                                                    <th class="text-center">Ngày Khởi Tạo</th>
+                                                    <th class="text-center">Tác Vụ</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">
-                                                <tr>
-                                                    <td class="col-md-1 text-center">
-                                                        <strong>1</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        Nguyễn Minh Đạo
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        06/02/2002
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge bg-label-info me-1">VIET NAM</span>
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        24/09/2024
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Detail</button>
-                                                        <button type="button" class="btn btn-warning">Edit</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
+                                                <c:forEach var="author" items="${authors}">
+                                                    <tr>
+                                                        <td class="col-md-1 text-center">
+                                                            <strong>${author.id}</strong>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            ${author.name}
+                                                        </td>
+                                                        <td class="col-md-1">
+                                                            <fmt:formatDate type="date" value="${author.birthDate}" />
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span class="badge bg-label-info me-1">
+                                                                ${author.nationality}
+                                                            </span>
+                                                        </td>
+                                                        <td class="col-md-1">
+                                                            <fmt:formatDate type="date" value="${author.createdAt}" />
+                                                        </td>
+                                                        <td class="col-md-2">
+                                                            <a href="#" class="btn btn-outline-info"
+                                                                title="Xem chi tiết">
+                                                                <i class="far fa-sticky-note"></i>
+                                                                Xem
+                                                            </a>
+                                                            <a href="#" class="btn btn-outline-warning"
+                                                                title="Cập nhật">
+                                                                <i class="fas fa-user-edit"></i>
+                                                                Sửa
+                                                            </a>
+                                                            <button data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal" type="button"
+                                                                class="btn btn-outline-danger btnDelete" title="Xóa">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                                Xóa
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

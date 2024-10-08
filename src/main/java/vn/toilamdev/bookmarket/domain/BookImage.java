@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "book_images")
 public class BookImage extends AbstractDomain {
     private String name;
-    private String orderImage;
+    private Integer orderImage;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -23,11 +23,11 @@ public class BookImage extends AbstractDomain {
         this.name = name;
     }
 
-    public String getOrderImage() {
+    public Integer getOrderImage() {
         return orderImage;
     }
 
-    public void setOrderImage(String orderImage) {
+    public void setOrderImage(Integer orderImage) {
         this.orderImage = orderImage;
     }
 

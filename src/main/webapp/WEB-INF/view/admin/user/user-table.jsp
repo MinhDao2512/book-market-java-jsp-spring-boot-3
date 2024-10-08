@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Tài khoản</title>
+            <title>StorySwap.vn | Bảng người dùng</title>
 
             <meta name="description" content="" />
 
@@ -103,12 +103,12 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">Order</th>
-                                                    <th class="text-center">Avatar</th>
-                                                    <th class="text-center">Full Name</th>
+                                                    <th class="text-center">ID</th>
+                                                    <th class="text-center">Hỉnh Đại Diện</th>
+                                                    <th class="text-center">Họ & Tên</th>
                                                     <th class="text-center">Email</th>
-                                                    <th class="text-center">Created At</th>
-                                                    <th class="text-center">Actions</th>
+                                                    <th class="text-center">Ngày Khởi Tạo</th>
+                                                    <th class="text-center">Tác Vụ</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-border-bottom-0">

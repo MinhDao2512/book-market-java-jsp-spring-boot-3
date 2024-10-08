@@ -3,6 +3,8 @@ package vn.toilamdev.bookmarket.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -12,11 +14,14 @@ import jakarta.persistence.Table;
 public class Author extends AbstractDomain {
     private String name;
     private String biography;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
+
     private String nationality;
 
-    @OneToMany(mappedBy = BookAuthorship_.AUTHOR)
-    private List<BookAuthorship> bookAuthorship;
+    @OneToMany(mappedBy = Book_.AUTHOR)
+    private List<Book> books;
 
     public String getName() {
         return name;
@@ -50,12 +55,12 @@ public class Author extends AbstractDomain {
         this.nationality = nationality;
     }
 
-    public List<BookAuthorship> getBookAuthorship() {
-        return bookAuthorship;
+    public List<Book> getBooks() {
+        return books;
     }
 
-    public void setBookAuthorship(List<BookAuthorship> bookAuthorship) {
-        this.bookAuthorship = bookAuthorship;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
 }

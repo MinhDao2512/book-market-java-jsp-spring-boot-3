@@ -24,6 +24,7 @@ public class User extends AbstractDomain {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+
     private String avatar;
 
     @ManyToOne

@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Dashboard</title>
+            <title>StorySwap.vn | Chi tiết vai trò</title>
 
             <meta name="description" content="" />
 
@@ -77,7 +77,7 @@
                                             <div class="card-body">
                                                 <div class="mb-3 row">
                                                     <label for="html5-url-input" class="col-md-2 col-form-label">
-                                                        Name:</label>
+                                                        Chức Danh:</label>
                                                     <div class="col-md-10">
                                                         <input class="form-control" type="text" id="html5-url-input"
                                                             value="${role.name}" readonly />
@@ -85,23 +85,26 @@
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label for="html5-url-input" class="col-md-2 col-form-label">
-                                                        Description:</label>
+                                                        Mô Tả:</label>
                                                     <div class="col-md-10">
-                                                        <input class="form-control" type="text" id="html5-url-input"
-                                                            value="${role.description}" readonly />
+                                                        <!-- <input class="form-control" type="text" id="html5-url-input"
+                                                            style="white-space: normal; word-wrap: break-word;"
+                                                            value="${role.description}" readonly /> -->
+                                                        <textarea class="form-control" rows="2" cols="50"
+                                                            disabled="true">${role.description}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
                                                     <label for="html5-url-input" class="col-md-2 col-form-label">
-                                                        Create By:</label>
+                                                        Người Khởi Tạo:</label>
                                                     <div class="col-md-10">
                                                         <input class="form-control" type="text" id="html5-url-input"
                                                             value="${role.createdBy}" readonly />
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 row">
-                                                    <label for="html5-date-input" class="col-md-2 col-form-label">Create
-                                                        At:</label>
+                                                    <label for="html5-date-input" class="col-md-2 col-form-label">Ngày
+                                                        Khởi Tạo:</label>
                                                     <div class="col-md-10">
                                                         <input class="form-control" type="datetime"
                                                             id="html5-date-input" value="${role.createdAt}" readonly />

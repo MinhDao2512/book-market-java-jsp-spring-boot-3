@@ -23,13 +23,19 @@ public class Book extends AbstractDomain {
     private Date publicationDate;
     private String state;
     private Integer quantity;
+    private String publishingCompany;
+    private String size;
+    private String translator;
+    private String coverType;
+    private Integer numberOfPages;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    @OneToMany(mappedBy = BookAuthorship_.BOOK)
-    private List<BookAuthorship> bookAuthorship;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
     @OneToMany(mappedBy = Comment_.BOOK)
     private List<Comment> comments;
@@ -102,6 +108,46 @@ public class Book extends AbstractDomain {
         this.quantity = quantity;
     }
 
+    public String getPublishingCompany() {
+        return publishingCompany;
+    }
+
+    public void setPublishingCompany(String publishingCompany) {
+        this.publishingCompany = publishingCompany;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getTranslator() {
+        return translator;
+    }
+
+    public void setTranslator(String translator) {
+        this.translator = translator;
+    }
+
+    public String getCoverType() {
+        return coverType;
+    }
+
+    public void setCoverType(String coverType) {
+        this.coverType = coverType;
+    }
+
+    public Integer getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(Integer numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
     public Publisher getPublisher() {
         return publisher;
     }
@@ -110,12 +156,12 @@ public class Book extends AbstractDomain {
         this.publisher = publisher;
     }
 
-    public List<BookAuthorship> getBookAuthorship() {
-        return bookAuthorship;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setBookAuthorship(List<BookAuthorship> bookAuthorship) {
-        this.bookAuthorship = bookAuthorship;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public List<Comment> getComments() {

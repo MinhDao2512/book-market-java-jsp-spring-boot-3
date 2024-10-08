@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Chi tiết tài khoản </title>
+            <title>StorySwap.vn | Chi tiết người dùng</title>
 
             <meta name="description" content="" />
 
@@ -95,8 +95,8 @@
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3 row">
-                                                        <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Full Name:</label>
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Họ
+                                                            & Tên:</label>
                                                         <div class="col-md-10">
                                                             <form:input class="form-control" type="text" id="fulltName"
                                                                 placeholder="Dao" name="fullName" path="fullName"
@@ -113,15 +113,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
-                                                        <label for="html5-tel-input"
-                                                            class="col-md-2 col-form-label">Username:</label>
+                                                        <label for="html5-tel-input" class="col-md-2 col-form-label">Tên
+                                                            Tài Khoản:</label>
                                                         <div class="col-md-4">
                                                             <form:input class="form-control" type="tel" id="username"
                                                                 placeholder="vnkun0602" name="username" path="username"
                                                                 disabled="true" />
                                                         </div>
-                                                        <label for="html5-tel-input"
-                                                            class="col-md-2 col-form-label">Phone:</label>
+                                                        <label for="html5-tel-input" class="col-md-2 col-form-label">Số
+                                                            Điện Thoại:</label>
                                                         <div class="col-md-4">
                                                             <form:input class="form-control" type="tel" id="phoneNumber"
                                                                 placeholder="(+84)120 230 016" name="phoneNumber"
@@ -129,8 +129,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
-                                                        <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Address:</label>
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Địa
+                                                            Chỉ:</label>
                                                         <div class="col-md-10">
                                                             <form:input class="form-control" type="text" id="address"
                                                                 placeholder="Số nhà, Phường, Quận, Thành phố "
@@ -139,14 +139,14 @@
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
-                                                            class="col-md-2 col-form-label">Date:</label>
+                                                            class="col-md-2 col-form-label">Ngày Sinh:</label>
                                                         <div class="col-md-3">
                                                             <form:input class="form-control" type="date"
                                                                 id="dateOfBirth" name="dateOfBirth" path="dateOfBirth"
                                                                 disabled="true" />
                                                         </div>
-                                                        <label for="defaultSelect"
-                                                            class="col-md-2 col-form-label">Role:</label>
+                                                        <label for="defaultSelect" class="col-md-2 col-form-label">Vai
+                                                            Trò:</label>
                                                         <div class="col-md-5">
                                                             <form:input class="form-control" type="text" id="roleName"
                                                                 name="roleName" path="role.name" disabled="true" />
@@ -154,13 +154,13 @@
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
-                                                            class="col-md-2 col-form-label">Created At:</label>
+                                                            class="col-md-2 col-form-label">Ngày Khởi Tạo:</label>
                                                         <div class="col-md-3">
-                                                            <input class="form-control" type="date" id="createdAt"
+                                                            <form:input class="form-control" type="date" id="createdAt"
                                                                 name="createdAt" path="createdAt" disabled="true" />
                                                         </div>
-                                                        <label for="defaultSelect"
-                                                            class="col-md-2 col-form-label">Created By:</label>
+                                                        <label for="defaultSelect" class="col-md-2 col-form-label">Người
+                                                            Khởi Tạo:</label>
                                                         <div class="col-md-5">
                                                             <form:input class="form-control" type="text" id="createdBy"
                                                                 name="createdBy" path="createdBy" disabled="true"
