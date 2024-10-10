@@ -1,15 +1,23 @@
 package vn.toilamdev.bookmarket.service;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import vn.toilamdev.bookmarket.constant.SystemConstant;
 import vn.toilamdev.bookmarket.domain.Comment;
 import vn.toilamdev.bookmarket.domain.Order;
+import vn.toilamdev.bookmarket.domain.Role;
 import vn.toilamdev.bookmarket.domain.User;
+import vn.toilamdev.bookmarket.dto.UserDTO;
+import vn.toilamdev.bookmarket.mapper.UserMapper;
 import vn.toilamdev.bookmarket.repository.CartRepository;
 import vn.toilamdev.bookmarket.repository.CommentRepository;
 import vn.toilamdev.bookmarket.repository.OrderRepository;
+import vn.toilamdev.bookmarket.repository.RoleRepository;
 import vn.toilamdev.bookmarket.repository.UserRepository;
 
 @Service
@@ -18,13 +26,20 @@ public class UserService {
     private final CommentRepository commentRepository;
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
+    private final UploadFileService uploadFileService;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, CommentRepository commentRepository,
-            OrderRepository orderRepository, CartRepository cartRepository) {
+            OrderRepository orderRepository, CartRepository cartRepository, UploadFileService uploadFileService,
+            RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
+        this.uploadFileService = uploadFileService;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User saveOrUpdateUser(User user) {
@@ -61,5 +76,40 @@ public class UserService {
         }
 
         this.userRepository.deleteById(user.getId());
+    }
+
+    public void handleUpdateUser(User user, User currentUser, MultipartFile file) {
+        Role newRole = this.roleRepository.findByName(user.getRole().getName());
+
+        currentUser.setFullName(user.getFullName());
+        currentUser.setPhoneNumber(user.getPhoneNumber());
+        currentUser.setAddress(user.getAddress());
+        currentUser.setDateOfBirth(user.getDateOfBirth());
+        currentUser.setRole(newRole);
+
+        if (file.getOriginalFilename() != "" || file.getOriginalFilename() != null) {
+            String fileName = this.uploadFileService.handleSaveFile(file, SystemConstant.DIRECTORY_AVATAR);
+            currentUser.setAvatar(fileName);
+        }
+
+        this.userRepository.save(currentUser);
+    }
+
+    public void handleCreateUser(UserDTO userDTO, MultipartFile file) {
+        Role role = this.roleRepository.findByName(userDTO.getRoleName());
+        User newUser = UserMapper.mappingUserDTO(userDTO);
+
+        newUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
+        newUser.setRole(role);
+        if (file.getOriginalFilename() == "" ||
+                file.getOriginalFilename() == null) {
+            newUser.setAvatar(SystemConstant.AVATAR_NAME_DEFAULT);
+        } else {
+            newUser.setAvatar(this.uploadFileService.handleSaveFile(file,
+                    SystemConstant.DIRECTORY_AVATAR));
+        }
+        newUser.setCreatedAt(new Date(System.currentTimeMillis()));
+
+        this.userRepository.save(newUser);
     }
 }
