@@ -7,5 +7,5 @@ import vn.toilamdev.bookmarket.domain.BookCategorization;
 
 @Repository
 public interface BookCategorizationRepository extends JpaRepository<BookCategorization, Long> {
-
+    void deleteById(long id);
 }

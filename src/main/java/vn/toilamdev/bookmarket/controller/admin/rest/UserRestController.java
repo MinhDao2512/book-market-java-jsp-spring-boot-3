@@ -75,6 +75,7 @@ public class UserRestController {
         currentUser.setAddress(user.getAddress());
         currentUser.setDateOfBirth(user.getDateOfBirth());
         currentUser.setRole(newRole);
+
         if (multipartFile.getOriginalFilename() != "" || multipartFile.getOriginalFilename() != null) {
             String fileName = this.uploadFileService.handleSaveFile(multipartFile, SystemConstant.DIRECTORY_AVATAR);
             currentUser.setAvatar(fileName);
@@ -87,7 +88,8 @@ public class UserRestController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable long id) {
         // Do somethings
-        this.userService.deleteUserById(id);
+        User currentUser = this.userService.getUserById(id);
+        this.userService.handleDeleteUser(currentUser);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

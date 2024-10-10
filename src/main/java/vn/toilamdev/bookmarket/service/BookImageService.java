@@ -16,4 +16,8 @@ public class BookImageService {
     public BookImage saveOrUpdateBookImage(BookImage bookImage) {
         return this.bookImageRepository.save(bookImage);
     }
+
+    public void deleteBookImageById(long id) {
+        this.bookImageRepository.deleteById(id);
+    }
 }

@@ -5,8 +5,11 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,10 +43,14 @@ public class BookRestController {
             @RequestParam("bookFiles") List<MultipartFile> bookFiles) {
 
         Publisher publisher = this.publisherService.getPublisherByName(bookDTO.getPublisher());
-        Book newBook = BookMapper.mappingBookDTO(bookDTO);
+        Book newBook = new Book();
+        newBook = BookMapper.mappingBookDTO(newBook, bookDTO);
 
-        if (bookDTO.getNewAuthor() != null) {
-            Author newAuthor = this.authorService.saveOrUpdate(bookDTO.getNewAuthor());
+        if (bookDTO.getAuthorDefault().equals("OTHER")) {
+            Author newAuthor = bookDTO.getNewAuthor();
+            newAuthor.setCreatedAt(new Date(System.currentTimeMillis()));
+            newAuthor = this.authorService.saveOrUpdate(newAuthor);
+
             newBook.setAuthor(newAuthor);
         } else {
             Author newAuthor = this.authorService.getAuthorByName(bookDTO.getAuthorDefault());
@@ -60,5 +67,27 @@ public class BookRestController {
         this.bookService.handleSaveBookCategorization(bookDTO.getCategories(), newBook);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
+
+    @PutMapping("/books/{id}")
+    public ResponseEntity<Void> updateBook(@ModelAttribute BookDTO bookDTO, @PathVariable long id,
+            @RequestParam("bookFiles") List<MultipartFile> booFiles) {
+
+        Book currentBook = this.bookService.getBookById(id);
+        currentBook = BookMapper.mappingBookDTO(currentBook, bookDTO);
+
+        if (booFiles != null && booFiles.get(0).getOriginalFilename() != "") {
+            currentBook.setBookImages(this.bookService.handleUpdateBookImage(booFiles, currentBook));
+        }
+
+        this.bookService.saveOrUpdateBook(currentBook);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+    @DeleteMapping("/books/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable long id) {
+        Book currentBook = this.bookService.getBookById(id);
+        this.bookService.handleDeleteBook(currentBook);
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 }

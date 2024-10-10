@@ -60,6 +60,7 @@
                                     </h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
+                                    <input id="bookId" type="text" style="display: none;" />
                                 </div>
                                 <div class="modal-body">
                                     <p><strong>Bạn muốn xóa sản phẩm này ?</strong></p>
@@ -113,7 +114,7 @@
                                             </thead>
                                             <tbody class="table-border-bottom-0">
                                                 <c:forEach var="book" items="${books}">
-                                                    <tr>
+                                                    <tr data-book-id="${book.id}">
                                                         <td class="col-md-1 text-center">
                                                             <strong>${book.id}</strong>
                                                         </td>
@@ -137,19 +138,20 @@
                                                                 value="${book.publicationDate}" />
                                                         </td>
                                                         <td class="col-md-2">
-                                                            <a href="#" class="btn btn-outline-info"
-                                                                title="Xem chi tiết">
+                                                            <a href="/admin/books/detail/${book.id}"
+                                                                class="btn btn-outline-info" title="Xem chi tiết">
                                                                 <i class="far fa-sticky-note"></i>
                                                                 Xem
                                                             </a>
-                                                            <a href="#" class="btn btn-outline-warning"
-                                                                title="Cập nhật">
+                                                            <a href="/admin/books/update/${book.id}"
+                                                                class="btn btn-outline-warning" title="Cập nhật">
                                                                 <i class="fas fa-user-edit"></i>
                                                                 Sửa
                                                             </a>
                                                             <button data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal" type="button"
-                                                                class="btn btn-outline-danger btnDelete" title="Xóa">
+                                                                class="btn btn-outline-danger btnDelete" title="Xóa"
+                                                                data-book-id="${book.id}">
                                                                 <i class="fas fa-trash-alt"></i>
                                                                 Xóa
                                                             </button>
@@ -196,6 +198,59 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <script>
+                $(document).ready(function (event) {
+                    $(this).click(function () {
+                        var btnDeletes = document.querySelectorAll('.btnDelete');
+                        btnDeletes.forEach(function (button) {
+                            button.blur();
+                            button.classList.remove('active');
+                        });
+                    });
+
+                    $(this).keydown(function () {
+                        var btnDeletes = document.querySelectorAll('.btnDelete');
+                        btnDeletes.forEach(function (button) {
+                            button.blur();
+                            button.classList.remove('active');
+                        });
+                    });
+
+                    //Check event button delete on click
+                    $('.btnDelete').click(function () {
+                        var userId = $(this).data('book-id');
+                        $('#bookId').val(userId);
+                    });
+
+                    //Check event button confirm delete on click
+                    $('#btnConfirmDelete').click(function () {
+                        closeModalAndBackdrop();
+                        var bookId = $('#bookId').val();
+                        sendAJAXRequest(bookId);
+                    });
+
+                    //Call API  
+                    function sendAJAXRequest(bookId) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "http://localhost:8082/api/admin/books/" + bookId,
+                            success: function (response) {
+                                $('tr[data-book-id="' + bookId + '"]').remove();
+                                alert("Bạn đã xóa thành công sản phẩm có ID = " + bookId + "!");
+                            },
+                            error: function (jqXHR, status, error) {
+                                alert("Lỗi khi xóa sản phẩm: " + jqXHR.responseText);
+                            }
+                        });
+                    }
+
+                    function closeModalAndBackdrop() {
+                        $('#exampleModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                    }
+                });
+            </script>
         </body>
 
         </html>
