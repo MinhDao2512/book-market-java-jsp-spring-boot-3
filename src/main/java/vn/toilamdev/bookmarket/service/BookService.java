@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import vn.toilamdev.bookmarket.constant.SystemConstant;
+import vn.toilamdev.bookmarket.domain.Author;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.BookCategorization;
 import vn.toilamdev.bookmarket.domain.BookImage;
@@ -15,6 +16,10 @@ import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.Category;
 import vn.toilamdev.bookmarket.domain.Comment;
 import vn.toilamdev.bookmarket.domain.OrderItem;
+import vn.toilamdev.bookmarket.domain.Publisher;
+import vn.toilamdev.bookmarket.dto.BookDTO;
+import vn.toilamdev.bookmarket.mapper.BookMapper;
+import vn.toilamdev.bookmarket.repository.AuthorRepository;
 import vn.toilamdev.bookmarket.repository.BookCategorizationRepository;
 import vn.toilamdev.bookmarket.repository.BookImageRepository;
 import vn.toilamdev.bookmarket.repository.BookRepository;
@@ -22,6 +27,7 @@ import vn.toilamdev.bookmarket.repository.CartItemRepository;
 import vn.toilamdev.bookmarket.repository.CategoryRepository;
 import vn.toilamdev.bookmarket.repository.CommentRepository;
 import vn.toilamdev.bookmarket.repository.OrderItemRepository;
+import vn.toilamdev.bookmarket.repository.PublisherRepository;
 
 @Service
 public class BookService {
@@ -33,11 +39,14 @@ public class BookService {
     private final CommentRepository commentRepository;
     private final OrderItemRepository orderItemRepository;
     private final CartItemRepository cartItemRepository;
+    private final PublisherRepository publisherRepository;
+    private final AuthorRepository authorRepository;
 
     public BookService(BookRepository bookRepository, UploadFileService uploadFileService,
             BookImageRepository bookImageRepository, CategoryRepository categoryRepository,
             BookCategorizationRepository bookCategorizationRepository, CommentRepository commentRepository,
-            CartItemRepository cartItemRepository, OrderItemRepository orderItemRepository) {
+            CartItemRepository cartItemRepository, OrderItemRepository orderItemRepository,
+            PublisherRepository publisherRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.uploadFileService = uploadFileService;
         this.bookImageRepository = bookImageRepository;
@@ -46,6 +55,8 @@ public class BookService {
         this.commentRepository = commentRepository;
         this.orderItemRepository = orderItemRepository;
         this.cartItemRepository = cartItemRepository;
+        this.publisherRepository = publisherRepository;
+        this.authorRepository = authorRepository;
     }
 
     public List<Book> getAllBooks() {
@@ -144,5 +155,40 @@ public class BookService {
         }
 
         this.bookRepository.deleteById(book.getId());
+    }
+
+    public void handleCreateBook(BookDTO bookDTO, List<MultipartFile> files) {
+        Publisher publisher = this.publisherRepository.findByName(bookDTO.getPublisher());
+        Book newBook = new Book();
+        newBook = BookMapper.mappingBookDTO(newBook, bookDTO);
+
+        if (bookDTO.getAuthorDefault().equals("OTHER")) {
+            Author newAuthor = bookDTO.getNewAuthor();
+            newAuthor.setCreatedAt(new Date(System.currentTimeMillis()));
+            newAuthor = this.authorRepository.save(newAuthor);
+
+            newBook.setAuthor(newAuthor);
+        } else {
+            Author newAuthor = this.authorRepository.findByName(bookDTO.getAuthorDefault());
+            newBook.setAuthor(newAuthor);
+        }
+        newBook.setPublisher(publisher);
+        newBook.setCreatedAt(new Date(System.currentTimeMillis()));
+        // Save Book
+        newBook = this.bookRepository.save(newBook);
+        // Save BookImage
+        this.handleSaveBookImage(files, newBook);
+        // Save Category
+        this.handleSaveBookCategorization(bookDTO.getCategories(), newBook);
+    }
+
+    public void handleUpdateBook(BookDTO bookDTO, Book currentBook, List<MultipartFile> files) {
+        currentBook = BookMapper.mappingBookDTO(currentBook, bookDTO);
+
+        if (files != null && files.get(0).getOriginalFilename() != "") {
+            currentBook.setBookImages(this.handleUpdateBookImage(files, currentBook));
+        }
+
+        this.bookRepository.save(currentBook);
     }
 }
