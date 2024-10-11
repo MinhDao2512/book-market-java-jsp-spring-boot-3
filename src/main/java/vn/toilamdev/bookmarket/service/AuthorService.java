@@ -1,6 +1,7 @@
 package vn.toilamdev.bookmarket.service;
 
 import java.util.List;
+import java.util.Date;
 
 import org.springframework.stereotype.Service;
 
@@ -25,5 +26,17 @@ public class AuthorService {
 
     public Author getAuthorByName(String name) {
         return this.authorRepository.findByName(name);
+    }
+
+    public Author getAuthorById(long id) {
+        return this.authorRepository.findById(id);
+    }
+
+    public boolean existsAuthor(String name, String nationality, Date birthDate) {
+        return this.authorRepository.existsByNameAndNationalityAndBirthDate(name, nationality, birthDate);
+    }
+
+    public void deleteAuthorById(long id) {
+        this.authorRepository.deleteById(id);
     }
 }
