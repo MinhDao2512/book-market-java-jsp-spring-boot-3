@@ -28,11 +28,12 @@ import vn.toilamdev.bookmarket.repository.CategoryRepository;
 import vn.toilamdev.bookmarket.repository.CommentRepository;
 import vn.toilamdev.bookmarket.repository.OrderItemRepository;
 import vn.toilamdev.bookmarket.repository.PublisherRepository;
+import vn.toilamdev.bookmarket.utils.UploadFile;
 
 @Service
 public class BookService {
     private final BookRepository bookRepository;
-    private final UploadFileService uploadFileService;
+    private final UploadFile uploadFileService;
     private final BookImageRepository bookImageRepository;
     private final CategoryRepository categoryRepository;
     private final BookCategorizationRepository bookCategorizationRepository;
@@ -42,7 +43,7 @@ public class BookService {
     private final PublisherRepository publisherRepository;
     private final AuthorRepository authorRepository;
 
-    public BookService(BookRepository bookRepository, UploadFileService uploadFileService,
+    public BookService(BookRepository bookRepository, UploadFile uploadFileService,
             BookImageRepository bookImageRepository, CategoryRepository categoryRepository,
             BookCategorizationRepository bookCategorizationRepository, CommentRepository commentRepository,
             CartItemRepository cartItemRepository, OrderItemRepository orderItemRepository,

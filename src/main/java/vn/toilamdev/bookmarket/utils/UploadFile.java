@@ -1,4 +1,4 @@
-package vn.toilamdev.bookmarket.service;
+package vn.toilamdev.bookmarket.utils;
 
 import java.io.File;
 import java.io.BufferedOutputStream;
@@ -11,10 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.ServletContext;
 
 @Service
-public class UploadFileService {
+public class UploadFile {
     private final ServletContext servletContext;
 
-    public UploadFileService(ServletContext servletContext) {
+    public UploadFile(ServletContext servletContext) {
         this.servletContext = servletContext;
     }
 

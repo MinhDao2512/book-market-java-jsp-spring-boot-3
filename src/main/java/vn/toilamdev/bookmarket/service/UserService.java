@@ -19,6 +19,7 @@ import vn.toilamdev.bookmarket.repository.CommentRepository;
 import vn.toilamdev.bookmarket.repository.OrderRepository;
 import vn.toilamdev.bookmarket.repository.RoleRepository;
 import vn.toilamdev.bookmarket.repository.UserRepository;
+import vn.toilamdev.bookmarket.utils.UploadFile;
 
 @Service
 public class UserService {
@@ -26,12 +27,12 @@ public class UserService {
     private final CommentRepository commentRepository;
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
-    private final UploadFileService uploadFileService;
+    private final UploadFile uploadFileService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserService(UserRepository userRepository, CommentRepository commentRepository,
-            OrderRepository orderRepository, CartRepository cartRepository, UploadFileService uploadFileService,
+            OrderRepository orderRepository, CartRepository cartRepository, UploadFile uploadFileService,
             RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.commentRepository = commentRepository;
