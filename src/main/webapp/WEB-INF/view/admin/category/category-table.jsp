@@ -51,6 +51,30 @@
             <!-- Layout wrapper -->
             <div class="layout-wrapper layout-content-navbar">
                 <div class="layout-container">
+                    <!--Start Alert Dialog-->
+                    <div class="modal" tabindex="-1" id="exampleModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        <strong>Thông báo</strong>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>Bạn muốn xóa thể loại này ?</strong></p>
+                                    <input id="categoryId" type="hidden" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button id="btnCancelDelete" class="btn btn-outline-secondary"
+                                        data-bs-dismiss="modal">Hủy</button>
+                                    <button id="btnConfirmDelete" class="btn btn-primary">Đồng ý</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Alert Dialog-->
 
                     <jsp:include page="../layout/menu.jsp" />
 
@@ -90,7 +114,7 @@
                                             </thead>
                                             <tbody class="table-border-bottom-0">
                                                 <c:forEach var="category" items="${categories}">
-                                                    <tr>
+                                                    <tr data-category-id="${category.id}">
                                                         <td class="col-md-1 text-center">
                                                             <strong>${category.id}</strong>
                                                         </td>
@@ -104,19 +128,20 @@
                                                             ${category.createdAt}
                                                         </td>
                                                         <td class="col-md-2">
-                                                            <a href="#" class="btn btn-outline-info"
-                                                                title="Xem chi tiết">
+                                                            <a href="/admin/categories/detail/${category.id}"
+                                                                class="btn btn-outline-info" title="Xem chi tiết">
                                                                 <i class="far fa-sticky-note"></i>
                                                                 Xem
                                                             </a>
-                                                            <a href="#" class="btn btn-outline-warning"
-                                                                title="Cập nhật">
+                                                            <a href="/admin/categories/update/${category.id}"
+                                                                class="btn btn-outline-warning" title="Cập nhật">
                                                                 <i class="fas fa-pencil-alt"></i>
                                                                 Sửa
                                                             </a>
                                                             <button data-bs-toggle="modal"
                                                                 data-bs-target="#exampleModal" type="button"
-                                                                class="btn btn-outline-danger btnDelete" title="Xóa">
+                                                                class="btn btn-outline-danger btnDelete" title="Xóa"
+                                                                data-category-id="${category.id}">
                                                                 <i class="fas fa-trash-alt"></i>
                                                                 Xóa
                                                             </button>
@@ -163,6 +188,63 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
+            <script>
+                $(document).ready(function (event) {
+
+                    //Hidden Modal     
+                    $(this).click(function () {
+                        var btnDeletes = document.querySelectorAll('.btnDelete');
+                        btnDeletes.forEach(function (button) {
+                            button.blur();
+                            button.classList.remove('active');
+                        });
+                    });
+
+                    $(this).keydown(function () {
+                        var btnDeletes = document.querySelectorAll('.btnDelete');
+                        btnDeletes.forEach(function (button) {
+                            button.blur();
+                            button.classList.remove('active');
+                        });
+                    });
+
+                    //Check event button delete on click
+                    $('.btnDelete').click(function () {
+                        var categoryId = $(this).data('category-id');
+                        $('#categoryId').val(categoryId);
+                    });
+
+                    //Check event button confirm delete on click
+                    $('#btnConfirmDelete').click(function () {
+                        closeModalAndBackdrop();
+                        var categoryId = $('#categoryId').val();
+                        sendAJAXRequest(categoryId);
+                    });
+
+                    //Call API Delete 
+                    function sendAJAXRequest(categoryId) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "http://localhost:8082/api/admin/categories/" + categoryId,
+                            success: function (response) {
+                                $('tr[data-category-id="' + categoryId + '"]').remove();
+                                alert("Bạn đã xóa thành công thể loại có ID = " + categoryId + "!");
+                            },
+                            error: function (jqXHR, status, error) {
+                                alert("Thất bại! Bạn không thể xóa dữ liệu không còn tồn tại."
+                                    + "\nChú ý: Trang sẽ được tải lại!" + jqXHR.responseText);
+                                window.location.href = '/admin/categories';
+                            }
+                        });
+                    }
+
+                    function closeModalAndBackdrop() {
+                        $('#exampleModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                    }
+                });
+            </script>
         </body>
 
         </html>

@@ -8,4 +8,8 @@ import vn.toilamdev.bookmarket.domain.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByName(String name);
+
+    Category findById(long id);
+
+    boolean existsByName(String name);
 }
