@@ -63,13 +63,15 @@
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <!--Start Form Create User-->
-                                <form id="formCreateUser">
+                                <form id="formCreateUser" novalidate>
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Người Dùng /</span>
                                             <span class="text-muted fw-light">Người Dùng /</span> Tạo mới
                                         </h4>
                                     </div>
+
+                                    <!--Info User-->
                                     <div class="row justify-content-center">
                                         <div class="col-xl-3">
                                             <!-- File input -->
@@ -98,72 +100,82 @@
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3 row">
-                                                        <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Tên:</label>
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">
+                                                            Tên: <strong style="color: red;">*</strong>
+                                                        </label>
                                                         <div class="col-md-3">
                                                             <input class="form-control" type="text" id="firstName"
-                                                                placeholder="Dao" name="firstName" />
+                                                                placeholder="Dao" name="firstName" required />
                                                         </div>
                                                         <label for="html5-url-input" class="col-md-2 col-form-label">Họ
-                                                            & Tên Đệm:</label>
+                                                            & Tên Đệm: <strong style="color: red;">*</strong></label>
                                                         <div class="col-md-5">
                                                             <input class="form-control" type="text" id="lastName"
-                                                                placeholder="Nguyen Minh" name="lastName" />
+                                                                placeholder="Nguyen Minh" name="lastName" required />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-email-input"
-                                                            class="col-md-2 col-form-label">Email:</label>
+                                                            class="col-md-2 col-form-label">Email: <strong
+                                                                style="color: red;">*</strong></label>
                                                         <div class="col-md-10">
-                                                            <input class="form-control" type="email" id="email"
-                                                                placeholder="vnkun@example.com" name="email" />
+                                                            <input class="form-control" type="text" id="email"
+                                                                placeholder="vnkun@example.com" name="email" required />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-password-input"
-                                                            class="col-md-2 col-form-label">Mật Khẩu:</label>
+                                                            class="col-md-2 col-form-label">Mật Khẩu: <strong
+                                                                style="color: red;">*</strong></label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="password" id="password"
-                                                                name="password" />
+                                                                name="password" placeholder="********" required />
                                                         </div>
                                                         <label for="html5-password-input"
-                                                            class="col-md-2 col-form-label">Nhập Lại Mật Khẩu:</label>
+                                                            class="col-md-2 col-form-label">Nhập Lại Mật Khẩu: <strong
+                                                                style="color: red;">*</strong></label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="password"
-                                                                id="confirmPassword" name="confirmPassword" />
+                                                                id="confirmPassword" name="confirmPassword"
+                                                                placeholder="********" required />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-tel-input" class="col-md-2 col-form-label">Số
-                                                            Điện Thoại:</label>
+                                                            Điện Thoại: <strong style="color: red;">*</strong></label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="tel" id="phoneNumber"
-                                                                placeholder="(+84)120 230 016" name="phoneNumber" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Địa
-                                                            Chỉ:</label>
-                                                        <div class="col-md-10">
-                                                            <input class="form-control" type="text" id="address"
-                                                                placeholder="Số nhà, Phường, Quận, Thành phố "
-                                                                name="address" />
+                                                                placeholder="+84 120 230 016" name="phoneNumber"
+                                                                required />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
-                                                            class="col-md-2 col-form-label">Ngày Sinh:</label>
+                                                            class="col-md-2 col-form-label">Ngày Sinh: <strong
+                                                                style="color: red;">*</strong></label>
                                                         <div class="col-md-3">
                                                             <input class="form-control" type="date" id="dateOfBirth"
-                                                                name="dateOfBirth" />
+                                                                name="dateOfBirth" required />
                                                         </div>
                                                         <label for="defaultSelect" class="col-md-2 col-form-label">Vai
-                                                            Trò:</label>
+                                                            Trò: <strong style="color: red;">*</strong></label>
                                                         <div class="col-md-5">
-                                                            <select id="selectRole" class="form-select" name="roleName">
-                                                                <option selected>Chọn vai trò</option>
+                                                            <select id="selectRole" class="form-select" name="roleName"
+                                                                required>
+                                                                <option value="">Chọn vai trò</option>
                                                                 <c:forEach var="role" items="${roles}">
-                                                                    <option value="${role.name}">${role.name}</option>
+                                                                    <c:choose>
+                                                                        <c:when test="${role.name == 'USER'}">
+                                                                            <option value="${role.name}" selected>
+                                                                                ${role.name}
+                                                                            </option>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <option value="${role.name}">
+                                                                                ${role.name}
+                                                                            </option>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
@@ -172,6 +184,61 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--Address Input-->
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-3"></div>
+                                        <div class="col-xl-7">
+                                            <!-- HTML5 Inputs -->
+                                            <div class="card mb-4">
+                                                <h5 class="card-header" style="color: goldenrod;">
+                                                    <strong>Địa chỉ hiện tại</strong>
+                                                </h5>
+                                                <div class="card-body">
+                                                    <div class="mb-3 row">
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Số
+                                                            Nhà:</label>
+                                                        <div class="col-md-3">
+                                                            <input class="form-control" type="text" id="houseNumber"
+                                                                placeholder="D21/3" name="houseNumber" />
+                                                        </div>
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Tên
+                                                            Đường | Thôn: <strong style="color: red;">*</strong></label>
+                                                        <div class="col-md-5">
+                                                            <input class="form-control" type="text" id="street"
+                                                                placeholder="Trần Não" name="street" required />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3 row">
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Tên
+                                                            Phường | Xã: <strong style="color: red;">*</strong></label>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" type="text" id="ward"
+                                                                placeholder="An Khánh" name="ward" required />
+                                                        </div>
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Tên
+                                                            Quận | Huyện: <strong style="color: red;">*</strong></label>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" type="text" id="district"
+                                                                placeholder="Tp. Thủ Đức" name="district" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="html5-password-input"
+                                                            class="col-md-2 col-form-label">Tên Tỉnh | Thành
+                                                            Phố: <strong style="color: red;">*</strong></label>
+                                                        <div class="col-md-4">
+                                                            <input class="form-control" type="text" id="city"
+                                                                name="city" placeholder="Hồ Chí Minh" required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Action Button-->
                                     <div class="row justify-content-center mt-4">
                                         <div class="col-xl-3"></div>
                                         <div class="col-xl-7">
@@ -219,46 +286,8 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formCreateUser").submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreateUser');
-                        var formData = new FormData(form);
-
-                        sendAjaxRequest(formData);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'http://localhost:8082/api/admin/users',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                alert('Bạn đã thêm mới người dùng thành công!');
-                                window.location.href = '/admin/users';
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi tạo người dùng: ' + xhr.responseText);
-                            }
-                        });
-                    }
-
-                    // Preview Avatar
-                    const avatarFile = $("#avatarFile");
-                    avatarFile.change(
-                        function (e) {
-                            const imfURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imfURL);
-                            $("#avatarPreview").css({ "display": "block" });
-                        }
-                    );
-                });
-            </script>
+            <script src="/admin/js/validation/utils.js"></script>
+            <script src="/admin/js/validation/user.js"></script>
         </body>
 
         </html>

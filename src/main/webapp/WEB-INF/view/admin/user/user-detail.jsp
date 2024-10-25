@@ -167,6 +167,21 @@
                                                                 placeholder="ngminhdao" />
                                                         </div>
                                                     </div>
+                                                    <div class="mb-3 row">
+                                                        <label for="html5-date-input"
+                                                            class="col-md-2 col-form-label">Ngày Cập Nhật:</label>
+                                                        <div class="col-md-3">
+                                                            <form:input class="form-control" type="date" id="updatedAt"
+                                                                name="updatedAt" path="updatedAt" disabled="true" />
+                                                        </div>
+                                                        <label for="defaultSelect" class="col-md-2 col-form-label">Người
+                                                            Cập Nhật:</label>
+                                                        <div class="col-md-5">
+                                                            <form:input class="form-control" type="text" id="updatedBy"
+                                                                name="updatedBy" path="updatedBy" disabled="true"
+                                                                placeholder="ngminhdao" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

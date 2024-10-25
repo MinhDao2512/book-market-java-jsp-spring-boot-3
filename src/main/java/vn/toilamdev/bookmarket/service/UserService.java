@@ -59,6 +59,14 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    public User getUserByPhoneNumber(String phoneNumber) {
+        return this.userRepository.findByPhoneNumber(phoneNumber);
+    }
+
     public void handleDeleteUser(User user) {
         if (user.getComments().size() != 0) {
             for (Comment cmt : user.getComments()) {
@@ -79,7 +87,7 @@ public class UserService {
         this.userRepository.deleteById(user.getId());
     }
 
-    public void handleUpdateUser(User user, User currentUser, MultipartFile file) {
+    public User handleUpdateUser(User user, User currentUser, MultipartFile file) {
         Role newRole = this.roleRepository.findByName(user.getRole().getName());
 
         currentUser.setFullName(user.getFullName());
@@ -93,10 +101,11 @@ public class UserService {
             currentUser.setAvatar(fileName);
         }
 
-        this.userRepository.save(currentUser);
+        currentUser = this.userRepository.save(currentUser);
+        return currentUser;
     }
 
-    public void handleCreateUser(UserDTO userDTO, MultipartFile file) {
+    public User handleCreateUser(UserDTO userDTO, MultipartFile file) {
         Role role = this.roleRepository.findByName(userDTO.getRoleName());
         User newUser = UserMapper.mappingUserDTO(userDTO);
 
@@ -111,6 +120,8 @@ public class UserService {
         }
         newUser.setCreatedAt(new Date(System.currentTimeMillis()));
 
-        this.userRepository.save(newUser);
+        newUser = this.userRepository.save(newUser);
+
+        return newUser;
     }
 }

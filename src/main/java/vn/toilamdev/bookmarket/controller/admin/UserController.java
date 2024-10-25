@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import vn.toilamdev.bookmarket.domain.Role;
 import vn.toilamdev.bookmarket.domain.User;
+import vn.toilamdev.bookmarket.dto.UserDTO;
 import vn.toilamdev.bookmarket.service.RoleService;
 import vn.toilamdev.bookmarket.service.UserService;
 
@@ -29,6 +30,7 @@ public class UserController {
     public String getCreateUserPage(Model model) {
         List<Role> roles = this.roleService.getAllRoles();
         model.addAttribute("roles", roles);
+        model.addAttribute("userDTO", new UserDTO());
         return "admin/user/user-create";
     }
 
