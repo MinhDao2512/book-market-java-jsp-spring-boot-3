@@ -63,7 +63,7 @@
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <!--Start Form Create User-->
-                                <form id="formCreateBook">
+                                <form id="formCreateBook" novalidate>
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Sách /</span>
@@ -83,13 +83,19 @@
                                                             class="col-md-2 col-form-label">ISBN:</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text" id="ISBN"
-                                                                placeholder="978-604-2-27297-1" name="ISBN" />
+                                                                placeholder="9786042272971" name="ISBN" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "ISBN"
+                                                            </div>
                                                         </div>
                                                         <label for="html5-email-input"
                                                             class="col-md-2 col-form-label">Ngày xuất bản:</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="date" id="publicationDate"
-                                                                name="publicationDate" />
+                                                                name="publicationDate" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Ngày Xuất Bản"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -97,7 +103,10 @@
                                                             class="col-md-2 col-form-label">Tiêu đề:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="title"
-                                                                placeholder="Clean Code" name="title" />
+                                                                placeholder="Clean Code" name="title" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tiêu Đề"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -105,14 +114,16 @@
                                                             class="col-md-2 col-form-label">Thể loại:</label>
                                                         <div class="col-md-10">
                                                             <select id="categories" class="form-select"
-                                                                name="categories" multiple size="5">
-                                                                <option selected>Chọn thể loại</option>
+                                                                name="categories" multiple size="5" required>
                                                                 <c:forEach var="category" items="${categories}">
                                                                     <option value="${category.name}">
                                                                         ${category.description}
                                                                     </option>
                                                                 </c:forEach>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa chọn "Thể Loại"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -120,18 +131,24 @@
                                                             lượng:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
-                                                                <input class="form-control" type="text" id="quantity"
-                                                                    name="quantity" />
                                                                 <span class="input-group-text">quyển</span>
+                                                                <input class="form-control" type="text" id="quantity"
+                                                                    name="quantity" required />
+                                                                <div class="invalid-feedback">
+                                                                    Bạn chưa nhập "Số Lượng"
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <label for="html5-date-input"
-                                                            class="col-md-2 col-form-label">Giá bán:</label>
+                                                            class="col-md-2 col-form-label">Giá Bán:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
+                                                                <span class="input-group-text">vnđ</span>
                                                                 <input class="form-control" type="text" id="price"
-                                                                    name="price" />
-                                                                <span class="input-group-text">vnd</span>
+                                                                    name="price" required />
+                                                                <div class="invalid-feedback">
+                                                                    Bạn chưa nhập "Giá Bán"
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -139,55 +156,74 @@
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Tình trạng:</label>
                                                         <div class="col-md-4">
-                                                            <select id="state" class="form-select" name="state">
-                                                                <option selected>Chọn tình trạng</option>
-                                                                <option value="NEW">New</option>
-                                                                <option value="LIKE NEW">Like New</option>
-                                                                <option value="USED">Used</option>
+                                                            <select id="state" class="form-select" name="state"
+                                                                required>
+                                                                <option selected value="">Chọn tình trạng</option>
+                                                                <option value="NEW">Mới</option>
+                                                                <option value="LIKE NEW">Mới 98%</option>
+                                                                <option value="USED">Đã sử dụng</option>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa chọn "Tình Trạng"
+                                                            </div>
                                                         </div>
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Công ty phát hành :</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text"
-                                                                id="publishingCompany" name="publishingCompany" />
+                                                                id="publishingCompany" name="publishingCompany"
+                                                                placeholder="Nhã Nam" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập tên "Công Ty Phát Hành"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Kích thước:</label>
                                                         <div class="col-md-4">
-                                                            <div class="input-group">
-                                                                <input class="form-control" type="text" id="size"
-                                                                    name="size" />
-                                                                <span class="input-group-text">cm</span>
+                                                            <input class="form-control" type="text" id="size"
+                                                                name="size" required
+                                                                placeholder="rộng x dài cm | inch" />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Kích Thước"
                                                             </div>
                                                         </div>
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Dịch giả:</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text" id="translator"
-                                                                name="translator" />
+                                                                name="translator" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập tên "Dịch Giả"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Loại bìa:</label>
                                                         <div class="col-md-4">
-                                                            <select id="coverType" class="form-select" name="coverType">
-                                                                <option selected>Chọn loại bìa</option>
+                                                            <select id="coverType" class="form-select" name="coverType"
+                                                                required>
+                                                                <option selected value="">Chọn loại bìa</option>
                                                                 <option value="BIA CUNG">Bìa cứng</option>
                                                                 <option value="BIA MEM">Bìa mềm</option>
                                                                 <option value="BIA XOAN OC">Bìa xoắn ốc</option>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa chọn "Loại Bìa"
+                                                            </div>
                                                         </div>
                                                         <label for="html5-date-input" class="col-md-2 col-form-label">Số
                                                             trang:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
-                                                                <input class="form-control" type="text"
-                                                                    id="numberOfPages" name="numberOfPages" />
                                                                 <span class="input-group-text">trang</span>
+                                                                <input class="form-control" type="text"
+                                                                    id="numberOfPages" name="numberOfPages" required />
+                                                                <div class="invalid-feedback">
+                                                                    Bạn chưa nhập "Số Trang"
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -196,7 +232,11 @@
                                                             tả sản phẩm:</label>
                                                         <div class="col-md-10">
                                                             <textarea class="form-control" id="description"
-                                                                name="description" rows="10" cols="50"></textarea>
+                                                                name="description" rows="10" cols="50"
+                                                                required></textarea>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Mô Tả Sản Phẩm"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -204,9 +244,9 @@
                                                             class="col-md-2 col-form-label">Tác giả:</label>
                                                         <div class="col-md-10">
                                                             <select id="selectAuthor" class="form-select"
-                                                                name="authorDefault">
+                                                                name="authorDefault" required>
                                                                 <!-- <option selected>Chọn tác giả</option> -->
-                                                                <option selected>Chọn tác giả</option>
+                                                                <option selected value="">Chọn tác giả</option>
                                                                 <c:forEach var="author" items="${authors}">
                                                                     <option value="${author.name}">
                                                                         ${author.name}
@@ -214,6 +254,9 @@
                                                                 </c:forEach>
                                                                 <option value="OTHER">Lựa chọn khác (Other)</option>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa chọn "Tác Giả"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -221,29 +264,32 @@
                                                             class="col-md-2 col-form-label">Nhà xuất bản:</label>
                                                         <div class="col-md-10">
                                                             <select id="selectPublisher" class="form-select"
-                                                                name="publisher">
+                                                                name="publisher" required>
                                                                 <!-- <option selected>Chọn tác giả</option> -->
-                                                                <option selected>Chọn nhà xuất bản</option>
+                                                                <option selected value="">Chọn nhà xuất bản</option>
                                                                 <c:forEach var="publisher" items="${publishers}">
                                                                     <option value="${publisher.name}">
                                                                         Nhà Xuất Bản ${publisher.name}
                                                                     </option>
                                                                 </c:forEach>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa chọn "Nhà Xuất Bản"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <!-- Author New -->
-                                            <div class="card other-author mb-4" style="display: none;">
+                                            <div class="card mb-4 other-author" style="display: none;">
                                                 <h5 class="card-header" style="color: goldenrod;">
                                                     <strong>Sách | Tác giả khác (Other)</strong>
                                                 </h5>
                                                 <div class="card-body">
                                                     <div class="mb-3 row">
-                                                        <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Name:</label>
+                                                        <label for="html5-url-input" class="col-md-2 col-form-label">Họ
+                                                            Và Tên:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="authorName"
                                                                 placeholder="Alex Nguyen" name="newAuthor.name" />
@@ -251,13 +297,13 @@
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-email-input"
-                                                            class="col-md-2 col-form-label">Birth Date:</label>
+                                                            class="col-md-2 col-form-label">Ngày Sinh:</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="date" id="birthDate"
                                                                 name="newAuthor.birthDate" />
                                                         </div>
                                                         <label for="html5-url-input"
-                                                            class="col-md-2 col-form-label">Nationality:</label>
+                                                            class="col-md-2 col-form-label">Quốc Tịch:</label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text" id="nationality"
                                                                 placeholder="Viet Nam" name="newAuthor.nationality" />
@@ -265,7 +311,7 @@
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
-                                                            class="col-md-2 col-form-label">Biography:</label>
+                                                            class="col-md-2 col-form-label">Tiểu Sử:</label>
                                                         <div class="col-md-10">
                                                             <textarea class="form-control" id="biography"
                                                                 name="newAuthor.biography" rows="5"
@@ -274,6 +320,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <!-- File input -->
                                             <div class="card">
                                                 <h5 class="card-header" style="color: goldenrod;">
@@ -282,7 +329,11 @@
                                                 <div class="card-body">
                                                     <div class="mb-3">
                                                         <input class="form-control" accept=".png, .jpg, .jpeg"
-                                                            type="file" id="bookFiles" name="bookFiles" multiple />
+                                                            type="file" id="bookFiles" name="bookFiles" multiple
+                                                            required />
+                                                        <div class="invalid-feedback">
+                                                            Bạn chưa chọn "Hình Mô Tả"
+                                                        </div>
                                                     </div>
                                                     <div class="mb-3" id="imagePreviewContainer">
                                                         <!--Preview Images-->
@@ -337,64 +388,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(function (event) {
-                    $('#selectAuthor').change(function () {
-                        var selectElement = document.getElementById('selectAuthor');
-                        var selectedValue = selectElement.value;
-
-                        if (selectedValue === "OTHER") {
-                            $('.other-author').show();
-                        }
-                        else {
-                            $('.other-author').hide();
-                        }
-                    });
-
-                    $('#formCreateBook').submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreateBook');
-                        var formData = new FormData(form);
-
-                        sendAjaxRequest(formData);
-                    });
-
-                    function sendAjaxRequest(formData) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'http://localhost:8082/api/admin/books',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                alert('Bạn đã thêm mới sản phẩm thành công!');
-                                window.location.href = '/admin/books';
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi tạo mới sản phẩm: ' + xhr.responseText);
-                            }
-                        });
-                    }
-
-                    // Preview Avatar
-                    $('#bookFiles').change(
-                        function (e) {
-                            const previewContainer = $("#imagePreviewContainer");
-                            previewContainer.html("");
-
-                            [...e.target.files].forEach((file, index) => {
-                                const imgURL = URL.createObjectURL(file);
-                                $('<img>', {
-                                    src: imgURL,
-                                    alt: "Avatar Preview",
-                                    title: `Avatar Preview ${index + 1}`,
-                                    css: { maxHeight: '200px', margin: '10px' }
-                                }).appendTo(previewContainer);
-                            });
-                        }
-                    );
-                });
-            </script>
+            <script src="/admin/js/validation/book.js"></script>
         </body>
 
         </html>

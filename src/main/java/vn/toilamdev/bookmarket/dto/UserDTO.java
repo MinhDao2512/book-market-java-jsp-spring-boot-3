@@ -16,12 +16,12 @@ import vn.toilamdev.bookmarket.validation.UniquePhoneNumber;
 public class UserDTO {
     @NotBlank(message = "'Tên' không được để trống !")
     @Size(max = 30, message = "'Tên' không được vượt quá 30 ký tự !")
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "'Tên' không hợp lệ: Không được chứa ký tự đặc biệt, chữ số và tiếng việt !")
+    @Pattern(regexp = "^[\\p{L}\\p{M}]+(?: [\\p{L}\\p{M}]+)*$", message = "'Tên' không hợp lệ: Không được chứa ký tự đặc biệt, chữ số !")
     private String firstName;
 
     @NotBlank(message = "'Họ và Tên đêm' không được để trống !")
     @Size(max = 100, message = "'Họ và Tên đệm' không được vượt quá 100 ký tự !")
-    @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "'Họ và Tên đệm' không hợp lệ: Không được chứa ký tự đặc biệt, chữ số và tiếng việt !")
+    @Pattern(regexp = "^[\\p{L}\\p{M}]+(?: [\\p{L}\\p{M}]+)*$", message = "'Họ và Tên đệm' không hợp lệ: Không được chứa ký tự đặc biệt, chữ số !")
     private String lastName;
 
     @NotBlank(message = "'Email' không được để trống !")
@@ -38,23 +38,23 @@ public class UserDTO {
     @UniquePhoneNumber(message = "'Số điện thoại' đã tồn tại. Hãy nhập 'Số điện thoại' khác !")
     private String phoneNumber;
 
-    @Pattern(regexp = "^[0-9a-zA-Z\\-\\/\\s]*$", message = "'Số nhà' không hợp lệ !")
+    @Pattern(regexp = "^[\\d\\p{L}\\s'/-]+$", message = "'Số nhà' không hợp lệ !")
     private String houseNumber;
 
     @NotBlank(message = "'Tên Đường' không được để trống !")
-    @Pattern(regexp = "^[a-zA-Z\\s\\-\\.]+$", message = "'Tên Đường' không hợp lệ !")
+    @Pattern(regexp = "^[\\p{L}\\p{M}\\d\\s'-]+$", message = "'Tên Đường' không hợp lệ !")
     private String street;
 
     @NotBlank(message = "'Tên Phường | Xã' không được để trống !")
-    @Pattern(regexp = "^[a-zA-Z\\s\\-\\,\\.]+$", message = "'Tên Phường | Xã' không hợp lệ !")
+    @Pattern(regexp = "^[\\p{L}\\p{M}\\d\\s'-]+$", message = "'Tên Phường | Xã' không hợp lệ !")
     private String ward;
 
     @NotBlank(message = "'Tên Quận | Huyện' không được để trống !")
-    @Pattern(regexp = "^[a-zA-Z0-9\\s\\-\\,\\.]+$", message = "'Tên Quận | Huyện' không hợp lệ !")
+    @Pattern(regexp = "^[\\p{L}\\p{M}\\d\\s'-]+$", message = "'Tên Quận | Huyện' không hợp lệ !")
     private String district;
 
     @NotBlank(message = "'Tên Tỉnh | Thành phố' không được để trống !")
-    @Pattern(regexp = "^[a-zA-Z\\s\\-\\,\\.]+$", message = "'Tên Tỉnh | Thành phố' không hợp lệ !")
+    @Pattern(regexp = "^[\\p{L}\\p{M}\\d\\s'-]+$", message = "'Tên Tỉnh | Thành phố' không hợp lệ !")
     private String city;
 
     @NotNull(message = "'Ngày sinh' không được NULL !")

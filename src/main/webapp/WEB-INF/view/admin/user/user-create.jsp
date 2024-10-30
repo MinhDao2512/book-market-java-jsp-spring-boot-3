@@ -106,12 +106,18 @@
                                                         <div class="col-md-3">
                                                             <input class="form-control" type="text" id="firstName"
                                                                 placeholder="Dao" name="firstName" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tên"
+                                                            </div>
                                                         </div>
                                                         <label for="html5-url-input" class="col-md-2 col-form-label">Họ
                                                             & Tên Đệm: <strong style="color: red;">*</strong></label>
                                                         <div class="col-md-5">
                                                             <input class="form-control" type="text" id="lastName"
                                                                 placeholder="Nguyen Minh" name="lastName" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Họ và Tên Đệm"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -121,6 +127,9 @@
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="email"
                                                                 placeholder="vnkun@example.com" name="email" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Email"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -130,14 +139,20 @@
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="password" id="password"
                                                                 name="password" placeholder="********" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Mật Khẩu"
+                                                            </div>
                                                         </div>
                                                         <label for="html5-password-input"
-                                                            class="col-md-2 col-form-label">Nhập Lại Mật Khẩu: <strong
+                                                            class="col-md-2 col-form-label">Xác Nhận Mật Khẩu: <strong
                                                                 style="color: red;">*</strong></label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="password"
                                                                 id="confirmPassword" name="confirmPassword"
                                                                 placeholder="********" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Xác Nhận Mật Khẩu"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -147,6 +162,9 @@
                                                             <input class="form-control" type="tel" id="phoneNumber"
                                                                 placeholder="+84 120 230 016" name="phoneNumber"
                                                                 required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Số Điện Thoại"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -156,6 +174,9 @@
                                                         <div class="col-md-3">
                                                             <input class="form-control" type="date" id="dateOfBirth"
                                                                 name="dateOfBirth" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Ngày Sinh"
+                                                            </div>
                                                         </div>
                                                         <label for="defaultSelect" class="col-md-2 col-form-label">Vai
                                                             Trò: <strong style="color: red;">*</strong></label>
@@ -178,6 +199,9 @@
                                                                     </c:choose>
                                                                 </c:forEach>
                                                             </select>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa chọn "Vai Trò"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -207,6 +231,9 @@
                                                         <div class="col-md-5">
                                                             <input class="form-control" type="text" id="street"
                                                                 placeholder="Trần Não" name="street" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tên Đường | Thôn"
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -216,12 +243,18 @@
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text" id="ward"
                                                                 placeholder="An Khánh" name="ward" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tên Phường | Xã"
+                                                            </div>
                                                         </div>
                                                         <label for="html5-url-input" class="col-md-2 col-form-label">Tên
                                                             Quận | Huyện: <strong style="color: red;">*</strong></label>
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text" id="district"
                                                                 placeholder="Tp. Thủ Đức" name="district" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tên Quận | Huyện"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -231,6 +264,9 @@
                                                         <div class="col-md-4">
                                                             <input class="form-control" type="text" id="city"
                                                                 name="city" placeholder="Hồ Chí Minh" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tên Tỉnh | Thành Phố"
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -286,7 +322,6 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script src="/admin/js/validation/utils.js"></script>
             <script src="/admin/js/validation/user.js"></script>
         </body>
 

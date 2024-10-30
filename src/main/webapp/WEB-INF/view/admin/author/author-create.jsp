@@ -63,7 +63,7 @@
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <!--Start Form Create User-->
-                                <form id="formCreateAuthor">
+                                <form id="formCreateAuthor" novalidate>
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Sách /</span>
@@ -83,7 +83,10 @@
                                                             và Tên:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="name"
-                                                                placeholder="Nguyen Minh Dao" name="name" />
+                                                                placeholder="Nguyen Minh Dao" name="name" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập 'Họ và Tên' của tác giả !
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -91,13 +94,19 @@
                                                             class="col-md-2 col-form-label">Ngày Sinh:</label>
                                                         <div class="col-md-3">
                                                             <input class="form-control" type="date" id="birthDate"
-                                                                name="birthDate" />
+                                                                name="birthDate" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập 'Ngày Sinh' của tác giả !
+                                                            </div>
                                                         </div>
                                                         <label for="defaultSelect" class="col-md-2 col-form-label">Quốc
                                                             Tịch:</label>
                                                         <div class="col-md-5">
                                                             <input class="form-control" type="text" id="nationality"
-                                                                placeholder="Viet Nam" name="nationality" />
+                                                                placeholder="Viet Nam" name="nationality" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập 'Quốc Tịch' của tác giả !
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -105,7 +114,10 @@
                                                             class="col-md-2 col-form-label">Tiểu Sử :</label>
                                                         <div class="col-md-10">
                                                             <textarea class="form-control" name="biography"
-                                                                id="biography" rows="5" cols="100"></textarea>
+                                                                id="biography" rows="5" cols="100" required></textarea>
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập 'Tiểu Sử' của tác giả !
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -158,41 +170,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formCreateAuthor").submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreateAuthor');
-                        var formData = new FormData(form);
-
-                        sendAjaxRequest(formData);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'http://localhost:8082/api/admin/authors',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, xhr) {
-                                if (xhr.status === 201) {
-                                    alert("Thành công! Bạn đã tại mới một tác giả.");
-                                    window.location.href = '/admin/authors';
-                                }
-                                else if (xhr.status === 200) {
-                                    alert("Thất bại! Tác giả đã tồn tại.");
-                                }
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi tạo mới tác giả: ' + xhr.responseText);
-                            }
-                        });
-                    }
-                });
-            </script>
+            <script src="/admin/js/validation/author.js"></script>
         </body>
 
         </html>

@@ -1,43 +1,59 @@
 $(document).ready(() => {
 
+    //Save Time Out
+    let typingTimer;
+    const doneTypingInterval = 100;
+
     // Check First Name
     $('#firstName').on('input blur', () => {
         var firstName = $('#firstName').val().trim();
-        var firstNameRegex = /^[a-zA-Z\s]+$/;
+        var firstNameRegex = /^[\p{L}\p{M}]+(?: [\p{L}\p{M}]+)*$/u;
 
-        if (firstName.length === 0) {
-            $('#firstName').addClass('is-invalid');
-            $('#firstName').siblings('.invalid-feedback').text('Bạn chưa nhập "Tên"!').show();
-        } else if (firstName.length > 30) {
-            $('#firstName').addClass('is-invalid');
-            $('#firstName').siblings('.invalid-feedback').text('Độ dài chuỗi không hợp lệ: "Tối đa 30 ký tự."').show();
-        } else if (!firstNameRegex.test(firstName)) {
-            $('#firstName').addClass('is-invalid');
-            $('#firstName').siblings('.invalid-feedback').text('Tên không hợp lệ: "Không chứa ký tự đặc biệt, chữ số và tiếng việt."').show();
-        } else {
-            $('#firstName').removeClass('is-invalid');
-            $('#firstName').siblings('.invalid-feedback').hide();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (firstName.length === 0) {
+                $('#firstName').addClass('is-invalid');
+                $('#firstName').siblings('.invalid-feedback').remove();
+                $('#firstName').after('<div class="invalid-feedback">Bạn chưa nhập "Tên"</div>').show();
+            } else if (firstName.length > 30) {
+                $('#firstName').addClass('is-invalid');
+                $('#firstName').siblings('.invalid-feedback').remove();
+                $('#firstName').after('<div class="invalid-feedback">Độ dài không hợp lệ: "Tối đa 30 ký tự"</div>').show();
+            } else if (!firstNameRegex.test(firstName)) {
+                $('#firstName').addClass('is-invalid');
+                $('#firstName').siblings('.invalid-feedback').remove();
+                $('#firstName').after('<div class="invalid-feedback">Tên không hợp lệ: "Không chứa ký tự đặc biệt, chữ số"</div>').show();
+            } else {
+                $('#firstName').removeClass('is-invalid');
+                $('#firstName').siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     // Check Last Name
     $('#lastName').on('input blur', () => {
         var lastName = $('#lastName').val().trim();
-        var lastNameRegex = /^[a-zA-Z\s]*$/;
+        var lastNameRegex = /^[\p{L}\p{M}]+(?: [\p{L}\p{M}]+)*$/u;
 
-        if (lastName.length === 0) {
-            $('#lastName').addClass('is-invalid');
-            $('#lastName').siblings('.invalid-feedback').text('Bạn chưa nhập "Họ và Tên đệm"!').show();
-        } else if (lastName.length > 100) {
-            $('#lastName').addClass('is-invalid');
-            $('#lastName').siblings('.invalid-feedback').text('Độ dài chuỗi không hợp lệ: "Tối đa 100 ký tự".').show();
-        } else if (!lastNameRegex.test(lastName)) {
-            $('#lastName').addClass('is-invalid');
-            $('#lastName').siblings('.invalid-feedback').text('Chuỗi không hợp lệ: "Không chứa ký tự đặc biệt, chữ số và tiếng việt."').show();
-        } else {
-            $('#lastName').removeClass('is-invalid');
-            $('#lastName').siblings('.invalid-feedback').hide();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (lastName.length === 0) {
+                $('#lastName').addClass('is-invalid');
+                $('#lastName').siblings('.invalid-feedback').remove();
+                $('#lastName').after('<div class="invalid-feedback">Bạn chưa nhập "Họ và Tên Đệm"</div>').show();
+            } else if (lastName.length > 100) {
+                $('#lastName').addClass('is-invalid');
+                $('#lastName').siblings('.invalid-feedback').remove();
+                $('#lastName').after('<div class="invalid-feedback">Độ dài không hợp lệ: "Tối đa 100 ký tự"</div>').show();
+            } else if (!lastNameRegex.test(lastName)) {
+                $('#lastName').addClass('is-invalid');
+                $('#lastName').siblings('.invalid-feedback').remove();
+                $('#lastName').after('<div class="invalid-feedback">Họ và Tên Đệm không hợp lệ: "Không chứa ký tự đặc biệt, chữ số"</div>').show();
+            } else {
+                $('#lastName').removeClass('is-invalid');
+                $('#lastName').siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     //Check Email
@@ -47,13 +63,15 @@ $(document).ready(() => {
 
         if (email.length === 0) {
             $('#email').addClass('is-invalid');
-            $('#email').siblings('.invalid-feedback').text('Bạn chưa nhập địa chỉ "Email"!').show();
+            $('#email').siblings('.invalid-feedback').remove();
+            $('#email').after('<div class="invalid-feedback">Bạn chưa nhập địa chỉ "Email"</div>').show();
         } else if (!emailRegex.test(email)) {
             $('#email').addClass('is-invalid');
-            $('#email').siblings('.invalid-feedback').text('Địa chỉ "Email" không hợp lệ.').show();
+            $('#email').siblings('.invalid-feedback').remove();
+            $('#email').after('<div class="invalid-feedback">Địa chỉ "Email" không hợp lệ</div>').show();
         } else {
             $('#email').removeClass('is-invalid');
-            $('#email').siblings('.invalid-feedback').hide();
+            $('#email').siblings('.invalid-feedback').remove();
         }
     });
 
@@ -65,22 +83,25 @@ $(document).ready(() => {
 
         if (confirmPassword !== password) {
             $('#confirmPassword').addClass('is-invalid');
-            $('#confirmPassword').siblings('.invalid-feedback').text('Mật khẩu không trùng khớp!').show();
+            $('#confirmPassword').siblings('.invalid-feedback').remove();
+            $('#confirmPassword').after('<div class="invalid-feedback">Mật khẩu không trùng khớp</div>').show();
         }
         else {
             $('#confirmPassword').removeClass('is-invalid');
-            $('#confirmPassword').siblings('.invalid-feedback').hide();
+            $('#confirmPassword').siblings('.invalid-feedback').remove();
         }
 
         if (password.length === 0) {
             $('#password').addClass('is-invalid');
-            $('#password').siblings('.invalid-feedback').text('Bạn chưa nhập "Mật Khẩu"!').show();
+            $('#password').siblings('.invalid-feedback').remove();
+            $('#password').after('<div class="invalid-feedback">Bạn chưa nhập "Mật Khẩu"</div>').show();
         } else if (!passwordRegex.test(password)) {
             $('#password').addClass('is-invalid');
-            $('#password').siblings('.invalid-feedback').text('"Mật Khẩu" phải chứa ít nhất 8 ký tự, bao gồm chữ thường, chữ hoa, số và ký tự đặc biệt!').show();
+            $('#password').siblings('.invalid-feedback').remove();
+            $('#password').after('<div class="invalid-feedback">"Mật Khẩu" phải chứa ít nhất 8 ký tự, bao gồm chữ thường, chữ hoa, số và ký tự đặc biệt</div>').show();
         } else {
             $('#password').removeClass('is-invalid');
-            $('#password').siblings('.invalid-feedback').hide();
+            $('#password').siblings('.invalid-feedback').remove();
         }
     });
 
@@ -91,16 +112,18 @@ $(document).ready(() => {
 
         if (confirmPassword.length === 0) {
             $('#confirmPassword').addClass('is-invalid');
-            $('#confirmPassword').siblings('.invalid-feedback').text('Bạn chưa nhập lại "Mật Khẩu"!').show();
+            $('#confirmPassword').siblings('.invalid-feedback').remove();
+            $('#confirmPassword').after('<div class="invalid-feedback">Bạn chưa nhập "Xác Nhận Mật Khẩu"</div>').show();
         }
         else {
             if (confirmPassword !== password) {
                 $('#confirmPassword').addClass('is-invalid');
-                $('#confirmPassword').siblings('.invalid-feedback').text('Mật khẩu không trùng khớp!').show();
+                $('#confirmPassword').siblings('.invalid-feedback').remove();
+                $('#confirmPassword').after('<div class="invalid-feedback">Mật khẩu không trùng khớp</div>').show();
             }
             else {
                 $('#confirmPassword').removeClass('is-invalid');
-                $('#confirmPassword').siblings('.invalid-feedback').hide();
+                $('#confirmPassword').siblings('.invalid-feedback').remove();
             }
         }
     });
@@ -112,13 +135,15 @@ $(document).ready(() => {
 
         if (phoneNumber.length === 0) {
             $('#phoneNumber').addClass('is-invalid');
-            $('#phoneNumber').siblings('.invalid-feedback').text('Bạn chưa nhập "Số Điện Thoại"!').show();
+            $('#phoneNumber').siblings('.invalid-feedback').remove();
+            $('#phoneNumber').after('<div class="invalid-feedback">Bạn chưa nhập "Số Điện Thoại"</div>').show();
         } else if (!phoneRegex.test(phoneNumber)) {
             $('#phoneNumber').addClass('is-invalid');
-            $('#phoneNumber').siblings('.invalid-feedback').text('"Số Điện Thoại" không hợp lệ!').show();
+            $('#phoneNumber').siblings('.invalid-feedback').remove();
+            $('#phoneNumber').after('<div class="invalid-feedback">"Số Điện Thoại" không hợp lệ</div>').show();
         } else {
             $('#phoneNumber').removeClass('is-invalid');
-            $('#phoneNumber').siblings('.invalid-feedback').hide();
+            $('#phoneNumber').siblings('.invalid-feedback').remove();
         }
     });
 
@@ -130,13 +155,15 @@ $(document).ready(() => {
 
         if (!dateOfBirth) {
             $('#dateOfBirth').addClass('is-invalid');
-            $('#dateOfBirth').siblings('.invalid-feedback').text('Bạn chưa nhập "Ngày Sinh"!').show();
+            $('#dateOfBirth').siblings('.invalid-feedback').remove();
+            $('#dateOfBirth').after('<div class="invalid-feedback">Bạn chưa nhập "Ngày Sinh"</div>').show();
         } else if (inputDate > today) {
             $('#dateOfBirth').addClass('is-invalid');
-            $('#dateOfBirth').siblings('.invalid-feedback').text('"Ngày Sinh" không thể lớn hơn hoặc bằng ngày hiện tại!').show();
+            $('#dateOfBirth').siblings('.invalid-feedback').remove();
+            $('#dateOfBirth').after('<div class="invalid-feedback">"Ngày Sinh" không thể lớn hơn hoặc bằng ngày hiện tại</div>').show();
         } else {
             $('#dateOfBirth').removeClass('is-invalid');
-            $('#dateOfBirth').siblings('.invalid-feedback').hide();
+            $('#dateOfBirth').siblings('.invalid-feedback').remove();
         }
     });
 
@@ -146,79 +173,116 @@ $(document).ready(() => {
 
         if (roleName === "") {
             $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Bạn chưa chọn "Vai Trò"!').show();
+            $(this).siblings('.invalid-feedback').remove();
+            $(this).after('<div class="invalid-feedback">Bạn chưa chọn "Vai Trò"</div>').show();
         } else {
             $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').hide();
+            $(this).siblings('.invalid-feedback').remove();
+        }
+    });
+    //Check House Number
+    $('#houseNumber').on('input blur', function () {
+        const houseNumber = this.value;
+        const houseNumberRegex = /^[\d\p{L}\s'/-]+$/u;
+
+        if (houseNumber !== "") {
+            if (!houseNumberRegex.test(houseNumber)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">Lỗi định dạng: "Số Nhà" không chứa ký tự đặc biệt</div>').show();
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            }
         }
     });
 
     //Check Street Name
     $('#street').on('input blur', function () {
         var street = this.value;
-        var streetRegex = /^[a-zA-Z\s\-\.]+$/;
+        var streetRegex = /^[\p{L}\p{M}\d\s,'-]+$/u;
 
-        if (street.length === 0) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Bạn chưa nhập "Tên Đường"!').show();
-        } else if (!streetRegex.test(street)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('"Tên Đường" không hợp lệ!').show();
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').hide();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (street.length === 0) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">Bạn chưa nhập "Tên Đường"</div>').show();
+            } else if (!streetRegex.test(street)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">"Tên Đường" không hợp lệ</div>').show();
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     //Check Ward Name
     $('#ward').on('input blur', function () {
         var ward = this.value;
-        var wardRegex = /^[a-zA-Z\s\-\,\.]+$/;
+        var wardRegex = /^[\p{L}\p{M}\d\s'-]+$/u;
 
-        if (ward.length === 0) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Bạn chưa nhập "Tên Phường | Xã"!').show();
-        } else if (!wardRegex.test(ward)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('"Tên Phường | Xã" không hợp lệ!').show();
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').hide();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (ward.length === 0) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">Bạn chưa nhập "Tên Phường | Xã"</div>').show();
+            } else if (!wardRegex.test(ward)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">"Tên Phường | Xã" không hợp lệ</div>').show();
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     //Check District Name
     $('#district').on('input blur', function () {
         var district = this.value;
-        var districtRegex = /^[a-zA-Z0-9\s\-\,\.]+$/;
+        var districtRegex = /^[\p{L}\p{M}\d\s'-]+$/u;
 
-        if (district.length === 0) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Bạn chưa nhập "Tên Quận | Huyện"!').show();
-        } else if (!districtRegex.test(district)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('"Tên Quận | Huyện" không hợp lệ!').show();
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').hide();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (district.length === 0) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">Bạn chưa nhập "Tên Quận | Huyện"</div>').show();
+            } else if (!districtRegex.test(district)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">"Tên Quận | Huyện" không hợp lệ</div>').show();
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     //Check City Name
     $('#city').on('input blur', function () {
         var city = this.value;
-        var cityRegex = /^[a-zA-Z\s\-\,\.]+$/;
+        var cityRegex = /^[\p{L}\p{M}\s'-]+$/u;
 
-        if (city.length === 0) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('Bạn chưa nhập "Tên Tình | Thành phố"!').show();
-        } else if (!cityRegex.test(city)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').text('"Tên Tỉnh | Thành phố" không hợp lệ!').show();
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').hide();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (city.length === 0) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">Bạn chưa nhập "Tên Tình | Thành Phố"</div>').show();
+            } else if (!cityRegex.test(city)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">"Tên Tỉnh | Thành phố" không hợp lệ</div>').show();
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     //Form Submit
@@ -226,11 +290,24 @@ $(document).ready(() => {
         event.preventDefault();
         var form = document.getElementById('formCreateUser');
         var formData = new FormData(form);
+        var inValid = false;
 
-        if (!form.checkValidity()) {
-            alert('Có lỗi xảy ra: "BẠN CHƯA ĐIỀN ĐẦY ĐỦ THÔNG TIN!"');
-            event.stopPropagation()
-            form.classList.add('was-validated');
+        $("input[required], select[required], textarea[required]").each(function () {
+            if ($(this).next('.invalid-feedback').length) {
+                inValid = true;
+            }
+        });
+
+        if (inValid) {
+            alert('Có lỗi xảy ra: "BẠN CHƯA ĐIỀN ĐẦY ĐỦ THÔNG TIN HOẶC THÔNG TIN KHÔNG ĐÚNG ĐỊNH DẠNG !"');
+            event.stopPropagation();
+
+            $("input[required], select[required], textarea[required]").each(function () {
+                if ($(this).next('.invalid-feedback').length) {
+                    $(this).addClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').show();
+                }
+            });
         } else {
             sendAjaxRequest(formData);
         }
@@ -251,9 +328,10 @@ $(document).ready(() => {
             },
             error: function (xhr, status, error) {
                 if (xhr.status === 400) {
+                    alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại trước đó');
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
-                    $('.invalid-feedback').hide();
+                    $('.invalid-feedback').remove();
 
                     // Display validation errors
                     var errors = JSON.parse(xhr.responseText);
