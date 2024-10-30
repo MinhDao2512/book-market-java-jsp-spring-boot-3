@@ -1,7 +1,12 @@
 package vn.toilamdev.bookmarket.controller.admin.rest;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import vn.toilamdev.bookmarket.domain.Category;
 import vn.toilamdev.bookmarket.service.CategoryService;
 
@@ -23,7 +29,16 @@ public class CategoryRestController {
     }
 
     @PostMapping("/categories")
-    public ResponseEntity<?> createCategory(@ModelAttribute Category category) {
+    public ResponseEntity<?> createCategory(@Valid @ModelAttribute Category category, BindingResult bindingResult) {
+
+        if (bindingResult.hasFieldErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
         Category newCategory = this.categoryService.handleCreateCategory(category);
         if (newCategory != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(newCategory);

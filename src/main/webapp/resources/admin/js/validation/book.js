@@ -431,7 +431,7 @@ $(document).ready(function (event) {
                         inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
                 } else {
-                    alert('Lỗi khi tạo sách: ' + xhr.responseText);
+                    alert('Lỗi khi tạo mới sách: ' + xhr.responseText);
                 }
             }
         });

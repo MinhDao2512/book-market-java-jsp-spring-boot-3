@@ -63,7 +63,7 @@
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <!--Start Form Create User-->
-                                <form id="formCreateCategory">
+                                <form id="formCreateCategory" novalidate>
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Sách /</span>
@@ -83,7 +83,10 @@
                                                             class="col-md-2 col-form-label">Tên:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="name"
-                                                                placeholder="Self-Help" name="name" />
+                                                                placeholder="Self-Help" name="name" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Tên" của thể loại
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -91,7 +94,11 @@
                                                             Tả:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="description"
-                                                                name="description" placeholder="Phát triển bản thân" />
+                                                                name="description" placeholder="Phát triển bản thân"
+                                                                required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Mô Tả" của thể loại
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -145,36 +152,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formCreateCategory").submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreateCategory');
-                        var formData = new FormData(form);
-
-                        sendAjaxRequest(formData);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'http://localhost:8082/api/admin/categories',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, xhr) {
-                                alert("Thành công! Bạn đã tại mới một thể loại.");
-                                window.location.href = '/admin/categories';
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Thất bại! Thể loai này đã tồn tại.');
-                            }
-                        });
-                    }
-                });
-            </script>
+            <script src="/admin/js/validation/category.js"></script>
         </body>
 
         </html>
