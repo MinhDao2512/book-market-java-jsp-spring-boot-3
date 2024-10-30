@@ -63,7 +63,7 @@
                             <!-- Content -->
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <!--Start Form Create User-->
-                                <form id="formCreatePublisher">
+                                <form id="formCreatePublisher" novalidate>
                                     <div class="d-flex justify-content-between">
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Sách /</span>
@@ -85,7 +85,10 @@
                                                             <div class="input-group">
                                                                 <span class="input-group-text">Nhà Xuất Bản</span>
                                                                 <input type="text" class="form-control" name="name"
-                                                                    id="name" placeholder="Hà Nội">
+                                                                    id="name" placeholder="Hà Nội" required>
+                                                                <div class="invalid-feedback">
+                                                                    Bạn chưa nhập "Tên" của nhà xuất bản
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -96,7 +99,11 @@
                                                             <div class="input-group">
                                                                 <span class="input-group-text">+84</span>
                                                                 <input class="form-control" type="text" id="phoneNumber"
-                                                                    placeholder="942 236 357" name="phoneNumber" />
+                                                                    placeholder="942 236 357" name="phoneNumber"
+                                                                    required />
+                                                                <div class="invalid-feedback">
+                                                                    Bạn chưa nhập "Số Điện Thoại" của nhà xuất bản
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -108,7 +115,10 @@
                                                                 <span class="input-group-text">Link</span>
                                                                 <input class="form-control" type="text" id="website"
                                                                     placeholder="http://nxbbk.hust.edu.vn/"
-                                                                    name="website" />
+                                                                    name="website" required />
+                                                                <div class="invalid-feedback">
+                                                                    Bạn chưa nhập địa chỉ "Website" của nhà xuất bản
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -117,8 +127,11 @@
                                                             Chỉ:</label>
                                                         <div class="col-md-10">
                                                             <input class="form-control" type="text" id="address"
-                                                                placeholder="Thông tin địa chỉ cụ thể..."
-                                                                name="address" />
+                                                                placeholder="Số nhà, tên phường, tên quận, tên thành phố"
+                                                                name="address" required />
+                                                            <div class="invalid-feedback">
+                                                                Bạn chưa nhập "Địa Chỉ" của nhà xuất bản
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,41 +186,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formCreatePublisher").submit((event) => {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreatePublisher');
-                        var formData = new FormData(form);
-
-                        sendAjaxRequest(formData);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData) {
-                        $.ajax({
-                            type: 'POST',
-                            url: 'http://localhost:8082/api/admin/publishers',
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, xhr) {
-                                if (xhr.status === 201) {
-                                    alert("Thành công! Bạn đã tạo mới một nhà xuất bản.");
-                                    window.location.href = '/admin/publishers';
-                                }
-                                else if (xhr.status === 200) {
-                                    alert("Thất bại! Nhà xuất bản đã tồn tại.");
-                                }
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi tạo mới nhà xuất bản: ' + xhr.responseText);
-                            }
-                        });
-                    }
-                });
-            </script>
+            <script src="/admin/js/validation/publisher.js"></script>
         </body>
 
         </html>

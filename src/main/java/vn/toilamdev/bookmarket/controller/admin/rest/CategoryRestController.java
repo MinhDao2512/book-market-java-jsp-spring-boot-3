@@ -23,7 +23,7 @@ public class CategoryRestController {
     }
 
     @PostMapping("/categories")
-    public ResponseEntity<Category> createCategory(@ModelAttribute Category category) {
+    public ResponseEntity<?> createCategory(@ModelAttribute Category category) {
         Category newCategory = this.categoryService.handleCreateCategory(category);
         if (newCategory != null) {
             return ResponseEntity.status(HttpStatus.CREATED).body(newCategory);
