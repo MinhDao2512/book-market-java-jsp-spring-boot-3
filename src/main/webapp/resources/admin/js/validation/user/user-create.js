@@ -331,14 +331,14 @@ $(document).ready(() => {
                     alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại trước đó');
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
-                    $('.invalid-feedback').remove();
+                    $('.invalid-feedback').removeAll();
 
                     // Display validation errors
                     var errors = JSON.parse(xhr.responseText);
                     Object.keys(errors).forEach(function (key) {
                         var inputField = $('#' + key);
                         inputField.addClass('is-invalid');
-                        inputField.siblings('.invalid-feedback').text(errors[key]).show();
+                        inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
                 } else {
                     alert('Lỗi khi tạo người dùng: ' + xhr.responseText);

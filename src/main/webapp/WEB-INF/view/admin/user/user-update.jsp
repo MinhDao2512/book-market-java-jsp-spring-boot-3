@@ -101,9 +101,11 @@
                                                         <label for="html5-url-input" class="col-md-2 col-form-label">Họ
                                                             và Tên:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="fullName"
-                                                                placeholder="Nguyen Minh Dao" name="fullName"
-                                                                path="fullName" />
+                                                            <input type="hidden" id="userId"
+                                                                value="${currentUser.id}" />
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="fullName" placeholder="Nguyen Minh Dao"
+                                                                name="fullName" path="fullName" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -119,8 +121,8 @@
                                                         <label for="html5-tel-input" class="col-md-2 col-form-label">Tên
                                                             Tài Khoản:</label>
                                                         <div class="col-md-4">
-                                                            <form:input class="form-control" type="text" id="username"
-                                                                placeholder="vnkunn" name="username" disabled="true"
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="username" placeholder="vnkunn" name="username"
                                                                 path="username" />
                                                         </div>
                                                         <label for="html5-tel-input" class="col-md-2 col-form-label">Số
@@ -128,14 +130,15 @@
                                                         <div class="col-md-4">
                                                             <form:input class="form-control" type="tel" id="phoneNumber"
                                                                 placeholder="(+84)120 230 016" name="phoneNumber"
-                                                                path="phoneNumber" />
+                                                                path="phoneNumber" disabled="true" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-url-input" class="col-md-2 col-form-label">Địa
                                                             Chỉ:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="address"
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="address"
                                                                 placeholder="Số nhà, Phường, Quận, Thành phố "
                                                                 name="address" path="address" />
                                                         </div>
@@ -144,7 +147,7 @@
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Ngày Sinh:</label>
                                                         <div class="col-md-3">
-                                                            <form:input class="form-control" type="date"
+                                                            <form:input class="form-control validate" type="date"
                                                                 id="dateOfBirth" name="dateOfBirth"
                                                                 path="dateOfBirth" />
                                                         </div>
@@ -240,46 +243,8 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $('#formUpdateUser').submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formUpdateUser');
-                        var formData = new FormData(form);
-                        var userId = '${currentUser.id}';
 
-                        sendAjaxRequest(userId, formData);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(userId, formData) {
-                        $.ajax({
-                            type: 'PUT',
-                            url: 'http://localhost:8082/api/admin/users/' + userId,
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                alert('Bạn đã cập nhật người dùng thành công!');
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi cập nhật người dùng: ' + xhr.responseText);
-                            }
-                        });
-                    }
-
-                    // Preview Avatar
-                    const avatarFile = $("#avatarFile");
-                    avatarFile.change(
-                        function (e) {
-                            const imfURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imfURL);
-                            $("#avatarPreview").css({ "display": "block" });
-                        }
-                    );
-                });
-            </script>
+            <script src="/admin/js/validation/user/user-update.js"></script>
         </body>
 
         </html>

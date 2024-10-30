@@ -88,13 +88,15 @@ public class UserService {
     }
 
     public User handleUpdateUser(User user, User currentUser, MultipartFile file) {
-        Role newRole = this.roleRepository.findByName(user.getRole().getName());
+        if (!user.getRole().getName().equals(currentUser.getRole().getName())) {
+            Role newRole = this.roleRepository.findByName(user.getRole().getName());
+            currentUser.setRole(newRole);
+        }
 
         currentUser.setFullName(user.getFullName());
-        currentUser.setPhoneNumber(user.getPhoneNumber());
+        currentUser.setUsername(user.getUsername());
         currentUser.setAddress(user.getAddress());
         currentUser.setDateOfBirth(user.getDateOfBirth());
-        currentUser.setRole(newRole);
 
         if (file.getOriginalFilename() != "" || file.getOriginalFilename() != null) {
             String fileName = this.uploadFileService.handleSaveFile(file, SystemConstant.DIRECTORY_AVATAR);

@@ -49,8 +49,17 @@ public class UserRestController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@ModelAttribute User user,
+    public ResponseEntity<?> updateUser(@Valid @ModelAttribute User user, BindingResult bindingResult,
             @RequestParam("avatarFile") MultipartFile multipartFile, @PathVariable long id) {
+
+        if (bindingResult.hasFieldErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
         User currentUser = this.userService.getUserById(id);
         currentUser = this.userService.handleUpdateUser(user, currentUser, multipartFile);
         return ResponseEntity.status(HttpStatus.OK).body(currentUser);
