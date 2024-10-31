@@ -83,9 +83,12 @@
                                                             class="col-md-2 col-form-label">Tên:</label>
                                                         <div class="col-md-10">
                                                             <div class="input-group">
+                                                                <input type="hidden" id="publisherId"
+                                                                    value="${currentPublisher.id}" />
                                                                 <span class="input-group-text">Nhà Xuất Bản</span>
-                                                                <form:input type="text" class="form-control" name="name"
-                                                                    placeholder="Hà Nội" path="name" disabled="true" />
+                                                                <form:input type="text" class="form-control validate"
+                                                                    name="name" placeholder="Hà Nội" path="name"
+                                                                    id="name" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -95,7 +98,7 @@
                                                         <div class="col-md-10">
                                                             <div class="input-group">
                                                                 <span class="input-group-text">+84</span>
-                                                                <form:input class="form-control" type="text"
+                                                                <form:input class="form-control validate" type="text"
                                                                     id="phoneNumber" placeholder="942 236 357"
                                                                     name="phoneNumber" path="phoneNumber" />
                                                             </div>
@@ -107,7 +110,7 @@
                                                         <div class="col-md-10">
                                                             <div class="input-group">
                                                                 <span class="input-group-text">Link</span>
-                                                                <form:input class="form-control" type="text"
+                                                                <form:input class="form-control validate" type="text"
                                                                     id="website" placeholder="http://nxbbk.hust.edu.vn/"
                                                                     name="website" path="website" />
                                                             </div>
@@ -117,9 +120,9 @@
                                                         <label for="defaultSelect" class="col-md-2 col-form-label">Địa
                                                             Chỉ:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="address"
-                                                                placeholder="Thông tin địa chỉ cụ thể..." name="address"
-                                                                path="address" />
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="address" placeholder="Thông tin địa chỉ cụ thể..."
+                                                                name="address" path="address" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,36 +176,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formUpdatePublisher").submit((event) => {
-                        event.preventDefault();
-                        var form = document.getElementById('formUpdatePublisher');
-                        var formData = new FormData(form);
-                        var publisherId = '${currentPublisher.id}';
-
-                        sendAjaxRequest(formData, publisherId);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData, publisherId) {
-                        $.ajax({
-                            type: 'PUT',
-                            url: 'http://localhost:8082/api/admin/publishers/' + publisherId,
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, xhr) {
-                                alert("Thành công! Bạn đã cập nhật nhà xuất bản có ID = " + publisherId);
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi cập nhật nhà xuất bản: ' + xhr.responseText);
-                            }
-                        });
-                    }
-                });
-            </script>
+            <script src="/admin/js/validation/publisher/publisher-update.js"></script>
         </body>
 
         </html>

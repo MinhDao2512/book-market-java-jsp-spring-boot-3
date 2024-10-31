@@ -54,12 +54,17 @@ public class BookRestController {
     }
 
     @PutMapping("/books/{id}")
-    public ResponseEntity<Void> updateBook(@ModelAttribute BookDTO bookDTO, @PathVariable long id,
+    public ResponseEntity<?> updateBook(@ModelAttribute BookDTO bookDTO,
+            @PathVariable long id,
             @RequestParam("bookFiles") List<MultipartFile> files) {
 
         Book currentBook = this.bookService.getBookById(id);
-        this.bookService.handleUpdateBook(bookDTO, currentBook, files);
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        if (currentBook != null) {
+            this.bookService.handleUpdateBook(bookDTO, currentBook, files);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/books/{id}")

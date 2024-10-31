@@ -83,16 +83,18 @@
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Tên:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="name"
-                                                                placeholder="Self-Help" name="name" path="name"
-                                                                disabled="true" />
+                                                            <input type="hidden" id="categoryId"
+                                                                value="${currentCategory.id}" />
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="name" placeholder="Self-Help" name="name"
+                                                                path="name" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input" class="col-md-2 col-form-label">Mô
                                                             Tả:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text"
+                                                            <form:input class="form-control validate" type="text"
                                                                 id="description" name="description"
                                                                 placeholder="Phát triển bản thân" path="description" />
                                                         </div>
@@ -148,37 +150,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    //Form Submit
-                    $("#formUpdateCategory").submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formUpdateCategory');
-                        var formData = new FormData(form);
-                        var categoryId = '${currentCategory.id}';
-
-                        sendAjaxRequest(formData, categoryId);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData, categoryId) {
-                        $.ajax({
-                            type: 'PUT',
-                            url: 'http://localhost:8082/api/admin/categories/' + categoryId,
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, xhr) {
-                                alert("Thành công! Bạn đã cập nhật thể loại có id = " + categoryId);
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Thất bại! Thể loai này không còn tồn tại.');
-                                window.location.href = '/admin/categories';
-                            }
-                        });
-                    }
-                });
-            </script>
+            <script src="/admin/js/validation/category/category-update.js"></script>
         </body>
 
         </html>

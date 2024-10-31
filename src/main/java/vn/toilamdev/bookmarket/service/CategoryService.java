@@ -46,6 +46,7 @@ public class CategoryService {
     public Category handleUpdateCategory(Category category, long id) {
         Category currentCategory = this.categoryRepository.findById(id);
         if (currentCategory != null) {
+            currentCategory.setName(category.getName());
             currentCategory.setDescription(category.getDescription());
             currentCategory.setUpdatedAt(new Date(System.currentTimeMillis()));
 

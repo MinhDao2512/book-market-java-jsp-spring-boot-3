@@ -186,7 +186,32 @@ public class BookService {
     public void handleUpdateBook(BookDTO bookDTO, Book currentBook, List<MultipartFile> files) {
         currentBook = BookMapper.mappingBookDTO(currentBook, bookDTO);
 
-        if (files != null && files.get(0).getOriginalFilename() != "") {
+        // Update Publisher
+        if (currentBook.getPublisher() == null
+                || !currentBook.getPublisher().getName().equals(bookDTO.getPublisher())) {
+            Publisher newPublisher = this.publisherRepository.findByName(bookDTO.getPublisher());
+            currentBook.setPublisher(newPublisher);
+        }
+
+        // Update BookCategorizations
+        List<BookCategorization> bookCategorizations = new ArrayList<>();
+        for (BookCategorization bookCate : currentBook.getBookCategorizations()) {
+            this.bookCategorizationRepository.deleteById(bookCate.getId());
+        }
+        for (String category : bookDTO.getCategories()) {
+            Category newCategory = this.categoryRepository.findByName(category);
+
+            BookCategorization newBookCategorization = new BookCategorization();
+            newBookCategorization.setCategory(newCategory);
+            newBookCategorization.setBook(currentBook);
+
+            newBookCategorization = this.bookCategorizationRepository.save(newBookCategorization);
+            bookCategorizations.add(newBookCategorization);
+        }
+        currentBook.setBookCategorizations(bookCategorizations);
+
+        // Update Book Images
+        if (files != null && files.get(0).isEmpty()) {
             currentBook.setBookImages(this.handleUpdateBookImage(files, currentBook));
         }
 

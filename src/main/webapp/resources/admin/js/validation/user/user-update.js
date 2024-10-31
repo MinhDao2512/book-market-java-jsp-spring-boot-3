@@ -145,6 +145,9 @@ $(document).ready(() => {
                         inputField.addClass('is-invalid');
                         inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
+                } else if (xhr.status === 404) {
+                    alert('Lỗi cập nhật người dùng: Thông tin Người dùng không tồn tại hoặc đã bị xóa trước đó !' + xhr.responseText);
+                    window.location.href = '/admin/users';
                 } else {
                     alert('Lỗi khi cập nhật người dùng: ' + xhr.responseText);
                 }

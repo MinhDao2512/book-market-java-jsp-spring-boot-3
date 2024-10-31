@@ -56,16 +56,30 @@ public class AuthorRestController {
     }
 
     @PutMapping("/authors/{id}")
-    public ResponseEntity<Void> updateAuthor(@ModelAttribute Author author, @PathVariable long id) {
-        Author currentAuthor = this.authorService.getAuthorById(id);
-        currentAuthor.setName(author.getName());
-        currentAuthor.setBiography(author.getBiography());
-        currentAuthor.setBirthDate(author.getBirthDate());
-        currentAuthor.setNationality(author.getNationality());
-        currentAuthor.setUpdatedAt(new Date(System.currentTimeMillis()));
+    public ResponseEntity<?> updateAuthor(@Valid @ModelAttribute Author author, BindingResult bindingResult,
+            @PathVariable long id) {
 
-        this.authorService.saveOrUpdate(currentAuthor);
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        if (bindingResult.hasFieldErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
+        Author currentAuthor = this.authorService.getAuthorById(id);
+        if (currentAuthor != null) {
+            currentAuthor.setName(author.getName());
+            currentAuthor.setBiography(author.getBiography());
+            currentAuthor.setBirthDate(author.getBirthDate());
+            currentAuthor.setNationality(author.getNationality());
+            currentAuthor.setUpdatedAt(new Date(System.currentTimeMillis()));
+
+            this.authorService.saveOrUpdate(currentAuthor);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/authors/{id}")

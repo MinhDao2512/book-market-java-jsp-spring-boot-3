@@ -82,21 +82,24 @@
                                                         <label for="html5-url-input" class="col-md-2 col-form-label">Họ
                                                             và Tên:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="name"
-                                                                placeholder="Nguyen Minh Dao" name="name" path="name" />
+                                                            <input type="hidden" id="authorId"
+                                                                value="${currentAuthor.id}" />
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="name" placeholder="Nguyen Minh Dao" name="name"
+                                                                path="name" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Ngày Sinh:</label>
                                                         <div class="col-md-3">
-                                                            <form:input class="form-control" type="date" id="birthDate"
-                                                                name="birthDate" path="birthDate" />
+                                                            <form:input class="form-control validate" type="date"
+                                                                id="birthDate" name="birthDate" path="birthDate" />
                                                         </div>
                                                         <label for="defaultSelect" class="col-md-2 col-form-label">Quốc
                                                             Tịch:</label>
                                                         <div class="col-md-5">
-                                                            <form:input class="form-control" type="text"
+                                                            <form:input class="form-control validate" type="text"
                                                                 id="nationality" placeholder="Viet Nam"
                                                                 name="nationality" path="nationality" />
                                                         </div>
@@ -105,7 +108,7 @@
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Tiểu Sử :</label>
                                                         <div class="col-md-10">
-                                                            <textarea class="form-control" name="biography"
+                                                            <textarea class="form-control validate" name="biography"
                                                                 id="biography" rows="5"
                                                                 cols="100">${currentAuthor.biography}</textarea>
                                                         </div>
@@ -160,35 +163,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(() => {
-                    $('#formUpdateAuthor').submit(function (e) {
-                        e.preventDefault();
-                        var form = document.getElementById('formUpdateAuthor');
-                        var formData = new FormData(form);
-                        var authorId = '${currentAuthor.id}';
-
-                        sendAjaxRequest(formData, authorId);
-                    });
-
-                    // Call API using FormData
-                    function sendAjaxRequest(formData, authorId) {
-                        $.ajax({
-                            type: 'PUT',
-                            url: 'http://localhost:8082/api/admin/authors/' + authorId,
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response, textStatus, xhr) {
-                                alert("Thành công! Bạn đã cập nhật tác giả có id = " + authorId);
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi cập nhật tác giả: ' + xhr.responseText);
-                            }
-                        });
-                    }
-                });
-            </script>
+            <script src="/admin/js/validation/author/author-update.js"></script>
         </body>
 
         </html>

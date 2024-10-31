@@ -82,13 +82,15 @@
                                                         <label for="html5-email-input"
                                                             class="col-md-2 col-form-label">ISBN:</label>
                                                         <div class="col-md-4">
+                                                            <input type="hidden" id="bookId"
+                                                                value="${currentBook.id}" />
                                                             <form:input class="form-control" type="text" id="ISBN"
-                                                                name="ISBN" path="ISBN" />
+                                                                name="ISBN" path="ISBN" disabled="true" />
                                                         </div>
                                                         <label for="html5-email-input"
                                                             class="col-md-2 col-form-label">Ngày xuất bản:</label>
                                                         <div class="col-md-4">
-                                                            <form:input class="form-control" type="date"
+                                                            <form:input class="form-control validate" type="date"
                                                                 id="publicationDate" name="publicationDate"
                                                                 path="publicationDate" />
                                                         </div>
@@ -97,21 +99,36 @@
                                                         <label for="html5-url-input"
                                                             class="col-md-2 col-form-label">Tiêu đề:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="title"
-                                                                placeholder="Clean Code" name="title" path="title" />
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="title" placeholder="Clean Code" name="title"
+                                                                path="title" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Thể loại:</label>
                                                         <div class="col-md-10">
-                                                            <select id="categories" class="form-select"
-                                                                name="categories" multiple size="3" disabled="true">
-                                                                <c:forEach var="bookCate"
-                                                                    items="${currentBook.bookCategorizations}">
-                                                                    <option value="${bookCate.category.name}">
-                                                                        ${bookCate.category.description}
-                                                                    </option>
+                                                            <select id="categories" class="form-select validate"
+                                                                name="categories" multiple size="5"
+                                                                path="bookCategorizations.category.name">
+                                                                <c:forEach var="category" items="${categories}">
+                                                                    <c:set var="check" value="${0}" />
+                                                                    <c:forEach var="bookCate"
+                                                                        items="${currentBook.bookCategorizations}">
+                                                                        <c:if
+                                                                            test="${category.name == bookCate.category.name}">
+                                                                            <option value="${category.name}" selected>
+                                                                                ${category.description}
+                                                                            </option>
+                                                                            <c:set var="check" value="1" />
+                                                                        </c:if>
+                                                                    </c:forEach>
+
+                                                                    <c:if test="${check == 0}">
+                                                                        <option value="${category.name}">
+                                                                            ${category.description}
+                                                                        </option>
+                                                                    </c:if>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
@@ -121,18 +138,18 @@
                                                             lượng:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
-                                                                <form:input class="form-control" type="text"
-                                                                    id="quantity" name="quantity" path="quantity" />
                                                                 <span class="input-group-text">quyển</span>
+                                                                <form:input class="form-control validate" type="text"
+                                                                    id="quantity" name="quantity" path="quantity" />
                                                             </div>
                                                         </div>
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Giá bán:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
-                                                                <form:input class="form-control" type="text" id="price"
-                                                                    name="price" path="price" />
-                                                                <span class="input-group-text">vnd</span>
+                                                                <span class="input-group-text">vnđ</span>
+                                                                <form:input class="form-control validate" type="text"
+                                                                    id="price" name="price" path="price" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -142,15 +159,15 @@
                                                         <div class="col-md-4">
                                                             <form:select id="state" class="form-select" name="state"
                                                                 path="state">
-                                                                <form:option value="NEW">New</form:option>
-                                                                <form:option value="LIKE NEW">Like New</form:option>
-                                                                <form:option value="USED">Used</form:option>
+                                                                <form:option value="NEW">Mới</form:option>
+                                                                <form:option value="LIKE NEW">Mới 98%</form:option>
+                                                                <form:option value="USED">Đã sử dụng</form:option>
                                                             </form:select>
                                                         </div>
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Công ty phát hành :</label>
                                                         <div class="col-md-4">
-                                                            <form:input class="form-control" type="text"
+                                                            <form:input class="form-control validate" type="text"
                                                                 id="publishingCompany" name="publishingCompany"
                                                                 path="publishingCompany" />
                                                         </div>
@@ -159,17 +176,14 @@
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Kích thước:</label>
                                                         <div class="col-md-4">
-                                                            <div class="input-group">
-                                                                <form:input class="form-control" type="text" id="size"
-                                                                    name="size" path="size" />
-                                                                <span class="input-group-text">cm</span>
-                                                            </div>
+                                                            <form:input class="form-control" type="text" id="size"
+                                                                name="size" path="size" disabled="true" />
                                                         </div>
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Dịch giả:</label>
                                                         <div class="col-md-4">
-                                                            <form:input class="form-control" type="text" id="translator"
-                                                                name="translator" path="translator" />
+                                                            <form:input class="form-control validate" type="text"
+                                                                id="translator" name="translator" path="translator" />
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -188,10 +202,10 @@
                                                             trang:</label>
                                                         <div class="col-md-4">
                                                             <div class="input-group">
-                                                                <form:input class="form-control" type="text"
+                                                                <span class="input-group-text">trang</span>
+                                                                <form:input class="form-control validate" type="text"
                                                                     id="numberOfPages" name="numberOfPages"
                                                                     path="numberOfPages" />
-                                                                <span class="input-group-text">trang</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -199,7 +213,7 @@
                                                         <label for="html5-date-input" class="col-md-2 col-form-label">Mô
                                                             tả sản phẩm:</label>
                                                         <div class="col-md-10">
-                                                            <textarea class="form-control" id="description"
+                                                            <textarea class="form-control validate" id="description"
                                                                 name="description" rows="10"
                                                                 cols="50">${currentBook.description}</textarea>
                                                         </div>
@@ -217,9 +231,24 @@
                                                         <label for="html5-date-input"
                                                             class="col-md-2 col-form-label">Nhà xuất bản:</label>
                                                         <div class="col-md-10">
-                                                            <form:input class="form-control" type="text" id="publisher"
-                                                                name="publisher" path="publisher.name"
-                                                                disabled="true" />
+                                                            <select id="selectPublisher" class="form-select"
+                                                                name="publisher">
+                                                                <c:forEach var="pls" items="${publishers}">
+                                                                    <c:choose>
+                                                                        <c:when
+                                                                            test="${pls.name == currentBook.publisher.name}">
+                                                                            <option value="${pls.name}" selected>
+                                                                                Nhà Xuất Bản ${pls.name}
+                                                                            </option>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <option value="${pls.name}">
+                                                                                Nhà Xuất Bản ${pls.name}
+                                                                            </option>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
+                                                                </c:forEach>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -292,51 +321,7 @@
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <script>
-                $(document).ready(function (event) {
-                    $('#formCreateBook').submit(function (event) {
-                        event.preventDefault();
-                        var form = document.getElementById('formCreateBook');
-                        var formData = new FormData(form);
-                        var id = '${currentBook.id}';
-                        sendAjaxRequest(formData, id);
-                    });
-
-                    function sendAjaxRequest(formData, id) {
-                        $.ajax({
-                            type: 'PUT',
-                            url: 'http://localhost:8082/api/admin/books/' + id,
-                            data: formData,
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                alert('Bạn đã cập nhật sản phẩm thành công!');
-                            },
-                            error: function (xhr, status, error) {
-                                alert('Lỗi khi cập nhật sản phẩm: ' + xhr.responseText);
-                            }
-                        });
-                    }
-
-                    // Preview Avatar
-                    $('#bookFiles').change(
-                        function (e) {
-                            const previewContainer = $("#imagePreviewContainer");
-                            previewContainer.html("");
-
-                            [...e.target.files].forEach((file, index) => {
-                                const imgURL = URL.createObjectURL(file);
-                                $('<img>', {
-                                    src: imgURL,
-                                    alt: "Avatar Preview",
-                                    title: `Avatar Preview ${index + 1}`,
-                                    css: { maxHeight: '200px', margin: '10px' }
-                                }).appendTo(previewContainer);
-                            });
-                        }
-                    );
-                });
-            </script>
+            <script src="/admin/js/validation/book/book-update.js"></script>
         </body>
 
         </html>

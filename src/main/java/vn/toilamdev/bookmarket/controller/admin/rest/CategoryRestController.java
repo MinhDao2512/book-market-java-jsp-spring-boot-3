@@ -48,7 +48,16 @@ public class CategoryRestController {
     }
 
     @PutMapping("/categories/{id}")
-    public ResponseEntity<Category> updateCategory(@ModelAttribute Category category, @PathVariable long id) {
+    public ResponseEntity<?> updateCategory(@Valid @ModelAttribute Category category,
+            BindingResult bindingResult, @PathVariable long id) {
+        if (bindingResult.hasFieldErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
         Category currentCategory = this.categoryService.handleUpdateCategory(category, id);
         if (currentCategory != null) {
             return ResponseEntity.status(HttpStatus.OK).body(currentCategory);

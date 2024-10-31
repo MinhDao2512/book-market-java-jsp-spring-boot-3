@@ -51,15 +51,29 @@ public class PublisherRestController {
     }
 
     @PutMapping("/publishers/{id}")
-    public ResponseEntity<Void> updatePublisher(@ModelAttribute Publisher publisher, @PathVariable long id) {
-        Publisher currentPublisher = this.publisherService.getPublisherById(id);
-        currentPublisher.setAddress(publisher.getAddress());
-        currentPublisher.setPhoneNumber(publisher.getPhoneNumber());
-        currentPublisher.setWebsite(publisher.getWebsite());
-        currentPublisher.setUpdatedAt(new Date(System.currentTimeMillis()));
+    public ResponseEntity<?> updatePublisher(@Valid @ModelAttribute Publisher publisher, BindingResult bindingResult,
+            @PathVariable long id) {
+        if (bindingResult.hasFieldErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError fieldError : bindingResult.getFieldErrors()) {
+                errors.put(fieldError.getField(), fieldError.getDefaultMessage());
+            }
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
 
-        this.publisherService.saveOrUpdatePublisher(currentPublisher);
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        Publisher currentPublisher = this.publisherService.getPublisherById(id);
+        if (currentPublisher != null) {
+            currentPublisher.setName(publisher.getName());
+            currentPublisher.setAddress(publisher.getAddress());
+            currentPublisher.setPhoneNumber(publisher.getPhoneNumber());
+            currentPublisher.setWebsite(publisher.getWebsite());
+            currentPublisher.setUpdatedAt(new Date(System.currentTimeMillis()));
+
+            this.publisherService.saveOrUpdatePublisher(currentPublisher);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/publishers/{id}")

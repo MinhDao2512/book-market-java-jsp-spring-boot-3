@@ -61,8 +61,12 @@ public class UserRestController {
         }
 
         User currentUser = this.userService.getUserById(id);
-        currentUser = this.userService.handleUpdateUser(user, currentUser, multipartFile);
-        return ResponseEntity.status(HttpStatus.OK).body(currentUser);
+        if (currentUser != null) {
+            currentUser = this.userService.handleUpdateUser(user, currentUser, multipartFile);
+            return ResponseEntity.status(HttpStatus.OK).body(currentUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/users/{id}")
