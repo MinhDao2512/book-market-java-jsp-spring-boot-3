@@ -192,7 +192,6 @@ public class BookService {
             Publisher newPublisher = this.publisherRepository.findByName(bookDTO.getPublisher());
             currentBook.setPublisher(newPublisher);
         }
-
         // Update BookCategorizations
         List<BookCategorization> bookCategorizations = new ArrayList<>();
         for (BookCategorization bookCate : currentBook.getBookCategorizations()) {
@@ -209,11 +208,11 @@ public class BookService {
             bookCategorizations.add(newBookCategorization);
         }
         currentBook.setBookCategorizations(bookCategorizations);
-
         // Update Book Images
-        if (files != null && files.get(0).isEmpty()) {
+        if (files != null && files.get(0).getOriginalFilename() != "") {
             currentBook.setBookImages(this.handleUpdateBookImage(files, currentBook));
         }
+        currentBook.setUpdatedAt(new Date(System.currentTimeMillis()));
 
         this.bookRepository.save(currentBook);
     }

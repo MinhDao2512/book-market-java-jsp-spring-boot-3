@@ -183,20 +183,11 @@
                                                         <div class="col-md-5">
                                                             <select id="selectRole" class="form-select" name="roleName"
                                                                 required>
-                                                                <option value="">Chọn vai trò</option>
+                                                                <option value="" selected>Chọn vai trò</option>
                                                                 <c:forEach var="role" items="${roles}">
-                                                                    <c:choose>
-                                                                        <c:when test="${role.name == 'USER'}">
-                                                                            <option value="${role.name}" selected>
-                                                                                ${role.name}
-                                                                            </option>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <option value="${role.name}">
-                                                                                ${role.name}
-                                                                            </option>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
+                                                                    <option value="${role.name}">
+                                                                        ${role.name}
+                                                                    </option>
                                                                 </c:forEach>
                                                             </select>
                                                             <div class="invalid-feedback">

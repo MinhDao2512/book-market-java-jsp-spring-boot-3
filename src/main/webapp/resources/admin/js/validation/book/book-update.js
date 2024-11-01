@@ -218,7 +218,7 @@ $(document).ready(function (event) {
                     alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại !')
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
-                    $('.invalid-feedback').removeAll();
+                    $('.invalid-feedback').remove();
 
                     // Display validation errors
                     var errors = JSON.parse(xhr.responseText);

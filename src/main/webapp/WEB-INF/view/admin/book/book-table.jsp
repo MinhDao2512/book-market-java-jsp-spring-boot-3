@@ -122,7 +122,8 @@
                                                         <td>
                                                             ${book.ISBN}
                                                         </td>
-                                                        <td style="white-space: normal; word-wrap: break-word;">
+                                                        <td class="col-md-2"
+                                                            style="white-space: normal; word-wrap: break-word;">
                                                             ${book.title}
                                                         </td>
                                                         <td>

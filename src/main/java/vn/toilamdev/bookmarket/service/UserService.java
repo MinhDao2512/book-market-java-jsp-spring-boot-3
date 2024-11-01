@@ -92,17 +92,15 @@ public class UserService {
             Role newRole = this.roleRepository.findByName(user.getRole().getName());
             currentUser.setRole(newRole);
         }
-
         currentUser.setFullName(user.getFullName());
         currentUser.setUsername(user.getUsername());
         currentUser.setAddress(user.getAddress());
         currentUser.setDateOfBirth(user.getDateOfBirth());
-
-        if (file.getOriginalFilename() != "" || file.getOriginalFilename() != null) {
+        if (file.getOriginalFilename() != "") {
             String fileName = this.uploadFileService.handleSaveFile(file, SystemConstant.DIRECTORY_AVATAR);
             currentUser.setAvatar(fileName);
         }
-
+        currentUser.setUpdatedAt(new Date(System.currentTimeMillis()));
         currentUser = this.userRepository.save(currentUser);
         return currentUser;
     }
@@ -113,8 +111,7 @@ public class UserService {
 
         newUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
         newUser.setRole(role);
-        if (file.getOriginalFilename() == "" ||
-                file.getOriginalFilename() == null) {
+        if (file == null || file.getOriginalFilename() == "") {
             newUser.setAvatar(SystemConstant.AVATAR_NAME_DEFAULT);
         } else {
             newUser.setAvatar(this.uploadFileService.handleSaveFile(file,

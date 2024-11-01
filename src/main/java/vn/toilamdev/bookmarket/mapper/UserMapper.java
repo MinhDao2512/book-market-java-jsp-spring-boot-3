@@ -17,10 +17,16 @@ public class UserMapper {
         return nameAfterFormat;
     }
 
+    private static String formatUsername(String email) {
+        String[] words = email.split("@");
+        return words[0];
+    }
+
     public static User mappingUserDTO(UserDTO userDTO) {
         User user = new User();
         user.setFullName(formatName(userDTO.getLastName()) + formatName(userDTO.getFirstName()));
         user.setEmail(userDTO.getEmail());
+        user.setUsername(formatUsername(userDTO.getEmail()));
         user.setAddress(userDTO.getHouseNumber() + " " + userDTO.getStreet() + ", " + userDTO.getWard() + ", "
                 + userDTO.getDistrict() + ", " + userDTO.getCity());
         user.setDateOfBirth(userDTO.getDateOfBirth());

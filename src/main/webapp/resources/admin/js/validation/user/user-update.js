@@ -58,18 +58,21 @@ $(document).ready(() => {
         const address = this.value;
         const addressRegex = /^[\p{L}\p{N}.,\s/-]+,\s*[\p{L}\p{N}.\s-]+,\s*[\p{L}\p{N}.\s-]+,\s*[\p{L}\p{N}.\s-]+$/u;
 
-        if (address.length === 0) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').remove();
-            $(this).after('<div class="invalid-feedback">"Địa Chỉ" không được để trống</div>').show();
-        } else if (!addressRegex.test(address)) {
-            $(this).addClass('is-invalid');
-            $(this).siblings('.invalid-feedback').remove();
-            $(this).after('<div class="invalid-feedback">Lỗi định dạng: "Địa Chỉ" phải bao gồm: số nhà tên đường, tên phường, tên quận, tên thành phố</div>').show();
-        } else {
-            $(this).removeClass('is-invalid');
-            $(this).siblings('.invalid-feedback').remove();
-        }
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => {
+            if (address.length === 0) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">"Địa Chỉ" không được để trống</div>').show();
+            } else if (!addressRegex.test(address)) {
+                $(this).addClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+                $(this).after('<div class="invalid-feedback">Lỗi định dạng: "Địa Chỉ" phải bao gồm: số nhà tên đường, tên phường, tên quận, tên thành phố</div>').show();
+            } else {
+                $(this).removeClass('is-invalid');
+                $(this).siblings('.invalid-feedback').remove();
+            }
+        }, doneTypingInterval);
     });
 
     //Check Date Of Birth
@@ -136,7 +139,7 @@ $(document).ready(() => {
                     alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại trước đó');
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
-                    $('.invalid-feedback').removeAll();
+                    $('.invalid-feedback').remove();
 
                     // Display validation errors
                     var errors = JSON.parse(xhr.responseText);
