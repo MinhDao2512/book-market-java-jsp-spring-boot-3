@@ -3,6 +3,8 @@ Author: Tôi Làm Dev (Nguyễn Minh Đạo)
 STORY SWAP WEBSITE
 "Story Swap Website" là một nền tảng trực tuyến cho phép người dùng mua, bán và trao đổi sách cũ và mới. Ứng dụng được xây dựng với Spring Framework 6 cho phần back-end, sử dụng JSP cho phần front-end, kết hợp với Bootstrap 5, jQuery và AJAX call API để mang đến trải nghiệm người dùng mượt mà và hiện đại.
 
+"Story Swap Website" đucợ thiết kế dựa trên ngôn ngữ lập trình JAVA 17. Là sự kết hợp giữa mô hình Model - View -Controller và RestFul API 
+
 * Tính năng:
   - Đăng ký và Đăng nhập: Người dùng có thể tạo tài khoản và đăng nhập để truy cập vào các tính năng của website.
   - Quản lý sách: Admin có thể thêm, sửa, xóa sách dễ dàng thông qua giao diện quản lý.
@@ -14,7 +16,7 @@ STORY SWAP WEBSITE
   - Phân trang
 
 * Công nghệ sử dụng:
-  - Back-end: Spring Framework 6, Spring Boot 3, Spring Data JPA, Spring Session, Spring Security
+  - Back-end: Spring Framework 6, Spring Boot 3, Spring Data JPA, Spring Session, Spring Security, Spring REST
   - Front-end: JSP (thư viện JSTL), Bootstrap 5, jQuery, AJAX (call API)
   - Cơ sở dữ liệu: MySQL
   - Validation: Java Bean Validation cho kiểm tra dữ liệu
