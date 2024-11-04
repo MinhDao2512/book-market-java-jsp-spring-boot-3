@@ -43,10 +43,10 @@
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Trang Chủ</a></li>
-                                <li><a href="./shop-grid.html">Sản Phẩm</a></li>
-                                <li><a href="./blog.html">Blog</a></li>
-                                <li><a href="./contact.html">Liên Hệ</a></li>
+                                <li class="active"><a href="/">Trang Chủ</a></li>
+                                <li><a href="/shop">Sản Phẩm</a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/contact">Liên Hệ</a></li>
                             </ul>
                         </nav>
                     </div>

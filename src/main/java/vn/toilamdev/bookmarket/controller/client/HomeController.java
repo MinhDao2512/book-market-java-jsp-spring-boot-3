@@ -22,7 +22,10 @@ public class HomeController {
     @GetMapping
     public String getHomePage(Model model) {
         List<Book> books = this.bookService.getAllBooks();
+
         model.addAttribute("books", books);
+
         return "client/homepage/homepage-home";
     }
+
 }
