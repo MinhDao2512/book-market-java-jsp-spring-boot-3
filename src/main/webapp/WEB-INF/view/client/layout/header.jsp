@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="header__logo">
-                            <a href="./index.html"><img src="/client/img/logo-story-swap.png" alt="Logo-Brand"
+                            <a href="/"><img src="/client/img/logo-story-swap.png" alt="Logo-Brand"
                                     style="height: 60px;"></a>
                         </div>
                     </div>
