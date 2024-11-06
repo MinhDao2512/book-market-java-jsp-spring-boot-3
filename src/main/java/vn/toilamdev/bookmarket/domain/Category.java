@@ -23,6 +23,8 @@ public class Category extends AbstractDomain {
     @Size(max = 100, message = "'Mô Tả' của thể loại quá dài: Tối đa 100 ký tự")
     private String description;
 
+    private Integer isActive;
+
     @OneToMany(mappedBy = BookCategorization_.CATEGORY)
     private List<BookCategorization> bookCategorizations;
 
@@ -40,6 +42,14 @@ public class Category extends AbstractDomain {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
     public List<BookCategorization> getBookCategorizations() {

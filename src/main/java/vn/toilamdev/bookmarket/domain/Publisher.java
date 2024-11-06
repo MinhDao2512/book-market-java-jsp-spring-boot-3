@@ -34,6 +34,8 @@ public class Publisher extends AbstractDomain {
     @OneToMany(mappedBy = Book_.PUBLISHER)
     private List<Book> books;
 
+    private Integer isActive;
+
     public String getName() {
         return name;
     }
@@ -72,6 +74,14 @@ public class Publisher extends AbstractDomain {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
 }

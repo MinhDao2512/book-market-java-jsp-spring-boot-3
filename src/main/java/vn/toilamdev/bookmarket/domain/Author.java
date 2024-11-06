@@ -35,6 +35,8 @@ public class Author extends AbstractDomain {
     @Pattern(regexp = "^[\\p{L}\\s-]+$", message = "Lỗi định dạng: 'Quốc Tịch' không được chứa ký tự đặc biệt và số")
     private String nationality;
 
+    private Integer isActive;
+
     @OneToMany(mappedBy = Book_.AUTHOR)
     private List<Book> books;
 
@@ -68,6 +70,14 @@ public class Author extends AbstractDomain {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
     public List<Book> getBooks() {

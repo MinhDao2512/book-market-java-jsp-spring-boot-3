@@ -88,6 +88,19 @@
                             <strong>Người Dùng</strong>
                         </div>
                     </a>
+                    <a href="/admin/users" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">
+                            <strong>Đã Xóa</strong>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Roles -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">QUẢN LÝ VAI TRÒ</span>
+                </li>
+                <li class="menu-item">
                     <a href="/admin/roles" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
@@ -106,22 +119,67 @@
                             <strong>Sách</strong>
                         </div>
                     </a>
+                    <a href="/admin/books" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">
+                            <strong>Đã Xóa</strong>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Authors -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">QUẢN LÝ TÁC GIẢ</span>
+                </li>
+                <li class="menu-item">
                     <a href="/admin/authors" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Tác Giả</strong>
                         </div>
                     </a>
+                    <a href="/admin/authors" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">
+                            <strong>Đã Xóa</strong>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Publishers -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">QUẢN LÝ NXB</span>
+                </li>
+                <li class="menu-item">
                     <a href="/admin/publishers" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Nhà Xuất Bản</strong>
                         </div>
                     </a>
+                    <a href="/admin/publishers" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">
+                            <strong>Đã Xóa</strong>
+                        </div>
+                    </a>
+                </li>
+
+                <!-- Authors -->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">QUẢN LÝ THỂ LOẠI</span>
+                </li>
+                <li class="menu-item">
                     <a href="/admin/categories" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Thể Loại</strong>
+                        </div>
+                    </a>
+                    <a href="/admin/categories" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables">
+                            <strong>Đã Xóa</strong>
                         </div>
                     </a>
                 </li>
@@ -133,6 +191,10 @@
                     <a href="/admin/orders" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables"><strong>Đơn Hàng</strong></div>
+                    </a>
+                    <a href="/admin/orders" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-table"></i>
+                        <div data-i18n="Tables"><strong>Đã Xóa</strong></div>
                     </a>
                 </li>
             </ul>

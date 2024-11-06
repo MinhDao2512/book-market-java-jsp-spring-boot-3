@@ -105,18 +105,43 @@ public class UserService {
         return currentUser;
     }
 
+    private static String formatUsername(String email) {
+        String[] words = email.split("@");
+        return words[0];
+    }
+
     public User handleCreateUser(UserDTO userDTO, MultipartFile file) {
         Role role = this.roleRepository.findByName(userDTO.getRoleName());
         User newUser = UserMapper.mappingUserDTO(userDTO);
 
         newUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
         newUser.setRole(role);
+        newUser.setUsername(formatUsername(userDTO.getEmail()));
+
         if (file == null || file.getOriginalFilename() == "") {
             newUser.setAvatar(SystemConstant.AVATAR_NAME_DEFAULT);
         } else {
             newUser.setAvatar(this.uploadFileService.handleSaveFile(file,
                     SystemConstant.DIRECTORY_AVATAR));
         }
+        newUser.setCreatedAt(new Date(System.currentTimeMillis()));
+
+        newUser = this.userRepository.save(newUser);
+
+        return newUser;
+    }
+
+    public User handleCreateUser(UserDTO userDTO, String fullName) {
+        Role newRole = this.roleRepository.findByName("USER");
+        User newUser = new User();
+
+        newUser.setFullName(fullName);
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setPhoneNumber(userDTO.getPhoneNumber());
+        newUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        newUser.setAvatar(SystemConstant.AVATAR_NAME_DEFAULT);
+        newUser.setUsername(formatUsername(userDTO.getEmail()));
+        newUser.setRole(newRole);
         newUser.setCreatedAt(new Date(System.currentTimeMillis()));
 
         newUser = this.userRepository.save(newUser);

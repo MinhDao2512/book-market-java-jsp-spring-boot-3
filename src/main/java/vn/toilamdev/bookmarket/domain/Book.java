@@ -22,8 +22,10 @@ public class Book extends AbstractDomain {
     private String description;
 
     private Double price;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publicationDate;
+
     private String state;
     private Integer quantity;
     private String publishingCompany;
@@ -31,6 +33,7 @@ public class Book extends AbstractDomain {
     private String translator;
     private String coverType;
     private Integer numberOfPages;
+    private Integer isActive;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
@@ -149,6 +152,14 @@ public class Book extends AbstractDomain {
 
     public void setNumberOfPages(Integer numberOfPages) {
         this.numberOfPages = numberOfPages;
+    }
+
+    public Integer getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 
     public Publisher getPublisher() {
