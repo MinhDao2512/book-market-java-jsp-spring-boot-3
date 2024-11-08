@@ -138,7 +138,7 @@ public class UserService {
         newUser.setFullName(fullName);
         newUser.setEmail(userDTO.getEmail());
         newUser.setPhoneNumber(userDTO.getPhoneNumber());
-        newUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        newUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
         newUser.setAvatar(SystemConstant.AVATAR_NAME_DEFAULT);
         newUser.setUsername(formatUsername(userDTO.getEmail()));
         newUser.setRole(newRole);

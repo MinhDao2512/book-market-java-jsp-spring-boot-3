@@ -110,12 +110,18 @@
                                 </div>
                                 <!-- /Logo -->
                                 <h4 class="mb-2">Xin chào! 👋</h4>
-                                <p class="mb-4">Vui lòng đăng nhập tài khoản của bạn</p>
-
-                                <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                                <c:choose>
+                                    <c:when test="${param.error != null}">
+                                        <p class="mb-4" style="color: red;">Tài khoản hoặc Mật Khẩu không đúng</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p class="mb-4">Vui lòng đăng nhập tài khoản của bạn</p>
+                                    </c:otherwise>
+                                </c:choose>
+                                <form id="formAuthentication" class="mb-3" action="/login" method="post">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Tài Khoản</label>
-                                        <input type="text" class="form-control validate" id="email" name="email"
+                                        <input type="text" class="form-control validate" id="email" name="username"
                                             placeholder="Địa chỉ email của bạn" />
                                         <div class="invalid-feedback">
                                             Bạn chưa nhập địa chỉ "Email"
@@ -148,6 +154,9 @@
                                     </div>
                                     <div class="mb-3">
                                         <button class="btn btn-primary d-grid w-100" type="submit">Đăng nhập</button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     </div>
                                 </form>
 

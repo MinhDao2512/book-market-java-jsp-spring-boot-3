@@ -35,11 +35,7 @@ $(document).ready(() => {
 
     $('#formAuthentication').submit(function (event) {
         event.preventDefault();
-        var formData = new FormData();
         var inValid = false;
-
-        formData.append("email", $('#email').val());
-        formData.append("password", $('#password').val());
 
         $('.validate').each(function () {
             if ($(this).nextAll('.invalid-feedback').length) {
@@ -54,6 +50,8 @@ $(document).ready(() => {
                     $(this).nextAll('.invalid-feedback').show();
                 }
             });
+        } else {
+            this.submit();
         }
     });
 });
