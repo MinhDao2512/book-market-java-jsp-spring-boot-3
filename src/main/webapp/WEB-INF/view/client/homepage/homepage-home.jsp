@@ -83,7 +83,7 @@
                                 <div class="hero__text">
                                     <h2 style="color: #C5A992;">Story Swap</h2>
                                     <p>Miễn phí vẫn chuyển cho hóa đơn trên 300.000đ</p>
-                                    <a href="/" class="primary-btn" style="background-color: #C5A992;">MUA NGAY</a>
+                                    <a href="/shop" class="primary-btn" style="background-color: #C5A992;">MUA NGAY</a>
                                 </div>
                             </div>
                         </div>

@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@include file="/resources/taglib.jsp" %>
         <!DOCTYPE html>
-        <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
-            data-assets-path="/admin/" data-template="vertical-menu-template-free">
+
+        <html lang="en" class="light-style" dir="ltr" data-theme="theme-default" data-assets-path="/admin/"
+            data-template="vertical-menu-template-free">
 
         <head>
             <meta charset="utf-8" />
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>Story Swap</title>
+            <title>Story Swap | Lỗi tài nguyên không có sẵn</title>
 
             <meta name="description" content="" />
 
@@ -30,21 +31,11 @@
             <link rel="stylesheet" href="/admin/vendor/css/core.css" class="template-customizer-core-css" />
             <link rel="stylesheet" href="/admin/vendor/css/theme-default.css" class="template-customizer-theme-css" />
             <link rel="stylesheet" href="/admin/css/demo.css" />
-
-            <!-- Vendors CSS -->
             <link rel="stylesheet" href="/admin/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+            <link rel="stylesheet" href="/admin/vendor/css/pages/page-misc.css" />
 
-            <link rel="stylesheet" href="/admin/vendor/libs/apex-charts/apex-charts.css" />
-
-            <!-- Page CSS -->
-
-            <!-- Helpers -->
             <script src="/admin/vendor/js/helpers.js"></script>
-
-            <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-            <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
             <script src="/admin/js/config.js"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         </head>
 
         <body>
@@ -78,13 +69,11 @@
             <!-- endbuild -->
 
             <!-- Vendors JS -->
-            <script src="/admin/vendor/libs/apex-charts/apexcharts.js"></script>
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
 
             <!-- Page JS -->
-            <script src="/admin/js/dashboards-analytics.js"></script>
 
             <!-- Place this tag in your head or just before your close body tag. -->
             <script async defer src="https://buttons.github.io/buttons.js"></script>

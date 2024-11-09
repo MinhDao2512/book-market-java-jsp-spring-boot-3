@@ -28,8 +28,8 @@ public class HomeController {
         return "client/homepage/homepage-home";
     }
 
-    @GetMapping("errors")
-    public String getErrorPage(Model model) {
+    @GetMapping("access-deny")
+    public String getDenyPage(Model model) {
         return "errors/403";
     }
 }
