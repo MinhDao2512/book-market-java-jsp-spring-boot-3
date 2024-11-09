@@ -28,4 +28,8 @@ public class HomeController {
         return "client/homepage/homepage-home";
     }
 
+    @GetMapping("errors")
+    public String getErrorPage(Model model) {
+        return "errors/403";
+    }
 }

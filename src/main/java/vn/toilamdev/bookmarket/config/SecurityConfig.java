@@ -12,9 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import jakarta.servlet.DispatcherType;
 import vn.toilamdev.bookmarket.service.UserService;
+import vn.toilamdev.bookmarket.service.auth.MyAuthenticationSuccessHandler;
 import vn.toilamdev.bookmarket.service.auth.MyDatabaseUserDetailsService;
 
 @Configuration
@@ -33,6 +35,11 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new MyAuthenticationSuccessHandler();
+    }
+
+    @Bean
     public AuthenticationManager authenticationManager(
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder) {
@@ -46,16 +53,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(author -> author
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
                         .requestMatchers("/", "/login", "/register", "/shop/**", "/blog/**", "/contact/**",
-                                "/client/**", "/images/**", "/admin/css/**", "/admin/js/**")
+                                "/client/**", "/images/**", "/admin/css/**", "/admin/js/**", "/admin/vendor/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
+                        .successHandler(authenticationSuccessHandler())
                         .failureUrl("/login?error")
                         .permitAll())
                 .logout(logout -> logout

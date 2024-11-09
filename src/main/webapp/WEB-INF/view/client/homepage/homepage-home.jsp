@@ -9,7 +9,7 @@
             <meta name="keywords" content="Ogani, unica, creative, html">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Story Swap | Trang chủ</title>
+            <title>Story Swap</title>
 
             <!-- Google Font -->
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="hero__categories">
-                                <div class="hero__categories__all">
+                                <div class="hero__categories__all" style="background-color: #C5A992;">
                                     <i class="fa fa-bars"></i>
                                     <span>Danh mục</span>
                                 </div>
@@ -65,11 +65,12 @@
                                             <span class="arrow_carrot-down"></span>
                                         </div>
                                         <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
-                                        <button type="submit" class="site-btn">TÌM KIẾM</button>
+                                        <button type="submit" class="site-btn" style="background-color: #C5A992;">TÌM
+                                            KIẾM</button>
                                     </form>
                                 </div>
                                 <div class="hero__search__phone">
-                                    <div class="hero__search__phone__icon">
+                                    <div class="hero__search__phone__icon" style="color: #C5A992;">
                                         <i class="fa fa-phone"></i>
                                     </div>
                                     <div class="hero__search__phone__text">
@@ -78,12 +79,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="hero__item set-bg" data-setbg="/client/img/hero/banner.jpg">
+                            <div class="hero__item set-bg" data-setbg="/images/banner/banner.jpg">
                                 <div class="hero__text">
-                                    <span>FRUIT FRESH</span>
-                                    <h2>Vegetable <br />100% Organic</h2>
-                                    <p>Free Pickup and Delivery Available</p>
-                                    <a href="/" class="primary-btn">SHOP NOW</a>
+                                    <h2 style="color: #C5A992;">Story Swap</h2>
+                                    <p>Miễn phí vẫn chuyển cho hóa đơn trên 300.000đ</p>
+                                    <a href="/" class="primary-btn" style="background-color: #C5A992;">MUA NGAY</a>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,6 @@
             <script src="/client/js/mixitup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
-
         </body>
 
         </html>

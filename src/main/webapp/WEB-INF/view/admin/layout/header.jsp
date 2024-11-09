@@ -30,7 +30,8 @@
                                             </div>
                                         </div>
                                         <div class="flex-grow-1">
-                                            <span class="fw-semibold d-block">John Doe</span>
+                                            <span
+                                                class="fw-semibold d-block">${pageContext.request.userPrincipal.name}</span>
                                             <small class="text-muted">Admin</small>
                                         </div>
                                     </div>
@@ -42,33 +43,26 @@
                             <li>
                                 <a class="dropdown-item" href="#">
                                     <i class="bx bx-user me-2"></i>
-                                    <span class="align-middle">My Profile</span>
+                                    <span class="align-middle">Tài khoản</span>
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="bx bx-cog me-2"></i>
-                                    <span class="align-middle">Settings</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <span class="d-flex align-items-center align-middle">
-                                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                                        <span class="flex-grow-1 align-middle">Billing</span>
-                                        <span
-                                            class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                                    </span>
+                                <a class="dropdown-item" href="/" target="_blank">
+                                    <i class='bx bx-home me-2'></i>
+                                    <span class="align-middle">Trang chủ</span>
                                 </a>
                             </li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="auth-login-basic.html">
-                                    <i class="bx bx-power-off me-2"></i>
-                                    <span class="align-middle">Log Out</span>
-                                </a>
+                                <form method="post" action="/logout">
+                                    <button class="dropdown-item" type="submit">
+                                        <i class="bx bx-power-off me-2"></i>
+                                        <span class="align-middle">Đăng xuất</span>
+                                    </button>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                </form>
                             </li>
                         </ul>
                     </li>

@@ -8,8 +8,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="footer__about">
                             <div class="footer__about__logo">
-                                <a href="./index.html"><img src="/client/img/logo-story-swap.png" alt=""
-                                        style="height: 60px;"></a>
+                                <a href="/">
+                                    <h2 style="color: #C5A992; font-weight: bold">
+                                        <i class="fa fa-book"></i> SWAP STORY
+                                    </h2>
+                                </a>
                             </div>
                             <ul>
                                 <li>Địa chỉ: Quảng Trị</li>
@@ -36,7 +39,8 @@
                             <p>Nhận ưu đãi mới nhất từ chúng tôi thông qua email.</p>
                             <form action="#">
                                 <input type="text" placeholder="Email của bạn">
-                                <button type="submit" class="site-btn">ĐĂNG KÝ</button>
+                                <button type="submit" class="site-btn" style="background-color: #C5A992;">ĐĂNG
+                                    KÝ</button>
                             </form>
                             <div class="footer__widget__social">
                                 <a href="https://www.facebook.com/NguyenMinhDao.qt062/"><i

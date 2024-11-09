@@ -1,4 +1,4 @@
-package vn.toilamdev.bookmarket.controller.auth;
+package vn.toilamdev.bookmarket.controller.rest;
 
 import java.util.HashMap;
 import java.util.Map;

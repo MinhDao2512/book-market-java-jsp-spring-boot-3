@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="hero__categories">
-                                <div class="hero__categories__all">
+                                <div class="hero__categories__all" style="background-color: #C5A992;">
                                     <i class="fa fa-bars"></i>
                                     <span>Danh mục</span>
                                 </div>
@@ -64,11 +64,12 @@
                                             <span class="arrow_carrot-down"></span>
                                         </div>
                                         <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
-                                        <button type="submit" class="site-btn">TÌM KIẾM</button>
+                                        <button type="submit" class="site-btn" style="background-color: #C5A992;">TÌM
+                                            KIẾM</button>
                                     </form>
                                 </div>
                                 <div class="hero__search__phone">
-                                    <div class="hero__search__phone__icon">
+                                    <div class="hero__search__phone__icon" style="color: #C5A992;">
                                         <i class="fa fa-phone"></i>
                                     </div>
                                     <div class="hero__search__phone__text">
