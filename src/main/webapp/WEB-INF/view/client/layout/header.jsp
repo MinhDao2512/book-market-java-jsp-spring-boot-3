@@ -18,13 +18,17 @@
                             <div class="header__top__right">
                                 <c:if test="${not empty pageContext.request.userPrincipal}">
                                     <div class="header__top__right__language">
-                                        <i class="fa fa-user"></i>
-                                        <div> ${pageContext.request.userPrincipal.name}</div>
+                                        <img src="/images/user/${sessionScope.avatar}" style="width: 20px;"
+                                            class="rounded-circle" />
+                                        <div>${sessionScope.username}</div>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
                                             <li><a href="/myProfile">Thông tin</a></li>
                                             <li><a href="/cart">Giỏ hàng</a></li>
                                             <li><a href="/orders">Đơn hàng</a></li>
+                                            <c:if test="${sessionScope.roleName != 'USER'}">
+                                                <li><a href="/admin" target="_blank">Quản trị</a></li>
+                                            </c:if>
                                             <li>
                                                 <form method="post" action="/logout">
                                                     <button type="submit">Đăng xuất</button>

@@ -104,6 +104,11 @@
 			<version>6.4.1.Final</version>
 			<scope>provided</scope>
 		</dependency>
+		<!--Spring Session-->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
