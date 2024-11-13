@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.Category;
-import vn.toilamdev.bookmarket.exception.IdInvalidException;
 import vn.toilamdev.bookmarket.service.BookService;
 import vn.toilamdev.bookmarket.service.CategoryService;
 
@@ -37,15 +36,9 @@ public class ShopController {
     }
 
     @GetMapping("/{id}")
-    public String getDetailPage(Model model, @PathVariable("id") String id) throws IdInvalidException {
-        long currentId;
-        try {
-            currentId = Long.parseLong(id);
-        } catch (Exception e) {
-            throw new IdInvalidException("Invalid ID Format");
-        }
+    public String getDetailPage(Model model, @PathVariable("id") long id) {
 
-        Book currentBook = this.bookService.getBookById(currentId);
+        Book currentBook = this.bookService.getBookById(id);
 
         model.addAttribute("currentBook", currentBook);
 

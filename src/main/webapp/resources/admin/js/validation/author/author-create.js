@@ -88,8 +88,12 @@ $(document).ready(() => {
     //Form Submit
     $("#formCreateAuthor").submit(function (event) {
         event.preventDefault();
-        var form = document.getElementById('formCreateAuthor');
-        var formData = new FormData(form);
+        //create FormData
+        var formData = new FormData(document.getElementById('formCreateAuthor'));
+        //mapping formData to array
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
+        //check valid data 
         var inValid = false;
 
         $("input[required], select[required], textarea[required]").each(function () {
@@ -109,7 +113,7 @@ $(document).ready(() => {
                 }
             });
         } else {
-            sendAjaxRequest(formData);
+            sendAjaxRequest(JSON.stringify(object));
         }
     });
 
@@ -119,30 +123,32 @@ $(document).ready(() => {
             type: 'POST',
             url: 'http://localhost:8082/api/admin/authors',
             data: formData,
-            contentType: false,
+            contentType: "application/json; charset=utf-8",
             processData: false,
             success: function (response, textStatus, xhr) {
                 alert("Thành công! Bạn đã tại mới một tác giả.");
                 window.location.href = '/admin/authors';
             },
             error: function (xhr, status, error) {
+                var message = 'Có lỗi xảy ra:\n';
+                alert(message + xhr.responseText);
+
                 if (xhr.status == 400) {
-                    alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại trước đó');
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
 
                     // Display validation errors
-                    var errors = JSON.parse(xhr.responseText);
+                    var errors = JSON.parse(xhr.responseText).error;
                     Object.keys(errors).forEach(function (key) {
                         var inputField = $('#' + key);
                         inputField.addClass('is-invalid');
                         inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
                 } else if (xhr.status == 409) {
-                    alert("Thất bại! Tác giả đã tồn tại.");
-                } else {
-                    alert('Lỗi khi tạo mới tác giả: ' + xhr.responseText);
+                    var inputField = $('#name');
+                    inputField.addClass('is-invalid');
+                    inputField.after('<div class="invalid-feedback">' + 'Tác giả đã tồn tại trước đó' + '</div>').show();
                 }
             }
         });

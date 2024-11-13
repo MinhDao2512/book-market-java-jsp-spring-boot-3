@@ -1,10 +1,12 @@
 package vn.toilamdev.bookmarket.controller.rest;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 import java.util.HashMap;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +36,8 @@ public class AuthorRestController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/authors")
-    public ResponseEntity<?> createAuthor(@Valid @ModelAttribute Author author, BindingResult bindingResult) {
+    @PostMapping(value = "/authors", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> createAuthor(@Valid @RequestBody Author author, BindingResult bindingResult) {
 
         if (bindingResult.hasFieldErrors()) {
             Map<String, String> errors = new HashMap<>();
@@ -49,9 +52,10 @@ public class AuthorRestController {
         if (!existsAuthor) {
             author.setCreatedAt(new Date(System.currentTimeMillis()));
             this.authorService.saveOrUpdate(author);
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(author);
         } else {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body(Collections.singletonMap("message", "Author Already Exists"));
         }
     }
 
