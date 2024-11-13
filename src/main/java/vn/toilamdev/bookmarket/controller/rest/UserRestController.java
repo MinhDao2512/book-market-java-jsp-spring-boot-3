@@ -50,7 +50,7 @@ public class UserRestController {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<?> updateUser(@Valid @ModelAttribute User user, BindingResult bindingResult,
-            @RequestParam("avatarFile") MultipartFile multipartFile, @PathVariable long id) {
+            @RequestParam("avatarFile") MultipartFile multipartFile, @PathVariable("id") long id) {
 
         if (bindingResult.hasFieldErrors()) {
             Map<String, String> errors = new HashMap<>();
@@ -70,7 +70,7 @@ public class UserRestController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") long id) {
         User currentUser = this.userService.getUserById(id);
         this.userService.handleDeleteUser(currentUser);
         return ResponseEntity.status(HttpStatus.OK).body(null);
