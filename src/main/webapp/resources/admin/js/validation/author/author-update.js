@@ -86,9 +86,14 @@ $(document).ready(() => {
 
     $('#formUpdateAuthor').submit(function (e) {
         e.preventDefault();
-        var form = document.getElementById('formUpdateAuthor');
-        var formData = new FormData(form);
+        //create FormData
+        var formData = new FormData(document.getElementById('formUpdateAuthor'));
+        //mapping formData to array
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
+        //Get id currentAuthor
         var authorId = $('#authorId').val();
+        //Check validate
         var inValid = false;
 
         $(".validate").each(function () {
@@ -108,7 +113,7 @@ $(document).ready(() => {
                 }
             });
         } else {
-            sendAjaxRequest(formData, authorId);
+            sendAjaxRequest(JSON.stringify(object), authorId);
         }
     });
 
@@ -118,30 +123,28 @@ $(document).ready(() => {
             type: 'PUT',
             url: 'http://localhost:8082/api/admin/authors/' + authorId,
             data: formData,
-            contentType: false,
+            contentType: "application/json; charset=utf-8",
             processData: false,
             success: function (response, textStatus, xhr) {
                 alert("Thành công! Bạn đã cập nhật tác giả có id = " + authorId);
             },
             error: function (xhr, status, error) {
+                var message = 'Có lỗi xảy ra:\n';
+                alert(message + xhr.responseText);
                 if (xhr.status == 400) {
-                    alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại trước đó');
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
 
                     // Display validation errors
-                    var errors = JSON.parse(xhr.responseText);
+                    var errors = JSON.parse(xhr.responseText).error;
                     Object.keys(errors).forEach(function (key) {
                         var inputField = $('#' + key);
                         inputField.addClass('is-invalid');
                         inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
                 } else if (xhr.status == 404) {
-                    alert("Thất bại! Thông tin tác giả không tồn tại.");
                     window.location.href = '/admin/authors';
-                } else {
-                    alert('Lỗi khi cập nhật tác giả: ' + xhr.responseText);
                 }
             }
         });

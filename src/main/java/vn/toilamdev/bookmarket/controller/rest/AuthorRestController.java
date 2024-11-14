@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -59,8 +58,8 @@ public class AuthorRestController {
         }
     }
 
-    @PutMapping("/authors/{id}")
-    public ResponseEntity<?> updateAuthor(@Valid @ModelAttribute Author author, BindingResult bindingResult,
+    @PutMapping(value = "/authors/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateAuthor(@Valid @RequestBody Author author, BindingResult bindingResult,
             @PathVariable long id) {
 
         if (bindingResult.hasFieldErrors()) {
@@ -73,16 +72,11 @@ public class AuthorRestController {
 
         Author currentAuthor = this.authorService.getAuthorById(id);
         if (currentAuthor != null) {
-            currentAuthor.setName(author.getName());
-            currentAuthor.setBiography(author.getBiography());
-            currentAuthor.setBirthDate(author.getBirthDate());
-            currentAuthor.setNationality(author.getNationality());
-            currentAuthor.setUpdatedAt(new Date(System.currentTimeMillis()));
-
-            this.authorService.saveOrUpdate(currentAuthor);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            currentAuthor = this.authorService.handleUpdateAuthor(currentAuthor, author);
+            return ResponseEntity.status(HttpStatus.OK).body(currentAuthor);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("message", "Author with ID = " + id + " dose not exist"));
         }
     }
 

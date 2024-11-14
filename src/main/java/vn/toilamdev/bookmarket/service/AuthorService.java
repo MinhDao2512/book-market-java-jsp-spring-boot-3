@@ -39,4 +39,16 @@ public class AuthorService {
     public void deleteAuthorById(long id) {
         this.authorRepository.deleteById(id);
     }
+
+    public Author handleUpdateAuthor(Author currentAuthor, Author newAuthor) {
+        currentAuthor.setName(newAuthor.getName());
+        currentAuthor.setBiography(newAuthor.getBiography());
+        currentAuthor.setBirthDate(newAuthor.getBirthDate());
+        currentAuthor.setNationality(newAuthor.getNationality());
+        currentAuthor.setUpdatedAt(new Date(System.currentTimeMillis()));
+
+        currentAuthor = this.authorRepository.save(currentAuthor);
+
+        return currentAuthor;
+    }
 }

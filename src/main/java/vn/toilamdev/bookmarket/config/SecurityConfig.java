@@ -22,7 +22,7 @@ import vn.toilamdev.bookmarket.service.auth.MyAuthenticationSuccessHandler;
 import vn.toilamdev.bookmarket.service.auth.MyDatabaseUserDetailsService;
 
 @Configuration
-@EnableWebSecurity
+// @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
@@ -31,68 +31,70 @@ public class SecurityConfig {
                 return new BCryptPasswordEncoder();
         }
 
-        @Bean
-        public UserDetailsService userDetailsService(UserService userService) {
-                return new MyDatabaseUserDetailsService(userService);
-        }
+        // @Bean
+        // public UserDetailsService userDetailsService(UserService userService) {
+        // return new MyDatabaseUserDetailsService(userService);
+        // }
 
-        @Bean
-        public AuthenticationSuccessHandler authenticationSuccessHandler() {
-                return new MyAuthenticationSuccessHandler();
-        }
+        // @Bean
+        // public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        // return new MyAuthenticationSuccessHandler();
+        // }
 
-        @Bean
-        public AuthenticationManager authenticationManager(
-                        UserDetailsService userDetailsService,
-                        PasswordEncoder passwordEncoder) {
-                DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-                authenticationProvider.setUserDetailsService(userDetailsService);
-                authenticationProvider.setPasswordEncoder(passwordEncoder);
+        // @Bean
+        // public AuthenticationManager authenticationManager(
+        // UserDetailsService userDetailsService,
+        // PasswordEncoder passwordEncoder) {
+        // DaoAuthenticationProvider authenticationProvider = new
+        // DaoAuthenticationProvider();
+        // authenticationProvider.setUserDetailsService(userDetailsService);
+        // authenticationProvider.setPasswordEncoder(passwordEncoder);
 
-                return new ProviderManager(authenticationProvider);
-        }
+        // return new ProviderManager(authenticationProvider);
+        // }
 
-        @Bean
-        public SpringSessionRememberMeServices rememberMeServices() {
-                SpringSessionRememberMeServices rememberMeServices = new SpringSessionRememberMeServices();
-                rememberMeServices.setAlwaysRemember(true);
-                return rememberMeServices;
-        }
+        // @Bean
+        // public SpringSessionRememberMeServices rememberMeServices() {
+        // SpringSessionRememberMeServices rememberMeServices = new
+        // SpringSessionRememberMeServices();
+        // rememberMeServices.setAlwaysRemember(true);
+        // return rememberMeServices;
+        // }
 
-        @Bean
-        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-                http
-                                .csrf(csrf -> csrf
-                                                .ignoringRequestMatchers("/api/**"))
-                                .authorizeHttpRequests(author -> author
-                                                .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE)
-                                                .permitAll()
-                                                .requestMatchers("/", "/login", "/register", "/shop/**", "/blog/**",
-                                                                "/contact/**",
-                                                                "/client/**", "/images/**", "/admin/css/**",
-                                                                "/admin/js/**", "/admin/vendor/**",
-                                                                "/admin/img/**")
-                                                .permitAll()
-                                                .requestMatchers("/admin/**").hasAnyRole("ADMIN", "OWNER", "CONTENT")
-                                                .anyRequest().authenticated())
-                                .formLogin(form -> form
-                                                .loginPage("/login")
-                                                .successHandler(authenticationSuccessHandler())
-                                                .failureUrl("/login?error")
-                                                .permitAll())
-                                .logout(logout -> logout
-                                                .deleteCookies("JSESSIONID").invalidateHttpSession(true))
-                                .rememberMe(r -> r
-                                                .rememberMeServices(rememberMeServices()))
-                                .sessionManagement((sessionManagement) -> sessionManagement
-                                                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                                                .invalidSessionUrl("/logout?expired")
-                                                .maximumSessions(1)
-                                                .maxSessionsPreventsLogin(false))
-                                .exceptionHandling(ex -> ex
-                                                .accessDeniedPage("/access-deny"));
+        // @Bean
+        // public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // http
+        // .csrf(csrf -> csrf
+        // .ignoringRequestMatchers("/api/**"))
+        // .authorizeHttpRequests(author -> author
+        // .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE)
+        // .permitAll()
+        // .requestMatchers("/", "/login", "/register", "/shop/**", "/blog/**",
+        // "/contact/**",
+        // "/client/**", "/images/**", "/admin/css/**",
+        // "/admin/js/**", "/admin/vendor/**",
+        // "/admin/img/**")
+        // .permitAll()
+        // .requestMatchers("/admin/**").hasAnyRole("ADMIN", "OWNER", "CONTENT")
+        // .anyRequest().authenticated())
+        // .formLogin(form -> form
+        // .loginPage("/login")
+        // .successHandler(authenticationSuccessHandler())
+        // .failureUrl("/login?error")
+        // .permitAll())
+        // .logout(logout -> logout
+        // .deleteCookies("JSESSIONID").invalidateHttpSession(true))
+        // .rememberMe(r -> r
+        // .rememberMeServices(rememberMeServices()))
+        // .sessionManagement((sessionManagement) -> sessionManagement
+        // .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+        // .invalidSessionUrl("/logout?expired")
+        // .maximumSessions(1)
+        // .maxSessionsPreventsLogin(false))
+        // .exceptionHandling(ex -> ex
+        // .accessDeniedPage("/access-deny"));
 
-                return http.build();
-        }
+        // return http.build();
+        // }
 
 }
