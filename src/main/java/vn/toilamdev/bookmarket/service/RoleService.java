@@ -2,6 +2,8 @@ package vn.toilamdev.bookmarket.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.toilamdev.bookmarket.domain.Role;
@@ -17,6 +19,11 @@ public class RoleService {
 
     public List<Role> getAllRoles() {
         return this.roleRepository.findAll();
+    }
+
+    public List<Role> getAllRoles(Pageable pageable) {
+        Page<Role> page = this.roleRepository.findAll(pageable);
+        return page.getContent();
     }
 
     public Role getRoleById(long id) {

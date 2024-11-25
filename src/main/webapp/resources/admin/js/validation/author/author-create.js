@@ -127,7 +127,7 @@ $(document).ready(() => {
             processData: false,
             success: function (response, textStatus, xhr) {
                 alert("Thành công! Bạn đã tại mới một tác giả.");
-                window.location.href = '/admin/authors';
+                window.location.href = '/admin/authors?page=1';
             },
             error: function (xhr, status, error) {
                 var message = 'Có lỗi xảy ra:\n';

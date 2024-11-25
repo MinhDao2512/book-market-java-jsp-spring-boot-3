@@ -97,8 +97,10 @@ $(document).ready(() => {
     //Form Submit
     $("#formCreatePublisher").submit((event) => {
         event.preventDefault();
-        var form = document.getElementById('formCreatePublisher');
-        var formData = new FormData(form);
+        var formData = new FormData(document.getElementById('formCreatePublisher'));
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
+
         var inValid = false;
 
         $("input[required], select[required], textarea[required]").each(function () {
@@ -118,7 +120,7 @@ $(document).ready(() => {
                 }
             });
         } else {
-            sendAjaxRequest(formData);
+            sendAjaxRequest(JSON.stringify(object));
         }
     });
 
@@ -128,30 +130,31 @@ $(document).ready(() => {
             type: 'POST',
             url: 'http://localhost:8082/api/admin/publishers',
             data: formData,
-            contentType: false,
+            contentType: "application/json; charset=utf-8",
             processData: false,
             success: function (response, textStatus, xhr) {
                 alert("Thành công! Bạn đã tạo mới một nhà xuất bản.");
-                window.location.href = '/admin/publishers';
+                window.location.href = '/admin/publishers?page=1';
             },
             error: function (xhr, status, error) {
+                var message = 'Có lỗi xảy ra:\n';
+                alert(message + xhr.responseText);
                 if (xhr.status === 400) {
-                    alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại !')
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
 
                     // Display validation errors
-                    var errors = JSON.parse(xhr.responseText);
+                    var errors = JSON.parse(xhr.responseText).error;
                     Object.keys(errors).forEach(function (key) {
                         var inputField = $('#' + key);
                         inputField.addClass('is-invalid');
                         inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
                 } else if (xhr.status === 409) {
-                    alert("Tạo mới thất bại! Nhà xuất bản đã tồn tại.");
-                } else {
-                    alert('Lỗi khi tạo mới nhà xuất bản: ' + xhr.responseText);
+                    var inputField = $('#name');
+                    inputField.addClass('is-invalid');
+                    inputField.after('<div class="invalid-feedback">"Nhà Xuất Bản" đã tồn tại trước đó</div>').show();
                 }
             }
         });

@@ -3,6 +3,8 @@ package vn.toilamdev.bookmarket.service;
 import java.util.List;
 import java.util.Date;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.toilamdev.bookmarket.domain.BookCategorization;
@@ -23,6 +25,11 @@ public class CategoryService {
 
     public List<Category> getAllCategories() {
         return this.categoryRepository.findAll();
+    }
+
+    public List<Category> getAllCategories(Pageable pageable) {
+        Page<Category> page = this.categoryRepository.findAll(pageable);
+        return page.getContent();
     }
 
     public Category getCategoryByName(String name) {

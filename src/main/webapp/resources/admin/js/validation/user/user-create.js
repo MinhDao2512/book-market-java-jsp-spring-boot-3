@@ -324,7 +324,7 @@ $(document).ready(() => {
             processData: false,
             success: function (response) {
                 alert('Bạn đã thêm mới người dùng thành công!');
-                window.location.href = '/admin/users';
+                window.location.href = '/admin/users?page=1';
             },
             error: function (xhr, status, error) {
                 if (xhr.status === 400) {

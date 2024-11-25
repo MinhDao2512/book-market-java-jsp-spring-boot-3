@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,6 +64,11 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return this.bookRepository.findAll();
+    }
+
+    public List<Book> getAllBooks(Pageable pageable) {
+        Page<Book> page = this.bookRepository.findAll(pageable);
+        return page.getContent();
     }
 
     public Book saveOrUpdateBook(Book book) {

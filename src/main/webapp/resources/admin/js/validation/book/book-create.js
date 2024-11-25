@@ -414,7 +414,7 @@ $(document).ready(function (event) {
             processData: false,
             success: function (response) {
                 alert('Bạn đã thêm mới sản phẩm thành công!');
-                window.location.href = '/admin/books';
+                window.location.href = '/admin/books?page=1';
             },
             error: function (xhr, status, error) {
                 if (xhr.status === 400) {

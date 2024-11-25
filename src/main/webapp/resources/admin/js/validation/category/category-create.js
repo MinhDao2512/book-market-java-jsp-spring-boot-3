@@ -94,7 +94,7 @@ $(document).ready(() => {
             processData: false,
             success: function (response, textStatus, xhr) {
                 alert("Thành công! Bạn đã tại mới một thể loại.");
-                window.location.href = '/admin/categories';
+                window.location.href = '/admin/categories?page=1';
             },
             error: function (xhr, status, error) {
                 if (xhr.status === 400) {

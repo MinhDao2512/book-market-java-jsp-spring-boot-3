@@ -93,6 +93,7 @@
                                         <div class="col-xl-7">
                                             <!-- HTML5 Inputs -->
                                             <div class="card mb-4">
+                                                <input type="hidden" data-users-active="1" id="usersActive" />
                                                 <h5 class="card-header" style="color: goldenrod;">
                                                     <strong>Thông tin cá nhân</strong>
                                                 </h5>
@@ -200,7 +201,8 @@
                                         <div class="col-xl-3"></div>
                                         <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/users" class="btn btn-outline-secondary">Quay lại</a>
+                                                <a href="/admin/users?page=1" class="btn btn-outline-secondary">Quay
+                                                    lại</a>
                                                 <button id="btnUpdateUser" type="submit" class="btn btn-primary">Cập
                                                     nhật</button>
                                             </div>
@@ -237,7 +239,7 @@
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
-
+            <script src="/admin/js/utils.js"></script>
             <!-- Page JS -->
             <script src="/admin/js/dashboards-analytics.js"></script>
 

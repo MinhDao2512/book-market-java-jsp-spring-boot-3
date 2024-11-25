@@ -3,6 +3,8 @@ package vn.toilamdev.bookmarket.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,6 +51,11 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
+    }
+
+    public List<User> getAllUsers(Pageable pageable) {
+        Page<User> page = this.userRepository.findAll(pageable);
+        return page.getContent();
     }
 
     public void deleteUserById(long id) {

@@ -96,8 +96,10 @@ $(document).ready(() => {
     //Form Submit
     $("#formUpdatePublisher").submit((event) => {
         event.preventDefault();
-        var form = document.getElementById('formUpdatePublisher');
-        var formData = new FormData(form);
+        var formData = new FormData(document.getElementById('formUpdatePublisher'));
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
+
         var publisherId = $('#publisherId').val();
         var inValid = false;
 
@@ -118,7 +120,7 @@ $(document).ready(() => {
                 }
             });
         } else {
-            sendAjaxRequest(formData, publisherId);
+            sendAjaxRequest(JSON.stringify(object), publisherId);
         }
     });
 
@@ -128,30 +130,28 @@ $(document).ready(() => {
             type: 'PUT',
             url: 'http://localhost:8082/api/admin/publishers/' + publisherId,
             data: formData,
-            contentType: false,
+            contentType: "application/json; charset=utf-8",
             processData: false,
             success: function (response, textStatus, xhr) {
                 alert("Thành công! Bạn đã cập nhật nhà xuất bản có ID = " + publisherId);
             },
             error: function (xhr, status, error) {
+                var message = 'Có lỗi xảy ra:\n';
+                alert(message + xhr.responseText);
                 if (xhr.status === 400) {
-                    alert('Lỗi phía Server: Thông tin không hợp lệ hoặc đã tồn tại !')
                     // Clear previous errors
                     $('.is-invalid').removeClass('is-invalid');
                     $('.invalid-feedback').remove();
 
                     // Display validation errors
-                    var errors = JSON.parse(xhr.responseText);
+                    var errors = JSON.parse(xhr.responseText).error;
                     Object.keys(errors).forEach(function (key) {
                         var inputField = $('#' + key);
                         inputField.addClass('is-invalid');
                         inputField.after('<div class="invalid-feedback">' + errors[key] + '</div>').show();
                     });
                 } else if (xhr.status === 404) {
-                    alert("Thất bại! Thông tin nhà xuất bản không còn tồn tại.");
                     window.location.href = '/admin/publishers';
-                } else {
-                    alert('Lỗi khi cập nhật nhà xuất bản: ' + xhr.responseText);
                 }
             }
         });

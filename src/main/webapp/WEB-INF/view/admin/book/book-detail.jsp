@@ -72,6 +72,7 @@
                                     <div class="row justify-content-center">
                                         <div class="col-xl-3">
                                             <div class="card mb-4">
+                                                <input type="hidden" data-books-active="1" id="booksActive" />
                                                 <h5 class="card-header" style="color: goldenrod;">
                                                     <strong>Sách | Hình ảnh</strong>
                                                 </h5>
@@ -263,7 +264,8 @@
                                         <div class="col-xl-3"></div>
                                         <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/books" class="btn btn-outline-secondary">Quay lại</a>
+                                                <a href="/admin/books?page=1" class="btn btn-outline-secondary">Quay
+                                                    lại</a>
                                             </div>
                                         </div>
                                     </div>
@@ -298,7 +300,7 @@
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
-
+            <script src="/admin/js/utils.js"></script>
             <!-- Page JS -->
             <script src="/admin/js/dashboards-analytics.js"></script>
 

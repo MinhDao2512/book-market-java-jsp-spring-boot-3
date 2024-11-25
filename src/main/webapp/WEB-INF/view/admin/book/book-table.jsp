@@ -98,6 +98,7 @@
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
+                                    <input type="hidden" data-books-active="1" id="booksActive" />
                                     <h5 class="card-header">BẢNG SÁCH: </h5>
                                     <div class="table-responsive text-nowrap">
                                         <table class="table table-bordered table-striped">
@@ -166,6 +167,57 @@
                                 </div>
                                 <!--/ Basic Bootstrap Table -->
                             </div>
+                            <!--Pagination-->
+                            <nav aria-label="...">
+                                <ul class="pagination justify-content-center">
+                                    <c:choose>
+                                        <c:when test="${currentPage == 1}">
+                                            <li class="page-item disabled">
+                                                <a class="page-link"></a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/books?page=${currentPage-1}"
+                                                    title="Trước">
+                                                    <strong>&laquo;</strong>
+                                                </a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:forEach var="pageNumber" items="${pageNumbers}">
+                                        <c:choose>
+                                            <c:when test="${pageNumber == currentPage}">
+                                                <li class="page-item active" aria-current="page">
+                                                    <a class="page-link"
+                                                        href="/admin/books?page=${pageNumber}">${pageNumber}</a>
+                                                </li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li class="page-item" aria-current="page">
+                                                    <a class="page-link"
+                                                        href="/admin/books?page=${pageNumber}">${pageNumber}</a>
+                                                </li>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${currentPage == totalPages}">
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#"></a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/books?page=${currentPage+1}"
+                                                    title="Sau">
+                                                    <strong>&raquo;</strong>
+                                                </a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </ul>
+                            </nav>
                             <!-- / Content -->
 
                             <jsp:include page="../layout/footer.jsp" />
@@ -194,7 +246,7 @@
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
-
+            <script src="/admin/js/utils.js"></script>
             <!-- Page JS -->
             <script src="/admin/js/dashboards-analytics.js"></script>
 

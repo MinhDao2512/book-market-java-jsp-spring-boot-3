@@ -196,7 +196,7 @@
 
       <!-- Main JS -->
       <script src="/admin/js/main.js"></script>
-
+      <script src="/admin/js/utils.js"></script>
       <!-- Page JS -->
       <script src="/admin/js/dashboards-analytics.js"></script>
 

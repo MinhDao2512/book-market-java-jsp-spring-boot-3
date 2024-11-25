@@ -75,6 +75,7 @@
                                         <div class="col-xl-7">
                                             <!-- HTML5 Inputs -->
                                             <div class="card mb-4">
+                                                <input type="hidden" data-categories-active="1" id="categoriesActive" />
                                                 <h5 class="card-header" style="color: goldenrod;">
                                                     <strong>Thông tin thể loại</strong>
                                                 </h5>
@@ -135,7 +136,8 @@
                                     <div class="row justify-content-center mt-4">
                                         <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/categories" class="btn btn-outline-secondary">Quay
+                                                <a href="/admin/categories?page=1"
+                                                    class="btn btn-outline-secondary">Quay
                                                     lại</a>
                                                 <button id="btnCreateAuthor" type="submit" class="btn btn-primary">Thêm
                                                     mới</button>
@@ -173,7 +175,7 @@
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
-
+            <script src="/admin/js/utils.js"></script>
             <!-- Page JS -->
             <script src="/admin/js/dashboards-analytics.js"></script>
 

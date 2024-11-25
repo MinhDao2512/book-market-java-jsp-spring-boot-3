@@ -65,6 +65,7 @@
                                 <!--Start Form Create User-->
                                 <form id="formCreateUser" novalidate>
                                     <div class="d-flex justify-content-between">
+                                        <input type="hidden" data-users-active="1" id="usersActive" />
                                         <h4 class="fw-bold py-3 mb-4">
                                             <span class="text-muted fw-light">Quản Lý Người Dùng /</span>
                                             <span class="text-muted fw-light">Người Dùng /</span> Tạo mới
@@ -270,7 +271,8 @@
                                         <div class="col-xl-3"></div>
                                         <div class="col-xl-7">
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/users" class="btn btn-outline-secondary">Quay lại</a>
+                                                <a href="/admin/users?page=1" class="btn btn-outline-secondary">Quay
+                                                    lại</a>
                                                 <button id="btnCreateUser" type="submit" class="btn btn-primary">Thêm
                                                     mới</button>
                                             </div>
@@ -307,7 +309,7 @@
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
-
+            <script src="/admin/js/utils.js"></script>
             <!-- Page JS -->
             <script src="/admin/js/dashboards-analytics.js"></script>
 

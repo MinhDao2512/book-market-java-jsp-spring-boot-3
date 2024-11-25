@@ -2,6 +2,8 @@ package vn.toilamdev.bookmarket.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.toilamdev.bookmarket.domain.Book;
@@ -17,6 +19,11 @@ public class PublisherService {
     public PublisherService(PublisherRepository publisherRepository, BookRepository bookRepository) {
         this.publisherRepository = publisherRepository;
         this.bookRepository = bookRepository;
+    }
+
+    public List<Publisher> getAllPublishers(Pageable pageable) {
+        Page<Publisher> page = this.publisherRepository.findAll(pageable);
+        return page.getContent();
     }
 
     public List<Publisher> getAllPublishers() {

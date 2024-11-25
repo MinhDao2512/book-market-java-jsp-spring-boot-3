@@ -71,6 +71,7 @@
                                     <div class="col-xl-7">
                                         <!-- HTML5 Inputs -->
                                         <div class="card mb-4">
+                                            <input type="hidden" data-roles-active="1" id="rolesActive" />
                                             <h5 class="card-header" style="color: goldenrod;">
                                                 <strong>Thông tin chi tiết</strong>
                                             </h5>
@@ -117,7 +118,7 @@
                                 <div class="row justify-content-center mt-4">
                                     <div class="col-xl-7">
                                         <div class="d-flex justify-content-between">
-                                            <a href="/admin/roles" class="btn btn-outline-secondary">Quay lại</a>
+                                            <a href="/admin/roles?page=1" class="btn btn-outline-secondary">Quay lại</a>
                                         </div>
                                     </div>
                                 </div>
@@ -150,7 +151,7 @@
 
             <!-- Main JS -->
             <script src="/admin/js/main.js"></script>
-
+            <script src="/admin/js/utils.js"></script>
             <!-- Page JS -->
             <script src="/admin/js/dashboards-analytics.js"></script>
 

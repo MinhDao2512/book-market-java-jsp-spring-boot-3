@@ -3,6 +3,8 @@ package vn.toilamdev.bookmarket.service;
 import java.util.List;
 import java.util.Date;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.toilamdev.bookmarket.domain.Author;
@@ -18,6 +20,11 @@ public class AuthorService {
 
     public List<Author> getAllAuthors() {
         return this.authorRepository.findAll();
+    }
+
+    public List<Author> getAllAuthors(Pageable pageable) {
+        Page<Author> page = this.authorRepository.findAll(pageable);
+        return page.getContent();
     }
 
     public Author saveOrUpdate(Author author) {
