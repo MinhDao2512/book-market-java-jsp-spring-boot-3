@@ -111,7 +111,7 @@
                                 <!-- /Logo -->
                                 <h4 class="mb-2">Đăng ký 🚀</h4>
 
-                                <form id="formAuthentication" class="mb-3" action="/register" method="POST">
+                                <form id="formAuthentication" class="mb-3" action="/api/register" method="POST">
                                     <div class="mb-3">
                                         <label for="fullName" class="form-label">Họ và Tên</label>
                                         <input type="text" class="form-control validate" id="fullName" name="fullName"

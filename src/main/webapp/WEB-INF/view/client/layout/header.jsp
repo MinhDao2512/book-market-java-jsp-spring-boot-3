@@ -17,29 +17,33 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__right">
                                 <c:if test="${not empty pageContext.request.userPrincipal}">
+                                    <div class="header__top__right__social">
+                                        <a href="/cart-detail">
+                                            <i class="fa fa-shopping-bag"></i>
+                                            <span class="countItems">${sessionScope.cartItems}</span>
+                                        </a>
+                                    </div>
                                     <div class="header__top__right__language">
                                         <img src="/images/user/${sessionScope.avatar}" style="width: 20px;"
                                             class="rounded-circle" />
                                         <div>${sessionScope.username}</div>
                                         <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li><a href="/myProfile">Thông tin</a></li>
-                                            <li><a href="/cart">Giỏ hàng</a></li>
-                                            <li><a href="/orders">Đơn hàng</a></li>
+                                        <ul style="background-color: white; width: 100px;">
+                                            <li><a href="/myProfile" style="color: black;">Thông tin</a></li>
+                                            <li><a href="/cart-detail" style="color: black;">Giỏ hàng</a></li>
+                                            <li><a href="/orders" style="color: black;">Đơn hàng</a></li>
                                             <c:if test="${sessionScope.roleName != 'USER'}">
-                                                <li><a href="/admin" target="_blank">Quản trị</a></li>
+                                                <li><a href="/admin" target="_blank" style="color: black;">Quản trị</a>
+                                                </li>
                                             </c:if>
                                             <li>
-                                                <form method="post" action="/logout">
-                                                    <button type="submit">Đăng xuất</button>
+                                                <form method="post" action="/logout" id="logoutForm">
+                                                    <a style="color: black;" onclick="submitFormLogout()">Đăng xuất</a>
                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                         value="${_csrf.token}" />
                                                 </form>
                                             </li>
                                         </ul>
-                                    </div>
-                                    <div class="header__top__right__social">
-                                        <a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a>
                                     </div>
                                 </c:if>
                                 <c:if test="${empty pageContext.request.userPrincipal}">

@@ -56,7 +56,7 @@
                                 <div class="dropdown-divider"></div>
                             </li>
                             <li>
-                                <form method="post" action="/logout">
+                                <form method="post" action="/logout" id="formLogout">
                                     <button class="dropdown-item" type="submit">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Đăng xuất</span>

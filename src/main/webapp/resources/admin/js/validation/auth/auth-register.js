@@ -135,13 +135,10 @@ $(document).ready(() => {
 
     $('#formAuthentication').submit(function (event) {
         event.preventDefault();
-        var formData = new FormData();
+        var formData = new FormData(document.getElementById('formAuthentication'));
+        var object = {};
+        formData.forEach((value, key) => object[key] = value);
         var inValid = false;
-
-        formData.append("email", $('#email').val());
-        formData.append("password", $('#password').val());
-        formData.append("phoneNumber", $('#phoneNumber').val());
-        formData.append("fullName", $('#fullName').val());
 
         $('.validate').each(function () {
             if ($(this).nextAll('.invalid-feedback').length) {
@@ -157,7 +154,7 @@ $(document).ready(() => {
                 }
             });
         } else {
-            sendAjaxRequest(formData);
+            sendAjaxRequest(JSON.stringify(object));
         }
 
         function sendAjaxRequest(formData) {
@@ -165,7 +162,7 @@ $(document).ready(() => {
                 type: 'POST',
                 url: 'http://localhost:8082/api/register',
                 data: formData,
-                contentType: false,
+                contentType: "application/json; charset=utf-8",
                 processData: false,
                 success: function (response, textStatus, xhr) {
                     alert("BẠN ĐÃ TẠO TÀI KHOẢN THÀNH CÔNG. CHUYỂN ĐẾN TRANG ĐĂNG NHẬP!");
@@ -173,13 +170,12 @@ $(document).ready(() => {
                 },
                 error: function (xhr, status, error) {
                     if (xhr.status == 400) {
-                        alert('LỖI PHÍA SERVER: THÔNG TIN KHÔNG HỢP LỆ HOẶC ĐÃ TỒN TẠI TRƯỚC ĐÓ!');
                         // Clear previous errors
                         $('.is-invalid').removeClass('is-invalid');
                         $('.invalid-feedback').remove();
 
                         // Display validation errors
-                        var errors = JSON.parse(xhr.responseText);
+                        var errors = JSON.parse(xhr.responseText).error;
                         Object.keys(errors).forEach(function (key) {
                             var inputField = $('#' + key);
                             inputField.addClass('is-invalid');

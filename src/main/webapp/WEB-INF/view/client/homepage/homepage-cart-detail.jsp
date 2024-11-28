@@ -91,10 +91,10 @@
                     <div class="row">
                         <div class="col-lg-12 text-center">
                             <div class="breadcrumb__text">
-                                <h2>Sản Phẩm</h2>
+                                <h2>Giỏ hàng</h2>
                                 <div class="breadcrumb__option">
                                     <a href="/">Trang chủ</a>
-                                    <span>Sản phẩm</span>
+                                    <span>Giỏ hàng</span>
                                 </div>
                             </div>
                         </div>
@@ -103,82 +103,92 @@
             </section>
             <!-- Breadcrumb Section End -->
 
-            <!-- Product Section Begin -->
-            <section class="product spad">
+            <!-- Shoping Cart Section Begin -->
+            <section class="shoping-cart spad">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-5">
-                            <div class="sidebar">
-                                <div class="sidebar__item">
-                                    <h4>Thể Loại</h4>
-                                    <ul>
-                                        <c:forEach var="category" items="${categories}">
-                                            <li><a href="#">${category.description}</a></li>
+                        <div class="col-lg-12">
+                            <div class="shoping__cart__table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="shoping__product">Sản phẩm</th>
+                                            <th>Giá tiền</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="cartItem" items="${sessionScope.myCart.cartItems}">
+                                            <tr>
+                                                <td class="shoping__cart__item">
+                                                    <img src="/client/img/cart/cartItem.book.bookImages[0].name" alt="">
+                                                    <h5>${cartItem.book.title}</h5>
+                                                </td>
+                                                <td class="shoping__cart__price">
+                                                    ${cartItem.book.price}
+                                                </td>
+                                                <td class="shoping__cart__quantity">
+                                                    <div class="quantity">
+                                                        <div class="pro-qty">
+                                                            <input type="text" value="1">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    $110.00
+                                                </td>
+                                                <td class="shoping__cart__item__close">
+                                                    <span class="icon_close"></span>
+                                                </td>
+                                            </tr>
                                         </c:forEach>
-                                    </ul>
-                                </div>
+                                    </tbody>
+                                </table>
+                                <c:if test="${sessionScope.cartId == null}">
+                                    <h6 class="mt-3" style="text-align: center">
+                                        Bạn chưa có sản phẩm nào trong giỏ hàng !
+                                    </h6>
+                                </c:if>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-7">
-                            <div class="filter__item">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-5">
-                                        <div class="filter__sort">
-                                            <span>Sắp xếp</span>
-                                            <select>
-                                                <option value="0">Phổ biến</option>
-                                                <option value="0">Bán chạy</option>
-                                                <option value="0">Hàng mới</option>
-                                                <option value="0">Giá thấp đến cao</option>
-                                                <option value="0">Giá cao đến thấp</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="filter__found">
-                                            <h6><span>Tất cả</span> sản phẩm</h6>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-3">
-                                        <div class="filter__option">
-                                            <span class="icon_grid-2x2"></span>
-                                            <span class="icon_ul"></span>
-                                        </div>
-                                    </div>
-                                </div>
+                    </div>
+                    <div class=" row">
+                        <div class="col-lg-12">
+                            <div class="shoping__cart__btns">
+                                <a href="/shop" class="primary-btn cart-btn">THÊM SẢN PHẨM KHÁC</a>
+                                <!-- <a href="#" class="primary-btn cart-btn cart-btn-right"><span
+                                        class="icon_loading"></span>
+                                    CẬP NHẬT GIỎ HÀNG</a> -->
                             </div>
-                            <div class="row">
-                                <c:forEach var="book" items="${books}">
-                                    <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product__item">
-                                            <div class="product__item__pic set-bg"
-                                                data-setbg="/images/book/${book.bookImages[0].name}">
-                                                <ul class="product__item__pic__hover">
-                                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                    <li><a href="#" class="btnAddToCart" data-book-id="${book.id}"><i
-                                                                class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="product__item__text">
-                                                <h6><a href="/shop/${book.id}">${book.title}</a></h6>
-                                                <h5>${book.price}</h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                            <div class="product__pagination">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                        <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="shoping__checkout">
+                                <h5>Tổng Giỏ Hàng</h5>
+                                <ul>
+                                    <li>Tạm tính
+                                        <span>
+                                            <c:if test="${sessionScope.cartId == null}">0 đ</c:if>
+                                        </span>
+                                    </li>
+                                    <li>Tổng
+                                        <span>
+                                            <c:if test="${sessionScope.cartId == null}">0 đ</c:if>
+                                        </span>
+                                    </li>
+                                </ul>
+                                <a href="#" class="primary-btn" style="background-color: #C5A992;">TIẾN
+                                    HÀNH THANH
+                                    TOÁN</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- Product Section End -->
+            <!-- Shoping Cart Section End -->
 
             <!-- Footer Section Begin -->
             <jsp:include page="../layout/footer.jsp" />
@@ -193,18 +203,7 @@
             <script src="/client/js/mixitup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
-            <script>
-                $('.btnAddToCart').on('click', function (event) {
-                    event.preventDefault();
 
-                    var countItems = $('.countItems').text();
-                    countItems++;
-                    $('.countItems').text(countItems);
-
-                    var bookId = $(this).data('book-id');
-                    console.log(bookId);
-                });
-            </script>
         </body>
 
         </html>

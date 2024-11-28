@@ -14,6 +14,8 @@ import vn.toilamdev.bookmarket.validation.UniqueEmail;
 import vn.toilamdev.bookmarket.validation.UniquePhoneNumber;
 
 public class UserDTO {
+    private String fullName;
+
     @NotBlank(message = "'Tên' không được để trống !")
     @Size(max = 30, message = "'Tên' không được vượt quá 30 ký tự !")
     @Pattern(regexp = "^[\\p{L}\\p{M}]+(?: [\\p{L}\\p{M}]+)*$", message = "'Tên' không hợp lệ: Không được chứa ký tự đặc biệt, chữ số !")
@@ -64,6 +66,14 @@ public class UserDTO {
 
     @NotBlank(message = "'Vai trò' không được để trống !")
     private String roleName;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String getFirstName() {
         return firstName;

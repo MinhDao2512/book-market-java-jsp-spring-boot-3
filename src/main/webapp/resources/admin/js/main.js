@@ -116,3 +116,10 @@ let menu, animate;
   // Auto update menu collapsed/expanded based on the themeConfig
   window.Helpers.setCollapsed(true, false);
 })();
+
+$('#formLogout').submit(function (event) {
+  event.preventDefault();
+  if (confirm('Bạn có chắc chắn muốn đăng xuất không?')) {
+    $(this).off('submit').submit();
+  }
+})

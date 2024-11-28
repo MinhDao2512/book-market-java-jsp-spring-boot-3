@@ -7,10 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -30,8 +29,7 @@ public class RegisterRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerAccount(@Valid @ModelAttribute UserDTO userDTO, BindingResult bindingResult,
-            @RequestParam("fullName") String fullName) {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
         Map<String, String> errors = new HashMap<>();
         boolean existsUser = false;
 
@@ -48,7 +46,7 @@ public class RegisterRestController {
         if (existsUser) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         } else {
-            User newUser = this.userService.handleCreateUser(userDTO, fullName);
+            User newUser = this.userService.handleCreateUser(userDTO, userDTO.getFullName());
             return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
         }
     }
