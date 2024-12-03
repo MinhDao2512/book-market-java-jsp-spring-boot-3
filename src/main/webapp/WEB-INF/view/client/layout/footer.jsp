@@ -9,7 +9,7 @@
                         <div class="footer__about">
                             <div class="footer__about__logo">
                                 <a href="/">
-                                    <h2 style="color: #C5A992; font-weight: bold">
+                                    <h2 style="color: #7fad39; font-weight: bold">
                                         <i class="fa fa-book"></i> SWAP STORY
                                     </h2>
                                 </a>
@@ -39,7 +39,7 @@
                             <p>Nhận ưu đãi mới nhất từ chúng tôi thông qua email.</p>
                             <form action="#">
                                 <input type="text" placeholder="Email của bạn">
-                                <button type="submit" class="site-btn" style="background-color: #C5A992;">ĐĂNG
+                                <button type="submit" class="site-btn">ĐĂNG
                                     KÝ</button>
                             </form>
                             <div class="footer__widget__social">

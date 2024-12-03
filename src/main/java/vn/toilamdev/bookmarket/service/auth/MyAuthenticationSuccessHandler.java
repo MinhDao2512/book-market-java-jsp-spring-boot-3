@@ -37,12 +37,9 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
             session.setAttribute("avatar", currentUser.getAvatar());
             session.setAttribute("roleName", currentUser.getRole().getName());
             session.setAttribute("id", currentUser.getId());
-            if (currentUser.getCart() != null) {
-                session.setAttribute("cartItems", currentUser.getCart().getCartItems().size());
-                session.setAttribute("cartId", currentUser.getCart().getId());
-            } else {
-                session.setAttribute("cartItems", 0);
-            }
+            session.setAttribute("cartCount", currentUser.getCart().getCartItems().size());
+            session.setAttribute("cartId", currentUser.getCart().getId());
+            session.setAttribute("totalCartPrice", currentUser.getCart().getTotalPrice());
         }
 
     }

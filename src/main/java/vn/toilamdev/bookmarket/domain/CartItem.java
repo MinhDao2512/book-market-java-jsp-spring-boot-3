@@ -22,6 +22,8 @@ public class CartItem extends AbstractDomain {
         return quantity;
     }
 
+    private double totalPrice;
+
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
@@ -42,4 +44,11 @@ public class CartItem extends AbstractDomain {
         this.cart = cart;
     }
 
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }

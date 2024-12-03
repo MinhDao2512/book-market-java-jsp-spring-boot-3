@@ -33,6 +33,8 @@
             <link rel="stylesheet" href="/client/css/owl.carousel.min.css" type="text/css">
             <link rel="stylesheet" href="/client/css/slicknav.min.css" type="text/css">
             <link rel="stylesheet" href="/client/css/style.css" type="text/css">
+            <!--JQuery-->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         </head>
 
         <body>
@@ -46,7 +48,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="hero__categories">
-                                <div class="hero__categories__all" style="background-color: #C5A992;">
+                                <div class="hero__categories__all">
                                     <i class="fa fa-bars"></i>
                                     <span>Danh mục</span>
                                 </div>
@@ -65,12 +67,12 @@
                                             <span class="arrow_carrot-down"></span>
                                         </div>
                                         <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
-                                        <button type="submit" class="site-btn" style="background-color: #C5A992;">TÌM
+                                        <button type="submit" class="site-btn">TÌM
                                             KIẾM</button>
                                     </form>
                                 </div>
                                 <div class="hero__search__phone">
-                                    <div class="hero__search__phone__icon" style="color: #C5A992;">
+                                    <div class="hero__search__phone__icon">
                                         <i class="fa fa-phone"></i>
                                     </div>
                                     <div class="hero__search__phone__text">
@@ -155,7 +157,6 @@
                                                 data-setbg="/images/book/${book.bookImages[0].name}">
                                                 <ul class="product__item__pic__hover">
                                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                                                     <li><a href="#" class="btnAddToCart" data-book-id="${book.id}"><i
                                                                 class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
@@ -185,7 +186,6 @@
             <!-- Footer Section End -->
 
             <!-- Js Plugins -->
-            <script src="/client/js/jquery-3.3.1.min.js"></script>
             <script src="/client/js/bootstrap.min.js"></script>
             <script src="/client/js/jquery.nice-select.min.js"></script>
             <script src="/client/js/jquery-ui.min.js"></script>
@@ -196,14 +196,32 @@
             <script>
                 $('.btnAddToCart').on('click', function (event) {
                     event.preventDefault();
-
-                    var countItems = $('.countItems').text();
-                    countItems++;
-                    $('.countItems').text(countItems);
-
+                    var cartId = '${sessionScope.cartId}';
                     var bookId = $(this).data('book-id');
-                    console.log(bookId);
+                    var bookCount = 1;
+
+                    if (!cartId) {
+                        confirm('BẠN CẦN ĐĂNG NHẬP TRƯỚC KHI MUA HÀNG.');
+                        window.location.href = '/login';
+                    } else {
+                        sendRequestAddToCart(bookId, bookCount);
+                    }
                 });
+
+                function sendRequestAddToCart(bookId, bookCount) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'http://localhost:8082/api/cart?bookId=' + bookId + '&' + 'bookCount=' + bookCount,
+                        contentType: "application/json; charset=utf-8",
+                        processData: false,
+                        success: function (response, textStatus, xhr) {
+                            alert("");
+                        },
+                        error: function (xhr, status, error) {
+                            alert('Đã có lỗi xảy ra!');
+                        }
+                    });
+                }
             </script>
         </body>
 

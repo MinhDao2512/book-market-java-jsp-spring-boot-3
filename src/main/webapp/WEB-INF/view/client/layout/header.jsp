@@ -3,6 +3,7 @@
 
         <!-- Header Section Begin -->
         <header class="header">
+            <input type="hidden" id="cartId" value="${sessionScope.cartId}" />
             <div class="header__top">
                 <div class="container">
                     <div class="row">
@@ -10,7 +11,7 @@
                             <div class="header__top__left">
                                 <ul>
                                     <li><i class="fa fa-envelope"></i> nguyenminhdao002@gmail.com</li>
-                                    <li style="color: #C5A992;">Miễn phí vận chuyển cho đơn hàng từ 369.000 đ</li>
+                                    <li>Miễn phí vận chuyển cho đơn hàng từ 369.000 đ</li>
                                 </ul>
                             </div>
                         </div>
@@ -20,7 +21,7 @@
                                     <div class="header__top__right__social">
                                         <a href="/cart-detail">
                                             <i class="fa fa-shopping-bag"></i>
-                                            <span class="countItems">${sessionScope.cartItems}</span>
+                                            <span class="countItems">${sessionScope.cartCount}</span>
                                         </a>
                                     </div>
                                     <div class="header__top__right__language">
@@ -51,9 +52,9 @@
                                         <i class="fa fa-user"></i>
                                         <div> Tài khoản</div>
                                         <span class="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li><a href="/login">Đăng nhập</a></li>
-                                            <li><a href="/register">Đăng ký</a></li>
+                                        <ul style="background-color: white; width: 100px;">
+                                            <li><a href="/login" style="color: black;">Đăng nhập</a></li>
+                                            <li><a href="/register" style="color: black;">Đăng ký</a></li>
                                         </ul>
                                     </div>
                                 </c:if>
@@ -67,14 +68,14 @@
                     <div class="col-lg-3">
                         <div class="header__logo">
                             <a href="/">
-                                <h2 style="color: #C5A992; font-weight: bold"><i class="fa fa-book"></i> SWAP STORY</h2>
+                                <h2 style="color: #7fad39; font-weight: bold"><i class="fa fa-book"></i> SWAP STORY</h2>
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="/" style="color: #C5A992;">Trang Chủ</a></li>
+                                <li class="active"><a href="/">Trang Chủ</a></li>
                                 <li><a href="/shop">Sản Phẩm</a></li>
                                 <li><a href="/blog">Blog</a></li>
                                 <li><a href="/contact">Liên Hệ</a></li>

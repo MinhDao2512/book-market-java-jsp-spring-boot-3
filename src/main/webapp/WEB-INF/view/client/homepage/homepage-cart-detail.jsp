@@ -9,7 +9,7 @@
             <meta name="keywords" content="Ogani, unica, creative, html">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Story Swap | Sản phẩm</title>
+            <title>Story Swap | Giỏ hàng</title>
 
             <!-- Google Font -->
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="hero__categories">
-                                <div class="hero__categories__all" style="background-color: #C5A992;">
+                                <div class="hero__categories__all">
                                     <i class="fa fa-bars"></i>
                                     <span>Danh mục</span>
                                 </div>
@@ -65,12 +65,12 @@
                                             <span class="arrow_carrot-down"></span>
                                         </div>
                                         <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
-                                        <button type="submit" class="site-btn" style="background-color: #C5A992;">TÌM
+                                        <button type="submit" class="site-btn">TÌM
                                             KIẾM</button>
                                     </form>
                                 </div>
                                 <div class="hero__search__phone">
-                                    <div class="hero__search__phone__icon" style="color: #C5A992;">
+                                    <div class="hero__search__phone__icon">
                                         <i class="fa fa-phone"></i>
                                     </div>
                                     <div class="hero__search__phone__text">
@@ -120,10 +120,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="cartItem" items="${sessionScope.myCart.cartItems}">
+                                        <c:forEach var="cartItem" items="${cartItems}">
                                             <tr>
                                                 <td class="shoping__cart__item">
-                                                    <img src="/client/img/cart/cartItem.book.bookImages[0].name" alt="">
+                                                    <img src="/images/book/${cartItem.book.bookImages[0].name}"
+                                                        style="width: 100px; text-align: left;">
                                                     <h5>${cartItem.book.title}</h5>
                                                 </td>
                                                 <td class="shoping__cart__price">
@@ -137,7 +138,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="shoping__cart__total">
-                                                    $110.00
+                                                    ${cartItem.book.price * cartItem.quantity}
                                                 </td>
                                                 <td class="shoping__cart__item__close">
                                                     <span class="icon_close"></span>
@@ -146,8 +147,8 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <c:if test="${sessionScope.cartId == null}">
-                                    <h6 class="mt-3" style="text-align: center">
+                                <c:if test="${sessionScope.cartCount == 0}">
+                                    <h6 class="mt-3" style="color: red; text-align: center">
                                         Bạn chưa có sản phẩm nào trong giỏ hàng !
                                     </h6>
                                 </c:if>
@@ -171,18 +172,18 @@
                                 <ul>
                                     <li>Tạm tính
                                         <span>
-                                            <c:if test="${sessionScope.cartId == null}">0 đ</c:if>
+                                            ${sessionScope.totalCartPrice}
                                         </span>
                                     </li>
                                     <li>Tổng
                                         <span>
-                                            <c:if test="${sessionScope.cartId == null}">0 đ</c:if>
+                                            ${sessionScope.totalCartPrice}
                                         </span>
                                     </li>
                                 </ul>
-                                <a href="#" class="primary-btn" style="background-color: #C5A992;">TIẾN
-                                    HÀNH THANH
-                                    TOÁN</a>
+                                <c:if test="${sessionScope.cartCount != 0}">
+                                    <a href="#" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+                                </c:if>
                             </div>
                         </div>
                     </div>

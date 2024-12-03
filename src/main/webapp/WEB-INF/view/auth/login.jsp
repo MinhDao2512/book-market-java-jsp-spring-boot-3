@@ -55,7 +55,7 @@
                             <div class="card-body">
                                 <!-- Logo -->
                                 <div class="app-brand justify-content-center">
-                                    <a href="index.html" class="app-brand-link gap-2">
+                                    <a href="/" class="app-brand-link gap-2">
                                         <span class="app-brand-logo demo">
                                             <svg width="25" viewBox="0 0 25 42" version="1.1"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -146,13 +146,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="remember-me" />
-                                            <label class="form-check-label" for="remember-me"> Remember Me </label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
+                                    <div class="mb-3 mt-4">
                                         <button class="btn btn-primary d-grid w-100" type="submit">Đăng nhập</button>
                                     </div>
                                     <div class="mb-3">

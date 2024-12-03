@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import vn.toilamdev.bookmarket.constant.SystemConstant;
+import vn.toilamdev.bookmarket.domain.Cart;
 import vn.toilamdev.bookmarket.domain.Comment;
 import vn.toilamdev.bookmarket.domain.Order;
 import vn.toilamdev.bookmarket.domain.Role;
@@ -120,6 +121,7 @@ public class UserService {
     public User handleCreateUser(UserDTO userDTO, MultipartFile file) {
         Role role = this.roleRepository.findByName(userDTO.getRoleName());
         User newUser = UserMapper.mappingUserDTO(userDTO);
+        Cart cart = new Cart();
 
         newUser.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
         newUser.setRole(role);
@@ -135,12 +137,16 @@ public class UserService {
 
         newUser = this.userRepository.save(newUser);
 
+        cart.setUser(newUser);
+        this.cartRepository.save(cart);
+
         return newUser;
     }
 
     public User handleCreateUser(UserDTO userDTO, String fullName) {
         Role newRole = this.roleRepository.findByName("USER");
         User newUser = new User();
+        Cart cart = new Cart();
 
         newUser.setFullName(fullName);
         newUser.setEmail(userDTO.getEmail());
@@ -152,6 +158,9 @@ public class UserService {
         newUser.setCreatedAt(new Date(System.currentTimeMillis()));
 
         newUser = this.userRepository.save(newUser);
+
+        cart.setUser(newUser);
+        this.cartRepository.save(cart);
 
         return newUser;
     }

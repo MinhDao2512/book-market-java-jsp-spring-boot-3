@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="hero__categories">
-                                <div class="hero__categories__all" style="background-color: #C5A992;">
+                                <div class="hero__categories__all">
                                     <i class="fa fa-bars"></i>
                                     <span>Danh mục</span>
                                 </div>
@@ -64,12 +64,12 @@
                                             <span class="arrow_carrot-down"></span>
                                         </div>
                                         <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
-                                        <button type="submit" class="site-btn" style="background-color: #C5A992;">TÌM
+                                        <button type="submit" class="site-btn">TÌM
                                             KIẾM</button>
                                     </form>
                                 </div>
                                 <div class="hero__search__phone">
-                                    <div class="hero__search__phone__icon" style="color: #C5A992;">
+                                    <div class="hero__search__phone__icon">
                                         <i class="fa fa-phone"></i>
                                     </div>
                                     <div class="hero__search__phone__text">
@@ -140,8 +140,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="primary-btn" style="background-color: #C5A992;">Mua ngay</a>
-                                <a href="#" class="primary-btn" style="background-color: #C5A992;">Thêm vào giỏ</a>
+                                <a href="#" class="primary-btn">Mua ngay</a>
+                                <a href="#" class="primary-btn">Thêm vào giỏ</a>
                                 <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                                 <ul>
                                     <h3>Thông tin chi tiết</h3>
