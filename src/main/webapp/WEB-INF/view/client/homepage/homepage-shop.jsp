@@ -9,12 +9,16 @@
             <meta name="keywords" content="Ogani, unica, creative, html">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <!--Title-->
             <title>Story Swap | Sản phẩm</title>
 
             <!-- Google Font -->
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
                 rel="stylesheet">
 
+            <!--Jquery Toast Plugin-->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+                rel="stylesheet">
             <!--Bootstrap 4.4.1-->
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
                 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -193,6 +197,8 @@
             <script src="/client/js/mixitup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
+            <!--Jquery Toast Plugin-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
             <script>
                 $('.btnAddToCart').on('click', function (event) {
                     event.preventDefault();
@@ -215,12 +221,22 @@
                         contentType: "application/json; charset=utf-8",
                         processData: false,
                         success: function (response, textStatus, xhr) {
-                            alert("");
+                            $.toast({
+                                heading: 'Giỏ hàng',
+                                text: 'Sản phẩm đã được thêm vào giỏ hàng',
+                                position: 'top-right',
+                                icon: 'success'
+                            })
+                            updateCartCount(JSON.parse(xhr.responseText).data['newCartCount']);
                         },
                         error: function (xhr, status, error) {
                             alert('Đã có lỗi xảy ra!');
                         }
                     });
+                }
+
+                function updateCartCount(newCartCount) {
+                    $('#cartCount').text(newCartCount);
                 }
             </script>
         </body>

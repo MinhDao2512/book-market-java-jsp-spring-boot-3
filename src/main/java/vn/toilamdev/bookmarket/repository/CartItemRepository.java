@@ -8,4 +8,6 @@ import vn.toilamdev.bookmarket.domain.CartItem;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     void deleteById(long id);
+
+    CartItem findById(long id);
 }

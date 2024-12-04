@@ -206,21 +206,80 @@
     proQty.prepend('<span class="dec qtybtn">-</span>');
     proQty.append('<span class="inc qtybtn">+</span>');
     proQty.on('click', '.qtybtn', function () {
+        var totalCartPrice = $('.total-cart-price').text().replace(/[^\d.-]/g, '');
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
+        var bookPrice = $(this).closest(".pro-qty").data("book-price");
+        var cartItemId = $(this).closest(".pro-qty").data("cart-item-id");
+        // var bookPrice =  
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                var newVal = 1;
             }
         }
+        //Total Price of Cart Item
+        var totalCartItemPrice = bookPrice * newVal;
+
+        //Update quantity
         $button.parent().find('input').val(newVal);
+
+        //Update Total Price Of Cart Item
+        $(this).closest('td').next('.shoping__cart__total').text(formatNumber(totalCartItemPrice));
+
+        //Update Total Price Of Cart
+        totalCartPrice = (totalCartPrice - (oldValue * bookPrice)) + totalCartItemPrice;
+        $('.total-cart-price').text(formatNumber(totalCartPrice));
+
+        var dataJSON = {
+            'cartItemId': cartItemId,
+            'quantity': newVal,
+            'totalCartItemPrice': totalCartItemPrice,
+            'totalCartPrice': totalCartPrice
+        };
+
+        if (oldValue != newVal) {
+            //Update Cart Item 
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8082/api/cart-item',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(dataJSON),
+                success: function () {
+                    $.toast({
+                        heading: 'Giỏ hàng',
+                        text: 'Cập nhật thành công.',
+                        position: 'top-right',
+                        icon: 'success'
+                    })
+                },
+                error: function () {
+                    $.toast({
+                        heading: 'Giỏ hàng',
+                        text: 'Cập nhật thất bại.',
+                        position: 'top-right',
+                        icon: 'error'
+                    })
+                }
+            });
+        }
     });
 
+    /*---------------
+        Format Number
+    -----------------*/
+    function formatNumber(num) {
+        const formattedTotal = new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(num).replaceAll('.', ',');
+
+        return formattedTotal;
+    }
 })(jQuery);
 
 function submitFormLogout() {

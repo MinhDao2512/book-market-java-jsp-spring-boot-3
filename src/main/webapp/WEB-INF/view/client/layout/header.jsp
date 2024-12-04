@@ -21,7 +21,7 @@
                                     <div class="header__top__right__social">
                                         <a href="/cart-detail">
                                             <i class="fa fa-shopping-bag"></i>
-                                            <span class="countItems">${sessionScope.cartCount}</span>
+                                            <span id="cartCount">${sessionScope.cartCount}</span>
                                         </a>
                                     </div>
                                     <div class="header__top__right__language">

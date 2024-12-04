@@ -52,7 +52,8 @@ public class CartRestController {
             Cart newCart = this.cartService.addToCart(currentUser, book, bookCount);
 
             session.setAttribute("cartCount", newCart.getCartItems().size());
-            return ResponseEntity.status(HttpStatus.CREATED).body(Collections.singletonMap("message", "Success."));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(Collections.singletonMap("newCartCount", newCart.getCartItems().size()));
         }
 
     }

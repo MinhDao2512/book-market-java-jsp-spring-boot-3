@@ -15,6 +15,9 @@
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
                 rel="stylesheet">
 
+            <!--Jquery Toast Plugin-->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+                rel="stylesheet">
             <!--Bootstrap 4.4.1-->
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
                 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -112,7 +115,8 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="shoping__product">Sản phẩm</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Sản phẩm</th>
                                             <th>Giá tiền</th>
                                             <th>Số lượng</th>
                                             <th>Tổng tiền</th>
@@ -122,23 +126,33 @@
                                     <tbody>
                                         <c:forEach var="cartItem" items="${cartItems}">
                                             <tr>
-                                                <td class="shoping__cart__item">
-                                                    <img src="/images/book/${cartItem.book.bookImages[0].name}"
-                                                        style="width: 100px; text-align: left;">
-                                                    <h5>${cartItem.book.title}</h5>
+                                                <td>
+                                                    <a href="/shop/${cartItem.book.id}">
+                                                        <img src="/images/book/${cartItem.book.bookImages[0].name}"
+                                                            style="width: 100px;">
+                                                    </a>
+                                                </td>
+                                                <td class="col-md-6"
+                                                    style="white-space: normal; word-wrap: break-word; overflow: visible;">
+                                                    <h5>
+                                                        <a href="/shop/${cartItem.book.id}"
+                                                            style="background-color: white; color: black; text-decoration: none; display: inline-block;">${cartItem.book.title}</a>
+                                                    </h5>
                                                 </td>
                                                 <td class="shoping__cart__price">
-                                                    ${cartItem.book.price}
+                                                    <fmt:formatNumber type="number" value="${cartItem.book.price}" />
                                                 </td>
                                                 <td class="shoping__cart__quantity">
                                                     <div class="quantity">
-                                                        <div class="pro-qty">
-                                                            <input type="text" value="1">
+                                                        <div class="pro-qty" data-book-price="${cartItem.book.price}"
+                                                            data-cart-item-id="${cartItem.id}">
+                                                            <input type="text" value="${cartItem.quantity}"
+                                                                class="input-quantity">
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td class="shoping__cart__total">
-                                                    ${cartItem.book.price * cartItem.quantity}
+                                                    <fmt:formatNumber type="number" value="${cartItem.totalPrice}" /> đ
                                                 </td>
                                                 <td class="shoping__cart__item__close">
                                                     <span class="icon_close"></span>
@@ -168,16 +182,11 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="shoping__checkout">
-                                <h5>Tổng Giỏ Hàng</h5>
+                                <h5>Giỏ Hàng</h5>
                                 <ul>
-                                    <li>Tạm tính
-                                        <span>
-                                            ${sessionScope.totalCartPrice}
-                                        </span>
-                                    </li>
-                                    <li>Tổng
-                                        <span>
-                                            ${sessionScope.totalCartPrice}
+                                    <li>Tổng:
+                                        <span class="total-cart-price">
+                                            <fmt:formatNumber type="number" value="${sessionScope.totalCartPrice}" /> đ
                                         </span>
                                     </li>
                                 </ul>
@@ -204,7 +213,7 @@
             <script src="/client/js/mixitup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
         </body>
 
         </html>

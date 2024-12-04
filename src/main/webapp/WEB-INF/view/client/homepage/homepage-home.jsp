@@ -153,13 +153,11 @@
                                     <div class="featured__item__pic set-bg"
                                         data-setbg="/images/book/${book.bookImages[0].name}">
                                         <ul class="featured__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a href="/shop/${book.id}"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="featured__item__text">
-                                        <h6><a href="#">${book.title}</a></h6>
+                                        <h6><a href="/shop/${book.id}">${book.title}</a></h6>
                                         <h5>${book.price}</h5>
                                     </div>
                                 </div>

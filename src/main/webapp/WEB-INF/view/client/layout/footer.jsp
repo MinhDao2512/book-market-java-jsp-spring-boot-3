@@ -35,8 +35,8 @@
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="footer__widget">
-                            <h6>Đăng Ký Nhận Ưu Đãi</h6>
-                            <p>Nhận ưu đãi mới nhất từ chúng tôi thông qua email.</p>
+                            <h6>Đăng Ký Nhận Thông Báo Sản Phẩm Mới</h6>
+                            <p>Nhận thông báo mới nhất từ chúng tôi thông qua email.</p>
                             <form action="#">
                                 <input type="text" placeholder="Email của bạn">
                                 <button type="submit" class="site-btn">ĐĂNG
