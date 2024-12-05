@@ -39,7 +39,7 @@
                                             </c:if>
                                             <li>
                                                 <form method="post" action="/logout" id="logoutForm">
-                                                    <a style="color: black;" onclick="submitFormLogout()">Đăng xuất</a>
+                                                    <a href="#" style="color: black;" class="logout">Đăng xuất</a>
                                                     <input type="hidden" name="${_csrf.parameterName}"
                                                         value="${_csrf.token}" />
                                                 </form>

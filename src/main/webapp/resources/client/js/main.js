@@ -209,8 +209,6 @@
         var totalCartPrice = $('.total-cart-price').text().replace(/[^\d.-]/g, '');
         var $button = $(this);
         var oldValue = $button.parent().find('input').val();
-        var bookPrice = $(this).closest(".pro-qty").data("book-price");
-        var cartItemId = $(this).closest(".pro-qty").data("cart-item-id");
         // var bookPrice =  
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
@@ -222,50 +220,55 @@
                 var newVal = 1;
             }
         }
-        //Total Price of Cart Item
-        var totalCartItemPrice = bookPrice * newVal;
 
         //Update quantity
         $button.parent().find('input').val(newVal);
 
-        //Update Total Price Of Cart Item
-        $(this).closest('td').next('.shoping__cart__total').text(formatNumber(totalCartItemPrice));
+        if (totalCartPrice !== "") {
+            var bookPrice = $(this).closest(".pro-qty").data("book-price");
+            var cartItemId = $(this).closest(".pro-qty").data("cart-item-id");
 
-        //Update Total Price Of Cart
-        totalCartPrice = (totalCartPrice - (oldValue * bookPrice)) + totalCartItemPrice;
-        $('.total-cart-price').text(formatNumber(totalCartPrice));
+            //Total Price of Cart Item
+            var totalCartItemPrice = bookPrice * newVal;
+            //Update Total Price Of Cart Item
+            $(this).closest('td').next('.shoping__cart__total').text(formatNumber(totalCartItemPrice));
 
-        var dataJSON = {
-            'cartItemId': cartItemId,
-            'quantity': newVal,
-            'totalCartItemPrice': totalCartItemPrice,
-            'totalCartPrice': totalCartPrice
-        };
+            //Update Total Price Of Cart
+            totalCartPrice = (totalCartPrice - (oldValue * bookPrice)) + totalCartItemPrice;
+            $('.total-cart-price').text(formatNumber(totalCartPrice));
 
-        if (oldValue != newVal) {
-            //Update Cart Item 
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:8082/api/cart-item',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(dataJSON),
-                success: function () {
-                    $.toast({
-                        heading: 'Giỏ hàng',
-                        text: 'Cập nhật thành công.',
-                        position: 'top-right',
-                        icon: 'success'
-                    })
-                },
-                error: function () {
-                    $.toast({
-                        heading: 'Giỏ hàng',
-                        text: 'Cập nhật thất bại.',
-                        position: 'top-right',
-                        icon: 'error'
-                    })
-                }
-            });
+            var dataJSON = {
+                'cartItemId': cartItemId,
+                'quantity': newVal,
+                'totalCartItemPrice': totalCartItemPrice,
+                'totalCartPrice': totalCartPrice
+            };
+
+            if (oldValue != newVal) {
+                //Update Cart Item 
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost:8082/api/cart-item',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(dataJSON),
+                    success: function () {
+                        $.toast({
+                            heading: 'Giỏ hàng',
+                            text: 'Cập nhật thành công.',
+                            position: 'top-right',
+                            icon: 'success'
+                        })
+                    },
+                    error: function () {
+                        $.toast({
+                            heading: 'Giỏ hàng',
+                            text: 'Cập nhật thất bại.',
+                            position: 'top-right',
+                            icon: 'error'
+                        })
+                    }
+                });
+            }
         }
     });
 
@@ -280,10 +283,64 @@
 
         return formattedTotal;
     }
+
+    /*---------------
+        Add To Cart
+    -----------------*/
+    $('.btnAddToCart').on('click', function (event) {
+        event.preventDefault();
+        var cartId = $('#cartId').val();
+        var bookId = $(this).data('book-id');
+        var bookCount = $('#bookCount').val();
+
+        if (!bookCount) {
+            bookCount = 1;
+        }
+
+        if (!cartId) {
+            window.location.href = '/login';
+        } else {
+            sendRequestAddToCart(bookId, bookCount);
+        }
+    });
+
+    function sendRequestAddToCart(bookId, bookCount) {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8082/api/cart?bookId=' + bookId + '&' + 'bookCount=' + bookCount,
+            contentType: "application/json; charset=utf-8",
+            processData: false,
+            success: function (response, textStatus, xhr) {
+                $.toast({
+                    heading: 'Giỏ hàng',
+                    text: 'Sản phẩm đã được thêm vào giỏ hàng',
+                    position: 'top-right',
+                    icon: 'success'
+                })
+                updateCartCount(JSON.parse(xhr.responseText).data['newCartCount']);
+            },
+            error: function (xhr, status, error) {
+                alert('Đã có lỗi xảy ra!');
+            }
+        });
+    }
+
+    function updateCartCount(newCartCount) {
+        $('#cartCount').text(newCartCount);
+    }
+
+    /*-----------------
+        Confirm Logout 
+    -------------------*/
+    $('.logout').on('click', function (event) {
+        event.preventDefault();
+        if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
+            document.getElementById('logoutForm').submit();
+        }
+    });
+
+    /*-----------------
+        Confirm Logout 
+    -------------------*/
 })(jQuery);
 
-function submitFormLogout() {
-    if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
-        document.getElementById('logoutForm').submit();
-    }
-}

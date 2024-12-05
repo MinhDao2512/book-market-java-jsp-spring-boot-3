@@ -125,7 +125,7 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach var="cartItem" items="${cartItems}">
-                                            <tr>
+                                            <tr data-cart-item-id="${cartItem.id}">
                                                 <td>
                                                     <a href="/shop/${cartItem.book.id}">
                                                         <img src="/images/book/${cartItem.book.bookImages[0].name}"
@@ -155,7 +155,8 @@
                                                     <fmt:formatNumber type="number" value="${cartItem.totalPrice}" /> đ
                                                 </td>
                                                 <td class="shoping__cart__item__close">
-                                                    <span class="icon_close"></span>
+                                                    <span class="icon_close btnDeleteCartItem"
+                                                        data-cart-item-id="${cartItem.id}"></span>
                                                 </td>
                                             </tr>
                                         </c:forEach>
@@ -173,14 +174,11 @@
                         <div class="col-lg-12">
                             <div class="shoping__cart__btns">
                                 <a href="/shop" class="primary-btn cart-btn">THÊM SẢN PHẨM KHÁC</a>
-                                <!-- <a href="#" class="primary-btn cart-btn cart-btn-right"><span
-                                        class="icon_loading"></span>
-                                    CẬP NHẬT GIỎ HÀNG</a> -->
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-7">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-5">
                             <div class="shoping__checkout">
                                 <h5>Giỏ Hàng</h5>
                                 <ul>
@@ -191,7 +189,7 @@
                                     </li>
                                 </ul>
                                 <c:if test="${sessionScope.cartCount != 0}">
-                                    <a href="#" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
+                                    <a href="/checkout" class="primary-btn">TIẾN HÀNH THANH TOÁN</a>
                                 </c:if>
                             </div>
                         </div>
@@ -214,6 +212,54 @@
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+            <script>
+                $('.btnDeleteCartItem').on('click', function () {
+                    var cartItemId = $(this).data('cart-item-id');
+                    var object = {
+                        'cartItemId': cartItemId
+                    };
+                    //Call API Delete
+                    sendAJAXRequest(object);
+                    //Update Total Cart Price
+                    var totalCartPrice = $('.total-cart-price').text().replace(/[^\d.-]/g, '');
+                    var totalCartItemPrice = $(this).closest('tr').find('.shoping__cart__total').text().replace(/[^\d.-]/g, '');
+                    totalCartPrice = new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    }).format(totalCartPrice - totalCartItemPrice).replaceAll('.', ',');
+
+                    $('.total-cart-price').text(totalCartPrice);
+                    //update cart count
+                    var oldCartCount = $('#cartCount').text();
+                    $('#cartCount').text(oldCartCount - 1);
+                });
+
+                function sendAJAXRequest(object) {
+                    $.ajax({
+                        type: 'DELETE',
+                        url: 'http://localhost:8082/api/cart-item',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(object),
+                        success: function () {
+                            $('tr[data-cart-item-id="' + object['cartItemId'] + '"]').hide();
+                            $.toast({
+                                heading: 'Giỏ hàng',
+                                text: 'Cập nhật thành công.',
+                                position: 'top-right',
+                                icon: 'success'
+                            })
+                        },
+                        error: function () {
+                            $.toast({
+                                heading: 'Giỏ hàng',
+                                text: 'Cập nhật thất bại.',
+                                position: 'top-right',
+                                icon: 'success'
+                            })
+                        }
+                    });
+                } 
+            </script>
         </body>
 
         </html>

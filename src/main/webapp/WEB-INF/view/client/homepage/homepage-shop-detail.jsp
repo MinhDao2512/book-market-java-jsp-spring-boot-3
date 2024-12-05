@@ -15,6 +15,9 @@
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
                 rel="stylesheet">
 
+            <!--Jquery Toast Plugin-->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+                rel="stylesheet">
             <!--Bootstrap 4.4.1-->
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
                 integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -136,13 +139,18 @@
                                 <div class="product__details__quantity">
                                     <div class="quantity">
                                         <div class="pro-qty">
-                                            <input type="text" value="1">
+                                            <input type="text" value="1" id="bookCount">
                                         </div>
                                     </div>
                                 </div>
-                                <a href="#" class="primary-btn">Mua ngay</a>
-                                <a href="#" class="primary-btn">Thêm vào giỏ</a>
-                                <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                                <c:if test="${empty sessionScope.cartId}">
+                                    <a href="/login" class="primary-btn">Mua ngay</a>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.cartId}">
+                                    <a href="/checkout" class="primary-btn">Mua ngay</a>
+                                </c:if>
+                                <a href="#" class="primary-btn btnAddToCart" data-book-id="${currentBook.id}">Thêm vào
+                                    giỏ</a>
                                 <ul>
                                     <h3>Thông tin chi tiết</h3>
                                     <li><b>Công ty phát hành</b> <span>${currentBook.publishingCompany}</span></li>
@@ -234,7 +242,8 @@
             <script src="/client/js/mixitup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
-
+            <!--Jquery Toast Plugin-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
         </body>
 
         </html>

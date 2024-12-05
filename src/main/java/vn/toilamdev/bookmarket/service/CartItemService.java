@@ -20,4 +20,8 @@ public class CartItemService {
     public CartItem getCartItemById(long cartItemId) {
         return this.cartItemRepository.findById(cartItemId);
     }
+
+    public void deleteCartItemById(long cartItemId) {
+        this.cartItemRepository.deleteById(cartItemId);
+    }
 }
