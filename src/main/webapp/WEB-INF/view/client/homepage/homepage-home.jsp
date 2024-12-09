@@ -41,55 +41,7 @@
             <!-- Header Section End -->
 
             <!-- Hero Section Begin -->
-            <section class="hero">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="hero__categories">
-                                <div class="hero__categories__all">
-                                    <i class="fa fa-bars"></i>
-                                    <span>Danh mục</span>
-                                </div>
-                                <ul>
-                                    <li><a href="#">English Books</a></li>
-                                    <li><a href="#">Sách tiếng Việt</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="hero__search">
-                                <div class="hero__search__form">
-                                    <form action="#">
-                                        <div class="hero__search__categories">
-                                            Tất cả danh mục
-                                            <span class="arrow_carrot-down"></span>
-                                        </div>
-                                        <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
-                                        <button type="submit" class="site-btn">TÌM
-                                            KIẾM</button>
-                                    </form>
-                                </div>
-                                <div class="hero__search__phone">
-                                    <div class="hero__search__phone__icon">
-                                        <i class="fa fa-phone"></i>
-                                    </div>
-                                    <div class="hero__search__phone__text">
-                                        <h5>(+84) 942 236 357</h5>
-                                        <span>Hỗ trợ 24/7</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hero__item set-bg" data-setbg="/images/banner/banner.jpg">
-                                <div class="hero__text">
-                                    <h2>Story Swap</h2>
-                                    <p>Miễn phí vẫn chuyển cho hóa đơn trên 300.000đ</p>
-                                    <a href="/shop" class="primary-btn">MUA NGAY</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <jsp:include page="../layout/hero-select-home.jsp" />
             <!-- Hero Section End -->
 
             <!-- Categories Section Begin -->
@@ -99,27 +51,27 @@
                         <div class="categories__slider owl-carousel">
                             <div class="col-lg-3">
                                 <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-1.jpg">
-                                    <h5><a href="#">Fresh Fruit</a></h5>
+                                    <h5><a href="#">Truyện Tranh</a></h5>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-2.jpg">
-                                    <h5><a href="#">Dried Fruit</a></h5>
+                                    <h5><a href="#">Trinh Thám</a></h5>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-3.jpg">
-                                    <h5><a href="#">Vegetables</a></h5>
+                                    <h5><a href="#">Tâm Lý Học</a></h5>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-4.jpg">
-                                    <h5><a href="#">drink fruits</a></h5>
+                                    <h5><a href="#">Kinh Dị</a></h5>
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-5.jpg">
-                                    <h5><a href="#">drink fruits</a></h5>
+                                    <h5><a href="#">Lãng Mạn</a></h5>
                                 </div>
                             </div>
                         </div>

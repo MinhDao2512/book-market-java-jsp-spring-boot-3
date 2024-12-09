@@ -16,7 +16,7 @@ public class OrderItem extends AbstractDomain {
     private Book book;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     public Integer getQuantity() {

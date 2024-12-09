@@ -338,9 +338,5 @@
             document.getElementById('logoutForm').submit();
         }
     });
-
-    /*-----------------
-        Confirm Logout 
-    -------------------*/
 })(jQuery);
 
