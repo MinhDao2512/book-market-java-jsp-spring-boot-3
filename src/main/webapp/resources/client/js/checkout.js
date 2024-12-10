@@ -65,21 +65,21 @@ $(document).ready(() => {
     });
 
     // Check Phone Number
-    $('#phoneNumber').on('input blur', () => {
-        var phoneNumber = $('#phoneNumber').val().trim();
+    $('#receiverPhone').on('input blur', () => {
+        var phoneNumber = $('#receiverPhone').val().trim();
         var phoneRegex = /^(\+84|0)(\s?\d{3})(\s?\d{3})(\s?\d{3})$/;
 
         if (phoneNumber.length === 0) {
-            $('#phoneNumber').addClass('is-invalid');
-            $('#phoneNumber').siblings('.invalid-feedback').remove();
-            $('#phoneNumber').after('<div class="invalid-feedback">Bạn chưa nhập "Số Điện Thoại"</div>').show();
+            $('#receiverPhone').addClass('is-invalid');
+            $('#receiverPhone').siblings('.invalid-feedback').remove();
+            $('#receiverPhone').after('<div class="invalid-feedback">Bạn chưa nhập "Số Điện Thoại"</div>').show();
         } else if (!phoneRegex.test(phoneNumber)) {
-            $('#phoneNumber').addClass('is-invalid');
-            $('#phoneNumber').siblings('.invalid-feedback').remove();
-            $('#phoneNumber').after('<div class="invalid-feedback">"Số Điện Thoại" không hợp lệ</div>').show();
+            $('#receiverPhone').addClass('is-invalid');
+            $('#receiverPhone').siblings('.invalid-feedback').remove();
+            $('#receiverPhone').after('<div class="invalid-feedback">"Số Điện Thoại" không hợp lệ</div>').show();
         } else {
-            $('#phoneNumber').removeClass('is-invalid');
-            $('#phoneNumber').siblings('.invalid-feedback').remove();
+            $('#receiverPhone').removeClass('is-invalid');
+            $('#receiverPhone').siblings('.invalid-feedback').remove();
         }
     });
 
@@ -104,20 +104,18 @@ $(document).ready(() => {
 
     //Check select paymentMethod
     $('input[type="checkbox"]').on('change', function () {
-        var $COD = $('#payment');
-        var $paypal = $('#paypal');
+        $('input[name="paymentMethod"]').not(this).prop('checked', false);
 
-        if ($COD.is(':checked') && $paypal.is(':checked')) {
-            $('.paypal').addClass('is-invalid');
-            $('.paypal').siblings('.invalid-feedback').remove();
-            $('.paypal').after('<div class="invalid-feedback">Hãy chọn một phương thức thanh toán duy nhất.</div>').show();
-        } else if (($COD.is(':checked') && !$paypal.is(':checked')) || (!$COD.is(':checked') && $paypal.is(':checked'))) {
-            $('.paypal').removeClass('is-invalid');
-            $('.paypal').siblings('.invalid-feedback').remove();
-        } else {
+        $cod = $('#payment');
+        $banking = $('#paypal');
+
+        if (!$cod.is(':checked') && !$banking.is(':checked')) {
             $('.paypal').addClass('is-invalid');
             $('.paypal').siblings('.invalid-feedback').remove();
             $('.paypal').after('<div class="invalid-feedback">Bạn chưa chọn phương thức thành toán.</div>').show();
+        } else {
+            $('.paypal').removeClass('is-invalid');
+            $('.paypal').siblings('.invalid-feedback').remove();
         }
     });
 
@@ -128,18 +126,10 @@ $(document).ready(() => {
         var formData = new FormData(document.getElementById('checkoutForm'));
         //mapping formData to array
         var object = {};
-        object['totalAmount'] = $('#totalPayment').text().replace(/[^\d.-]/g, '');
+        object['totalPrice'] = $('#totalPrice').text().replace(/[^\d.-]/g, '');
         object['quantity'] = $('.quantity').data('quantity');
 
-        formData.forEach((value, key) => {
-            if (key === 'payment') {
-                object['paymentMethod'] = 'COD';
-            } else if (key === 'paypal') {
-                object['paymentMethod'] = 'VNPAY';
-            } else {
-                object[key] = value;
-            }
-        });
+        formData.forEach((value, key) => object[key] = value);
         //check valid data 
         var inValid = false;
 

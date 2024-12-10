@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import vn.toilamdev.bookmarket.constant.SystemConstant;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.Order;
@@ -40,20 +41,18 @@ public class OrderService {
     public Order createNewOrder(OrderDTO orderDTO, User user) {
         // Mapping Data from OrderDTO to Order
         Order order = OrderMapper.mappingOrderDTO(orderDTO);
+        List<OrderItem> orderItems = new ArrayList<>();
 
         order.setCreatedAt(new Date(System.currentTimeMillis()));
-
-        order.setShippingMethod("GHTK");
-        order.setShippingStatus("In Transit");
-
-        if (order.getPaymentMethod().equals("VNPAY")) {
-            order.setPaymentStatus("Paid");
-        } else {
-            order.setPaymentStatus("UnPaid");
-        }
+        order.setStatus(SystemConstant.ORDER_STATUS_PENDING);
         order.setUser(user);
+        if (order.getPaymentMethod().equals(SystemConstant.PAYMENT_METHOD_BANKING)) {
+            order.setPaymentStatus(SystemConstant.PAYMENT_STATUS_SUCCEED);
+        } else {
+            order.setPaymentStatus(SystemConstant.PAYMENT_STATUS_UNPAID);
+            order.setPaymentRef(SystemConstant.PAYMENT_REF);
+        }
 
-        List<OrderItem> orderItems = new ArrayList<>();
         if (orderDTO.getBookId() == 0) {
 
             for (CartItem cartItem : user.getCart().getCartItems()) {
@@ -84,7 +83,7 @@ public class OrderService {
             OrderItem orderItem = new OrderItem();
             orderItem.setBook(book);
             orderItem.setQuantity(orderDTO.getQuantity());
-            orderItem.setTotalPrice(orderDTO.getTotalAmount());
+            orderItem.setTotalPrice(orderDTO.getTotalPrice());
             orderItem.setOrder(order);
 
             // Add OrderItem to List

@@ -12,13 +12,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "orders")
 public class Order extends AbstractDomain {
-    private double totalAmount;
-    private String shippingStatus; // 0 or 1 => In Transit | Delivered
+    private double totalPrice;
+    private String status; // COMPLETE | PENDING
     private String shippingAddress;
-    private String shippingMethod;
-    private String paymentMethod; // COD | VN-PAY
-    private String paymentStatus; // 0 or 1 => Unpaid | Paid
-    private String phoneNumber;
+    private String paymentMethod; // COD | BANKING
+    private String paymentStatus; // UNPAID | SUCCEED | FAILED
+    private String paymentRef;
+    private String receiverPhone;
     private String receiverName;
     private String receiverEmail;
     private String note;
@@ -30,20 +30,20 @@ public class Order extends AbstractDomain {
     @OneToMany(mappedBy = OrderItem_.ORDER, cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
-    public Double getTotalAmount() {
-        return totalAmount;
+    public double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public String getShippingStatus() {
-        return shippingStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setShippingStatus(String shippingStatus) {
-        this.shippingStatus = shippingStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getShippingAddress() {
@@ -52,14 +52,6 @@ public class Order extends AbstractDomain {
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
-    }
-
-    public String getShippingMethod() {
-        return shippingMethod;
-    }
-
-    public void setShippingMethod(String shippingMethod) {
-        this.shippingMethod = shippingMethod;
     }
 
     public String getPaymentMethod() {
@@ -78,12 +70,20 @@ public class Order extends AbstractDomain {
         this.paymentStatus = paymentStatus;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPaymentRef() {
+        return paymentRef;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPaymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
     public String getReceiverName() {

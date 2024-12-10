@@ -9,10 +9,10 @@ public class OrderMapper {
         order.setReceiverName(orderDTO.getReceiverName());
         order.setReceiverEmail(orderDTO.getReceiverEmail());
         order.setShippingAddress(orderDTO.getShippingAddress());
-        order.setPhoneNumber(orderDTO.getPhoneNumber());
+        order.setReceiverPhone(orderDTO.getReceiverPhone());
         order.setPaymentMethod(orderDTO.getPaymentMethod());
         order.setNote(orderDTO.getNote());
-        order.setTotalAmount(orderDTO.getTotalAmount());
+        order.setTotalPrice(orderDTO.getTotalPrice());
         return order;
     }
 }

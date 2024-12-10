@@ -3,10 +3,10 @@ package vn.toilamdev.bookmarket.dto;
 public class OrderDTO {
     private String receiverName;
     private String shippingAddress;
-    private String phoneNumber;
+    private String receiverPhone;
     private String receiverEmail;
     private String note;
-    private Double totalAmount;
+    private Double totalPrice;
     private int quantity;
     private long bookId;
     private String paymentMethod;
@@ -27,12 +27,12 @@ public class OrderDTO {
         this.shippingAddress = shippingAddress;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getReceiverPhone() {
+        return receiverPhone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
     public String getReceiverEmail() {
@@ -51,12 +51,12 @@ public class OrderDTO {
         this.note = note;
     }
 
-    public Double getTotalAmount() {
-        return totalAmount;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public int getQuantity() {

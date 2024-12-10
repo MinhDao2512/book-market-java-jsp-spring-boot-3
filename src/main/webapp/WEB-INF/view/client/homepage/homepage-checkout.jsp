@@ -67,26 +67,26 @@
             <section class="checkout spad">
                 <div class="container">
                     <div class="checkout__form">
-                        <h4>Thông Tin Đơn Hàng</h4>
+                        <h4>Thông Tin Người Nhận</h4>
                         <form id="checkoutForm">
                             <div class="row">
                                 <div class="col-lg-7 col-md-6">
                                     <div class="checkout__input">
-                                        <p>Tên người nhận hàng<span>*</span></p>
+                                        <p>Tên người nhận<span>*</span></p>
                                         <input type="text" value="${currentUser.fullName}" style="color: #7fad39;"
                                             id="receiverName" name="receiverName" class="required">
                                     </div>
                                     <div class="checkout__input">
-                                        <p>Địa chỉ nhận hàng<span>*</span></p>
+                                        <p>Địa chỉ người nhận<span>*</span></p>
                                         <input type="text" value="${currentUser.address}" style="color: #7fad39;"
                                             id="shippingAddress" name="shippingAddress" class="required">
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="checkout__input">
-                                                <p>Điện thoại nhận hàng<span>*</span></p>
+                                                <p>Số điện thoại<span>*</span></p>
                                                 <input type="text" value="${currentUser.phoneNumber}"
-                                                    style="color: #7fad39;" id="phoneNumber" name="phoneNumber"
+                                                    style="color: #7fad39;" id="receiverPhone" name="receiverPhone"
                                                     class="required">
                                             </div>
                                         </div>
@@ -103,11 +103,38 @@
                                         <input type="text" style="color: #7fad39;" id="note" name="note">
                                     </div>
                                     <div class="checkout__input">
+                                        <p>Hình thức thanh toán<span>*</span></p>
+                                        <div class="checkout__input__checkbox">
+                                            <label for="payment">
+                                                <i class="fa fa-money" aria-hidden="true"></i>
+                                                Thanh toán khi nhận hàng
+                                                <input type="checkbox" id="payment" name="paymentMethod" value="COD"
+                                                    checked>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div class="checkout__input__checkbox">
+                                            <label for="paypal">
+                                                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                                Thanh toán bằng ví VNPAY
+                                                <input type="checkbox" id="paypal" name="paymentMethod" value="BANKING">
+                                                <span class="checkmark paypal required"></span>
+                                                <div class="invalid-feedback">
+                                                    Bạn chưa chọn phương thức thanh toán.
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="checkout__input">
                                         <c:if test="${not empty bookId}">
-                                            <a href="/shop/${bookId}" class="btn btn-secondary">QUAY LẠI</a>
+                                            <a href="/shop/${bookId}" style="color:#dd2222;">
+                                                <i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại sản phẩm
+                                            </a>
                                         </c:if>
                                         <c:if test="${empty bookId}">
-                                            <a href="/cart-detail" class="btn btn-secondary">QUAY LẠI</a>
+                                            <a href="/cart-detail" style="color: #dd2222;">
+                                                <i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại giỏ hàng
+                                            </a>
                                         </c:if>
                                     </div>
                                 </div>
@@ -137,7 +164,7 @@
                                             </c:forEach>
                                         </ul>
                                         <div class="checkout__order__total">Tổng thanh toán
-                                            <span id="totalPayment">
+                                            <span id="totalPrice">
                                                 <c:if test="${empty totalPrice}">
                                                     <fmt:formatNumber type="number"
                                                         value="${sessionScope.totalCartPrice}" /> đ
@@ -146,23 +173,6 @@
                                                     <fmt:formatNumber type="number" value="${totalPrice}" /> đ
                                                 </c:if>
                                             </span>
-                                        </div>
-                                        <div class="checkout__input__checkbox">
-                                            <label for="payment">
-                                                Thanh toán khi nhận hàng
-                                                <input type="checkbox" id="payment" name="payment">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </div>
-                                        <div class="checkout__input__checkbox">
-                                            <label for="paypal">
-                                                Thanh toán qua VNPAY
-                                                <input type="checkbox" id="paypal" name="paypal">
-                                                <span class="checkmark paypal required"></span>
-                                                <div class="invalid-feedback">
-                                                    Bạn chưa chọn phương thức thanh toán.
-                                                </div>
-                                            </label>
                                         </div>
                                         <button type="submit" class="btn btn-success" id="btnChecout">ĐẶT HÀNG</button>
                                         <input type="hidden" value="${bookId}" id="bookId" name="bookId" />
