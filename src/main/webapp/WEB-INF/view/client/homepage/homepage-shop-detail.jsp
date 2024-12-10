@@ -106,7 +106,8 @@
                                     <a href="/login" class="primary-btn">Mua ngay</a>
                                 </c:if>
                                 <c:if test="${not empty sessionScope.cartId}">
-                                    <a href="/checkout" class="primary-btn">Mua ngay</a>
+                                    <a href="#" class="primary-btn" data-book-id="${currentBook.id}" id="buy-now">Mua
+                                        ngay</a>
                                 </c:if>
                                 <a href="#" class="primary-btn btnAddToCart" data-book-id="${currentBook.id}">Thêm vào
                                     giỏ</a>
@@ -203,6 +204,18 @@
             <script src="/client/js/main.js"></script>
             <!--Jquery Toast Plugin-->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#buy-now').on('click', function (event) {
+                        event.preventDefault();
+
+                        var quantity = $('#bookCount').val();
+                        var bookId = $(this).data('book-id');
+
+                        window.location.href = '/checkout/buy-now?bookId=' + bookId + '&quantity=' + quantity;
+                    });
+                });
+            </script>
         </body>
 
         </html>

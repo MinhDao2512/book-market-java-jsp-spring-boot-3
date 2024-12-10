@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "order_items")
 public class OrderItem extends AbstractDomain {
     private Integer quantity;
-    private Double priceAtTimeOfOrder;
+    private Double totalPrice;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -27,12 +27,12 @@ public class OrderItem extends AbstractDomain {
         this.quantity = quantity;
     }
 
-    public Double getPriceAtTimeOfOrder() {
-        return priceAtTimeOfOrder;
+    public Double getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setPriceAtTimeOfOrder(Double priceAtTimeOfOrder) {
-        this.priceAtTimeOfOrder = priceAtTimeOfOrder;
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public Book getBook() {
@@ -50,5 +50,4 @@ public class OrderItem extends AbstractDomain {
     public void setOrder(Order order) {
         this.order = order;
     }
-
 }

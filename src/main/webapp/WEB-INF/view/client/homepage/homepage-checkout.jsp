@@ -102,6 +102,14 @@
                                         <p>Ghi chú<span>*</span></p>
                                         <input type="text" style="color: #7fad39;" id="note" name="note">
                                     </div>
+                                    <div class="checkout__input">
+                                        <c:if test="${not empty bookId}">
+                                            <a href="/shop/${bookId}" class="btn btn-secondary">QUAY LẠI</a>
+                                        </c:if>
+                                        <c:if test="${empty bookId}">
+                                            <a href="/cart-detail" class="btn btn-secondary">QUAY LẠI</a>
+                                        </c:if>
+                                    </div>
                                 </div>
                                 <div class="col-lg-5 col-md-6">
                                     <div class="checkout__order">
@@ -120,7 +128,7 @@
                                                             ${cartItem.book.title}
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <span>
+                                                    <span class="quantity" data-quantity="${cartItem.quantity}">
                                                         <fmt:formatNumber type="number"
                                                             value="${cartItem.book.price}" /> đ x
                                                         ${cartItem.quantity}
@@ -130,8 +138,13 @@
                                         </ul>
                                         <div class="checkout__order__total">Tổng thanh toán
                                             <span id="totalPayment">
-                                                <fmt:formatNumber type="number"
-                                                    value="${sessionScope.totalCartPrice}" /> đ
+                                                <c:if test="${empty totalPrice}">
+                                                    <fmt:formatNumber type="number"
+                                                        value="${sessionScope.totalCartPrice}" /> đ
+                                                </c:if>
+                                                <c:if test="${not empty totalPrice}">
+                                                    <fmt:formatNumber type="number" value="${totalPrice}" /> đ
+                                                </c:if>
                                             </span>
                                         </div>
                                         <div class="checkout__input__checkbox">
@@ -151,7 +164,8 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <button type="submit" class="site-btn" id="btnChecout">ĐẶT HÀNG</button>
+                                        <button type="submit" class="btn btn-success" id="btnChecout">ĐẶT HÀNG</button>
+                                        <input type="hidden" value="${bookId}" id="bookId" name="bookId" />
                                     </div>
                                 </div>
                             </div>

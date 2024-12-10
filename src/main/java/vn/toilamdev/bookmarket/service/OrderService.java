@@ -6,10 +6,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.Order;
 import vn.toilamdev.bookmarket.domain.OrderItem;
 import vn.toilamdev.bookmarket.domain.User;
+import vn.toilamdev.bookmarket.dto.OrderDTO;
+import vn.toilamdev.bookmarket.mapper.OrderMapper;
+import vn.toilamdev.bookmarket.repository.BookRepository;
 import vn.toilamdev.bookmarket.repository.CartItemRepository;
 import vn.toilamdev.bookmarket.repository.CartRepository;
 import vn.toilamdev.bookmarket.repository.OrderRepository;
@@ -19,19 +23,24 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
+    private final BookRepository bookRepository;
 
     public OrderService(OrderRepository orderRepository, CartRepository cartRepository,
-            CartItemRepository cartItemRepository) {
+            CartItemRepository cartItemRepository, BookRepository bookRepository) {
         this.orderRepository = orderRepository;
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
+        this.bookRepository = bookRepository;
     }
 
     public Order createOrUpdateOrder(Order order) {
         return this.orderRepository.save(order);
     }
 
-    public Order createNewOrder(Order order, User user) {
+    public Order createNewOrder(OrderDTO orderDTO, User user) {
+        // Mapping Data from OrderDTO to Order
+        Order order = OrderMapper.mappingOrderDTO(orderDTO);
+
         order.setCreatedAt(new Date(System.currentTimeMillis()));
 
         order.setShippingMethod("GHTK");
@@ -45,26 +54,45 @@ public class OrderService {
         order.setUser(user);
 
         List<OrderItem> orderItems = new ArrayList<>();
+        if (orderDTO.getBookId() == 0) {
 
-        for (CartItem cartItem : user.getCart().getCartItems()) {
-            // Set Data for Order Item
+            for (CartItem cartItem : user.getCart().getCartItems()) {
+                // Set Data for Order Item
+                OrderItem orderItem = new OrderItem();
+                orderItem.setBook(cartItem.getBook());
+                orderItem.setQuantity(cartItem.getQuantity());
+                orderItem.setTotalPrice(cartItem.getTotalPrice());
+                orderItem.setOrder(order);
+
+                // Delete cart item
+                this.cartItemRepository.deleteById(cartItem.getId());
+
+                // Add Order Item to Order
+                orderItems.add(orderItem);
+            }
+            order.setOrderItems(orderItems);
+
+            // Update Cart
+            user.getCart().setTotalPrice(0);
+            user.getCart().setCartItems(null);
+            this.cartRepository.save(user.getCart());
+        } else {
+            // Get Book By Id
+            Book book = this.bookRepository.findById(orderDTO.getBookId());
+
+            // Set Data for OrderItem
             OrderItem orderItem = new OrderItem();
-            orderItem.setBook(cartItem.getBook());
-            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setBook(book);
+            orderItem.setQuantity(orderDTO.getQuantity());
+            orderItem.setTotalPrice(orderDTO.getTotalAmount());
             orderItem.setOrder(order);
 
-            // Delete cart item
-            this.cartItemRepository.deleteById(cartItem.getId());
-
-            // Add Order Item to Order
+            // Add OrderItem to List
             orderItems.add(orderItem);
-        }
-        order.setOrderItems(orderItems);
 
-        // Update Cart
-        user.getCart().setTotalPrice(0);
-        user.getCart().setCartItems(null);
-        this.cartRepository.save(user.getCart());
+            // Set List OrderItems for Order
+            order.setOrderItems(orderItems);
+        }
 
         return this.orderRepository.save(order);
     }

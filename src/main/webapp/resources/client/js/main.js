@@ -338,5 +338,6 @@
             document.getElementById('logoutForm').submit();
         }
     });
+
 })(jQuery);
 

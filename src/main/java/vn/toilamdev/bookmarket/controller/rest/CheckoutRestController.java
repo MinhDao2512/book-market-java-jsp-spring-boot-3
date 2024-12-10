@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import vn.toilamdev.bookmarket.domain.Order;
 import vn.toilamdev.bookmarket.domain.User;
+import vn.toilamdev.bookmarket.dto.OrderDTO;
 import vn.toilamdev.bookmarket.service.OrderService;
 import vn.toilamdev.bookmarket.service.UserService;
 
@@ -30,16 +31,19 @@ public class CheckoutRestController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> proceedToPayment(Model model, @RequestBody Order order, HttpServletRequest request) {
+    public ResponseEntity<Object> proceedToPayment(Model model, @RequestBody OrderDTO orderDTO,
+            HttpServletRequest request) {
         HttpSession session = request.getSession();
         long userId = (long) session.getAttribute("id");
         User currentUser = this.userService.getUserById(userId);
 
-        Order newOrder = this.orderService.createNewOrder(order, currentUser);
+        Order newOrder = this.orderService.createNewOrder(orderDTO, currentUser);
 
         if (newOrder != null) {
-            session.setAttribute("totalCartPrice", 0);
-            session.setAttribute("cartCount", 0);
+            if (orderDTO.getBookId() == 0) {
+                session.setAttribute("totalCartPrice", 0);
+                session.setAttribute("cartCount", 0);
+            }
             return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("message", "success"));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "error"));

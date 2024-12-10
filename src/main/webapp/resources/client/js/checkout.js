@@ -129,6 +129,8 @@ $(document).ready(() => {
         //mapping formData to array
         var object = {};
         object['totalAmount'] = $('#totalPayment').text().replace(/[^\d.-]/g, '');
+        object['quantity'] = $('.quantity').data('quantity');
+
         formData.forEach((value, key) => {
             if (key === 'payment') {
                 object['paymentMethod'] = 'COD';
