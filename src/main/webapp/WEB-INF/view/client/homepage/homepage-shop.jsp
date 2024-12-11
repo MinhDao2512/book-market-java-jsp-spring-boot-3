@@ -125,7 +125,9 @@
                                             </div>
                                             <div class="product__item__text">
                                                 <h6><a href="/shop/${book.id}">${book.title}</a></h6>
-                                                <h5>${book.price}</h5>
+                                                <h5>
+                                                    <fmt:formatNumber type="number" value="${book.price}" /> đ
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>

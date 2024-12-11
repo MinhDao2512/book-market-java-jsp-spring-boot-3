@@ -169,13 +169,12 @@ $(document).ready(() => {
             contentType: "application/json; charset=utf-8",
             processData: false,
             success: function (response, textStatus, xhr) {
-                $.toast({
-                    heading: 'Đặt hàng:',
-                    text: 'Bạn đã đặt hàng thành công.',
-                    position: 'top-right',
-                    icon: 'success'
-                })
-                window.location.href = "/shop";
+                var dataResponse = JSON.parse(xhr.responseText).data;
+                if (dataResponse['paymentMethod'] === 'BANKING') {
+                    window.location.href = dataResponse['vnpUrl'];
+                } else {
+                    window.location.href = "/thanks";
+                }
             },
             error: function (xhr, status, error) {
                 $.toast({

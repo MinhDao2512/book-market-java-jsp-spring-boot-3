@@ -1,14 +1,10 @@
 package vn.toilamdev.bookmarket.test;
 
+import java.util.UUID;
+
 public class TestUtil {
     public static void main(String[] args) {
-        String email = "nguyenminhdao@gmail.com";
-        String[] res = email.split("@");
-
-        for (String x : res) {
-            System.out.println(x);
-        }
-
-        System.out.println(res[0]);
+        final String uuid = UUID.randomUUID().toString().replace("-", "");
+        System.out.println(uuid);
     }
 }

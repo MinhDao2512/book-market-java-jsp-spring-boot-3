@@ -93,7 +93,9 @@
                                     <i class="fa fa-star-half-o"></i>
                                     <span>(18 đánh giá)</span>
                                 </div>
-                                <div class="product__details__price">${currentBook.price}</div>
+                                <div class="product__details__price">
+                                    <fmt:formatNumber type="number" value="${currentBook.price}" /> đ
+                                </div>
                                 <p><b>Đăng bán bởi: </b> ${currentBook.createdBy}</p>
                                 <div class="product__details__quantity">
                                     <div class="quantity">

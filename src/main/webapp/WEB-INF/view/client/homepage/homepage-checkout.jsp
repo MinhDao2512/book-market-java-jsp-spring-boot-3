@@ -119,9 +119,6 @@
                                                 Thanh toán bằng ví VNPAY
                                                 <input type="checkbox" id="paypal" name="paymentMethod" value="BANKING">
                                                 <span class="checkmark paypal required"></span>
-                                                <div class="invalid-feedback">
-                                                    Bạn chưa chọn phương thức thanh toán.
-                                                </div>
                                             </label>
                                         </div>
                                     </div>

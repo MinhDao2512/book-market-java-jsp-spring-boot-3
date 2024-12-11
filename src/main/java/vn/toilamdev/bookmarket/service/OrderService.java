@@ -38,7 +38,11 @@ public class OrderService {
         return this.orderRepository.save(order);
     }
 
-    public Order createNewOrder(OrderDTO orderDTO, User user) {
+    public Order getOrderByPaymentRef(String paymentRef) {
+        return this.orderRepository.findByPaymentRef(paymentRef);
+    }
+
+    public Order createNewOrder(OrderDTO orderDTO, User user, String uuid) {
         // Mapping Data from OrderDTO to Order
         Order order = OrderMapper.mappingOrderDTO(orderDTO);
         List<OrderItem> orderItems = new ArrayList<>();
@@ -46,12 +50,9 @@ public class OrderService {
         order.setCreatedAt(new Date(System.currentTimeMillis()));
         order.setStatus(SystemConstant.ORDER_STATUS_PENDING);
         order.setUser(user);
-        if (order.getPaymentMethod().equals(SystemConstant.PAYMENT_METHOD_BANKING)) {
-            order.setPaymentStatus(SystemConstant.PAYMENT_STATUS_SUCCEED);
-        } else {
-            order.setPaymentStatus(SystemConstant.PAYMENT_STATUS_UNPAID);
-            order.setPaymentRef(SystemConstant.PAYMENT_REF);
-        }
+        order.setPaymentStatus(SystemConstant.PAYMENT_STATUS_UNPAID);
+        order.setPaymentRef(
+                order.getPaymentMethod().equals(SystemConstant.PAYMENT_METHOD_COD) ? SystemConstant.PAYMENT_REF : uuid);
 
         if (orderDTO.getBookId() == 0) {
 
@@ -95,4 +96,5 @@ public class OrderService {
 
         return this.orderRepository.save(order);
     }
+
 }
