@@ -43,54 +43,45 @@
             <jsp:include page="../layout/hero-select-another.jsp" />
             <!-- Hero Section End -->
 
-            <!-- Breadcrumb Section Begin -->
-            <section class="breadcrumb-section set-bg" data-setbg="/client/img/breadcrumb.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="breadcrumb__text">
-                                <h2>Liên Hệ</h2>
-                                <div class="breadcrumb__option">
-                                    <a href="/">Trang chủ</a>
-                                    <span>Liên hệ</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Breadcrumb Section End -->
-
             <!-- Contact Section Begin -->
             <section class="contact spad">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                            <div class="contact__widget">
-                                <span class="icon_phone"></span>
-                                <h4>Điện thoại</h4>
-                                <p>(+84) 942 236 357</p>
-                            </div>
+                        <div class="col-lg-12 text-center">
+                            <h4 style="color: #C5A992;">
+                                <strong>Liên hệ</strong>
+                            </h4>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                            <div class="contact__widget">
-                                <span class="icon_pin_alt"></span>
-                                <h4>Địa chỉ</h4>
-                                <p>Triệu Tài, Triệu Phong, Quảng Trị</p>
+                    </div>
+                    <div class="filter__item mt-3">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                                <div class="contact__widget">
+                                    <span class="icon_phone"></span>
+                                    <h4>Điện thoại</h4>
+                                    <p>(+84) 942 236 357</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                            <div class="contact__widget">
-                                <span class="icon_clock_alt"></span>
-                                <h4>Thời gian mở cửa</h4>
-                                <p>09:00 đến 23:00</p>
+                            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                                <div class="contact__widget">
+                                    <span class="icon_pin_alt"></span>
+                                    <h4>Địa chỉ</h4>
+                                    <p>Triệu Tài, Triệu Phong, Quảng Trị</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-                            <div class="contact__widget">
-                                <span class="icon_mail_alt"></span>
-                                <h4>Email</h4>
-                                <p>nguyenminhdao002@gmail.com</p>
+                            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                                <div class="contact__widget">
+                                    <span class="icon_clock_alt"></span>
+                                    <h4>Thời gian mở cửa</h4>
+                                    <p>09:00 đến 23:00</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 text-center">
+                                <div class="contact__widget">
+                                    <span class="icon_mail_alt"></span>
+                                    <h4>Email</h4>
+                                    <p>nguyenminhdao002@gmail.com</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -101,8 +92,9 @@
             <!-- Map Begin -->
             <div class="map">
                 <iframe
-                    src="https://www.google.com/maps/place/97+%C4%90.+Man+Thi%E1%BB%87n,+Hi%E1%BB%87p+Ph%C3%BA,+Qu%E1%BA%ADn+9,+H%E1%BB%93+Ch%C3%AD+Minh,+Vietnam/@10.8478802,106.7843644,17z/data=!3m1!4b1!4m6!3m5!1s0x3175272a49301c55:0xde097a8add7a6926!8m2!3d10.8478749!4d106.7869393!16s%2Fg%2F11tsh4vv47?entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D"
-                    height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.521541680388!2d106.78436437451803!3d10.847880157872723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175272a49301c55%3A0xde097a8add7a6926!2zOTcgxJAuIE1hbiBUaGnhu4duLCBIaeG7h3AgUGjDuiwgUXXhuq1uIDksIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1734030122734!5m2!1sen!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
                 <div class="map-inside">
                     <i class="icon_pin"></i>
                     <div class="inside-widget">
@@ -135,7 +127,7 @@
                                 <input type="text" placeholder="Địa chỉ Email">
                             </div>
                             <div class="col-lg-12 text-center">
-                                <textarea placeholder="Your message"></textarea>
+                                <textarea placeholder="Nội dung"></textarea>
                                 <button type="submit" class="site-btn">GỬI LỜI NHẮN</button>
                             </div>
                         </div>

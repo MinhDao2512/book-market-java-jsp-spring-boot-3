@@ -9,7 +9,7 @@
                         <div class="footer__about">
                             <div class="footer__about__logo">
                                 <a href="/">
-                                    <h2 style="color: #7fad39; font-weight: bold">
+                                    <h2 style="color: #C5A992; font-weight: bold">
                                         <i class="fa fa-book"></i> SWAP STORY
                                     </h2>
                                 </a>

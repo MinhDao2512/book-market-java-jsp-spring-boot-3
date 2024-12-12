@@ -129,7 +129,7 @@ ol {
 	right: 0;
 	height: 4px;
 	width: 80px;
-	background: #7fad39;
+	background: #C5A992;
 	content: "";
 	margin: 0 auto;
 }
@@ -141,7 +141,7 @@ ol {
 }
 
 .spad {
-	padding-top: 100px;
+	padding-top: 10px;
 	padding-bottom: 100px;
 }
 
@@ -167,8 +167,9 @@ ol {
 	color: #ffffff;
 	text-transform: uppercase;
 	font-weight: 700;
-	background: #7fad39;
+	background: #C5A992;
 	letter-spacing: 2px;
+	border-radius: 25px;
 }
 
 .site-btn {
@@ -178,8 +179,9 @@ ol {
 	text-transform: uppercase;
 	display: inline-block;
 	padding: 13px 30px 12px;
-	background: #7fad39;
+	background: #C5A992;
 	border: none;
+	border-radius: 25px;
 }
 
 /* Preloder */
@@ -460,7 +462,7 @@ ol {
 }
 
 .header__menu ul li.active a {
-	color: #7fad39;
+	color: #C5A992;
 }
 
 .header__menu ul li:hover .header__menu__dropdown {
@@ -470,7 +472,7 @@ ol {
 }
 
 .header__menu ul li:hover>a {
-	color: #7fad39;
+	color: #C5A992;
 }
 
 .header__menu ul li:last-child {
@@ -587,10 +589,11 @@ ol {
 }
 
 .hero__categories__all {
-	background: #7fad39;
+	background: #C5A992;
 	position: relative;
 	padding: 10px 25px 10px 40px;
 	cursor: pointer;
+	border-radius: 25px;
 }
 
 .hero__categories__all i {
@@ -620,6 +623,7 @@ ol {
 	padding-left: 40px;
 	padding-top: 10px;
 	padding-bottom: 12px;
+	border-radius: 25px;
 }
 
 .hero__categories ul li {
@@ -644,6 +648,7 @@ ol {
 	border: 1px solid #ebebeb;
 	position: relative;
 	float: left;
+	border-radius: 25px;
 }
 
 .hero__search__form form .hero__search__categories {
@@ -700,7 +705,7 @@ ol {
 
 .hero__search__phone__icon {
 	font-size: 18px;
-	color: #7fad39;
+	color: #C5A992;
 	height: 50px;
 	width: 50px;
 	background: #f5f5f5;
@@ -1046,14 +1051,14 @@ ol {
 
 .breadcrumb__text h2 {
 	font-size: 46px;
-	color: #ffffff;
+	color: black;
 	font-weight: 700;
 }
 
 .breadcrumb__option a {
 	display: inline-block;
 	font-size: 16px;
-	color: #ffffff;
+	color: black;
 	font-weight: 700;
 	margin-right: 20px;
 	position: relative;
@@ -1065,14 +1070,14 @@ ol {
 	top: 13px;
 	height: 1px;
 	width: 10px;
-	background: #ffffff;
+	background: black;
 	content: "";
 }
 
 .breadcrumb__option span {
 	display: inline-block;
 	font-size: 16px;
-	color: #ffffff;
+	color: black;
 }
 
 /*---------------------
@@ -1254,8 +1259,8 @@ ol {
 -----------------------*/
 
 .product {
-	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 .product__discount {
@@ -1660,7 +1665,7 @@ ol {
 -----------------------*/
 
 .product-details {
-	padding-top: 80px;
+	padding-top: 10px;
 }
 
 .product__details__pic__item {
@@ -2682,6 +2687,7 @@ ol {
 	color: #1c1c1c;
 	height: 46px;
 	border: 1px solid #ededed;
+	border-radius: 25px;
 }
 
 .footer__widget form input::placeholder {
@@ -2748,7 +2754,7 @@ ol {
 -----------------------*/
 
 .contact {
-	padding-top: 80px;
+	padding-top: 10px;
 	padding-bottom: 50px;
 }
 
@@ -2758,7 +2764,7 @@ ol {
 
 .contact__widget span {
 	font-size: 36px;
-	color: #7fad39;
+	color: #C5A992;
 }
 
 .contact__widget h4 {
@@ -2797,7 +2803,7 @@ ol {
 
 .map .map-inside i {
 	font-size: 48px;
-	color: #7fad39;
+	color: #C5A992;
 	position: absolute;
 	bottom: -75px;
 	left: 50%;
@@ -2859,8 +2865,8 @@ ol {
 }
 
 .contact-form {
-	padding-top: 80px;
-	padding-bottom: 80px;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 .contact-form form input {

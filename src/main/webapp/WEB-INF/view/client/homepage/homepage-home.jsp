@@ -47,32 +47,45 @@
             <!-- Categories Section Begin -->
             <section class="categories">
                 <div class="container">
+                    <div class="section-title">
+                        <h2>Thể Loại</h2>
+                    </div>
                     <div class="row">
                         <div class="categories__slider owl-carousel">
                             <div class="col-lg-3">
-                                <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-1.jpg">
-                                    <h5><a href="#">Truyện Tranh</a></h5>
+                                <div class="categories__item set-bg" data-setbg="/images/category/truyen-tranh.jpg">
                                 </div>
+                                <h5 class="text-center mt-3">
+                                    <a href="#"> <strong style="color: black;"> TRUYỆN TRANH </strong> </a>
+                                </h5>
                             </div>
                             <div class="col-lg-3">
-                                <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-2.jpg">
-                                    <h5><a href="#">Trinh Thám</a></h5>
+                                <div class="categories__item set-bg" data-setbg="/images/category/trinh-tham.jpg">
                                 </div>
+                                <h5 class="text-center mt-3">
+                                    <a href="#"> <strong style="color: black;"> TRINH THÁM </strong> </a>
+                                </h5>
                             </div>
                             <div class="col-lg-3">
-                                <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-3.jpg">
-                                    <h5><a href="#">Tâm Lý Học</a></h5>
+                                <div class="categories__item set-bg" data-setbg="/images/category/khoa-hoc.jpg">
                                 </div>
+                                <h5 class="text-center mt-3">
+                                    <a href="#"> <strong style="color: black;"> KHOA HỌC </strong> </a>
+                                </h5>
                             </div>
                             <div class="col-lg-3">
-                                <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-4.jpg">
-                                    <h5><a href="#">Kinh Dị</a></h5>
+                                <div class="categories__item set-bg" data-setbg="/images/category/kinh-di.jpg">
                                 </div>
+                                <h5 class="text-center mt-3">
+                                    <a href="#"> <strong style="color: black;"> KINH DỊ </strong> </a>
+                                </h5>
                             </div>
                             <div class="col-lg-3">
-                                <div class="categories__item set-bg" data-setbg="/client/img/categories/cat-5.jpg">
-                                    <h5><a href="#">Lãng Mạn</a></h5>
+                                <div class="categories__item set-bg" data-setbg="/images/category/lang-man.jpg">
                                 </div>
+                                <h5 class="text-center mt-3">
+                                    <a href="#"> <strong style="color: black;"> LÃNG MẠN </strong> </a>
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -140,12 +153,11 @@
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-calendar-o"></i> 13/12/2024</li>
                                         <li><i class="fa fa-comment-o"></i> 5</li>
                                     </ul>
-                                    <h5><a href="#">Cooking tips make cooking simple</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
+                                    <h5><a href="#">Các mẹo giữ cho sách của bạn luôn mới</a></h5>
+                                    <p>TÔI LÀM DEV</p>
                                 </div>
                             </div>
                         </div>
@@ -156,12 +168,11 @@
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-calendar-o"></i> 13/12/2024</li>
                                         <li><i class="fa fa-comment-o"></i> 5</li>
                                     </ul>
-                                    <h5><a href="#">6 ways to prepare breakfast for 30</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
+                                    <h5><a href="#">6 cách để bắt đầu thói quen đọc sách</a></h5>
+                                    <p>TÔI LÀM DEV</p>
                                 </div>
                             </div>
                         </div>
@@ -172,12 +183,12 @@
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-calendar-o"></i> 13/12/2024</li>
                                         <li><i class="fa fa-comment-o"></i> 5</li>
                                     </ul>
-                                    <h5><a href="#">Visit the clean farm in the US</a></h5>
-                                    <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam
-                                        quaerat </p>
+                                    <h5><a href="#">Top 10 điều học được khi đọc cuốn sách "Thay đổi thói quen tí
+                                            hon"</a></h5>
+                                    <p>TÔI LÀM DEV</p>
                                 </div>
                             </div>
                         </div>

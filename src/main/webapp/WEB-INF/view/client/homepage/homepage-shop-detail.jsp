@@ -46,110 +46,109 @@
             <jsp:include page="../layout/hero-select-another.jsp" />
             <!-- Hero Section End -->
 
-            <!-- Breadcrumb Section Begin -->
-            <section class="breadcrumb-section set-bg" data-setbg="/client/img/breadcrumb.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="breadcrumb__text">
-                                <h2>Chi Tiết Sản Phẩm</h2>
-                                <div class="breadcrumb__option">
-                                    <a href="/">Trang chủ</a>
-                                    <a href="/shop">Sản phẩm</a>
-                                    <span>Chi tiết sản phẩm</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Breadcrumb Section End -->
-
-            <!-- Product Details Section Begin -->
             <section class="product-details spad">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="product__details__pic">
-                                <div class="product__details__pic__item">
-                                    <img class="product__details__pic__item--large"
-                                        src="/images/book/${currentBook.bookImages[0].name}" alt="">
-                                </div>
-                                <div class="product__details__pic__slider owl-carousel">
-                                    <c:forEach var="bookImage" items="${currentBook.bookImages}">
-                                        <img src="/images/book/${bookImage.name}" alt="">
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <div class="product__details__text">
-                                <h3>${currentBook.title}</h3>
-                                <div class="product__details__rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-half-o"></i>
-                                    <span>(18 đánh giá)</span>
-                                </div>
-                                <div class="product__details__price">
-                                    <fmt:formatNumber type="number" value="${currentBook.price}" /> đ
-                                </div>
-                                <p><b>Đăng bán bởi: </b> ${currentBook.createdBy}</p>
-                                <div class="product__details__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" value="1" id="bookCount">
-                                        </div>
-                                    </div>
-                                </div>
-                                <c:if test="${empty sessionScope.cartId}">
-                                    <a href="/login" class="primary-btn">Mua ngay</a>
-                                </c:if>
-                                <c:if test="${not empty sessionScope.cartId}">
-                                    <a href="#" class="primary-btn" data-book-id="${currentBook.id}" id="buy-now">Mua
-                                        ngay</a>
-                                </c:if>
-                                <a href="#" class="primary-btn btnAddToCart" data-book-id="${currentBook.id}">Thêm vào
-                                    giỏ</a>
-                                <ul>
-                                    <h3>Thông tin chi tiết</h3>
-                                    <li><b>Công ty phát hành</b> <span>${currentBook.publishingCompany}</span></li>
-                                    <li><b>Ngày xuất bản</b> <span>${currentBook.publicationDate}</span></li>
-                                    <li>
-                                        <b>Nhà xuất bản</b> <span>Nhà Xuất Bản ${currentBook.publisher.name}</span>
-                                    </li>
-                                    <li><b>Dịch Giả</b> <span>${currentBook.translator}</span></li>
-                                    <li><b>Kích thước</b> <span>${currentBook.size}</span></li>
-                                    <li><b>Số trang</b> <span>${currentBook.numberOfPages}</span></li>
-                                    <li><b>Loại bìa</b> <span>${currentBook.coverType}</span></li>
-                                </ul>
-                            </div>
-                        </div>
                         <div class="col-lg-12">
-                            <div class="product__details__tab">
-                                <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                                            aria-selected="true">Giới thiệu sách</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                            aria-selected="false">Đánh giá <span>(1)</span></a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                        <div class="product__details__tab__desc">
-                                            <h6>Mô Tả</h6>
-                                            <p>${currentBook.description}</p>
+                            <div class="breadcrumb__option">
+                                <a href="/shop" style="color: #C5A992;"> Sản phẩm </a>
+                                <c:choose>
+                                    <c:when test="${fn:length(currentBook.title) > 50}">
+                                        <span>${fn:substring(currentBook.title, 0, 50)}...</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${currentBook.title}
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter__item mt-3">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="product__details__pic">
+                                    <div class="product__details__pic__item">
+                                        <img class="product__details__pic__item--large"
+                                            src="/images/book/${currentBook.bookImages[0].name}" alt="">
+                                    </div>
+                                    <div class="product__details__pic__slider owl-carousel">
+                                        <c:forEach var="bookImage" items="${currentBook.bookImages}">
+                                            <img src="/images/book/${bookImage.name}" alt="">
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="product__details__text">
+                                    <h3>${currentBook.title}</h3>
+                                    <div class="product__details__rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <span>(18 đánh giá)</span>
+                                    </div>
+                                    <div class="product__details__price">
+                                        <fmt:formatNumber type="number" value="${currentBook.price}" /> đ
+                                    </div>
+                                    <p><b>Đăng bán bởi: </b> ${currentBook.createdBy}</p>
+                                    <div class="product__details__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="1" id="bookCount">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                        <div class="product__details__tab__desc">
-                                            <h6>vuive0602</h6>
-                                            <p>Sách hay lắm mọi người. Nên đọc nha!</p>
+                                    <c:if test="${empty sessionScope.cartId}">
+                                        <a href="/login" class="primary-btn">Mua ngay</a>
+                                    </c:if>
+                                    <c:if test="${not empty sessionScope.cartId}">
+                                        <a href="#" class="primary-btn" data-book-id="${currentBook.id}"
+                                            id="buy-now">Mua
+                                            ngay</a>
+                                    </c:if>
+                                    <a href="#" class="primary-btn btnAddToCart" data-book-id="${currentBook.id}">Thêm
+                                        vào
+                                        giỏ</a>
+                                    <ul>
+                                        <h3>Thông tin chi tiết</h3>
+                                        <li><b>Công ty phát hành</b> <span>${currentBook.publishingCompany}</span></li>
+                                        <li><b>Ngày xuất bản</b> <span>${currentBook.publicationDate}</span></li>
+                                        <li>
+                                            <b>Nhà xuất bản</b> <span>Nhà Xuất Bản ${currentBook.publisher.name}</span>
+                                        </li>
+                                        <li><b>Dịch Giả</b> <span>${currentBook.translator}</span></li>
+                                        <li><b>Kích thước</b> <span>${currentBook.size}</span></li>
+                                        <li><b>Số trang</b> <span>${currentBook.numberOfPages}</span></li>
+                                        <li><b>Loại bìa</b> <span>${currentBook.coverType}</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="product__details__tab">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                                aria-selected="true">Giới thiệu sách</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                                aria-selected="false">Đánh giá <span>(1)</span></a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                            <div class="product__details__tab__desc">
+                                                <h6>Mô Tả</h6>
+                                                <p>${currentBook.description}</p>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                            <div class="product__details__tab__desc">
+                                                <h6>vuive0602</h6>
+                                                <p>Sách hay lắm mọi người. Nên đọc nha!</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

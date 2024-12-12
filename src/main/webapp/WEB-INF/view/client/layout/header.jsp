@@ -68,14 +68,14 @@
                     <div class="col-lg-3">
                         <div class="header__logo">
                             <a href="/">
-                                <h2 style="color: #7fad39; font-weight: bold"><i class="fa fa-book"></i> SWAP STORY</h2>
+                                <h2 style="color: #C5A992; font-weight: bold"><i class="fa fa-book"></i> SWAP STORY</h2>
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <nav class="header__menu">
                             <ul>
-                                <li class="active"><a href="/">Trang Chủ</a></li>
+                                <li><a href="/">Trang Chủ</a></li>
                                 <li><a href="/shop">Sản Phẩm</a></li>
                                 <li><a href="/blog">Blog</a></li>
                                 <li><a href="/contact">Liên Hệ</a></li>

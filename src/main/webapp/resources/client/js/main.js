@@ -60,6 +60,17 @@
         allowParentLinks: true
     });
 
+    /*------------------
+    Dynamic Menu Active
+    --------------------*/
+    var currentPath = window.location.pathname;
+    $('.header__menu ul li').each(function () {
+        var linkPath = $(this).find('a').attr('href'); // Lấy giá trị href của thẻ <a>
+        if (currentPath === linkPath) {
+            $(this).addClass('active'); // Thêm active cho mục phù hợp
+        }
+    });
+
     /*-----------------------
         Categories Slider
     ------------------------*/

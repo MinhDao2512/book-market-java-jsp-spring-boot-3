@@ -39,13 +39,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hero__item set-bg" data-setbg="/images/banner/banner.jpg">
-                            <div class="hero__text">
-                                <h2>Story Swap</h2>
-                                <p>Miễn phí vẫn chuyển cho hóa đơn trên 300.000đ</p>
-                                <a href="/shop" class="primary-btn">MUA NGAY</a>
-                            </div>
-                        </div>
+                        <a href="/shop">
+                            <div class="hero__item set-bg" data-setbg="/images/banner/banner.png"> </div>
+                        </a>
                     </div>
                 </div>
             </div>
