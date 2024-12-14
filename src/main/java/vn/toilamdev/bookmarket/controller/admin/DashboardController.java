@@ -10,16 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import vn.toilamdev.bookmarket.constant.SystemConstant;
 import vn.toilamdev.bookmarket.domain.Author;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.Category;
+import vn.toilamdev.bookmarket.domain.Order;
 import vn.toilamdev.bookmarket.domain.Publisher;
 import vn.toilamdev.bookmarket.domain.Role;
 import vn.toilamdev.bookmarket.domain.User;
 import vn.toilamdev.bookmarket.service.AuthorService;
 import vn.toilamdev.bookmarket.service.BookService;
 import vn.toilamdev.bookmarket.service.CategoryService;
+import vn.toilamdev.bookmarket.service.OrderService;
 import vn.toilamdev.bookmarket.service.PublisherService;
 import vn.toilamdev.bookmarket.service.RoleService;
 import vn.toilamdev.bookmarket.service.UserService;
@@ -35,15 +39,18 @@ public class DashboardController {
     private final CategoryService categoryService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
+    private final OrderService orderService;
 
     public DashboardController(RoleService roleService, UserService userService, BookService bookService,
-            CategoryService categoryService, AuthorService authorService, PublisherService publisherService) {
+            CategoryService categoryService, AuthorService authorService, PublisherService publisherService,
+            OrderService orderService) {
         this.roleService = roleService;
         this.userService = userService;
         this.bookService = bookService;
         this.categoryService = categoryService;
         this.authorService = authorService;
         this.publisherService = publisherService;
+        this.orderService = orderService;
     }
 
     @GetMapping
@@ -124,7 +131,39 @@ public class DashboardController {
     }
 
     @GetMapping("/orders")
-    public String getOrdersTablePage(Model model) {
+    public String getOrdersTablePage(Model model, HttpServletRequest request, @RequestParam("page") int page) {
+        HttpSession session = request.getSession();
+
+        long userId = (long) session.getAttribute("id");
+        User user = this.userService.getUserById(userId);
+
+        String roleName = (String) session.getAttribute("roleName");
+
+        if (roleName.equals("ADMIN") || roleName.equals("OWNER")) {
+            int orderCount = this.orderService.getAllOrders().size();
+            int totalPages = 1;
+            int limit = 5;
+            int maxVisible = SystemConstant.MAX_VISIBLE_PAGES;
+            Pageable pageable = PageRequest.of(page - 1, limit);
+            List<Order> orders = this.orderService.getAllOrders(pageable);
+
+            if (orderCount % limit != 0) {
+                totalPages = orderCount / limit + 1;
+            } else {
+                totalPages = orderCount / limit;
+            }
+
+            List<Integer> pageNumbers = PaginationUtils.getPageNumbers(page, totalPages, maxVisible);
+
+            model.addAttribute("orders", orders);
+            model.addAttribute("totalPages", totalPages);
+            model.addAttribute("currentPage", page);
+            model.addAttribute("pageNumbers", pageNumbers);
+        } else {
+            List<Book> books = this.bookService.getListBooksByCreatedBy(user.getEmail());
+            model.addAttribute("books", books);
+        }
+
         return "admin/order/order-table";
     }
 

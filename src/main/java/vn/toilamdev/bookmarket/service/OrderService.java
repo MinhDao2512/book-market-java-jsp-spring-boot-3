@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.toilamdev.bookmarket.constant.SystemConstant;
@@ -40,6 +42,28 @@ public class OrderService {
 
     public Order getOrderByPaymentRef(String paymentRef) {
         return this.orderRepository.findByPaymentRef(paymentRef);
+    }
+
+    public List<Order> getAllOrders(Pageable pageable) {
+        Page<Order> page = this.orderRepository.findAll(pageable);
+        return page.getContent();
+    }
+
+    public List<Order> getAllOrders() {
+        return this.orderRepository.findAll();
+    }
+
+    public Order getOrderById(long id) {
+        return this.orderRepository.findById(id);
+    }
+
+    public List<Order> getListOrdersByUser(User user, Pageable pageable) {
+        Page<Order> page = this.orderRepository.findByUser(user, pageable);
+        return page.getContent();
+    }
+
+    public List<Order> getListOrdersByUser(User user) {
+        return this.orderRepository.findByUser(user);
     }
 
     public Order createNewOrder(OrderDTO orderDTO, User user, String uuid) {

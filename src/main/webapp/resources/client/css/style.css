@@ -1634,9 +1634,9 @@ ol {
 	display: inline-block;
 	width: 30px;
 	height: 30px;
-	border: 1px solid #b2b2b2;
+	border: 1px solid #C5A992;
 	font-size: 14px;
-	color: #b2b2b2;
+	color: #C5A992;
 	font-weight: 700;
 	line-height: 28px;
 	text-align: center;
@@ -1650,8 +1650,8 @@ ol {
 
 .product__pagination a:hover,
 .blog__pagination a:hover {
-	background: #7fad39;
-	border-color: #7fad39;
+	background: #C5A992;
+	border-color: #C5A992;
 	color: #ffffff;
 }
 
@@ -1660,6 +1660,11 @@ ol {
 	margin-right: 0;
 }
 
+.product__pagination a.active {
+    background: #C5A992;
+    border-color: #C5A992;
+    color: #ffffff;
+}
 /*---------------------
   Shop Details
 -----------------------*/
@@ -1882,7 +1887,7 @@ ol {
 -----------------------*/
 
 .shoping-cart {
-	padding-top: 80px;
+	padding-top: 10px;
 	padding-bottom: 80px;
 }
 
@@ -2074,7 +2079,7 @@ ol {
 -----------------------*/
 
 .checkout {
-	padding-top: 80px;
+	padding-top: 10px;
 	padding-bottom: 60px;
 }
 
@@ -2821,6 +2826,7 @@ ol {
 	z-index: 1;
 	-webkit-box-shadow: 0 0 20px 5px rgba(12, 7, 26, 0.15);
 	box-shadow: 0 0 20px 5px rgba(12, 7, 26, 0.15);
+	border-radius: 25px;
 }
 
 .map .map-inside .inside-widget:after {

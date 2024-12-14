@@ -47,85 +47,79 @@
             <jsp:include page="../layout/hero-select-another.jsp" />
             <!-- Hero Section End -->
 
-            <!-- Breadcrumb Section Begin -->
-            <section class="breadcrumb-section set-bg" data-setbg="/images/breadcrumb/breadcrumb.png">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="breadcrumb__text">
-                                <h2>Giỏ hàng</h2>
-                                <div class="breadcrumb__option">
-                                    <a href="/">Trang chủ</a>
-                                    <span>Giỏ hàng</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Breadcrumb Section End -->
-
             <!-- Shoping Cart Section Begin -->
             <section class="shoping-cart spad">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="shoping__cart__table">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Hình ảnh</th>
-                                            <th>Sản phẩm</th>
-                                            <th>Giá tiền</th>
-                                            <th>Số lượng</th>
-                                            <th>Tổng tiền</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="cartItem" items="${cartItems}">
-                                            <tr data-cart-item-id="${cartItem.id}">
-                                                <td>
-                                                    <a href="/shop/${cartItem.book.id}">
-                                                        <img src="/images/book/${cartItem.book.bookImages[0].name}"
-                                                            style="width: 100px;">
-                                                    </a>
-                                                </td>
-                                                <td class="col-md-6"
-                                                    style="white-space: normal; word-wrap: break-word; overflow: visible;">
-                                                    <h5>
-                                                        <a href="/shop/${cartItem.book.id}"
-                                                            style="background-color: white; color: black; text-decoration: none; display: inline-block;">${cartItem.book.title}</a>
-                                                    </h5>
-                                                </td>
-                                                <td class="shoping__cart__price">
-                                                    <fmt:formatNumber type="number" value="${cartItem.book.price}" />
-                                                </td>
-                                                <td class="shoping__cart__quantity">
-                                                    <div class="quantity">
-                                                        <div class="pro-qty" data-book-price="${cartItem.book.price}"
-                                                            data-cart-item-id="${cartItem.id}">
-                                                            <input type="text" value="${cartItem.quantity}"
-                                                                class="input-quantity">
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="shoping__cart__total">
-                                                    <fmt:formatNumber type="number" value="${cartItem.totalPrice}" /> đ
-                                                </td>
-                                                <td class="shoping__cart__item__close">
-                                                    <span class="icon_close btnDeleteCartItem"
-                                                        data-cart-item-id="${cartItem.id}"></span>
-                                                </td>
+                        <div class="col-lg-12 text-center">
+                            <h5 style="color: #C5A992;">
+                                <a href="/" style="color: #C5A992;"><strong>Trang chủ</strong></a> | Giỏ hàng
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="filter__item mt-3">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="shoping__cart__table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Hình ảnh</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Giá tiền</th>
+                                                <th>Số lượng</th>
+                                                <th>Tổng tiền</th>
+                                                <th></th>
                                             </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                                <c:if test="${sessionScope.cartCount == 0}">
-                                    <h6 class="mt-3" style="color: red; text-align: center">
-                                        Bạn chưa có sản phẩm nào trong giỏ hàng !
-                                    </h6>
-                                </c:if>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="cartItem" items="${cartItems}">
+                                                <tr data-cart-item-id="${cartItem.id}">
+                                                    <td>
+                                                        <a href="/shop/${cartItem.book.id}">
+                                                            <img src="/images/book/${cartItem.book.bookImages[0].name}"
+                                                                style="width: 100px;">
+                                                        </a>
+                                                    </td>
+                                                    <td class="col-md-6"
+                                                        style="white-space: normal; word-wrap: break-word; overflow: visible;">
+                                                        <h5>
+                                                            <a href="/shop/${cartItem.book.id}"
+                                                                style="background-color: white; color: black; text-decoration: none; display: inline-block;">${cartItem.book.title}</a>
+                                                        </h5>
+                                                    </td>
+                                                    <td class="shoping__cart__price">
+                                                        <fmt:formatNumber type="number"
+                                                            value="${cartItem.book.price}" />
+                                                    </td>
+                                                    <td class="shoping__cart__quantity">
+                                                        <div class="quantity">
+                                                            <div class="pro-qty"
+                                                                data-book-price="${cartItem.book.price}"
+                                                                data-cart-item-id="${cartItem.id}">
+                                                                <input type="text" value="${cartItem.quantity}"
+                                                                    class="input-quantity">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="shoping__cart__total">
+                                                        <fmt:formatNumber type="number"
+                                                            value="${cartItem.totalPrice}" /> đ
+                                                    </td>
+                                                    <td class="shoping__cart__item__close">
+                                                        <span class="icon_close btnDeleteCartItem"
+                                                            data-cart-item-id="${cartItem.id}"></span>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                    <c:if test="${sessionScope.cartCount == 0}">
+                                        <h6 class="mt-3" style="color: red; text-align: center">
+                                            Bạn chưa có sản phẩm nào trong giỏ hàng !
+                                        </h6>
+                                    </c:if>
+                                </div>
                             </div>
                         </div>
                     </div>

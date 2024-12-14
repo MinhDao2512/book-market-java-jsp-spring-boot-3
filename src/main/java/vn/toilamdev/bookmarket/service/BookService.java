@@ -79,6 +79,10 @@ public class BookService {
         return this.bookRepository.findById(id);
     }
 
+    public List<Book> getListBooksByCreatedBy(String createdBy) {
+        return this.bookRepository.findByCreatedBy(createdBy);
+    }
+
     public void handleSaveBookImage(List<MultipartFile> bookFiles, Book book) {
         for (int i = 0; i < bookFiles.size(); ++i) {
             if (bookFiles.get(i).getOriginalFilename() != null && bookFiles.get(i).getOriginalFilename() != "") {

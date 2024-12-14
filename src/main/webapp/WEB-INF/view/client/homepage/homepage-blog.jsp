@@ -48,9 +48,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <h4 style="color: #C5A992;">
-                                <strong>Blog</strong>
-                            </h4>
+                            <h5 style="color: #C5A992;">
+                                <a href="/" style="color: #C5A992;"><strong>Trang chủ</strong></a> | Blog
+                            </h5>
                         </div>
                     </div>
                     <div class="filter__item mt-3">

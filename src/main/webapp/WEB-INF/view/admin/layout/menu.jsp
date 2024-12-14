@@ -77,28 +77,62 @@
                 </li>
                 <!--Dashboard-->
 
-                <!-- Users -->
+
                 <li class="menu-header small text-uppercase">
                     <span class="menu-header-text">QUẢN LÝ</span>
                 </li>
-                <li class="menu-item users">
-                    <a href="/admin/users?page=1" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-table"></i>
-                        <div data-i18n="Tables">
-                            <strong>Người Dùng</strong>
-                        </div>
-                    </a>
-                </li>
 
-                <!-- Roles -->
-                <li class="menu-item roles">
-                    <a href="/admin/roles?page=1" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-table"></i>
-                        <div data-i18n="Tables">
-                            <strong>Vai Trò</strong>
-                        </div>
-                    </a>
-                </li>
+                <c:if test="${roleName == 'ADMIN' || roleName == 'OWNER'}">
+                    <!-- Users -->
+                    <li class="menu-item users">
+                        <a href="/admin/users?page=1" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">
+                                <strong>Người Dùng</strong>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Roles -->
+                    <li class="menu-item roles">
+                        <a href="/admin/roles?page=1" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">
+                                <strong>Vai Trò</strong>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Authors -->
+                    <li class="menu-item authors">
+                        <a href="/admin/authors?page=1" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">
+                                <strong>Tác Giả</strong>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Publishers -->
+                    <li class="menu-item publishers">
+                        <a href="/admin/publishers?page=1" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">
+                                <strong>Nhà Xuất Bản</strong>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Authors -->
+                    <li class="menu-item categories">
+                        <a href="/admin/categories?page=1" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-table"></i>
+                            <div data-i18n="Tables">
+                                <strong>Thể Loại</strong>
+                            </div>
+                        </a>
+                    </li>
+                </c:if>
 
                 <!--Books-->
                 <li class="menu-item books">
@@ -106,36 +140,6 @@
                         <i class="menu-icon tf-icons bx bx-table"></i>
                         <div data-i18n="Tables">
                             <strong>Sách</strong>
-                        </div>
-                    </a>
-                </li>
-
-                <!-- Authors -->
-                <li class="menu-item authors">
-                    <a href="/admin/authors?page=1" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-table"></i>
-                        <div data-i18n="Tables">
-                            <strong>Tác Giả</strong>
-                        </div>
-                    </a>
-                </li>
-
-                <!-- Publishers -->
-                <li class="menu-item publishers">
-                    <a href="/admin/publishers?page=1" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-table"></i>
-                        <div data-i18n="Tables">
-                            <strong>Nhà Xuất Bản</strong>
-                        </div>
-                    </a>
-                </li>
-
-                <!-- Authors -->
-                <li class="menu-item categories">
-                    <a href="/admin/categories?page=1" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-table"></i>
-                        <div data-i18n="Tables">
-                            <strong>Thể Loại</strong>
                         </div>
                     </a>
                 </li>

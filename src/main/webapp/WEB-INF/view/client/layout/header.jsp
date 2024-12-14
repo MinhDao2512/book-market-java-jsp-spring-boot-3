@@ -78,7 +78,7 @@
                                 <li><a href="/">Trang Chủ</a></li>
                                 <li><a href="/shop">Sản Phẩm</a></li>
                                 <li><a href="/blog">Blog</a></li>
-                                <li><a href="/contact">Liên Hệ</a></li>
+                                <li><a href="/contact">Giới Thiệu</a></li>
                             </ul>
                         </nav>
                     </div>

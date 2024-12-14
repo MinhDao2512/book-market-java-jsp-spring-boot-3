@@ -74,7 +74,8 @@ public class SecurityConfig {
                                                                 "/admin/js/**", "/admin/vendor/**",
                                                                 "/admin/img/**")
                                                 .permitAll()
-                                                .requestMatchers("/admin/**").hasAnyRole("ADMIN", "OWNER", "CONTENT")
+                                                .requestMatchers("/admin/**")
+                                                .hasAnyRole("ADMIN", "OWNER", "CONTENT", "SELLER")
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form
                                                 .loginPage("/login")

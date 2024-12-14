@@ -173,7 +173,7 @@ $(document).ready(() => {
                 if (dataResponse['paymentMethod'] === 'BANKING') {
                     window.location.href = dataResponse['vnpUrl'];
                 } else {
-                    window.location.href = "/thanks";
+                    window.location.href = "/response-place-order";
                 }
             },
             error: function (xhr, status, error) {

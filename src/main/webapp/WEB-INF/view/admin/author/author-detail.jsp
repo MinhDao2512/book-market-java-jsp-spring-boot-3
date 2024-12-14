@@ -136,8 +136,6 @@
                                             <div class="d-flex justify-content-between">
                                                 <a href="/admin/authors?page=1" class="btn btn-outline-secondary">Quay
                                                     lại</a>
-                                                <button id="btnCreateAuthor" type="submit" class="btn btn-primary">Thêm
-                                                    mới</button>
                                             </div>
                                         </div>
                                     </div>

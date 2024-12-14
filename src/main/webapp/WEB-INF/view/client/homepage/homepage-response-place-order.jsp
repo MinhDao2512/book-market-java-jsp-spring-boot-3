@@ -45,50 +45,48 @@
             <jsp:include page="../layout/hero-select-another.jsp" />
             <!-- Hero Section End -->
 
-            <!-- Breadcrumb Section Begin -->
-            <section class="breadcrumb-section set-bg" data-setbg="/images/breadcrumb/breadcrumb.png">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <div class="breadcrumb__text">
-                                <h2>Thanh toán</h2>
-                                <div class="breadcrumb__option">
-                                    <a href="/">Trang chủ</a>
-                                    <span>Thanh toán</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Breadcrumb Section End -->
-
             <!-- Checkout Section Begin -->
             <section class="checkout spad">
                 <div class="container">
-                    <div class="checkout__form">
-                        <h4>Thông Báo Đặt Hàng</h4>
-                        <c:if test="${not empty failed}">
-                            <div class="alert alert-danger text-center" role="alert" style="font-size: 25px;">
-                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <span>Đặt hàng không thành công</span>
-                            </div>
-                        </c:if>
-                        <c:if test="${empty failed}">
-                            <div class="alert alert-success text-center" role="alert" style="font-size: 25px;">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                <span>Chúc mừng bạn đã "Đặt hàng" và "Thanh toán" thành công</span>
-                            </div>
-                        </c:if>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h4 style="color: #C5A992;">
+                                <a href="/cart-detail" style="color: #C5A992;"><strong>Giỏ hàng</strong></a> | Thanh
+                                toán
+                            </h4>
+                        </div>
                     </div>
-                    <div>
-                        <div style="font-size: 20px;" class="text-center">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                            <a href="/shop" style="color: black;">
-                                <u>
-                                    Tiếp tục mua hàng
-                                </u>
-                            </a>
+                    <div class="filter__item mt-3">
+                        <div class="checkout__form">
+                            <h4>Thông Báo Đặt Hàng</h4>
+                            <c:if test="${not empty failed}">
+                                <div class="alert alert-danger text-center" role="alert" style="font-size: 25px;">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    <span>Đặt hàng không thành công</span>
+                                </div>
+                            </c:if>
+                            <c:if test="${empty failed && not empty BANKING}">
+                                <div class="alert alert-success text-center" role="alert" style="font-size: 25px;">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                    <span>Chúc mừng bạn đã "Đặt hàng" và "Thanh toán" thành công</span>
+                                </div>
+                            </c:if>
+                            <c:if test="${empty failed && not empty COD}">
+                                <div class="alert alert-success text-center" role="alert" style="font-size: 25px;">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                    <span>Chúc mừng bạn đã "Đặt hàng" thành công</span>
+                                </div>
+                            </c:if>
+                        </div>
+                        <div>
+                            <div style="font-size: 20px;" class="text-center">
+                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                <a href="/shop" style="color: black;">
+                                    <u>
+                                        Tiếp tục mua hàng
+                                    </u>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>StorySwap.vn | Dashboard</title>
+            <title>StorySwap.vn | Bảng đơn hàng</title>
 
             <meta name="description" content="" />
 
@@ -22,6 +22,7 @@
             <link
                 href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
                 rel="stylesheet" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
             <!-- Icons. Uncomment required icon fonts -->
             <link rel="stylesheet" href="/admin/vendor/fonts/boxicons.css" />
@@ -63,57 +64,149 @@
                             <div class="container-xxl flex-grow-1 container-p-y">
                                 <div class="d-flex justify-content-between">
                                     <h4 class="fw-bold py-3 mb-4">
-                                        <span class="text-muted fw-light">Dashboard /</span> Orders
-                                    </h4>
-                                    <h4 class="fw-bold py-3 mb-4">
-                                        <button type="button" class="btn btn-primary">Create</button>
+                                        <span class="text-muted fw-light">Quản Lý Đơn Hàng /</span> Đơn Hàng
                                     </h4>
                                 </div>
                                 <!-- Basic Bootstrap Table -->
                                 <div class="card">
                                     <input type="hidden" data-orders-active="1" id="ordersActive" />
-                                    <h5 class="card-header">Orders Table: </h5>
-                                    <div class="table-responsive text-nowrap">
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Order</th>
-                                                    <th class="text-center">Receiver</th>
-                                                    <th class="text-center">Shipping Address</th>
-                                                    <th class="text-center">Phone Number</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Created At</th>
-                                                    <th class="text-center">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-border-bottom-0">
-                                                <tr>
-                                                    <td class="col-md-1 text-center">
-                                                        <strong>1</strong>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        Vn KUnn
-                                                    </td>
-                                                    <td>
-                                                        Tp.HCM
-                                                    </td>
-                                                    <td class="col-md-1 text-center">
-                                                        0942236357
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="badge bg-label-info me-1">PENDING</span>
-                                                    </td>
-                                                    <td class="col-md-1">
-                                                        25/09/204
-                                                    </td>
-                                                    <td class="col-md-2">
-                                                        <button type="button" class="btn btn-info">Detail</button>
-                                                        <button type="button" class="btn btn-warning">Edit</button>
-                                                        <button type="button" class="btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <h5 class="card-header">Bảng Đơn Hàng: </h5>
+                                    <div>
+                                        <c:if test="${empty books}">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">ID</th>
+                                                        <th class="text-center">Mã đơn hàng</th>
+                                                        <th class="text-center">Thông tin nhận hàng</th>
+                                                        <th class="text-center">Ngày khởi tạo</th>
+                                                        <th class="text-center">Trạng thái đơn hàng</th>
+                                                        <th class="text-center">Thanh toán</th>
+                                                        <th class="text-center">Tổng tiền</th>
+                                                        <th class="text-center">Tác vụ</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+                                                    <c:forEach var="order" items="${orders}">
+                                                        <tr>
+                                                            <td>
+                                                                <strong>${order.id}</strong>
+                                                            </td>
+                                                            <td style="word-wrap: break-word; word-break: break-word;">
+                                                                <a
+                                                                    href="/admin/orders/detail/${order.id}">${order.paymentRef}</a>
+                                                            </td>
+                                                            <td class="col-md-2">
+                                                                <p><strong>Tên: </strong>${order.receiverName}</p>
+                                                                <p><strong>Địa chỉ: </strong>${order.shippingAddress}
+                                                                </p>
+                                                                <p><strong>Điện thoại: </strong>${order.receiverPhone}
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                <fmt:formatDate type="both"
+                                                                    value="${order.createdAt}" />
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span
+                                                                    class="badge bg-label-info me-1">${order.status}</span>
+                                                            </td>
+                                                            <td>
+                                                                <p><strong>Phương thức: </strong>${order.paymentMethod}
+                                                                </p>
+                                                                <p><strong>Trạng thái: </strong>${order.paymentStatus}
+                                                                </p>
+                                                            </td>
+                                                            <td class="col-auto text-center">
+                                                                <fmt:formatNumber type="number"
+                                                                    value="${order.totalPrice}" />&nbsp;đ
+                                                            </td>
+                                                            <td class="col-md-3 text-center">
+                                                                <a href="/admin/orders/detail/${order.id}"
+                                                                    class="btn btn-outline-info" title="Xem chi tiết">
+                                                                    <i class="far fa-sticky-note"></i>
+                                                                    Xem
+                                                                </a>
+                                                                <a href="/admin/authors/update/${author.id}"
+                                                                    class="btn btn-outline-warning" title="Cập nhật">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                    Sửa
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </c:if>
+                                        <c:if test="${not empty books}">
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">ID</th>
+                                                        <th class="text-center">Ngày khởi tạo</th>
+                                                        <th class="text-center">Mã đơn hàng</th>
+                                                        <th class="text-center">Tên sản phẩm</th>
+                                                        <th class="text-center">Giá tiền</th>
+                                                        <th class="text-center">Số lượng</th>
+                                                        <th class="text-center">Tổng tiền</th>
+                                                        <th class="text-center">Thông tin nhận hàng</th>
+                                                        <th class="text-center">Thanh toán</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table-border-bottom-0">
+                                                    <c:forEach var="book" items="${books}">
+                                                        <c:forEach var="orderItem" items="${book.orderItems}">
+                                                            <tr>
+                                                                <td>
+                                                                    <strong>${orderItem.id}</strong>
+                                                                </td>
+                                                                <td>
+                                                                    <fmt:formatDate type="both"
+                                                                        value="${orderItem.order.createdAt}" />
+                                                                </td>
+                                                                <td
+                                                                    style="word-wrap: break-word; word-break: break-word;">
+                                                                    ${orderItem.order.paymentRef}
+                                                                </td>
+                                                                <td
+                                                                    style="word-wrap: break-word; word-break: break-word;">
+                                                                    ${orderItem.book.title}
+                                                                </td>
+                                                                <td class="col-auto text-center">
+                                                                    <fmt:formatNumber type="number"
+                                                                        value="${orderItem.book.price}" />&nbsp;đ
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    ${orderItem.quantity}
+                                                                </td>
+                                                                <td class="col-auto text-center">
+                                                                    <fmt:formatNumber type="number"
+                                                                        value="${orderItem.totalPrice}" />&nbsp;đ
+                                                                </td>
+                                                                <td class="col-md-2">
+                                                                    <p><strong>Tên:
+                                                                        </strong>${orderItem.order.receiverName}</p>
+                                                                    <p><strong>Địa chỉ:
+                                                                        </strong>${orderItem.order.shippingAddress}
+                                                                    </p>
+                                                                    <p><strong>Điện thoại:
+                                                                        </strong>${orderItem.order.receiverPhone}
+                                                                    </p>
+                                                                </td>
+                                                                <td>
+                                                                    <p><strong>Phương thức:
+                                                                        </strong>${orderItem.order.paymentMethod}
+                                                                    </p>
+                                                                    <p><strong>Trạng thái:
+                                                                        </strong>${orderItem.order.paymentStatus}
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <!--/ Basic Bootstrap Table -->
