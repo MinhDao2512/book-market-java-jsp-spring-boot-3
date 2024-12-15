@@ -65,13 +65,13 @@
                                     <span>Đặt hàng không thành công</span>
                                 </div>
                             </c:if>
-                            <c:if test="${empty failed && not empty BANKING}">
+                            <c:if test="${not empty BANKING}">
                                 <div class="alert alert-success text-center" role="alert" style="font-size: 25px;">
                                     <i class="fa fa-check-circle" aria-hidden="true"></i>
                                     <span>Chúc mừng bạn đã "Đặt hàng" và "Thanh toán" thành công</span>
                                 </div>
                             </c:if>
-                            <c:if test="${empty failed && not empty COD}">
+                            <c:if test="${not empty COD}">
                                 <div class="alert alert-success text-center" role="alert" style="font-size: 25px;">
                                     <i class="fa fa-check-circle" aria-hidden="true"></i>
                                     <span>Chúc mừng bạn đã "Đặt hàng" thành công</span>

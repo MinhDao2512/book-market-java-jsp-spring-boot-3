@@ -123,7 +123,7 @@
                                                 </a>
                                             </c:if>
                                             <c:if test="${empty bookId}">
-                                                <a href="/cart-detail" style="color: #dd2222;">
+                                                <a href="/cart/detail" style="color: #dd2222;">
                                                     <i class="fa fa-arrow-left" aria-hidden="true"></i> Quay lại giỏ
                                                     hàng
                                                 </a>

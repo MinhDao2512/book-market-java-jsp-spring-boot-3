@@ -11,7 +11,7 @@ import vn.toilamdev.bookmarket.domain.User;
 import vn.toilamdev.bookmarket.service.UserService;
 
 @Controller
-@RequestMapping("/cart-detail")
+@RequestMapping("/cart/detail")
 public class CartController {
 
     private final UserService userService;

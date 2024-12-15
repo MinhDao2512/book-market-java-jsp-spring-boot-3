@@ -9,7 +9,7 @@
             <meta name="keywords" content="Ogani, unica, creative, html">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Story Swap | Đơn hàng</title>
+            <title>Story Swap | Đơn hàng | Chi tiết đơn hàng</title>
 
             <!-- Google Font -->
             <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-lg-12 text-center">
                             <h5 style="color: #C5A992;">
-                                <a href="/" style="color: #C5A992;"><strong>Trang chủ</strong></a> | Đơn hàng
+                                <a href="/" style="color: #C5A992;"><strong>Đơn hàng</strong> | ${orderCode}
                             </h5>
                         </div>
                     </div>
@@ -65,41 +65,42 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Mã đơn hàng</th>
-                                                <th>Thông tin nhận hàng</th>
-                                                <th>Ngày khởi tạo</th>
-                                                <th>Trạng thái đơn hàng</th>
-                                                <th>Thanh toán</th>
+                                                <th>Hình sản phẩm</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Giá sản phẩm</th>
+                                                <th>Số lượng</th>
                                                 <th>Tổng tiền</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="order" items="${orders}">
+                                            <c:forEach var="orderItem" items="${orderItems}">
                                                 <tr>
                                                     <td>
-                                                        ${order.id}
+                                                        ${orderItem.id}
+                                                    </td>
+                                                    <td class="col-md-2">
+                                                        <a href="/shop/${orderItem.book.id}" target="_blank">
+                                                            <img src="/images/book/${orderItem.book.bookImages[0].name}"
+                                                                alt="Avatar" class="avatar-xs" data-bs-toggle="tooltip"
+                                                                data-popup="tooltip-custom" data-bs-placement="top"
+                                                                title="Avatar" style="width: 80px; height: 80px;" />
+                                                        </a>
+                                                    </td>
+                                                    <td style="word-wrap: break-word; word-break: break-word;"
+                                                        class="text-left">
+                                                        <a href="/shop/${orderItem.book.id}" style="color: #C5A992;"
+                                                            target="_blank">${orderItem.book.title}</a>
+                                                    </td>
+                                                    <td class="text-center col-auto">
+                                                        <fmt:formatNumber type="number"
+                                                            value="${orderItem.book.price}" />&nbsp;đ
                                                     </td>
                                                     <td>
-                                                        <a href="/orders/detail/${order.id}" style="color: #C5A992;"
-                                                            title="Xem chi tiết">${order.paymentRef}</a>
+                                                        ${orderItem.quantity}
                                                     </td>
-                                                    <td style="text-align: left;">
-                                                        <p><strong>Tên: </strong>${order.receiverName}</p>
-                                                        <p><strong>Địa chỉ: </strong>${order.shippingAddress}</p>
-                                                        <p><strong>Điện thoại: </strong>${order.receiverPhone}</p>
-                                                    </td>
-                                                    <td>
-                                                        ${order.createdAt}
-                                                    </td>
-                                                    <td>
-                                                        ${order.status}
-                                                    </td>
-                                                    <td style="text-align: left;">
-                                                        <p><strong>Phương thức: </strong>${order.paymentMethod}</p>
-                                                        <p><strong>Trạng thái: </strong>${order.paymentStatus}</p>
-                                                    </td>
-                                                    <td>
-                                                        <fmt:formatNumber type="number" value="${order.totalPrice}" /> đ
+                                                    <td class="text-center col-auto">
+                                                        <fmt:formatNumber type="number"
+                                                            value="${orderItem.totalPrice}" />&nbsp;đ
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -108,28 +109,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="product__pagination text-center">
-                            <c:forEach var="pageNumber" items="${pageNumbers}">
-                                <c:choose>
-                                    <c:when test="${pageNumber == currentPage}">
-                                        <a href="/orders?page=${pageNumber}" class="active">${pageNumber}</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="/orders?page=${pageNumber}">${pageNumber}</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                            <c:if test="${totalPages > 1}">
-                                <a href="/orders?page=${currentPage + 1}"><i class="fa fa-long-arrow-right"></i></a>
-                            </c:if>
-                        </div>
                     </div>
                     <div class=" row">
                         <div class="col-lg-12">
                             <div class="shoping__cart__btns">
-                                <a href="/" class="primary-btn cart-btn">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Trang chủ
-                                </a>
+                                <c:if test="${empty orderItems}">
+                                    <a href="/" class="primary-btn cart-btn">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Trang chủ
+                                    </a>
+                                </c:if>
+                                <c:if test="${not empty orderItems}">
+                                    <a href="/orders" class="primary-btn cart-btn">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Đơn hàng
+                                    </a>
+                                </c:if>
                             </div>
                         </div>
                         <div class="col-lg-7">

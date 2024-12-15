@@ -72,7 +72,7 @@
                                     <input type="hidden" data-orders-active="1" id="ordersActive" />
                                     <h5 class="card-header">Bảng Đơn Hàng: </h5>
                                     <div>
-                                        <c:if test="${empty books}">
+                                        <c:if test="${empty orderItems}">
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
@@ -138,13 +138,14 @@
                                                 </tbody>
                                             </table>
                                         </c:if>
-                                        <c:if test="${not empty books}">
+                                        <c:if test="${not empty orderItems}">
                                             <table class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center">ID</th>
                                                         <th class="text-center">Ngày khởi tạo</th>
                                                         <th class="text-center">Mã đơn hàng</th>
+                                                        <th class="text-center">Hình sản phẩm</th>
                                                         <th class="text-center">Tên sản phẩm</th>
                                                         <th class="text-center">Giá tiền</th>
                                                         <th class="text-center">Số lượng</th>
@@ -154,55 +155,61 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="table-border-bottom-0">
-                                                    <c:forEach var="book" items="${books}">
-                                                        <c:forEach var="orderItem" items="${book.orderItems}">
-                                                            <tr>
-                                                                <td>
-                                                                    <strong>${orderItem.id}</strong>
-                                                                </td>
-                                                                <td>
-                                                                    <fmt:formatDate type="both"
-                                                                        value="${orderItem.order.createdAt}" />
-                                                                </td>
-                                                                <td
-                                                                    style="word-wrap: break-word; word-break: break-word;">
-                                                                    ${orderItem.order.paymentRef}
-                                                                </td>
-                                                                <td
-                                                                    style="word-wrap: break-word; word-break: break-word;">
-                                                                    ${orderItem.book.title}
-                                                                </td>
-                                                                <td class="col-auto text-center">
-                                                                    <fmt:formatNumber type="number"
-                                                                        value="${orderItem.book.price}" />&nbsp;đ
-                                                                </td>
-                                                                <td class="text-center">
-                                                                    ${orderItem.quantity}
-                                                                </td>
-                                                                <td class="col-auto text-center">
-                                                                    <fmt:formatNumber type="number"
-                                                                        value="${orderItem.totalPrice}" />&nbsp;đ
-                                                                </td>
-                                                                <td class="col-md-2">
-                                                                    <p><strong>Tên:
-                                                                        </strong>${orderItem.order.receiverName}</p>
-                                                                    <p><strong>Địa chỉ:
-                                                                        </strong>${orderItem.order.shippingAddress}
-                                                                    </p>
-                                                                    <p><strong>Điện thoại:
-                                                                        </strong>${orderItem.order.receiverPhone}
-                                                                    </p>
-                                                                </td>
-                                                                <td>
-                                                                    <p><strong>Phương thức:
-                                                                        </strong>${orderItem.order.paymentMethod}
-                                                                    </p>
-                                                                    <p><strong>Trạng thái:
-                                                                        </strong>${orderItem.order.paymentStatus}
-                                                                    </p>
-                                                                </td>
-                                                            </tr>
-                                                        </c:forEach>
+                                                    <c:forEach var="orderItem" items="${orderItems}">
+                                                        <tr>
+                                                            <td>
+                                                                <strong>${orderItem.id}</strong>
+                                                            </td>
+                                                            <td>
+                                                                <fmt:formatDate type="both"
+                                                                    value="${orderItem.order.createdAt}" />
+                                                            </td>
+                                                            <td style="word-wrap: break-word; word-break: break-word;">
+                                                                ${orderItem.order.paymentRef}
+                                                            </td>
+                                                            <td class="col-md-1 text-center">
+                                                                <a href="/shop/${orderItem.book.id}" target="_blank">
+                                                                    <img src="/images/book/${orderItem.book.bookImages[0].name}"
+                                                                        alt="Avatar"
+                                                                        class="rounded-circle avatar avatar-md"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-popup="tooltip-custom"
+                                                                        data-bs-placement="top" title="Avatar" />
+                                                                </a>
+                                                            </td>
+                                                            <td style="word-wrap: break-word; word-break: break-word;">
+                                                                ${orderItem.book.title}
+                                                            </td>
+                                                            <td class="col-auto text-center">
+                                                                <fmt:formatNumber type="number"
+                                                                    value="${orderItem.book.price}" />&nbsp;đ
+                                                            </td>
+                                                            <td class="text-center">
+                                                                ${orderItem.quantity}
+                                                            </td>
+                                                            <td class="col-auto text-center">
+                                                                <fmt:formatNumber type="number"
+                                                                    value="${orderItem.totalPrice}" />&nbsp;đ
+                                                            </td>
+                                                            <td class="col-md-2">
+                                                                <p><strong>Tên:
+                                                                    </strong>${orderItem.order.receiverName}</p>
+                                                                <p><strong>Địa chỉ:
+                                                                    </strong>${orderItem.order.shippingAddress}
+                                                                </p>
+                                                                <p><strong>Điện thoại:
+                                                                    </strong>${orderItem.order.receiverPhone}
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                <p><strong>Phương thức:
+                                                                    </strong>${orderItem.order.paymentMethod}
+                                                                </p>
+                                                                <p><strong>Trạng thái:
+                                                                    </strong>${orderItem.order.paymentStatus}
+                                                                </p>
+                                                            </td>
+                                                        </tr>
                                                     </c:forEach>
                                                 </tbody>
                                             </table>

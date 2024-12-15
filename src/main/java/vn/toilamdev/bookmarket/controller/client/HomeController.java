@@ -63,8 +63,9 @@ public class HomeController {
             }
             model.addAttribute(SystemConstant.PAYMENT_METHOD_BANKING, "true");
             this.orderService.createOrUpdateOrder(currentOrder);
+        } else {
+            model.addAttribute(SystemConstant.PAYMENT_METHOD_COD, "true");
         }
-        model.addAttribute(SystemConstant.PAYMENT_METHOD_COD, "true");
 
         return "client/homepage/homepage-response-place-order";
     }

@@ -19,7 +19,7 @@
                             <div class="header__top__right">
                                 <c:if test="${not empty pageContext.request.userPrincipal}">
                                     <div class="header__top__right__social">
-                                        <a href="/cart-detail">
+                                        <a href="/cart/detail">
                                             <i class="fa fa-shopping-bag"></i>
                                             <span id="cartCount">${sessionScope.cartCount}</span>
                                         </a>
@@ -31,7 +31,7 @@
                                         <span class="arrow_carrot-down"></span>
                                         <ul style="background-color: white; width: 100px;">
                                             <li><a href="/myProfile" style="color: black;">Thông tin</a></li>
-                                            <li><a href="/cart-detail" style="color: black;">Giỏ hàng</a></li>
+                                            <li><a href="/cart/detail" style="color: black;">Giỏ hàng</a></li>
                                             <li><a href="/orders" style="color: black;">Đơn hàng</a></li>
                                             <c:if test="${sessionScope.roleName != 'USER'}">
                                                 <li><a href="/admin" target="_blank" style="color: black;">Quản trị</a>

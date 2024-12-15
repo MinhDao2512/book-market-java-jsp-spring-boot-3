@@ -92,7 +92,7 @@
                                                         <td class="col-md-1 text-center">
                                                             <a href="/shop/${orderItem.book.id}" target="_blank">
                                                                 <img src="/images/book/${orderItem.book.bookImages[0].name}"
-                                                                    alt="Avatar" class="rounded-circle avatar avatar-md"
+                                                                    alt="Avatar" class="avatar-lg"
                                                                     data-bs-toggle="tooltip" data-popup="tooltip-custom"
                                                                     data-bs-placement="top" title="Avatar" />
                                                             </a>
