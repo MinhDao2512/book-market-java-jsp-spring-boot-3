@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,7 @@ import vn.toilamdev.bookmarket.domain.Author;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.BookCategorization;
 import vn.toilamdev.bookmarket.domain.BookImage;
+import vn.toilamdev.bookmarket.domain.Book_;
 import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.Category;
 import vn.toilamdev.bookmarket.domain.Comment;
@@ -85,6 +87,15 @@ public class BookService {
 
     public List<Book> getListBooksByCreatedBy(String createdBy, Pageable pageable) {
         return this.bookRepository.findByCreatedBy(createdBy, pageable).getContent();
+    }
+
+    // Get Book with Specification
+    private Specification<Book> titleLike(String title) {
+        return (root, query, builder) -> builder.like(root.get(Book_.TITLE), "%" + title + "%");
+    }
+
+    public List<Book> getListBooksWithTitle(String title, Pageable pageable) {
+        return this.bookRepository.findAll(titleLike(title), pageable).getContent();
     }
 
     public void handleSaveBookImage(List<MultipartFile> bookFiles, Book book) {

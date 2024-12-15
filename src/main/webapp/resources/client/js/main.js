@@ -350,5 +350,16 @@
         }
     });
 
+    /*-----------------
+        Search Form 
+    -------------------*/
+    $('#formSearch').submit(function (event) {
+        event.preventDefault();
+        var inputSearch = $('#inputSearch').val();
+
+        window.location.href = "/shop?title=" + inputSearch;
+    });
+
+
 })(jQuery);
 

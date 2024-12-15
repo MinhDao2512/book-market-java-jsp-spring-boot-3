@@ -19,12 +19,12 @@
                     <div class="col-lg-9">
                         <div class="hero__search">
                             <div class="hero__search__form">
-                                <form action="#">
+                                <form id="formSearch">
                                     <div class="hero__search__categories">
-                                        Tất cả danh mục
+                                        Tất cả sản phẩm
                                         <span class="arrow_carrot-down"></span>
                                     </div>
-                                    <input type="text" placeholder="Bạn cần tìm sản phẩm gì?">
+                                    <input type="text" id="inputSearch" placeholder="Bạn cần tìm sản phẩm gì?">
                                     <button type="submit" class="site-btn">TÌM
                                         KIẾM</button>
                                 </form>

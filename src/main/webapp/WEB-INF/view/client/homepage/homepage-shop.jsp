@@ -112,10 +112,19 @@
                                     </c:forEach>
                                 </div>
                                 <div class="product__pagination text-center">
-                                    <a href="#">1</a>
-                                    <a href="#">2</a>
-                                    <a href="#">3</a>
-                                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                                    <c:forEach var="pageNumber" items="${pageNumbers}">
+                                        <c:choose>
+                                            <c:when test="${pageNumber == currentPage}">
+                                                <a href="/shop?page=${pageNumber}" class="active">${pageNumber}</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="/shop?page=${pageNumber}">${pageNumber}</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                    <c:if test="${totalPages != currentPage}">
+                                        <a href="/shop?page=${currentPage+1}"><i class="fa fa-long-arrow-right"></i></a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
