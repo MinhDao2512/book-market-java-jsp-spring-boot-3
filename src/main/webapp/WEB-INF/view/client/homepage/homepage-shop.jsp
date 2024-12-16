@@ -89,29 +89,53 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <c:forEach var="book" items="${books}">
-                                        <div class="col-lg-4 col-md-6 col-sm-6">
-                                            <div class="product__item">
-                                                <div class="product__item__pic set-bg"
-                                                    data-setbg="/images/book/${book.bookImages[0].name}">
-                                                    <ul class="product__item__pic__hover">
-                                                        <li><a href="#" class="btnAddToCart"
-                                                                data-book-id="${book.id}"><i
-                                                                    class="fa fa-shopping-cart"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                                <div class="product__item__text">
-                                                    <h6><a href="/shop/${book.id}">${book.title}</a></h6>
-                                                    <h5>
-                                                        <fmt:formatNumber type="number" value="${book.price}" /> đ
-                                                    </h5>
+                                <c:if test="${not empty books}">
+                                    <div class="row">
+                                        <c:forEach var="book" items="${books}">
+                                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                                <div class="product__item">
+                                                    <div class="product__item__pic set-bg"
+                                                        data-setbg="/images/book/${book.bookImages[0].name}">
+                                                        <ul class="product__item__pic__hover">
+                                                            <li><a href="#" class="btnAddToCart"
+                                                                    data-book-id="${book.id}"><i
+                                                                        class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="product__item__text">
+                                                        <h6><a href="/shop/${book.id}">${book.title}</a></h6>
+                                                        <h5>
+                                                            <fmt:formatNumber type="number" value="${book.price}" /> đ
+                                                        </h5>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                                <div class="product__pagination text-center">
+                                        </c:forEach>
+                                    </div>
+                                    <div class="product__pagination text-center">
+                                        <c:forEach var="pageNumber" items="${pageNumbers}">
+                                            <c:choose>
+                                                <c:when test="${pageNumber == currentPage}">
+                                                    <a href="/shop?page=${pageNumber}" class="active">${pageNumber}</a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a href="/shop?page=${pageNumber}">${pageNumber}</a>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                        <c:if test="${totalPages != currentPage}">
+                                            <a href="/shop?page=${currentPage+1}"><i
+                                                    class="fa fa-long-arrow-right"></i></a>
+                                        </c:if>
+                                    </div>
+                                </c:if>
+                                <c:if test="${empty books}">
+                                    <div class="row">
+                                        <h5 class="text-center" style="color:  red;">Không tìm thấy sản phẩm nào cả
+                                        </h5>
+                                    </div>
+                                </c:if>
+                                <!-- <div class="product__pagination text-center">
                                     <c:forEach var="pageNumber" items="${pageNumbers}">
                                         <c:choose>
                                             <c:when test="${pageNumber == currentPage}">
@@ -125,7 +149,7 @@
                                     <c:if test="${totalPages != currentPage}">
                                         <a href="/shop?page=${currentPage+1}"><i class="fa fa-long-arrow-right"></i></a>
                                     </c:if>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
