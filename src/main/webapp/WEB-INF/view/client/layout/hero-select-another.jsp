@@ -24,7 +24,13 @@
                                         Tất cả sản phẩm
                                         <span class="arrow_carrot-down"></span>
                                     </div>
-                                    <input type="text" id="inputSearch" placeholder="Bạn cần tìm sản phẩm gì?">
+                                    <c:if test="${not empty keyword}">
+                                        <input type="text" id="inputSearch" placeholder="Bạn cần tìm sản phẩm gì?"
+                                            value="${keyword}" />
+                                    </c:if>
+                                    <c:if test="${empty keyword}">
+                                        <input type="text" id="inputSearch" placeholder="Bạn cần tìm sản phẩm gì?" />
+                                    </c:if>
                                     <button type="submit" class="site-btn">TÌM
                                         KIẾM</button>
                                 </form>

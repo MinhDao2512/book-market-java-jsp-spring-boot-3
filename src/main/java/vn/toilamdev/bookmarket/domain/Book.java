@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -37,22 +39,28 @@ public class Book extends AbstractDomain {
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
+    @JsonBackReference
     private Publisher publisher;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
+    @JsonBackReference
     private Author author;
 
     @OneToMany(mappedBy = Comment_.BOOK)
+    @JsonBackReference
     private List<Comment> comments;
 
     @OneToMany(mappedBy = OrderItem_.BOOK)
+    @JsonBackReference
     private List<OrderItem> orderItems;
 
     @OneToMany(mappedBy = CartItem_.BOOK)
+    @JsonBackReference
     private List<CartItem> cartItems;
 
     @OneToMany(mappedBy = BookCategorization_.BOOK)
+    @JsonBackReference
     private List<BookCategorization> bookCategorizations;
 
     @OneToMany(mappedBy = BookImage_.BOOK)

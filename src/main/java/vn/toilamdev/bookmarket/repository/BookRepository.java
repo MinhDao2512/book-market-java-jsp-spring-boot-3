@@ -18,4 +18,8 @@ public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificat
     List<Book> findByCreatedBy(String createdBy);
 
     Page<Book> findByCreatedBy(String createdBy, Pageable pageable);
+
+    List<Book> findByTitleContaining(String title, Pageable pageable);
+
+    int countByTitleContaining(String title);
 }

@@ -39,6 +39,14 @@
             <link rel="stylesheet" href="/client/css/style.css" type="text/css">
             <!--JQuery-->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+            <!--Select 2-->
+            <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+            <style>
+                span.select2-selection--single {
+                    display: none !important;
+                }
+            </style>
         </head>
 
         <body>
@@ -61,97 +69,144 @@
                         </div>
                     </div>
                     <div class="filter__item mt-3">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-5">
-                                <div class="sidebar">
-                                    <div class="sidebar__item">
-                                        <h4>Thể loại</h4>
-                                        <ul>
-                                            <c:forEach var="category" items="${categories}">
-                                                <li><a href="#">${category.description}</a></li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-9 col-md-7">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-5">
-                                        <div class="filter__sort">
-                                            <span>Sắp xếp</span>
-                                            <select>
-                                                <option value="0">Phổ biến</option>
-                                                <option value="0">Bán chạy</option>
-                                                <option value="0">Hàng mới</option>
-                                                <option value="0">Giá thấp đến cao</option>
-                                                <option value="0">Giá cao đến thấp</option>
-                                            </select>
+                        <form id="formFilter">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-5">
+                                    <div class="card" style="border: none;">
+                                        <div class="card-header text-center">
+                                            <h5><strong>Tất cả bộ lọc</strong></h5>
                                         </div>
-                                    </div>
-                                </div>
-                                <c:if test="${not empty books}">
-                                    <div class="row">
-                                        <c:forEach var="book" items="${books}">
-                                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                                <div class="product__item">
-                                                    <div class="product__item__pic set-bg"
-                                                        data-setbg="/images/book/${book.bookImages[0].name}">
-                                                        <ul class="product__item__pic__hover">
-                                                            <li><a href="#" class="btnAddToCart"
-                                                                    data-book-id="${book.id}"><i
-                                                                        class="fa fa-shopping-cart"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="product__item__text">
-                                                        <h6><a href="/shop/${book.id}">${book.title}</a></h6>
-                                                        <h5>
-                                                            <fmt:formatNumber type="number" value="${book.price}" /> đ
-                                                        </h5>
+                                        <div class="card-body">
+                                            <div class="sidebar">
+                                                <div class="sidebar__item">
+                                                    <h5>Thể loại</h5>
+                                                    <select class="js-example-basic-multiple" name="states[]"
+                                                        multiple="multiple" style="width: 100%;">
+                                                        <c:forEach var="category" items="${categories}">
+                                                            <option value="${category.name}">${category.description}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="sidebar">
+                                                <div class="sidebar__item">
+                                                    <h5>Tình trạng</h5>
+                                                    <div class="sidebar__item">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="OLD"
+                                                                id="statusOld">
+                                                            <label class="form-check-label" for="statusOld">Sách
+                                                                cũ</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="NEW"
+                                                                id="statusNew">
+                                                            <label class="form-check-label" for="statusNew">Sách
+                                                                mới</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:forEach>
+                                            <div class="sidebar">
+                                                <div class="sidebar__item">
+                                                    <h5>Giá</h5>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="lt100000"
+                                                            id="priceRangeLt100000">
+                                                        <label class="form-check-label" for="priceRangeLt100000">
+                                                            Giá dưới 100.000 đ
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="100000-500000" id="priceRange100000to500000">
+                                                        <label class="form-check-label" for="priceRange100000to500000">
+                                                            100.000 đ - 500.000 đ
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="500000-1000000" id="priceRange500000to1000000">
+                                                        <label class="form-check-label" for="priceRange500000to1000000">
+                                                            500.000 đ - 1.000.000 đ
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="gt1000000" id="priceRangeGt1000000">
+                                                        <label class="form-check-label" for="priceRangeGt1000000">
+                                                            Giá trên 1.000.000 đ
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="product__pagination text-center">
-                                        <c:forEach var="pageNumber" items="${pageNumbers}">
-                                            <c:choose>
-                                                <c:when test="${pageNumber == currentPage}">
-                                                    <a href="/shop?page=${pageNumber}" class="active">${pageNumber}</a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a href="/shop?page=${pageNumber}">${pageNumber}</a>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:forEach>
-                                        <c:if test="${totalPages != currentPage}">
-                                            <a href="/shop?page=${currentPage+1}"><i
-                                                    class="fa fa-long-arrow-right"></i></a>
-                                        </c:if>
+                                    <div class="sidebar text-center">
+                                        <div class="sidebar__item">
+                                            <button type="submit" class="btn btn-outline-info">Xem kết quả</button>
+                                        </div>
                                     </div>
-                                </c:if>
-                                <c:if test="${empty books}">
+                                </div>
+                                <div class="col-lg-9 col-md-7">
                                     <div class="row">
-                                        <h5 class="text-center" style="color:  red;">Không tìm thấy sản phẩm nào cả
-                                        </h5>
+                                        <div class="col-lg-4 col-md-5">
+                                            <div class="filter__sort">
+                                                <span>Sắp xếp</span>
+                                                <select id="sortBy">
+                                                    <option value="AZ" selected>Tên từ A &rarr; Z</option>
+                                                    <option value="ZA">Tên từ Z &rarr; A</option>
+                                                    <option value="LOWTOHIGH">Giá thấp đến cao</option>
+                                                    <option value="HIGHTOLOW">Giá cao đến thấp</option>
+                                                    <option value="NEWBOOKS">Hàng mới<i class="fa fa-tag"
+                                                            aria-hidden="true"></i>
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                </c:if>
-                                <!-- <div class="product__pagination text-center">
-                                    <c:forEach var="pageNumber" items="${pageNumbers}">
-                                        <c:choose>
-                                            <c:when test="${pageNumber == currentPage}">
-                                                <a href="/shop?page=${pageNumber}" class="active">${pageNumber}</a>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="/shop?page=${pageNumber}">${pageNumber}</a>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:forEach>
-                                    <c:if test="${totalPages != currentPage}">
-                                        <a href="/shop?page=${currentPage+1}"><i class="fa fa-long-arrow-right"></i></a>
+                                    <c:if test="${not empty books}">
+                                        <div class="row mt-3" id="bookList">
+                                            <c:forEach var="book" items="${books}">
+                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                    <div class="product__item">
+                                                        <div class="product__item__pic set-bg"
+                                                            data-setbg="/images/book/${book.bookImages[0].name}">
+                                                            <ul class="product__item__pic__hover">
+                                                                <li><a href="#" class="btnAddToCart"
+                                                                        data-book-id="${book.id}"><i
+                                                                            class="fa fa-shopping-cart"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="product__item__text">
+                                                            <h6><a href="/shop/${book.id}">${book.title}</a></h6>
+                                                            <h5>
+                                                                <fmt:formatNumber type="number" value="${book.price}" />
+                                                                đ
+                                                            </h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="product__pagination text-center">
+                                            <button class="btn btn-outline-info" id="loadMoreBtn">Xem thêm</button>
+                                            <div id="endMessage" style="display: none;">
+                                                <p style="color: red;">Sản phẩm đã hết.</p>
+                                            </div>
+                                        </div>
                                     </c:if>
-                                </div> -->
+                                    <c:if test="${empty books}">
+                                        <div class="row just d-flex justify-content-center">
+                                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                                <h5 style="color:  red;">Không tìm thấy sản phẩm nào cả </h5>
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </section>
@@ -171,6 +226,66 @@
             <script src="/client/js/main.js"></script>
             <!--Jquery Toast Plugin-->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+            <!--Select 2-->
+            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+            <script>
+                var nextPage = 2;
+                var totalPages = '${totalPages}';
+
+                $(document).ready(function () {
+
+                    $('.js-example-basic-multiple').select2();
+
+                    function loadMoreProducts() {
+                        $.ajax({
+                            url: '/shop/search',  // URL của API
+                            method: 'GET',
+                            data: {
+                                page: nextPage,  // Trang hiện tại
+                            },
+                            success: function (data) {
+                                var dataArr = data.data;
+                                var productHtml = '';
+
+                                dataArr.forEach(function (book) {
+                                    var bookImageUrl = '/images/book/' + book.bookImages[0].name;
+                                    productHtml += '<div class="col-lg-4 col-md-6 col-sm-6">' +
+                                        '<div class="product__item">' +
+                                        '<div class="product__item__pic set-bg" data-setbg="' + bookImageUrl + '" style="background-image: url(' + bookImageUrl + ');">' +
+                                        '<ul class="product__item__pic__hover">' +
+                                        '<li><a href="#" class="btnAddToCart" data-book-id="' + book.id + '"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                        '</ul>' +
+                                        '</div>' +
+                                        '<div class="product__item__text">' +
+                                        '<h6><a href="/shop/' + book.id + '">' + book.title + '</a></h6>' +
+                                        '<h5>' + book.price + ' đ</h5>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>';
+                                });
+
+                                $('#bookList').append(productHtml);
+
+                                if (totalPages == nextPage) {
+                                    $('#loadMoreBtn').hide();
+                                    $('#endMessage').show();
+                                } else {
+                                    nextPage++;
+                                }
+                            },
+                            error: function () {
+                                alert("Lỗi khi tải dữ liệu.");
+                            }
+                        });
+                    }
+
+                    $('#loadMoreBtn').click(function (event) {
+                        event.preventDefault();
+                        loadMoreProducts();  // Gọi hàm tải thêm sản phẩm
+                    });
+
+                });
+            </script>
         </body>
 
         </html>

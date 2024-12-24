@@ -95,7 +95,11 @@ public class BookService {
     }
 
     public List<Book> getListBooksWithTitle(String title, Pageable pageable) {
-        return this.bookRepository.findAll(titleLike(title), pageable).getContent();
+        return this.bookRepository.findByTitleContaining(title, pageable);
+    }
+
+    public int getBookCountWithTitle(String title) {
+        return this.bookRepository.countByTitleContaining(title);
     }
 
     public void handleSaveBookImage(List<MultipartFile> bookFiles, Book book) {

@@ -357,7 +357,7 @@
         event.preventDefault();
         var inputSearch = $('#inputSearch').val();
 
-        window.location.href = "/shop?title=" + inputSearch;
+        window.location.href = "/shop?keyword=" + inputSearch;
     });
 
 

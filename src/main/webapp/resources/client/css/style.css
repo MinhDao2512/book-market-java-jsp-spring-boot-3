@@ -1085,17 +1085,17 @@ ol {
 -----------------------*/
 
 .sidebar__item {
-	margin-bottom: 35px;
+	margin-bottom: 20px;
 }
 
 .sidebar__item.sidebar__item__color--option {
 	overflow: hidden;
 }
 
-.sidebar__item h4 {
+.sidebar__item h5 {
 	color: #1c1c1c;
 	font-weight: 700;
-	margin-bottom: 25px;
+	margin-bottom: 20px;
 }
 
 .sidebar__item ul li {
