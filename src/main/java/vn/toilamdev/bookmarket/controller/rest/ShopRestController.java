@@ -1,6 +1,8 @@
 package vn.toilamdev.bookmarket.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,19 +29,38 @@ public class ShopRestController {
     @GetMapping
     public ResponseEntity<Object> fetchBookByFilter(BookCriteriaDTO bookCriteriaDTO) {
         int currentPage = Integer.parseInt(bookCriteriaDTO.getPage().get());
-        int limit = 3;
+        int limit = 1;
+        long bookCount = 0;
+        long totalPages = 0;
 
-        if (!bookCriteriaDTO.getKeyword().isPresent() && !bookCriteriaDTO.getPrices().isPresent()
-                && !bookCriteriaDTO.getStates().isPresent() && !bookCriteriaDTO.getCategories().isPresent()) {
-            Pageable pageable = PageRequest.of(currentPage - 1, limit);
-            List<Book> book = this.bookService.fetchBooksWithFilter(bookCriteriaDTO, pageable);
+        Map<String, Object> response = new HashMap<>();
 
-            return ResponseEntity.status(HttpStatus.OK).body(book);
+        boolean hasFilters = bookCriteriaDTO.getKeyword().filter(k -> !k.isEmpty()).isPresent()
+                || bookCriteriaDTO.getCategories().isPresent()
+                || bookCriteriaDTO.getPrices().isPresent() || bookCriteriaDTO.getStates().isPresent();
+
+        Pageable pageable = PageRequest.of(currentPage - 1, limit);
+        List<Book> books;
+
+        // Update books & bookCount
+        if (!hasFilters) {
+            books = this.bookService.fetchAllBooks(pageable, bookCriteriaDTO.getSortBy().get());
+            bookCount = this.bookService.getAllBooks().size();
         } else {
-            Pageable pageable = PageRequest.of(currentPage - 1, limit);
-            List<Book> book = this.bookService.fetchBooksWithFilter(bookCriteriaDTO, pageable);
-
-            return ResponseEntity.status(HttpStatus.OK).body(book);
+            books = this.bookService.fetchBooksWithFilter(bookCriteriaDTO, pageable);
+            bookCount = this.bookService.countBooksWithFilter(bookCriteriaDTO);
         }
+
+        // Update Total Pages
+        if (bookCount % limit != 0) {
+            totalPages = bookCount / limit + 1;
+        } else {
+            totalPages = bookCount / limit;
+        }
+
+        response.put("data", books);
+        response.put("totalPages", totalPages);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

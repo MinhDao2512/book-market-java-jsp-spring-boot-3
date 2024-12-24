@@ -298,7 +298,7 @@
     /*---------------
         Add To Cart
     -----------------*/
-    $('.btnAddToCart').on('click', function (event) {
+    $('#bookList').on('click', '.btnAddToCart', function (event) {
         event.preventDefault();
         var cartId = $('#cartId').val();
         var bookId = $(this).data('book-id');

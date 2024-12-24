@@ -85,7 +85,7 @@
                                                     <select class="js-example-basic-multiple" name="states[]"
                                                         multiple="multiple" style="width: 100%;">
                                                         <c:forEach var="category" items="${categories}">
-                                                            <option value="${category.name}">${category.description}
+                                                            <option value="${category.id}">${category.description}
                                                             </option>
                                                         </c:forEach>
                                                     </select>
@@ -161,51 +161,15 @@
                                                     <option value="ZA">Tên từ Z &rarr; A</option>
                                                     <option value="PRICE_ASC">Giá thấp đến cao</option>
                                                     <option value="PRICE_DESC">Giá cao đến thấp</option>
-                                                    <option value="NEW_BOOKS">Hàng mới<i class="fa fa-tag"
-                                                            aria-hidden="true"></i>
-                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <c:if test="${not empty books}">
-                                        <div class="row mt-3" id="bookList">
-                                            <c:forEach var="book" items="${books}">
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                    <div class="product__item">
-                                                        <div class="product__item__pic set-bg"
-                                                            data-setbg="/images/book/${book.bookImages[0].name}">
-                                                            <ul class="product__item__pic__hover">
-                                                                <li><a href="#" class="btnAddToCart"
-                                                                        data-book-id="${book.id}"><i
-                                                                            class="fa fa-shopping-cart"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="product__item__text">
-                                                            <h6><a href="/shop/${book.id}">${book.title}</a></h6>
-                                                            <h5>
-                                                                <fmt:formatNumber type="number" value="${book.price}" />
-                                                                đ
-                                                            </h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                        <div class="product__pagination text-center">
-                                            <button class="btn btn-outline-info" id="loadMoreBtn">Xem thêm</button>
-                                            <div id="endMessage" style="display: none;">
-                                                <p style="color: red;">Sản phẩm đã hết.</p>
-                                            </div>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${empty books}">
-                                        <div class="row just d-flex justify-content-center">
-                                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                                <h5 style="color:  red;">Không tìm thấy sản phẩm nào cả </h5>
-                                            </div>
-                                        </div>
-                                    </c:if>
+                                    <div class="row mt-3" id="bookList">
+                                    </div>
+                                    <div class="product__pagination text-center">
+                                        <button class="btn btn-outline-info" id="loadMoreBtn">Xem thêm</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -239,20 +203,16 @@
                     NProgress.done();
                 };
 
-                var nextPage = 2;
-                var totalPages = '${totalPages}';
-                var checkBtnFilterClick = false;
-
-                if (totalPages == 1) {
-                    $('#loadMoreBtn').hide();
-                    $('#endMessage').show();
-                }
+                var currentPage = 1;
+                var totalPages = 0;
 
                 $(document).ready(function () {
 
                     $('.js-example-basic-multiple').select2();
 
-                    function loadMoreProducts(page) {
+                    loadMoreProducts(currentPage, true);
+
+                    function loadMoreProducts(page, isFirstLoad) {
                         NProgress.start();
 
                         var keyword = $('#inputSearch').val();
@@ -273,39 +233,44 @@
                                 sortBy: sortBy
                             },
                             success: function (data) {
-                                var dataArr = data.data;
+                                var dataMap = data.data;
+                                totalPages = dataMap['totalPages'];
+
                                 var productHtml = '';
 
-                                dataArr.forEach(function (book) {
-                                    var bookImageUrl = '/images/book/' + book.bookImages[0].name;
-                                    productHtml += '<div class="col-lg-4 col-md-6 col-sm-6">' +
-                                        '<div class="product__item">' +
-                                        '<div class="product__item__pic set-bg" data-setbg="' + bookImageUrl + '" style="background-image: url(' + bookImageUrl + ');">' +
-                                        '<ul class="product__item__pic__hover">' +
-                                        '<li><a href="#" class="btnAddToCart" data-book-id="' + book.id + '"><i class="fa fa-shopping-cart"></i></a></li>' +
-                                        '</ul>' +
-                                        '</div>' +
-                                        '<div class="product__item__text">' +
-                                        '<h6><a href="/shop/' + book.id + '">' + book.title + '</a></h6>' +
-                                        '<h5>' + book.price + ' đ</h5>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</div>';
-                                });
-
-                                if (!checkBtnFilterClick) {
-                                    $('#bookList').append(productHtml);
+                                if (!dataMap['data'] || dataMap['data'].length === 0) {
+                                    $('#loadMoreBtn').hide();
                                 } else {
-                                    $('#bookList').html(productHtml);
-                                    checkBtnFilterClick = false;
+                                    dataMap['data'].forEach(function (book) {
+                                        var bookImageUrl = '/images/book/' + book.bookImages[0].name;
+                                        var truncatedTitle = book.title.length > 30 ? book.title.slice(0, 30) + '...' : book.title;
+
+                                        productHtml += '<div class="col-lg-4 col-md-6 col-sm-6">' +
+                                            '<div class="product__item">' +
+                                            '<div class="product__item__pic set-bg" data-setbg="' + bookImageUrl + '" style="background-image: url(' + bookImageUrl + ');">' +
+                                            '<ul class="product__item__pic__hover">' +
+                                            '<li><a href="#" class="btnAddToCart" data-book-id="' + book.id + '"><i class="fa fa-shopping-cart"></i></a></li>' +
+                                            '</ul>' +
+                                            '</div>' +
+                                            '<div class="product__item__text">' +
+                                            '<h6><a href="/shop/' + book.id + '" data-bs-toggle="tooltip" data-bs-placement="top" title="' + book.title + '">' + truncatedTitle + '</a></h6>' +
+                                            '<h5 style="color: rgb(255, 66, 78);">' + book.price.toLocaleString('vi-VN').replace(/\./g, ',') + ' đ</h5>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>';
+                                    });
                                 }
 
-                                if (totalPages < nextPage) {
+                                if (isFirstLoad) {
+                                    $('#bookList').html(productHtml); // Lần đầu, thay toàn bộ nội dung
+                                } else {
+                                    $('#bookList').append(productHtml); // Các lần sau, thêm nội dung
+                                }
+
+                                if (currentPage >= totalPages) {
                                     $('#loadMoreBtn').hide();
-                                    $('#endMessage').show();
                                 } else {
                                     $('#loadMoreBtn').show();
-                                    $('#endMessage').hide();
                                 }
 
                                 NProgress.done();
@@ -352,18 +317,23 @@
                     //CHeck Btn Load More Click
                     $('#loadMoreBtn').click(function (event) {
                         event.preventDefault();
-                        var page = nextPage;
-                        loadMoreProducts(page);
-                        nextPage++;
+                        var page = currentPage + 1;
+                        ++currentPage;
+                        loadMoreProducts(page, false);
                     });
 
                     //Check Btn Filter Click
                     $('#filterBtn').click(function (event) {
                         event.preventDefault();
-                        nextPage = 2;
-                        checkBtnFilterClick = true;
-                        var page = 1;
-                        loadMoreProducts(page);
+                        currentPage = 1;
+                        loadMoreProducts(currentPage, true);
+                    });
+
+                    //Check Sort By Change
+                    $('#sortBy').change(function () {
+                        event.preventDefault();
+                        currentPage = 1;
+                        loadMoreProducts(currentPage, true);
                     });
                 });
             </script>

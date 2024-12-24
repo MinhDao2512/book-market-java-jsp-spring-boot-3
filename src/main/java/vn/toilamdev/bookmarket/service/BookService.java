@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +18,7 @@ import vn.toilamdev.bookmarket.domain.Author;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.BookCategorization;
 import vn.toilamdev.bookmarket.domain.BookImage;
+import vn.toilamdev.bookmarket.domain.Book_;
 import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.Category;
 import vn.toilamdev.bookmarket.domain.Comment;
@@ -90,14 +94,6 @@ public class BookService {
         return this.bookRepository.findByCreatedBy(createdBy, pageable).getContent();
     }
 
-    public List<Book> getListBooksWithTitle(String title, Pageable pageable) {
-        return this.bookRepository.findByTitleContaining(title, pageable);
-    }
-
-    public int getBookCountWithTitle(String title) {
-        return this.bookRepository.countByTitleContaining(title);
-    }
-
     public List<Book> fetchBooksWithFilter(BookCriteriaDTO bookCriteriaDTO, Pageable pageable) {
         Specification<Book> specification = Specification.where(null);
 
@@ -105,8 +101,8 @@ public class BookService {
             specification = specification.and(SpecificationFilter.byTitle(bookCriteriaDTO.getKeyword().get()));
         }
 
-        if (bookCriteriaDTO.getSortBy().isPresent()) {
-            specification = specification.and(SpecificationFilter.byOrder(bookCriteriaDTO.getSortBy().get()));
+        if (bookCriteriaDTO.getCategories().isPresent()) {
+            specification = specification.and(SpecificationFilter.byCategories(bookCriteriaDTO.getCategories().get()));
         }
 
         if (bookCriteriaDTO.getPrices().isPresent()) {
@@ -117,7 +113,62 @@ public class BookService {
             specification = specification.and(SpecificationFilter.byStates(bookCriteriaDTO.getStates().get()));
         }
 
+        if (bookCriteriaDTO.getSortBy().isPresent()) {
+            specification = specification.and(SpecificationFilter.byOrder(bookCriteriaDTO.getSortBy().get()));
+        }
+
         Page<Book> page = this.bookRepository.findAll(specification, pageable);
+
+        return page.getContent();
+    }
+
+    public long countBooksWithFilter(BookCriteriaDTO bookCriteriaDTO) {
+        Specification<Book> specification = Specification.where(null);
+
+        if (bookCriteriaDTO.getKeyword().isPresent() && bookCriteriaDTO.getKeyword().get() != "") {
+            specification = specification.and(SpecificationFilter.byTitle(bookCriteriaDTO.getKeyword().get()));
+        }
+
+        if (bookCriteriaDTO.getCategories().isPresent()) {
+            specification = specification.and(SpecificationFilter.byCategories(bookCriteriaDTO.getCategories().get()));
+        }
+
+        if (bookCriteriaDTO.getPrices().isPresent()) {
+            specification = specification.and(SpecificationFilter.byPrice(bookCriteriaDTO.getPrices().get()));
+        }
+
+        if (bookCriteriaDTO.getStates().isPresent()) {
+            specification = specification.and(SpecificationFilter.byStates(bookCriteriaDTO.getStates().get()));
+        }
+
+        if (bookCriteriaDTO.getSortBy().isPresent()) {
+            specification = specification.and(SpecificationFilter.byOrder(bookCriteriaDTO.getSortBy().get()));
+        }
+
+        return this.bookRepository.count(specification);
+    }
+
+    public List<Book> fetchAllBooks(Pageable pageable, String sortBy) {
+        Sort sort = Sort.unsorted();
+
+        switch (sortBy) {
+            case "AZ":
+                sort = Sort.by(Direction.ASC, Book_.TITLE);
+                break;
+            case "ZA":
+                sort = Sort.by(Direction.DESC, Book_.TITLE);
+                break;
+            case "PRICE_ASC":
+                sort = Sort.by(Direction.ASC, Book_.PRICE);
+                break;
+            default:
+                sort = Sort.by(Direction.DESC, Book_.PRICE);
+                break;
+        }
+
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+
+        Page<Book> page = this.bookRepository.findAll(pageable);
 
         return page.getContent();
     }

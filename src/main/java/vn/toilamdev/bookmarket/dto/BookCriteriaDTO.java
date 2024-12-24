@@ -7,7 +7,7 @@ public class BookCriteriaDTO {
     Optional<String> keyword;
     Optional<String> page;
     Optional<String> sortBy;
-    Optional<List<String>> categories;
+    Optional<List<Long>> categories;
     Optional<List<String>> states;
     Optional<List<String>> prices;
 
@@ -35,11 +35,11 @@ public class BookCriteriaDTO {
         this.sortBy = sortBy;
     }
 
-    public Optional<List<String>> getCategories() {
+    public Optional<List<Long>> getCategories() {
         return categories != null ? categories : Optional.empty();
     }
 
-    public void setCategories(Optional<List<String>> categories) {
+    public void setCategories(Optional<List<Long>> categories) {
         this.categories = categories;
     }
 
