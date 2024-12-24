@@ -161,8 +161,7 @@
                                                             <form:select id="state" class="form-select" name="state"
                                                                 path="state">
                                                                 <form:option value="NEW">Mới</form:option>
-                                                                <form:option value="LIKE NEW">Mới 98%</form:option>
-                                                                <form:option value="USED">Đã sử dụng</form:option>
+                                                                <form:option value="OLD">Đã sử dụng</form:option>
                                                             </form:select>
                                                         </div>
                                                         <label for="html5-date-input"

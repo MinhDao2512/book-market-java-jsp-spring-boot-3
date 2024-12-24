@@ -15,12 +15,12 @@ import vn.toilamdev.bookmarket.domain.Author;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.BookCategorization;
 import vn.toilamdev.bookmarket.domain.BookImage;
-import vn.toilamdev.bookmarket.domain.Book_;
 import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.Category;
 import vn.toilamdev.bookmarket.domain.Comment;
 import vn.toilamdev.bookmarket.domain.OrderItem;
 import vn.toilamdev.bookmarket.domain.Publisher;
+import vn.toilamdev.bookmarket.dto.BookCriteriaDTO;
 import vn.toilamdev.bookmarket.dto.BookDTO;
 import vn.toilamdev.bookmarket.mapper.BookMapper;
 import vn.toilamdev.bookmarket.repository.AuthorRepository;
@@ -32,6 +32,7 @@ import vn.toilamdev.bookmarket.repository.CategoryRepository;
 import vn.toilamdev.bookmarket.repository.CommentRepository;
 import vn.toilamdev.bookmarket.repository.OrderItemRepository;
 import vn.toilamdev.bookmarket.repository.PublisherRepository;
+import vn.toilamdev.bookmarket.utils.SpecificationFilter;
 import vn.toilamdev.bookmarket.utils.UploadFile;
 
 @Service
@@ -89,17 +90,36 @@ public class BookService {
         return this.bookRepository.findByCreatedBy(createdBy, pageable).getContent();
     }
 
-    // Get Book with Specification
-    private Specification<Book> titleLike(String title) {
-        return (root, query, builder) -> builder.like(root.get(Book_.TITLE), "%" + title + "%");
-    }
-
     public List<Book> getListBooksWithTitle(String title, Pageable pageable) {
         return this.bookRepository.findByTitleContaining(title, pageable);
     }
 
     public int getBookCountWithTitle(String title) {
         return this.bookRepository.countByTitleContaining(title);
+    }
+
+    public List<Book> fetchBooksWithFilter(BookCriteriaDTO bookCriteriaDTO, Pageable pageable) {
+        Specification<Book> specification = Specification.where(null);
+
+        if (bookCriteriaDTO.getKeyword().isPresent() && bookCriteriaDTO.getKeyword().get() != "") {
+            specification = specification.and(SpecificationFilter.byTitle(bookCriteriaDTO.getKeyword().get()));
+        }
+
+        if (bookCriteriaDTO.getSortBy().isPresent()) {
+            specification = specification.and(SpecificationFilter.byOrder(bookCriteriaDTO.getSortBy().get()));
+        }
+
+        if (bookCriteriaDTO.getPrices().isPresent()) {
+            specification = specification.and(SpecificationFilter.byPrice(bookCriteriaDTO.getPrices().get()));
+        }
+
+        if (bookCriteriaDTO.getStates().isPresent()) {
+            specification = specification.and(SpecificationFilter.byStates(bookCriteriaDTO.getStates().get()));
+        }
+
+        Page<Book> page = this.bookRepository.findAll(specification, pageable);
+
+        return page.getContent();
     }
 
     public void handleSaveBookImage(List<MultipartFile> bookFiles, Book book) {

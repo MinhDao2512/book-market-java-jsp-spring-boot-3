@@ -22,7 +22,8 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
                 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                 crossorigin="anonymous"></script>
-
+            <!-- Include CSS NProgress-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
 
             <!-- Css Styles -->
             <link rel="stylesheet" href="/client/css/bootstrap.min.css" type="text/css">
@@ -210,6 +211,15 @@
             <script src="/client/js/mixitup.min.js"></script>
             <script src="/client/js/owl.carousel.min.js"></script>
             <script src="/client/js/main.js"></script>
+            <!-- Include JS NProgress-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+            <script>
+                NProgress.start();
+
+                window.onload = function () {
+                    NProgress.done();
+                };
+            </script>
         </body>
 
         </html>

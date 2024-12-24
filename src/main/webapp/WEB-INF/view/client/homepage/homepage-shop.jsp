@@ -27,6 +27,8 @@
                 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                 crossorigin="anonymous"></script>
 
+            <!-- Include CSS NProgress-->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css">
 
             <!-- Css Styles -->
             <link rel="stylesheet" href="/client/css/bootstrap.min.css" type="text/css">
@@ -95,14 +97,14 @@
                                                     <div class="sidebar__item">
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="OLD"
-                                                                id="statusOld">
-                                                            <label class="form-check-label" for="statusOld">Sách
+                                                                id="stateOld">
+                                                            <label class="form-check-label" for="stateOld">Sách
                                                                 cũ</label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="NEW"
-                                                                id="statusNew">
-                                                            <label class="form-check-label" for="statusNew">Sách
+                                                                id="stateNew">
+                                                            <label class="form-check-label" for="stateNew">Sách
                                                                 mới</label>
                                                         </div>
                                                     </div>
@@ -145,7 +147,7 @@
                                     </div>
                                     <div class="sidebar text-center">
                                         <div class="sidebar__item">
-                                            <button type="submit" class="btn btn-outline-info">Xem kết quả</button>
+                                            <button class="btn btn-outline-info" id="filterBtn">Xem kết quả</button>
                                         </div>
                                     </div>
                                 </div>
@@ -157,9 +159,9 @@
                                                 <select id="sortBy">
                                                     <option value="AZ" selected>Tên từ A &rarr; Z</option>
                                                     <option value="ZA">Tên từ Z &rarr; A</option>
-                                                    <option value="LOWTOHIGH">Giá thấp đến cao</option>
-                                                    <option value="HIGHTOLOW">Giá cao đến thấp</option>
-                                                    <option value="NEWBOOKS">Hàng mới<i class="fa fa-tag"
+                                                    <option value="PRICE_ASC">Giá thấp đến cao</option>
+                                                    <option value="PRICE_DESC">Giá cao đến thấp</option>
+                                                    <option value="NEW_BOOKS">Hàng mới<i class="fa fa-tag"
                                                             aria-hidden="true"></i>
                                                     </option>
                                                 </select>
@@ -228,20 +230,47 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
             <!--Select 2-->
             <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+            <!-- Include JS NProgress-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
             <script>
+                NProgress.start();
+
+                window.onload = function () {
+                    NProgress.done();
+                };
+
                 var nextPage = 2;
                 var totalPages = '${totalPages}';
+                var checkBtnFilterClick = false;
+
+                if (totalPages == 1) {
+                    $('#loadMoreBtn').hide();
+                    $('#endMessage').show();
+                }
 
                 $(document).ready(function () {
 
                     $('.js-example-basic-multiple').select2();
 
-                    function loadMoreProducts() {
+                    function loadMoreProducts(page) {
+                        NProgress.start();
+
+                        var keyword = $('#inputSearch').val();
+                        var sortBy = $('#sortBy').val();
+                        var categories = getSelectedCategories();
+                        var states = getCheckedStates();
+                        var prices = getCheckedPrices();
+
                         $.ajax({
                             url: '/shop/search',  // URL của API
                             method: 'GET',
                             data: {
-                                page: nextPage,  // Trang hiện tại
+                                page: page,
+                                keyword: keyword,
+                                categories: categories,
+                                states: states,
+                                prices: prices,
+                                sortBy: sortBy
                             },
                             success: function (data) {
                                 var dataArr = data.data;
@@ -264,26 +293,78 @@
                                         '</div>';
                                 });
 
-                                $('#bookList').append(productHtml);
+                                if (!checkBtnFilterClick) {
+                                    $('#bookList').append(productHtml);
+                                } else {
+                                    $('#bookList').html(productHtml);
+                                    checkBtnFilterClick = false;
+                                }
 
-                                if (totalPages == nextPage) {
+                                if (totalPages < nextPage) {
                                     $('#loadMoreBtn').hide();
                                     $('#endMessage').show();
                                 } else {
-                                    nextPage++;
+                                    $('#loadMoreBtn').show();
+                                    $('#endMessage').hide();
                                 }
+
+                                NProgress.done();
                             },
                             error: function () {
                                 alert("Lỗi khi tải dữ liệu.");
+                                NProgress.done();
                             }
                         });
                     }
 
+                    //Get List Selected Categories
+                    function getSelectedCategories() {
+                        var selectedCategories = $('.js-example-basic-multiple').val(); // Lấy giá trị từ select
+                        return selectedCategories;
+                    }
+
+                    //Get List Checked States
+                    function getCheckedStates() {
+                        var selectedStates = [];
+                        $('.form-check-input:checked').each(function () {
+                            var id = $(this).attr('id');
+                            var value = $(this).val();
+                            if (id.includes('state')) {
+                                selectedStates.push(value);
+                            }
+                        });
+                        return selectedStates;
+                    }
+
+                    //Get List Checked Prices
+                    function getCheckedPrices() {
+                        var selectedPrices = [];
+                        $('.form-check-input:checked').each(function () {
+                            var id = $(this).attr('id');
+                            var value = $(this).val();
+                            if (id.includes('priceRange')) {
+                                selectedPrices.push(value);
+                            }
+                        });
+                        return selectedPrices;
+                    }
+
+                    //CHeck Btn Load More Click
                     $('#loadMoreBtn').click(function (event) {
                         event.preventDefault();
-                        loadMoreProducts();  // Gọi hàm tải thêm sản phẩm
+                        var page = nextPage;
+                        loadMoreProducts(page);
+                        nextPage++;
                     });
 
+                    //Check Btn Filter Click
+                    $('#filterBtn').click(function (event) {
+                        event.preventDefault();
+                        nextPage = 2;
+                        checkBtnFilterClick = true;
+                        var page = 1;
+                        loadMoreProducts(page);
+                    });
                 });
             </script>
         </body>

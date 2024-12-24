@@ -161,8 +161,7 @@
                                                                 required>
                                                                 <option selected value="">Chọn tình trạng</option>
                                                                 <option value="NEW">Mới</option>
-                                                                <option value="LIKE NEW">Mới 98%</option>
-                                                                <option value="USED">Đã sử dụng</option>
+                                                                <option value="OLD">Đã sử dụng</option>
                                                             </select>
                                                             <div class="invalid-feedback">
                                                                 Bạn chưa chọn "Tình Trạng"
