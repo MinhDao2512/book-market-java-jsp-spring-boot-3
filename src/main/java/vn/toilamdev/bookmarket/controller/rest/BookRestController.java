@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.dto.BookDTO;
@@ -35,7 +36,7 @@ public class BookRestController {
 
     @PostMapping("/books")
     public ResponseEntity<?> createBook(@Valid @ModelAttribute BookDTO bookDTO, BindingResult bindingResult,
-            @RequestParam("bookFiles") List<MultipartFile> bookFiles) {
+            @RequestParam("bookFiles") List<MultipartFile> bookFiles, HttpServletRequest request) {
 
         if (bindingResult.hasFieldErrors()) {
             Map<String, String> errors = new HashMap<>();
@@ -49,7 +50,7 @@ public class BookRestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
         }
 
-        this.bookService.handleCreateBook(bookDTO, bookFiles);
+        this.bookService.handleCreateBook(bookDTO, bookFiles, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 

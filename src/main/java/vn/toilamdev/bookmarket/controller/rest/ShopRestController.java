@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import vn.toilamdev.bookmarket.constant.SystemConstant;
 import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.dto.BookCriteriaDTO;
 import vn.toilamdev.bookmarket.service.BookService;
@@ -29,7 +30,7 @@ public class ShopRestController {
     @GetMapping
     public ResponseEntity<Object> fetchBookByFilter(BookCriteriaDTO bookCriteriaDTO) {
         int currentPage = Integer.parseInt(bookCriteriaDTO.getPage().get());
-        int limit = 1;
+        int limit = SystemConstant.LIMIT;
         long bookCount = 0;
         long totalPages = 0;
 

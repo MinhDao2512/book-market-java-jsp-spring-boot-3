@@ -36,6 +36,7 @@ public class Book extends AbstractDomain {
     private String coverType;
     private Integer numberOfPages;
     private Integer isActive;
+    private Integer sold;
 
     @ManyToOne
     @JoinColumn(name = "publisher_id")
@@ -168,6 +169,14 @@ public class Book extends AbstractDomain {
 
     public void setIsActive(Integer isActive) {
         this.isActive = isActive;
+    }
+
+    public Integer getSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
     }
 
     public Publisher getPublisher() {

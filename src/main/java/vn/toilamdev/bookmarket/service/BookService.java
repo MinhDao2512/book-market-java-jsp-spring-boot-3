@@ -13,6 +13,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import vn.toilamdev.bookmarket.constant.SystemConstant;
 import vn.toilamdev.bookmarket.domain.Author;
 import vn.toilamdev.bookmarket.domain.Book;
@@ -259,7 +261,9 @@ public class BookService {
         this.bookRepository.deleteById(book.getId());
     }
 
-    public void handleCreateBook(BookDTO bookDTO, List<MultipartFile> files) {
+    public void handleCreateBook(BookDTO bookDTO, List<MultipartFile> files, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+
         Publisher publisher = this.publisherRepository.findByName(bookDTO.getPublisher());
         Book newBook = new Book();
         newBook = BookMapper.mappingBookDTO(newBook, bookDTO);
@@ -276,6 +280,7 @@ public class BookService {
         }
         newBook.setPublisher(publisher);
         newBook.setCreatedAt(new Date(System.currentTimeMillis()));
+        newBook.setCreatedBy((String) session.getAttribute("username"));
         // Save Book
         newBook = this.bookRepository.save(newBook);
         // Save BookImage
