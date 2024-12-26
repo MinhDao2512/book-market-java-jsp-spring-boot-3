@@ -35,8 +35,16 @@ public class CheckoutController {
 
         User user = this.userService.getUserById(userId);
 
+        List<CartItem> cartItems = new ArrayList<>();
+
+        for (CartItem cartI : user.getCart().getCartItems()) {
+            if (cartI.getBook().getQuantity() > 0) {
+                cartItems.add(cartI);
+            }
+        }
+
         model.addAttribute("currentUser", user);
-        model.addAttribute("cartItems", user.getCart().getCartItems());
+        model.addAttribute("cartItems", cartItems);
         return "client/homepage/homepage-checkout";
     }
 

@@ -8,7 +8,7 @@
             <meta name="viewport"
                 content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-            <title>Story Swap | Đăng nhập</title>
+            <title>Story Swap | Quên mật khẩu</title>
 
             <meta name="description" content="" />
 
@@ -109,57 +109,24 @@
                                     </a>
                                 </div>
                                 <!-- /Logo -->
-                                <h4 class="mb-2">Xin chào! 👋</h4>
-                                <c:choose>
-                                    <c:when test="${param.error != null}">
-                                        <p class="mb-4" style="color: red;">Tài khoản hoặc Mật Khẩu không đúng</p>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <p class="mb-4">Vui lòng đăng nhập tài khoản của bạn</p>
-                                    </c:otherwise>
-                                </c:choose>
-                                <form id="formAuthentication" class="mb-3" action="/login" method="post">
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Tài Khoản</label>
-                                        <input type="text" class="form-control validate" id="email" name="username"
-                                            placeholder="Địa chỉ email của bạn" />
-                                        <div class="invalid-feedback">
-                                            Bạn chưa nhập địa chỉ "Email"
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 form-password-toggle">
-                                        <div class="d-flex justify-content-between">
-                                            <label class="form-label" for="password">Mật Khẩu</label>
-                                            <a href="/forgot">
-                                                <small>Quên mật khẩu?</small>
-                                            </a>
-                                        </div>
-                                        <div class="input-group input-group-merge">
-                                            <input type="password" id="password" class="form-control validate"
-                                                name="password"
-                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                aria-describedby="password" />
-                                            <span class="input-group-text cursor-pointer" id="hide-password"><i
-                                                    class="bx bx-hide"></i></span>
-                                            <div class="invalid-feedback">
-                                                Bạn chưa nhập "Mật Khẩu"
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 mt-4">
-                                        <button class="btn btn-primary d-grid w-100" type="submit">Đăng nhập</button>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                    </div>
-                                </form>
-
-                                <p class="text-center">
-                                    <span>Bạn chưa có tài khoản?</span>
-                                    <a href="/register">
-                                        <span>Đăng ký ngay</span>
-                                    </a>
+                                <h4 class="mb-2">Quên Mật Khẩu? 🔒</h4>
+                                <p class="mb-4">Nhập địa chỉ email đã đăng ký và chúng tôi sẽ gửi bạn liên kết đặt lại
+                                    mật khẩu.
                                 </p>
+                                <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            placeholder="Enter your email" autofocus />
+                                    </div>
+                                    <button class="btn btn-primary d-grid w-100">Gửi Liên Kết</button>
+                                </form>
+                                <div class="text-center">
+                                    <a href="/login" class="d-flex align-items-center justify-content-center">
+                                        <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
+                                        Quay lại đăng nhập
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <!-- /Register -->

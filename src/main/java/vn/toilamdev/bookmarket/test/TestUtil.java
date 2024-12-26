@@ -1,10 +1,9 @@
 package vn.toilamdev.bookmarket.test;
 
-import java.util.UUID;
+import java.util.Locale;
 
 public class TestUtil {
     public static void main(String[] args) {
-        final String uuid = UUID.randomUUID().toString().replace("-", "");
-        System.out.println(uuid);
+        System.out.println(Locale.getDefault());
     }
 }

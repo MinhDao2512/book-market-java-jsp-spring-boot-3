@@ -59,6 +59,7 @@ public class DashboardController {
 
     @GetMapping
     public String getDashboardPage(Model model) {
+        model.addAttribute("countOrder", this.orderService.getCountOrder());
         return "admin/dashboard/dashboard-home";
     }
 

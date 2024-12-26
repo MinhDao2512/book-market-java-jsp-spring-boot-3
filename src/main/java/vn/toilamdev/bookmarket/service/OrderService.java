@@ -66,6 +66,10 @@ public class OrderService {
         return this.orderRepository.findByUser(user);
     }
 
+    public long getCountOrder() {
+        return this.orderRepository.count();
+    }
+
     public Order createNewOrder(OrderDTO orderDTO, User user, String uuid) {
         // Mapping Data from OrderDTO to Order
         Order order = OrderMapper.mappingOrderDTO(orderDTO);

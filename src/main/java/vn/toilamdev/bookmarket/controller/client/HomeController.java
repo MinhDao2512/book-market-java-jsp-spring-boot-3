@@ -36,7 +36,12 @@ public class HomeController {
 
     @GetMapping
     public String getHomePage(Model model) {
-        List<Book> books = this.bookService.getAllBooks();
+        int crrPage = 1;
+        int limit = 8;
+        String sortBy = "AZ";
+
+        Pageable pageable = PageRequest.of(crrPage - 1, limit);
+        List<Book> books = this.bookService.fetchAllBooks(pageable, sortBy);
 
         model.addAttribute("books", books);
 

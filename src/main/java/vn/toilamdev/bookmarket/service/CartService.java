@@ -8,7 +8,6 @@ import vn.toilamdev.bookmarket.domain.Book;
 import vn.toilamdev.bookmarket.domain.Cart;
 import vn.toilamdev.bookmarket.domain.CartItem;
 import vn.toilamdev.bookmarket.domain.User;
-import vn.toilamdev.bookmarket.repository.BookRepository;
 import vn.toilamdev.bookmarket.repository.CartItemRepository;
 import vn.toilamdev.bookmarket.repository.CartRepository;
 
@@ -16,13 +15,10 @@ import vn.toilamdev.bookmarket.repository.CartRepository;
 public class CartService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final BookRepository bookRepository;
 
-    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository,
-            BookRepository bookRepository) {
+    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
-        this.bookRepository = bookRepository;
     }
 
     public Cart saveOrUpdateCart(Cart cart) {
@@ -35,10 +31,6 @@ public class CartService {
 
     // Add Item To Cart
     public Cart addToCart(User currentUser, Book book, int bookCount) {
-        // Update quantity for book
-        book.setQuantity(book.getQuantity() - bookCount);
-        book = this.bookRepository.save(book);
-
         // check
         int countCart = currentUser.getCart().getCartItems().size();
 

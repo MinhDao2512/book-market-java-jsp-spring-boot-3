@@ -68,6 +68,7 @@
                                                 <th>Sản phẩm</th>
                                                 <th>Giá tiền</th>
                                                 <th>Số lượng</th>
+                                                <th>Tình trạng</th>
                                                 <th>Tổng tiền</th>
                                                 <th></th>
                                             </tr>
@@ -81,7 +82,7 @@
                                                                 style="width: 100px;">
                                                         </a>
                                                     </td>
-                                                    <td class="col-md-6"
+                                                    <td class="col-md-4"
                                                         style="white-space: normal; word-wrap: break-word; overflow: visible;">
                                                         <h5>
                                                             <a href="/shop/${cartItem.book.id}"
@@ -101,6 +102,18 @@
                                                                     class="input-quantity">
                                                             </div>
                                                         </div>
+                                                    </td>
+                                                    <td>
+                                                        <c:if test="${cartItem.book.quantity == 0}">
+                                                            <div style="color: red;">
+                                                                Hết hàng
+                                                            </div>
+                                                        </c:if>
+                                                        <c:if test="${cartItem.book.quantity > 0}">
+                                                            <div style="color: forestgreen;">
+                                                                Còn hàng
+                                                            </div>
+                                                        </c:if>
                                                     </td>
                                                     <td class="shoping__cart__total">
                                                         <fmt:formatNumber type="number"

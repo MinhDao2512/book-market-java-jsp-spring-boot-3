@@ -331,7 +331,12 @@
                 updateCartCount(JSON.parse(xhr.responseText).data['newCartCount']);
             },
             error: function (xhr, status, error) {
-                alert('Đã có lỗi xảy ra!');
+                $.toast({
+                    heading: 'Giỏ hàng',
+                    text: 'Sản phẩm đã hết hàng',
+                    position: 'top-right',
+                    icon: 'error'
+                })
             }
         });
     }

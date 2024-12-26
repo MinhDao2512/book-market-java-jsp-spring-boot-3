@@ -61,18 +61,22 @@ public class SecurityConfig {
 
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+                String[] whiteList = {
+                                "/", "/login", "/register", "/shop/**", "/blog/**", "/forgot",
+                                "/api/**",
+                                "/contact/**",
+                                "/client/**", "/images/**", "/admin/css/**",
+                                "/admin/js/**", "/admin/vendor/**",
+                                "/admin/img/**"
+                };
+
                 http
                                 .csrf(csrf -> csrf
                                                 .disable())
                                 .authorizeHttpRequests(author -> author
                                                 .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE)
                                                 .permitAll()
-                                                .requestMatchers("/", "/login", "/register", "/shop/**", "/blog/**",
-                                                                "/api/**",
-                                                                "/contact/**",
-                                                                "/client/**", "/images/**", "/admin/css/**",
-                                                                "/admin/js/**", "/admin/vendor/**",
-                                                                "/admin/img/**")
+                                                .requestMatchers(whiteList)
                                                 .permitAll()
                                                 .requestMatchers("/admin/**")
                                                 .hasAnyRole("ADMIN", "OWNER", "CONTENT", "SELLER")

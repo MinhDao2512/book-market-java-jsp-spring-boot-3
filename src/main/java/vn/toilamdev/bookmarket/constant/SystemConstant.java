@@ -14,4 +14,5 @@ public class SystemConstant {
     public static final String ORDER_STATUS_COMPLETE = "COMPLETE";
     public static final String ORDER_STATUS_PENDING = "PENDING";
     public static final String PAYMENT_REF = "UNKNOWN";
+    public static final String FROM_NAME = "STORY_SWAP.com";
 }

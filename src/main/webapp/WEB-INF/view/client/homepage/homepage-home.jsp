@@ -104,10 +104,7 @@
                             </div>
                             <div class="featured__controls">
                                 <ul>
-                                    <li class="active" data-filter="*">Tất Cả</li>
-                                    <li data-filter=".new">Mới Nhất</li>
-                                    <li data-filter=".offer">Ưu Đãi</li>
-                                    <li data-filter=".best-seller">Bán Chạy</li>
+                                    <li data-filter=".best-seller">Nổi bật</li>
                                 </ul>
                             </div>
                         </div>
